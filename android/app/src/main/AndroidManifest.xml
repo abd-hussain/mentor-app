@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mentor_app">
    <application
-        android:label="mentor_app"
+        android:label="HelpEra_Mentor"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
