@@ -1,5 +1,9 @@
 {
     "appTitle": "هيلب ايرا",
-    "selectCountry" : "اختر البلد"
+    "selectCountry" : "اختر البلد",
+    "containerHomeIconTitle" : "الرئيسية",
+    "containerMessagesIconTitle" : "الرسائل",
+    "containerCalenderIconTitle" : "التقويم",
+    "containerAccountIconTitle" : "حسابي"
 
 }

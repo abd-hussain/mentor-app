@@ -4,6 +4,7 @@ import 'package:mentor_app/models/https/countries_model.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/shared_widget/shimmers/shimmer_list.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
+import 'package:mentor_app/utils/routes.dart';
 
 class ListOfCountriesWidget extends StatelessWidget {
   final ValueNotifier<List<Country>> countriesListNotifier;
@@ -35,9 +36,8 @@ class ListOfCountriesWidget extends StatelessWidget {
 
           box.put(DatabaseFieldConstant.countryId, item.id.toString());
           box.put(DatabaseFieldConstant.countryFlag, item.flagImage);
-          //TODO
-          // Navigator.of(context, rootNavigator: true)
-          //     .pushNamedAndRemoveUntil(RoutesConstants.mainContainer, (Route<dynamic> route) => false);
+          Navigator.of(context, rootNavigator: true)
+              .pushNamedAndRemoveUntil(RoutesConstants.mainContainer, (Route<dynamic> route) => false);
         },
         child: Container(
           height: 50,

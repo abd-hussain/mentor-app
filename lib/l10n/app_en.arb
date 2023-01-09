@@ -1,5 +1,9 @@
 {
     "appTitle": "HelpEra",
-    "selectCountry" : "Select Country"
+    "selectCountry" : "Select Country",
+    "containerHomeIconTitle" : "Home",
+    "containerMessagesIconTitle" : "Messages",
+    "containerCalenderIconTitle" : "Calender",
+    "containerAccountIconTitle" : "Account"
 
 }
