@@ -37,7 +37,7 @@ class ListOfCountriesWidget extends StatelessWidget {
           box.put(DatabaseFieldConstant.countryId, item.id.toString());
           box.put(DatabaseFieldConstant.countryFlag, item.flagImage);
           Navigator.of(context, rootNavigator: true)
-              .pushNamedAndRemoveUntil(RoutesConstants.mainContainer, (Route<dynamic> route) => false);
+              .pushNamedAndRemoveUntil(RoutesConstants.loginScreen, (Route<dynamic> route) => false);
         },
         child: Container(
           height: 50,

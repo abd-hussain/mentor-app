@@ -16,7 +16,7 @@ class _SetupScreenState extends State<SetupScreen> {
 
   @override
   void didChangeDependencies() {
-    _bloc.getSystemLanguage(context).then((value) {
+    _bloc.getSystemLanguage(context).whenComplete(() {
       _bloc.listOfCountries();
     });
     super.didChangeDependencies();
@@ -36,10 +36,14 @@ class _SetupScreenState extends State<SetupScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ChangeLanguageWidget(
-              selectedLanguageNotifier: _bloc.selectedLanguageNotifier,
-              segmentChange: (index) async => await _bloc.setLanguageInStorage(context, index),
-            ),
+            ValueListenableBuilder<int>(
+                valueListenable: _bloc.selectedLanguageNotifier,
+                builder: (context, snapshot, child) {
+                  return ChangeLanguageWidget(
+                    selectionIndex: snapshot,
+                    segmentChange: (index) async => await _bloc.setLanguageInStorage(context, index),
+                  );
+                }),
             const TitleTableWidget(),
             ListOfCountriesWidget(countriesListNotifier: _bloc.countriesListNotifier),
           ],

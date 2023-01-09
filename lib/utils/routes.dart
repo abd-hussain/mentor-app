@@ -3,12 +3,15 @@ import 'package:mentor_app/screens/account_tab/account_screen.dart';
 import 'package:mentor_app/screens/calender_tab/calender_screen.dart';
 import 'package:mentor_app/screens/call_tab/call_screen.dart';
 import 'package:mentor_app/screens/home_tab/home_screen.dart';
+import 'package:mentor_app/screens/login_screen/login_screen.dart';
 import 'package:mentor_app/screens/main_contaner/main_container.dart';
 import 'package:mentor_app/screens/messages_tab/messages_screen.dart';
 import 'package:mentor_app/screens/setup_screen/setup_screen.dart';
 
 class RoutesConstants {
   static const String initialRoute = 'initScreen';
+  static const String loginScreen = 'loginScreen';
+
   static const String mainContainer = 'mainContainer';
   static const String homeScreen = 'homeScreen';
   static const String messagesScreen = 'messagesScreen';
@@ -19,6 +22,7 @@ class RoutesConstants {
 
 final Map<String, Widget> routes = {
   RoutesConstants.initialRoute: const SetupScreen(),
+  RoutesConstants.loginScreen: const LoginScreen(),
   RoutesConstants.mainContainer: const MainContainer(),
   RoutesConstants.homeScreen: const HomeScreen(),
   RoutesConstants.messagesScreen: const MessagesScreen(),
