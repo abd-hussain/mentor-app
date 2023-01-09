@@ -4,6 +4,9 @@
     "containerHomeIconTitle" : "Home",
     "containerMessagesIconTitle" : "Messages",
     "containerCalenderIconTitle" : "Calender",
-    "containerAccountIconTitle" : "Account"
+    "containerAccountIconTitle" : "Account",
+    "submit" : "Submit",
+    "dontHaveAccount": "Don't have an account yet?",
+    "registerAccount": "Register now"
 
 }

@@ -4,6 +4,9 @@
     "containerHomeIconTitle" : "الرئيسية",
     "containerMessagesIconTitle" : "الرسائل",
     "containerCalenderIconTitle" : "التقويم",
-    "containerAccountIconTitle" : "حسابي"
+    "containerAccountIconTitle" : "حسابي",
+    "submit" : "ارسال",
+    "dontHaveAccount": "لا تمتلك حسابا حتى الآن؟",
+    "registerAccount": "قم بإنشاء حساب جديد الآن"
 
 }
