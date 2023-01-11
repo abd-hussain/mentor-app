@@ -7,6 +7,28 @@
     "containerAccountIconTitle" : "Account",
     "submit" : "Submit",
     "dontHaveAccount": "Don't have an account yet?",
-    "registerAccount": "Register now"
+    "registerAccount": "Register now",
+    "emailaddress": "Email Address",
+    "password": "Password",
+    "login": "Login",
+    "sure" : "Sure",
+    "areyousure" : "Are You Sure",
+    "cancel" : "cancel",
+    "pickimagefromstudio" : "Choose from Library",
+    "pickimagefromcamera" : "Choose from Camera",
+    "pickimageremoveimage" : "Remove image",
+    "profilephotosetting" : "Profile Photo Setting",
+    "genderprofile" : "Select Gender",
+    "firstnameprofile" : "First Name",
+    "lastnameprofile" : "Last Name",
+    "setprofilephoto" : "Set Profile Photo",
+    "picprofile" : "Profile Picture",
+    "gender" : "Gender",
+    "dbprofile" : "When’s your birthday?",
+    "countryprofile" : "Country"
+
+
+
+
 
 }

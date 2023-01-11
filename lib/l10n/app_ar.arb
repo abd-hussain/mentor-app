@@ -6,7 +6,26 @@
     "containerCalenderIconTitle" : "التقويم",
     "containerAccountIconTitle" : "حسابي",
     "submit" : "ارسال",
-    "dontHaveAccount": "لا تمتلك حسابا حتى الآن؟",
-    "registerAccount": "قم بإنشاء حساب جديد الآن"
+    "dontHaveAccount": "لا يوجد لك حساب ؟",
+    "registerAccount": "إنشاء حساب جديد",
+    "emailaddress": "البريد الالكتروني",
+    "password": "كلمة المرور",
+    "login": "تسجيل الدخول",
+    "sure" : "متاكد",
+    "areyousure" : "هل انت متاكد",
+    "cancel" : "رجوع",
+    "pickimagefromstudio" : "اختيار من الاستديو",
+    "pickimagefromcamera" : "اختيار من الكاميرا",
+    "pickimageremoveimage" : "حذف الصورة",
+    "profilephotosetting" : "اعدادات الصورة الشخصية",
+    "firstnameprofile" : "الاسم الاول",
+    "lastnameprofile" : "اسم العائلة",
+    "genderprofile" : "اختر الجنس",
+    "setprofilephoto" : "تحديد صورة شخصية",
+    "picprofile" : "الصورة الشخصية",
+    "gender" : "الجنس",
+    "dbprofile" : "تاريخ الميلاد",
+    "countryprofile" : "البلد"
+
 
 }
