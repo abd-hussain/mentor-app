@@ -139,6 +139,8 @@ class LoginBloc extends Bloc<AuthService> {
       required String password,
       bool isBiometricLogin = false}) {
     //TODO
+
+    _openMainScreen(context);
   }
 
   @override

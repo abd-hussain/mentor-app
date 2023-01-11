@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentor_app/screens/messages_tab/messages_bloc.dart';
 
 class MessagesScreen extends StatefulWidget {
   const MessagesScreen({super.key});
@@ -8,6 +9,7 @@ class MessagesScreen extends StatefulWidget {
 }
 
 class _MessagesScreenState extends State<MessagesScreen> {
+  final bloc = MessagesBloc();
   @override
   Widget build(BuildContext context) {
     return Container();

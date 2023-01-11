@@ -103,7 +103,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           buttonTitle: AppLocalizations.of(context)!.login,
                           enableButton: true, //TODO : Handle Validation
                           onTap: () {
+                            FocusScope.of(context).requestFocus(FocusNode());
+                            //TODO : Handle Validation
                             //TODO : Handle Login
+                            bloc.doLoginCall(
+                              context: context,
+                              userName: bloc.emailController.text.trim(),
+                              password: bloc.passwordController.text,
+                            );
                           },
                         ),
                         ValueListenableBuilder<AuthenticationBiometricType>(
@@ -114,40 +121,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   : const SizedBox();
                             }),
                         const SizedBox(height: 25),
-                        // StreamBuilder<String?>(
-                        //     initialData: '',
-                        //     stream: widget.bloc.errorPasswordMessageController.stream,
-                        //     builder: (context, snapshot) {
-                        //       if (snapshot.data == 'incorrect') {
-                        //         return Padding(
-                        //           padding: const EdgeInsets.only(bottom: 25),
-                        //           child: Center(
-                        //             child: InkWell(
-                        //               child: CustomText(
-                        //                 title: 'Login_Card_ForgotPassword',
-                        //                 style: locator<CustomTextStyle>().medium(
-                        //                     color: locator<ColorManager>().color(ColorConstants.l_0xff0059FF_d_0xff0059FF),
-                        //                     size: 14),
-                        //                 shouldFit: false,
-                        //               ),
-                        //               onTap: () {
-                        //                 Navigator.of(context, rootNavigator: true)
-                        //                     .pushNamed(RoutesConstants.resetPasswordScreen)
-                        //                     .then((value) async {
-                        //                   if (value != null) {
-                        //                     widget.onStartCallBack!();
-                        //                     widget.bloc.biometricStatus = false;
-                        //                     widget.bloc.buildController.sink.add(true);
-                        //                   }
-                        //                 });
-                        //               },
-                        //             ),
-                        //           ),
-                        //         );
-                        //       } else {
-                        //         return const SizedBox();
-                        //       }
-                        //     }),
                       ],
                     ),
                   ),
