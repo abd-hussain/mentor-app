@@ -6,6 +6,8 @@ import 'package:mentor_app/services/auth_services.dart';
 import 'package:mentor_app/services/filter_services.dart';
 import 'package:mentor_app/services/general/authentication_service.dart';
 import 'package:mentor_app/services/general/network_info_service.dart';
+import 'package:mentor_app/shared_widget/account_service.dart';
+import 'package:mentor_app/utils/day_time.dart';
 import 'package:mentor_app/utils/repository/http_interceptor.dart';
 import 'package:mentor_app/utils/repository/http_repository.dart';
 
@@ -15,8 +17,11 @@ Future<void> setupLocator() async {
   locator.registerSingleton<NetworkInfoService>(NetworkInfoService());
   locator.registerFactory<FilterService>(() => FilterService());
   locator.registerFactory<AuthService>(() => AuthService());
+  locator.registerFactory<AccountService>(() => AccountService());
+
   locator.registerLazySingleton(() => AuthenticationService());
   locator.registerLazySingleton(() => LocalAuthentication());
+  locator.registerSingleton<DayTime>(DayTime());
 
   locator.registerFactory<Dio>(() => Dio());
   locator.registerFactory<HttpInterceptor>(() => HttpInterceptor());

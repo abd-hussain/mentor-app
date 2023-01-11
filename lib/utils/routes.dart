@@ -6,8 +6,10 @@ import 'package:mentor_app/screens/home_tab/home_screen.dart';
 import 'package:mentor_app/screens/login_screen/login_screen.dart';
 import 'package:mentor_app/screens/main_contaner/main_container.dart';
 import 'package:mentor_app/screens/messages_tab/messages_screen.dart';
+import 'package:mentor_app/screens/notifications/notifications_screen.dart';
 import 'package:mentor_app/screens/register_screen/register_screen.dart';
 import 'package:mentor_app/screens/setup_screen/setup_screen.dart';
+import 'package:mentor_app/screens/web_view/web_view_screen.dart';
 
 class RoutesConstants {
   static const String initialRoute = 'initScreen';
@@ -20,6 +22,8 @@ class RoutesConstants {
   static const String calenderScreen = 'calenderScreen';
   static const String accountScreen = 'accountScreen';
   static const String registerScreen = 'registerScreen';
+  static const String notificationsScreen = 'notificationsScreen';
+  static const String webViewScreen = 'webViewScreen';
 }
 
 final Map<String, Widget> routes = {
@@ -32,4 +36,6 @@ final Map<String, Widget> routes = {
   RoutesConstants.calenderScreen: const CalenderScreen(),
   RoutesConstants.accountScreen: const AccountScreen(),
   RoutesConstants.registerScreen: const RegisterScreen(),
+  RoutesConstants.notificationsScreen: const NotificationsScreen(),
+  RoutesConstants.webViewScreen: const WebViewScreen(),
 };

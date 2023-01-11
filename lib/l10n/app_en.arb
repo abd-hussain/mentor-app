@@ -28,7 +28,36 @@
     "dbprofile" : "When’s your birthday?",
     "referalcodeprofile" : "Referal Code",
     "mobilenumber" : "Mobile Number",
-    "countryprofile" : "Country"
+    "welcomeback" : "Welcome Back",
+    "hello" : "Hello",
+    "countryprofile" : "Country",
+    "payments" : "Payments",
+    "notifications" : "Notifications",
+    "settings" : "Settings",
+    "generalsettings" : "General Settings",
+    "reachouttous" : "Reach out to us",
+    "accountsettings" : "Account Settings",
+    "workinghour" : "Working Hours",
+    "aboutus" : "About Us",
+    "support" : "Support",
+    "version" : "Version",
+    "rightsreserved" : "@ 2022 HelpEra.app. All right reserved.",
+    "rateapp" : "Rate Application",
+    "privacypolicy" : "Privacy Policy",
+    "whatsappnotinstalled" : "WhatsApp is not installed on the device",
+    "linkedin" : "LinkedIn",
+    "facebook" : "Facebook",
+    "termsandconditions" : "Terms & Conditions",
+    "editprofileinformations" : "Edit profile Informations",
+    "deleteaccount" : "Delete Account",
+    "areyousuredeleteaccount" : "Are you sure you want to Delete your Account ?",
+    "usertutorials" : "User Tutorials",
+    "language" : "Language",
+    "invite_friends" : "Invite Friends",
+    "reportproblem" : "Report Problem",
+    "reportsuggestion" : "Report Suggestion",
+    "logout" : "Logout"
+
 
 
 
