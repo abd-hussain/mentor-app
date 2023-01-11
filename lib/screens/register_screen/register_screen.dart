@@ -23,6 +23,7 @@ final bloc = RegisterBloc();
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final String savedLanguage = bloc.box.get(DatabaseFieldConstant.language);
+  // TODO Compleate Registration
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +46,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ImageHolder(
                           isFromNetwork: bloc.profileImageUrl != "",
                           urlImage: bloc.profileImageUrl == "" ? null : bloc.profileImageUrl,
-                          addImageCallBack: (file) {
+                          onAddImage: (file) {
                             bloc.profileImage = file;
                             bloc.validateFields();
                           },
-                          deleteImageCallBack: () {
+                          onDeleteImage: () {
                             bloc.profileImage = null;
                             bloc.profileImageUrl = "";
                             bloc.validateFields();
@@ -57,6 +58,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Expanded(
                         child: Column(
                           children: [
+                            CustomTextField(
+                              controller: bloc.suffixNameController,
+                              hintText: AppLocalizations.of(context)!.suffixenameprofile,
+                              keyboardType: TextInputType.name,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(45),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
                             CustomTextField(
                               controller: bloc.firstNameController,
                               hintText: AppLocalizations.of(context)!.firstnameprofile,
@@ -111,6 +121,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onChange: (text) => {},
                 ),
                 const SizedBox(height: 10),
+                CustomTextField(
+                  controller: bloc.mobileNumberController,
+                  hintText: AppLocalizations.of(context)!.mobilenumber,
+                  keyboardType: TextInputType.phone,
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(35),
+                  ],
+                  onChange: (text) => {},
+                ),
+                const SizedBox(height: 10),
+                CustomTextField(
+                  controller: bloc.referalCodeController,
+                  hintText: AppLocalizations.of(context)!.referalcodeprofile,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(6),
+                  ],
+                  onChange: (text) => {},
+                ),
+                const SizedBox(height: 20),
                 ValueListenableBuilder<bool>(
                     valueListenable: bloc.enableNextBtn,
                     builder: (context, snapshot, child) {

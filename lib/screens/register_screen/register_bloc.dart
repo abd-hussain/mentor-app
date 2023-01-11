@@ -11,11 +11,15 @@ class RegisterBloc {
   String? selectedDate;
 
   final box = Hive.box(DatabaseBoxConstant.userInfo);
+  TextEditingController suffixNameController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController genderController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController mobileNumberController = TextEditingController();
   TextEditingController countryController = TextEditingController();
+  TextEditingController referalCodeController = TextEditingController();
+
   File? profileImage;
   Country? selectedCountry;
 

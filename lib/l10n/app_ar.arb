@@ -15,6 +15,7 @@
     "areyousure" : "هل انت متاكد",
     "cancel" : "رجوع",
     "pickimagefromstudio" : "اختيار من الاستديو",
+    "suffixenameprofile" : "الكنيه",
     "pickimagefromcamera" : "اختيار من الكاميرا",
     "pickimageremoveimage" : "حذف الصورة",
     "profilephotosetting" : "اعدادات الصورة الشخصية",
@@ -25,6 +26,8 @@
     "picprofile" : "الصورة الشخصية",
     "gender" : "الجنس",
     "dbprofile" : "تاريخ الميلاد",
+    "referalcodeprofile" : "الرمز الترويجي",
+    "mobilenumber" : "رقم الهاتف",
     "countryprofile" : "البلد"
 
 

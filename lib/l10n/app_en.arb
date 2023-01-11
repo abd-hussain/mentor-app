@@ -21,10 +21,13 @@
     "genderprofile" : "Select Gender",
     "firstnameprofile" : "First Name",
     "lastnameprofile" : "Last Name",
+    "suffixenameprofile" : "Suffix Name",
     "setprofilephoto" : "Set Profile Photo",
     "picprofile" : "Profile Picture",
     "gender" : "Gender",
     "dbprofile" : "When’s your birthday?",
+    "referalcodeprofile" : "Referal Code",
+    "mobilenumber" : "Mobile Number",
     "countryprofile" : "Country"
 
 

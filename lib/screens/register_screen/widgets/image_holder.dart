@@ -8,8 +8,8 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/utils/constants/constant.dart';
 
 class ImageHolder extends StatelessWidget {
-  final Function(File image) addImageCallBack;
-  final Function() deleteImageCallBack;
+  final Function(File image) onAddImage;
+  final Function() onDeleteImage;
   final bool isFromNetwork;
   final String? urlImage;
   final double hight;
@@ -17,15 +17,15 @@ class ImageHolder extends StatelessWidget {
 
   const ImageHolder({
     super.key,
-    required this.addImageCallBack,
-    required this.deleteImageCallBack,
+    required this.onAddImage,
+    required this.onDeleteImage,
     this.isFromNetwork = false,
     this.urlImage,
-    this.hight = 116,
-    this.width = 100,
+    this.hight = 180,
+    this.width = 120,
   });
 
-  Future<File> pickImage(ImageSource source) async {
+  Future<File> _pickImage(ImageSource source) async {
     final image = await ImagePicker().pickImage(source: source);
     return File(image?.path ?? "");
   }
@@ -40,34 +40,32 @@ class ImageHolder extends StatelessWidget {
           context,
           image?.path.isNotEmpty ?? false || urlImage != null,
           deleteCallBack: () {
-            deleteImageCallBack();
-            // if (!isFromNetwork) {
+            onDeleteImage();
             image = null;
 
             imageController.value = image;
 
-            // }
             Navigator.pop(context);
           },
           cameraCallBack: () async {
-            image = await pickImage(ImageSource.camera);
+            image = await _pickImage(ImageSource.camera);
             if (image?.path.isEmpty ?? true) {
               return;
             }
             if (!isFromNetwork) {
               imageController.value = image;
             }
-            addImageCallBack(image!);
+            onAddImage(image!);
           },
           galleryCallBack: () async {
-            image = await pickImage(ImageSource.gallery);
+            image = await _pickImage(ImageSource.gallery);
             if (image?.path.isEmpty ?? true) {
               return;
             }
             if (!isFromNetwork) {
               imageController.value = image;
             }
-            addImageCallBack(image!);
+            onAddImage(image!);
           },
         );
       },
