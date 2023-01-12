@@ -63,6 +63,13 @@
     "reportanproblem" : "Report a Problem",
     "reportansuggestion" : "Report a Suggestion",
     "feedbackmessage" : "Your feedback is important to us, Please describe your issue here",
+    "skip" : "Skip",
+    "tutorial1" : "All consultations through specialized programs and packages",
+    "tutorial2" : "Enter into a safe consultation with the audiovisual specialist",
+    "tutorial3" : "Choose the specialist based on his specialization, qualifications, experience, and customer experiences with him",
+    "tutorial4" : "Search among hundreds of specialists and consultants in various specialties",
+    "tutorial5" : "Talk to specialists around the clock to help you as soon as possible",
+    "changelanguagemessage" : "Do You Want To Change The Language ?",
     "logout" : "Logout"
 
 

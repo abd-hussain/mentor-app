@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:mentor_app/models/profile_options.dart';
+import 'package:mentor_app/myApp.dart';
 import 'package:mentor_app/screens/report/report_screen.dart';
 import 'package:mentor_app/shared_widget/account_service.dart';
+import 'package:mentor_app/shared_widget/bottom_sheet_util.dart';
 import 'package:mentor_app/utils/constants/constant.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
@@ -49,21 +51,15 @@ class AccountBloc extends Bloc<AccountService> {
   List<ProfileOptions> listOfSettingsOptions(BuildContext context) {
     return [
       ProfileOptions(
-          icon: Icons.menu_book_rounded,
-          name: AppLocalizations.of(context)!.usertutorials,
-          onTap: () {
-            //TODO
-          }
-          //=> Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.tutorialsScreen),
-          ),
-      ProfileOptions(
         icon: Icons.translate,
         name: AppLocalizations.of(context)!.language,
         selectedItem: box.get(DatabaseFieldConstant.language) == "en" ? "English" : "العربية",
-        onTap: () {
-          //TODO
-          // _changeLanguage(context);
-        },
+        onTap: () => _changeLanguage(context),
+      ),
+      ProfileOptions(
+        icon: Icons.menu_book_rounded,
+        name: AppLocalizations.of(context)!.usertutorials,
+        onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.tutorialsScreen),
       ),
     ];
   }
@@ -109,6 +105,25 @@ class AccountBloc extends Bloc<AccountService> {
 
   void _openInviteFriends(BuildContext context) {
     Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.inviteFriendScreen);
+  }
+
+  void _changeLanguage(BuildContext context) async {
+    await BottomSheetsUtil().areYouShoureButtomSheet(
+        context: context,
+        message: AppLocalizations.of(context)!.changelanguagemessage,
+        sure: () {
+          if (box.get(DatabaseFieldConstant.language) == "en") {
+            box.put(DatabaseFieldConstant.language, "ar");
+            _refreshAppWithLanguageCode(context);
+          } else {
+            box.put(DatabaseFieldConstant.language, "en");
+            _refreshAppWithLanguageCode(context);
+          }
+        });
+  }
+
+  void _refreshAppWithLanguageCode(BuildContext context) async {
+    MyApp.of(context)!.rebuild();
   }
 
   @override

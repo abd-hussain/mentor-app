@@ -34,7 +34,7 @@ class ListOfOptions extends StatelessWidget {
             titleOptionCollection(title: AppLocalizations.of(context)!.accountsettings),
             optionCollectionItem(listOfAccountOptions, containerHight: 260),
             titleOptionCollection(title: AppLocalizations.of(context)!.generalsettings),
-            optionCollectionItem(listOfSettingsOptions, containerHight: 200),
+            optionCollectionItem(listOfSettingsOptions, containerHight: 125),
             titleOptionCollection(title: AppLocalizations.of(context)!.reachouttous),
             optionCollectionItem(listOfReachOutUsOptions, containerHight: 125),
             titleOptionCollection(title: AppLocalizations.of(context)!.support),

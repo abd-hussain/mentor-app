@@ -66,4 +66,5 @@ flutter:
   assets:
   - assets/images/
   - assets/images/days/
+  - assets/images/tutorials/
   - assets/lottie/
