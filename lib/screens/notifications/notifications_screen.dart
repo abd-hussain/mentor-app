@@ -23,6 +23,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   @override
   void dispose() {
+    bloc.onDispose();
     super.dispose();
   }
 
