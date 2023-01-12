@@ -7,6 +7,7 @@ import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mentor_app/utils/routes.dart';
 
 class AccountBloc extends Bloc<AccountService> {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
@@ -104,12 +105,14 @@ class AccountBloc extends Bloc<AccountService> {
         icon: Ionicons.person_add,
         name: AppLocalizations.of(context)!.invite_friends,
         onTap: () {
-          //TODO
-
-          // _openInviteFriends(context);
+          _openInviteFriends(context);
         },
       ),
     ];
+  }
+
+  void _openInviteFriends(BuildContext context) {
+    Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.inviteFriendScreen);
   }
 
   @override

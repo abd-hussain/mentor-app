@@ -56,6 +56,9 @@
     "invite_friends" : "Invite Friends",
     "reportproblem" : "Report Problem",
     "reportsuggestion" : "Report Suggestion",
+    "permision_denied" : "Permission Denied",
+    "sendsmsmessage" : "Send SMS Message",
+    "smsmessage" : "Help Era application for consulting, consult specialists, via video calls in any specialty. Download the app now",
     "logout" : "Logout"
 
 
