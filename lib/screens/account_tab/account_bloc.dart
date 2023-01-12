@@ -3,6 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:mentor_app/models/profile_options.dart';
 import 'package:mentor_app/shared_widget/account_service.dart';
+import 'package:mentor_app/utils/constants/constant.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/mixins.dart';
@@ -95,20 +96,21 @@ class AccountBloc extends Bloc<AccountService> {
       ProfileOptions(
         icon: Ionicons.color_palette,
         name: AppLocalizations.of(context)!.aboutus,
-        onTap: () {
-          //TODO
-
-          // _openAboutUs(context);
-        },
+        onTap: () => _openAboutUs(context),
       ),
       ProfileOptions(
         icon: Ionicons.person_add,
         name: AppLocalizations.of(context)!.invite_friends,
-        onTap: () {
-          _openInviteFriends(context);
-        },
+        onTap: () => _openInviteFriends(context),
       ),
     ];
+  }
+
+  void _openAboutUs(BuildContext context) {
+    Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.webViewScreen, arguments: {
+      AppConstant.webViewPageUrl: AppConstant.aboutusLink,
+      AppConstant.pageTitle: AppLocalizations.of(context)!.aboutus
+    });
   }
 
   void _openInviteFriends(BuildContext context) {
