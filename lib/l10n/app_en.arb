@@ -59,6 +59,10 @@
     "permision_denied" : "Permission Denied",
     "sendsmsmessage" : "Send SMS Message",
     "smsmessage" : "Help Era application for consulting, consult specialists, via video calls in any specialty. Download the app now",
+    "reportFooterText" : "We read all of the feedback carefully, but we may not respond to each submission individually.",
+    "reportanproblem" : "Report a Problem",
+    "reportansuggestion" : "Report a Suggestion",
+    "feedbackmessage" : "Your feedback is important to us, Please describe your issue here",
     "logout" : "Logout"
 
 

@@ -9,13 +9,14 @@ import 'package:mentor_app/screens/main_contaner/main_container.dart';
 import 'package:mentor_app/screens/messages_tab/messages_screen.dart';
 import 'package:mentor_app/screens/notifications/notifications_screen.dart';
 import 'package:mentor_app/screens/register_screen/register_screen.dart';
+import 'package:mentor_app/screens/report/report_screen.dart';
 import 'package:mentor_app/screens/setup_screen/setup_screen.dart';
 import 'package:mentor_app/screens/web_view/web_view_screen.dart';
 
 class RoutesConstants {
   static const String initialRoute = 'initScreen';
   static const String loginScreen = 'loginScreen';
-
+  static const String reportScreen = 'reportScreen';
   static const String mainContainer = 'mainContainer';
   static const String homeScreen = 'homeScreen';
   static const String messagesScreen = 'messagesScreen';
@@ -41,4 +42,5 @@ final Map<String, Widget> routes = {
   RoutesConstants.notificationsScreen: const NotificationsScreen(),
   RoutesConstants.webViewScreen: const WebViewScreen(),
   RoutesConstants.inviteFriendScreen: const InviteFriendsScreen(),
+  RoutesConstants.reportScreen: const ReportScreen(),
 };

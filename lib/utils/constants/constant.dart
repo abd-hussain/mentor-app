@@ -1,5 +1,5 @@
 class AppConstant {
-  // static const String argument1 = "argument1";
+  static const String argument1 = "argument1";
   static const String webViewPageUrl = "webViewPageUrl";
   static const String pageTitle = "pageTitle";
   // static const String countryCode = "countryCode";

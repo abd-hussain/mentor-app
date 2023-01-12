@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:mentor_app/models/profile_options.dart';
+import 'package:mentor_app/screens/report/report_screen.dart';
 import 'package:mentor_app/shared_widget/account_service.dart';
 import 'package:mentor_app/utils/constants/constant.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
@@ -70,24 +71,17 @@ class AccountBloc extends Bloc<AccountService> {
   List<ProfileOptions> listOfReachOutUsOptions(BuildContext context) {
     return [
       ProfileOptions(
-          icon: Icons.bug_report,
-          name: AppLocalizations.of(context)!.reportproblem,
-          onTap: () {
-            //TODO
-          }
-          // => Navigator.of(context, rootNavigator: true)
-          //     .pushNamed(RoutesConstants.reportScreen, arguments: {AppConstant.argument1: ReportPageType.issue}),
-          ),
+        icon: Icons.bug_report,
+        name: AppLocalizations.of(context)!.reportproblem,
+        onTap: () => Navigator.of(context, rootNavigator: true)
+            .pushNamed(RoutesConstants.reportScreen, arguments: {AppConstant.argument1: ReportPageType.issue}),
+      ),
       ProfileOptions(
-          icon: Ionicons.balloon,
-          name: AppLocalizations.of(context)!.reportsuggestion,
-          onTap: () {
-            //TODO
-          }
-
-          //  => Navigator.of(context, rootNavigator: true)
-          //     .pushNamed(RoutesConstants.reportScreen, arguments: {AppConstant.argument1: ReportPageType.suggestion}),
-          ),
+        icon: Ionicons.balloon,
+        name: AppLocalizations.of(context)!.reportsuggestion,
+        onTap: () => Navigator.of(context, rootNavigator: true)
+            .pushNamed(RoutesConstants.reportScreen, arguments: {AppConstant.argument1: ReportPageType.suggestion}),
+      ),
     ];
   }
 
