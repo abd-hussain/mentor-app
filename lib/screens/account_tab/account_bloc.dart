@@ -28,6 +28,22 @@ class AccountBloc extends Bloc<AccountService> {
           // Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.editProfileScreen),
           ),
       ProfileOptions(
+          icon: Icons.explore,
+          name: AppLocalizations.of(context)!.editprofileeinexperiances,
+          onTap: () {
+            //TODO
+          }
+          // Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.editProfileScreen),
+          ),
+      ProfileOptions(
+          icon: Icons.password,
+          name: AppLocalizations.of(context)!.editprofilepassword,
+          onTap: () {
+            //TODO
+          }
+          // Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.editProfileScreen),
+          ),
+      ProfileOptions(
         icon: Icons.logout,
         name: AppLocalizations.of(context)!.logout,
         onTap: () {

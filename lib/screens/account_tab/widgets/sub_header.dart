@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
-import 'package:mentor_app/utils/routes.dart';
 
 class ProfileSubHeader extends StatelessWidget {
   const ProfileSubHeader({Key? key}) : super(key: key);
