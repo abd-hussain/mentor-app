@@ -72,6 +72,8 @@
     "changelanguagemessage" : "هل تريد تغيير اللغة ؟",
     "editprofilepassword" : "تغيير كلمة المرور",
     "editprofileeinexperiances" : "تعديل الخبرات",
+    "areyousurelogout" : "هل أنت متأكد من أنك تريد تسجيل الخروج ؟",
+    "accountInformationwillbedeleted" : "سيتم حذف جميع معلومات الحساب ، ولا يمكنك تسجيل الدخول مرة أخرى",
     "logout" : "تسجيل الخروج"
 
 

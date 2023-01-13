@@ -72,6 +72,8 @@
     "changelanguagemessage" : "Do You Want To Change The Language ?",
     "editprofilepassword" : "Change Password",
     "editprofileeinexperiances" : "Edit Experiences",
+    "areyousurelogout" : "Are you sure you want to logout ?",
+    "accountInformationwillbedeleted" : "All Of The Account Informations Will Be Deleted, and you can't login again",
     "logout" : "Logout"
 
 

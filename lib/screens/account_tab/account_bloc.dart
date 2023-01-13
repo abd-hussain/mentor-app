@@ -46,20 +46,14 @@ class AccountBloc extends Bloc<AccountService> {
       ProfileOptions(
         icon: Icons.logout,
         name: AppLocalizations.of(context)!.logout,
-        onTap: () {
-          //TODO
-          //_logoutView(context);
-        },
+        onTap: () => _logoutView(context),
       ),
       ProfileOptions(
         icon: Ionicons.bag_remove_outline,
         iconColor: Colors.red,
         name: AppLocalizations.of(context)!.deleteaccount,
         nameColor: Colors.red,
-        onTap: () {
-          //TODO
-          //   _deleteAccountView(context);
-        },
+        onTap: () => _deleteAccountView(context),
       ),
     ];
   }
@@ -110,6 +104,58 @@ class AccountBloc extends Bloc<AccountService> {
         onTap: () => _openInviteFriends(context),
       ),
     ];
+  }
+
+  void _deleteAccountView(BuildContext context) {
+    var nav = Navigator.of(context, rootNavigator: true);
+
+    BottomSheetsUtil().areYouShoureButtomSheet(
+        context: context,
+        message: AppLocalizations.of(context)!.areyousuredeleteaccount,
+        sure: () async {
+          BottomSheetsUtil().areYouShoureButtomSheet(
+              context: context,
+              message: AppLocalizations.of(context)!.accountInformationwillbedeleted,
+              sure: () async {
+                service.removeAccount().whenComplete(() async {
+                  final box = await Hive.openBox(DatabaseBoxConstant.userInfo);
+                  box.deleteAll([
+                    DatabaseFieldConstant.apikey,
+                    DatabaseFieldConstant.token,
+                    DatabaseFieldConstant.language,
+                    DatabaseFieldConstant.userid,
+                    DatabaseFieldConstant.countryId,
+                    DatabaseFieldConstant.countryFlag,
+                    DatabaseFieldConstant.isUserLoggedIn,
+                    DatabaseFieldConstant.userFirstName,
+                  ]);
+
+                  await nav.pushNamedAndRemoveUntil(RoutesConstants.initialRoute, (Route<dynamic> route) => true);
+                });
+              });
+        });
+  }
+
+  void _logoutView(BuildContext context) {
+    var nav = Navigator.of(context, rootNavigator: true);
+    BottomSheetsUtil().areYouShoureButtomSheet(
+        context: context,
+        message: AppLocalizations.of(context)!.areyousurelogout,
+        sure: () async {
+          final box = await Hive.openBox(DatabaseBoxConstant.userInfo);
+          box.deleteAll([
+            DatabaseFieldConstant.apikey,
+            DatabaseFieldConstant.token,
+            DatabaseFieldConstant.language,
+            DatabaseFieldConstant.userid,
+            DatabaseFieldConstant.countryId,
+            DatabaseFieldConstant.countryFlag,
+            DatabaseFieldConstant.isUserLoggedIn,
+            DatabaseFieldConstant.userFirstName,
+          ]);
+
+          await nav.pushNamedAndRemoveUntil(RoutesConstants.initialRoute, (Route<dynamic> route) => true);
+        });
   }
 
   void _openAboutUs(BuildContext context) {

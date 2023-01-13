@@ -298,10 +298,14 @@ class BottomSheetsUtil {
                     child: Column(
                       children: [
                         const SizedBox(height: 20),
-                        CustomText(
-                          title: message,
-                          textColor: const Color(0xff191C1F),
-                          fontSize: 16,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8, right: 8),
+                          child: CustomText(
+                            title: message,
+                            textColor: const Color(0xff191C1F),
+                            maxLins: 3,
+                            fontSize: 16,
+                          ),
                         ),
                         const SizedBox(height: 20),
                         const Divider(
