@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:mentor_app/screens/edit_profile/edit_profile_bloc.dart';
 import 'package:mentor_app/shared_widget/country_field.dart';
 import 'package:mentor_app/shared_widget/date_of_birth_field.dart';
 import 'package:mentor_app/shared_widget/gender_field.dart';
 import 'package:mentor_app/shared_widget/image_holder_field.dart';
-import 'package:mentor_app/shared_widget/bottom_sheet_util.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
@@ -25,6 +22,7 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final bloc = EditProfileBloc();
+
   @override
   void didChangeDependencies() {
     logDebugMessage(message: 'Edit Profile init Called ...');
@@ -157,11 +155,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     const SizedBox(height: 10),
                     DateOfBirthField(
-                        selectedDate: bloc.selectedDate,
-                        language: bloc.box.get(DatabaseFieldConstant.language),
-                        dateSelected: (p0) {
-                          bloc.selectedDate = p0;
-                        }),
+                      selectedDate: bloc.selectedDate,
+                      language: bloc.box.get(DatabaseFieldConstant.language),
+                      dateSelected: (p0) {
+                        bloc.selectedDate = p0;
+                      },
+                    ),
                     const SizedBox(height: 10),
                     CustomTextField(
                       controller: bloc.emailController,
@@ -187,12 +186,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       controller: bloc.referalCodeController,
                       hintText: AppLocalizations.of(context)!.referalcodeprofile,
                       keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(6),
-                      ],
+                      inputFormatters: [LengthLimitingTextInputFormatter(6)],
                       onChange: (text) => {},
                     ),
-                    // const SizedBox(height: 20),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
