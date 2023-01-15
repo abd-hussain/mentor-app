@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mentor_app/screens/edit_experience/edit_experience_bloc.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
+import 'package:mentor_app/shared_widget/custom_textfield.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/logger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -55,19 +56,54 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                       ),
                     ],
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 20),
-                      Padding(
-                        padding: bloc.box.get(DatabaseFieldConstant.language) == "ar"
-                            ? const EdgeInsets.only(right: 16)
-                            : const EdgeInsets.only(left: 16),
-                        child: Row(
-                          children: [],
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 20),
+                        CustomTextField(
+                          controller: TextEditingController(),
+                          hintText: "Latest C.V",
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          controller: TextEditingController(),
+                          hintText: "City",
+                        ),
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          controller: TextEditingController(),
+                          hintText: "Current Job Title",
+                        ),
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          controller: TextEditingController(),
+                          hintText: "Experiance in Years",
+                        ),
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          controller: TextEditingController(),
+                          hintText: "ID",
+                        ),
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          controller: TextEditingController(),
+                          hintText: "category",
+                        ),
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          controller: TextEditingController(),
+                          hintText: "tags of mentors",
+                        ),
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          controller: TextEditingController(),
+                          hintText: "Cirtificates",
+                        ),
+                        const SizedBox(height: 10),
+                      ],
+                    ),
                   ),
                 ),
               ),
