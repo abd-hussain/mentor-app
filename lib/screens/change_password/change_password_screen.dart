@@ -24,6 +24,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   @override
   void didChangeDependencies() {
     logDebugMessage(message: 'Change Password init Called ...');
+    bloc.infoNotifier.value = AppLocalizations.of(context)!.fillcurrentpassword;
     super.didChangeDependencies();
   }
 
@@ -105,7 +106,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           ),
                           onChange: (text) {
                             if (text.isNotEmpty) {
-                              if (bloc.validateCurrentPassword(text)) {
+                              if (bloc.validateCurrentPassword(context, text)) {
                                 FocusScope.of(context).unfocus();
                               }
                             }
@@ -148,7 +149,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 if (PasswordsStrength().checkerOfThePasswordStrength(
                                     passwordStrengthValidationNotifier: bloc.passwordStrengthValidationNotifier)) {
                                   bloc.enableConfirmPasswordTextField = true;
-                                  bloc.infoNotifier.value = "* You Have to fill confirm Password first";
+                                  bloc.infoNotifier.value = AppLocalizations.of(context)!.fillconfirmpassword;
                                 } else {
                                   bloc.enableConfirmPasswordTextField = false;
                                 }

@@ -88,6 +88,10 @@
     "gendermale" : "ذكر",
     "genderfemale" : "انثى",
     "genderother" : "افضل عدم الافصاح",
+    "fillcurrentpassword" : "* يجب عليك ملء كلمة المرور الحالية أولاً",
+    "fillconfirmpassword" : "* يجب عليك ملء تأكيد كلمة المرور أولاً",
+    "fillnewpassword" : "* الآن يمكنك ملء كلمة المرور الجديدة الخاصة بك",
+    "currentpasswordwrong" : "* كلمة مرورك الحالية خاطئة",
     "logout" : "تسجيل الخروج"
 
 

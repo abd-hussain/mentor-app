@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mentor_app/screens/edit_experience/edit_experience_bloc.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
+import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/logger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -58,6 +59,14 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 20),
+                      Padding(
+                        padding: bloc.box.get(DatabaseFieldConstant.language) == "ar"
+                            ? const EdgeInsets.only(right: 16)
+                            : const EdgeInsets.only(left: 16),
+                        child: Row(
+                          children: [],
+                        ),
+                      ),
                     ],
                   ),
                 ),

@@ -87,6 +87,10 @@
     "gendermale" : "Male",
     "genderfemale" : "Female",
     "genderother" : "Prefer Not To Say",  
+    "fillcurrentpassword" : "* You Have to fill Current Password first",
+    "fillconfirmpassword" : "* You Have to fill confirm Password first",
+    "fillnewpassword" : "* Now You can fill your new password",
+    "currentpasswordwrong" : "* Your Current Password is Wrong",
     "logout" : "Logout"
 
 

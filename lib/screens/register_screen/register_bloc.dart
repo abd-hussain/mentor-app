@@ -24,5 +24,7 @@ class RegisterBloc {
 
   ValueNotifier<bool> enableNextBtn = ValueNotifier<bool>(false);
 
+  List<Country> listOfCountries = [];
+
   validateFields() {}
 }

@@ -5,6 +5,7 @@ import 'package:mentor_app/password_strenght_logic.dart';
 import 'package:mentor_app/shared_widget/account_service.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/mixins.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangePasswordBloc extends Bloc<AccountService> {
   bool currentPassowrdObscureText = true;
@@ -21,16 +22,16 @@ class ChangePasswordBloc extends Bloc<AccountService> {
   final ValueNotifier<PasswordStrengthModel> passwordStrengthValidationNotifier =
       ValueNotifier<PasswordStrengthModel>(PasswordStrengthModel());
 
-  final ValueNotifier<String> infoNotifier = ValueNotifier<String>("* You Have to fill Current Password first");
+  final ValueNotifier<String> infoNotifier = ValueNotifier<String>("");
   final box = Hive.box(DatabaseBoxConstant.userInfo);
 
-  bool validateCurrentPassword(String text) {
+  bool validateCurrentPassword(BuildContext context, String text) {
     if (box.get(DatabaseFieldConstant.biometricP) == text) {
-      infoNotifier.value = "* Now You can fill your new password";
+      infoNotifier.value = AppLocalizations.of(context)!.fillnewpassword;
       enableNewPasswordTextField = true;
       return true;
     }
-    infoNotifier.value = "* Your Current Password is Wrong";
+    infoNotifier.value = AppLocalizations.of(context)!.currentpasswordwrong;
     return false;
   }
 
