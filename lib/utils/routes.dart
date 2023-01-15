@@ -11,11 +11,13 @@ import 'package:mentor_app/screens/login_screen/login_screen.dart';
 import 'package:mentor_app/screens/main_contaner/main_container.dart';
 import 'package:mentor_app/screens/messages_tab/messages_screen.dart';
 import 'package:mentor_app/screens/notifications/notifications_screen.dart';
+import 'package:mentor_app/screens/payments/payments_screen.dart';
 import 'package:mentor_app/screens/register_screen/register_screen.dart';
 import 'package:mentor_app/screens/report/report_screen.dart';
 import 'package:mentor_app/screens/setup_screen/setup_screen.dart';
 import 'package:mentor_app/screens/tutorials/tutorials_screen.dart';
 import 'package:mentor_app/screens/web_view/web_view_screen.dart';
+import 'package:mentor_app/screens/working_hours/working_hours_screen.dart';
 
 class RoutesConstants {
   static const String initialRoute = 'initScreen';
@@ -35,6 +37,8 @@ class RoutesConstants {
   static const String changePasswordScreen = 'changePasswordScreen';
   static const String editProfileScreen = 'editProfileScreen';
   static const String editExperienceScreen = 'editExperienceScreen';
+  static const String workingHoursScreen = 'workingHoursScreen';
+  static const String paymentsScreen = 'paymentsScreen';
 }
 
 final Map<String, Widget> routes = {
@@ -55,4 +59,6 @@ final Map<String, Widget> routes = {
   RoutesConstants.changePasswordScreen: const ChangePasswordScreen(),
   RoutesConstants.editProfileScreen: const EditProfileScreen(),
   RoutesConstants.editExperienceScreen: const EditExperienceScreen(),
+  RoutesConstants.workingHoursScreen: const WorkingHoursScreen(),
+  RoutesConstants.paymentsScreen: const PaymentsScreen()
 };

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
+import 'package:mentor_app/utils/routes.dart';
 
 class ProfileSubHeader extends StatelessWidget {
   const ProfileSubHeader({Key? key}) : super(key: key);
@@ -28,9 +29,7 @@ class ProfileSubHeader extends StatelessWidget {
             optionButton(
               buttonTitle: AppLocalizations.of(context)!.payments,
               icon: Icons.payments_outlined,
-              onTap: () {
-                //TODO
-              },
+              onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.paymentsScreen),
             ),
             Row(
               children: [
@@ -54,9 +53,7 @@ class ProfileSubHeader extends StatelessWidget {
             optionButton(
               buttonTitle: AppLocalizations.of(context)!.workinghour,
               icon: Icons.work_history_outlined,
-              onTap: () => {
-                //TODO
-              },
+              onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.workingHoursScreen),
             ),
           ],
         ),
