@@ -7,7 +7,7 @@ import 'package:mentor_app/shared_widget/bottom_sheet_util.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/utils/constants/constant.dart';
 
-class ImageHolder extends StatelessWidget {
+class ImageHolderField extends StatelessWidget {
   final Function(File image) onAddImage;
   final Function() onDeleteImage;
   final bool isFromNetwork;
@@ -15,7 +15,7 @@ class ImageHolder extends StatelessWidget {
   final double hight;
   final double width;
 
-  const ImageHolder({
+  const ImageHolderField({
     super.key,
     required this.onAddImage,
     required this.onDeleteImage,

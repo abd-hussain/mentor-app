@@ -22,21 +22,15 @@ class AccountBloc extends Bloc<AccountService> {
   List<ProfileOptions> listOfAccountOptions(BuildContext context) {
     return [
       ProfileOptions(
-          icon: Icons.account_box,
-          name: AppLocalizations.of(context)!.editprofileinformations,
-          onTap: () {
-            //TODO
-          }
-          // Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.editProfileScreen),
-          ),
+        icon: Icons.account_box,
+        name: AppLocalizations.of(context)!.editprofileinformations,
+        onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.editProfileScreen),
+      ),
       ProfileOptions(
-          icon: Icons.explore,
-          name: AppLocalizations.of(context)!.editprofileeinexperiances,
-          onTap: () {
-            //TODO
-          }
-          // Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.editProfileScreen),
-          ),
+        icon: Icons.explore,
+        name: AppLocalizations.of(context)!.editprofileeinexperiances,
+        onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.editExperienceScreen),
+      ),
       ProfileOptions(
         icon: Icons.password,
         name: AppLocalizations.of(context)!.editprofilepassword,

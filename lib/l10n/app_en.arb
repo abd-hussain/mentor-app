@@ -83,7 +83,10 @@
     "createAccountUpperCase": "•  One upper case character",
     "createAccountNumber": "•  At least one number",
     "createAccountchar": "•  At least one special character",
-    "biometrics" : "Biometric login",
+    "biometrics" : "Biometric login", 
+    "gendermale" : "Male",
+    "genderfemale" : "Female",
+    "genderother" : "Prefer Not To Say",  
     "logout" : "Logout"
 
 

@@ -28,16 +28,16 @@ class ListOfCountriesWidget extends StatelessWidget {
   }
 
   Widget countryTile(BuildContext context, Country item) {
+    final nav = Navigator.of(context, rootNavigator: true);
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10),
       child: InkWell(
         onTap: () async {
           var box = await Hive.openBox(DatabaseBoxConstant.userInfo);
 
-          box.put(DatabaseFieldConstant.countryId, item.id.toString());
-          box.put(DatabaseFieldConstant.countryFlag, item.flagImage);
-          Navigator.of(context, rootNavigator: true)
-              .pushNamedAndRemoveUntil(RoutesConstants.loginScreen, (Route<dynamic> route) => false);
+          await box.put(DatabaseFieldConstant.countryId, item.id.toString());
+          await box.put(DatabaseFieldConstant.countryFlag, item.flagImage);
+          nav.pushNamedAndRemoveUntil(RoutesConstants.loginScreen, (Route<dynamic> route) => false);
         },
         child: Container(
           height: 50,

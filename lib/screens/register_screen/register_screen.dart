@@ -3,7 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:mentor_app/screens/register_screen/register_bloc.dart';
-import 'package:mentor_app/screens/register_screen/widgets/image_holder.dart';
+import 'package:mentor_app/shared_widget/country_field.dart';
+import 'package:mentor_app/shared_widget/date_of_birth_field.dart';
+import 'package:mentor_app/shared_widget/gender_field.dart';
+import 'package:mentor_app/shared_widget/image_holder_field.dart';
 import 'package:mentor_app/shared_widget/bottom_sheet_util.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
@@ -22,7 +25,6 @@ class RegisterScreen extends StatefulWidget {
 final bloc = RegisterBloc();
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final String savedLanguage = bloc.box.get(DatabaseFieldConstant.language);
   // TODO Compleate Registration
 
   @override
@@ -40,10 +42,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
               children: [
                 const SizedBox(height: 20),
                 Padding(
-                  padding: savedLanguage == "ar" ? const EdgeInsets.only(right: 16) : const EdgeInsets.only(left: 16),
+                  padding: bloc.box.get(DatabaseFieldConstant.language) == "ar"
+                      ? const EdgeInsets.only(right: 16)
+                      : const EdgeInsets.only(left: 16),
                   child: Row(
                     children: [
-                      ImageHolder(
+                      ImageHolderField(
                           isFromNetwork: bloc.profileImageUrl != "",
                           urlImage: bloc.profileImageUrl == "" ? null : bloc.profileImageUrl,
                           onAddImage: (file) {
@@ -93,8 +97,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    countryField(context),
-                    genderField(),
+                    CountryField(
+                      controller: bloc.countryController,
+                      listOfCountries: bloc.listOfCountries,
+                      selectedCountry: (p0) {
+                        bloc.selectedCountry = p0;
+                      },
+                    ),
+                    GenderField(controller: bloc.genderController),
                     const SizedBox(height: 10),
                   ],
                 ),
@@ -109,7 +119,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                dateBirthField(),
+                DateOfBirthField(
+                    selectedDate: bloc.selectedDate,
+                    language: bloc.box.get(DatabaseFieldConstant.language),
+                    dateSelected: (p0) {
+                      bloc.selectedDate = p0;
+                    }),
                 const SizedBox(height: 10),
                 CustomTextField(
                   controller: bloc.emailController,
@@ -168,100 +183,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget genderField() {
-    return Expanded(
-        child: Stack(
-      children: [
-        CustomTextField(
-          controller: bloc.genderController,
-          readOnly: true,
-          hintText: AppLocalizations.of(context)!.gender,
-          padding: const EdgeInsets.only(left: 16, right: 8),
-          keyboardType: TextInputType.text,
-          inputFormatters: [
-            LengthLimitingTextInputFormatter(45),
-          ],
-          onChange: (text) => {},
-        ),
-        InkWell(
-          onTap: () async {
-            await BottomSheetsUtil().genderBottomSheet(context, bloc.listOfGenders, (selectedGender) {
-              bloc.genderController.text = selectedGender.name;
-            });
-          },
-          child: Padding(
-            padding: const EdgeInsets.only(left: 8, right: 16),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 55,
-            ),
-          ),
-        ),
-      ],
-    ));
-  }
-
-  Widget countryField(context) {
-    return Expanded(
-      child: Stack(
-        children: [
-          CustomTextField(
-            readOnly: true,
-            controller: bloc.countryController,
-            hintText: AppLocalizations.of(context)!.countryprofile,
-            padding: const EdgeInsets.only(left: 8, right: 16),
-            keyboardType: TextInputType.number,
-            inputFormatters: [
-              LengthLimitingTextInputFormatter(45),
-            ],
-          ),
-          InkWell(
-            onTap: () async {
-              await BottomSheetsUtil().countryBottomSheet(context, bloc.listOfCountries, (selectedCountry) {
-                bloc.countryController.text = selectedCountry.name!;
-                bloc.selectedCountry = selectedCountry;
-              });
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8, right: 16),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 55,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget dateBirthField() {
-    final String savedLanguage = bloc.box.get(DatabaseFieldConstant.language);
-
-    late DateTime date;
-    if (bloc.selectedDate != null) {
-      date = DateFormat('yyyy/MM/dd').parse(bloc.selectedDate!);
-    } else {
-      date = DateTime(1992, 05, 22);
-    }
-    return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16),
-      child: DatePickerWidget(
-        firstDate: DateTime(1945, 01, 01),
-        lastDate: DateTime(DateTime.now().year - 10, 1, 1),
-        initialDate: date,
-        dateFormat: "yyyy/MM/dd",
-        locale: DatePicker.localeFromString(savedLanguage),
-        onChange: (DateTime newDate, _) {
-          bloc.selectedDate = DateFormat("yyyy/MM/dd").format(newDate);
-        },
-        pickerTheme: const DateTimePickerTheme(
-          itemTextStyle: TextStyle(color: Color(0xff384048), fontSize: 15),
         ),
       ),
     );
