@@ -1,5 +1,6 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:mentor_app/models/https/calender_model.dart';
 import 'package:mentor_app/screens/main_contaner/widgets/tab_navigator.dart';
 import 'package:mentor_app/utils/routes.dart';
 
@@ -7,6 +8,7 @@ enum SelectedTab { home, messages, call, calender, account }
 
 class MainContainerBloc {
   final ValueNotifier<SelectedTab> currentTabIndexNotifier = ValueNotifier<SelectedTab>(SelectedTab.home);
+  final ValueNotifier<List<CalenderMeetings>> eventsmeetingsListNotifier = ValueNotifier<List<CalenderMeetings>>([]);
 
   GlobalKey<ConvexAppBarState> appBarKey = GlobalKey<ConvexAppBarState>();
 

@@ -35,7 +35,17 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
       child: Scaffold(
         backgroundColor: const Color(0xffF3F4F5),
         resizeToAvoidBottomInset: false,
-        appBar: customAppBar(title: AppLocalizations.of(context)!.payments),
+        appBar: customAppBar(
+          title: AppLocalizations.of(context)!.payments,
+          actions: [
+            IconButton(
+              onPressed: () {
+                //TODO
+              },
+              icon: const Icon(Icons.settings),
+            )
+          ],
+        ),
       ),
     );
   }
