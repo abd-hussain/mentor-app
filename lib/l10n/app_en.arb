@@ -74,6 +74,16 @@
     "editprofileeinexperiances" : "Edit Experiences",
     "areyousurelogout" : "Are you sure you want to logout ?",
     "accountInformationwillbedeleted" : "All Of The Account Informations Will Be Deleted, and you can't login again",
+    "changepassword" : "Change Password",
+    "oldpassword" : "Old Password",
+    "newpassword" : "New Password",
+    "newpasswordagain" : "New Password Again",
+    "createAccountMaxChar": "•  Between 8-30 character",
+    "createAccountLowerCase": "•  One lower case character",
+    "createAccountUpperCase": "•  One upper case character",
+    "createAccountNumber": "•  At least one number",
+    "createAccountchar": "•  At least one special character",
+    "biometrics" : "Biometric login",
     "logout" : "Logout"
 
 

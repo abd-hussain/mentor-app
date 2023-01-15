@@ -6,6 +6,7 @@ import 'package:mentor_app/myApp.dart';
 import 'package:mentor_app/screens/report/report_screen.dart';
 import 'package:mentor_app/shared_widget/account_service.dart';
 import 'package:mentor_app/shared_widget/bottom_sheet_util.dart';
+import 'package:mentor_app/shared_widget/custom_switch.dart';
 import 'package:mentor_app/utils/constants/constant.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
@@ -16,6 +17,7 @@ import 'package:mentor_app/utils/routes.dart';
 class AccountBloc extends Bloc<AccountService> {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
   ValueNotifier<LoadingStatus> loadingStatus = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<bool> toggleOfBiometrics = ValueNotifier<bool>(false);
 
   List<ProfileOptions> listOfAccountOptions(BuildContext context) {
     return [
@@ -36,13 +38,28 @@ class AccountBloc extends Bloc<AccountService> {
           // Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.editProfileScreen),
           ),
       ProfileOptions(
-          icon: Icons.password,
-          name: AppLocalizations.of(context)!.editprofilepassword,
-          onTap: () {
-            //TODO
-          }
-          // Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.editProfileScreen),
+        icon: Icons.password,
+        name: AppLocalizations.of(context)!.editprofilepassword,
+        onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.changePasswordScreen),
+      ),
+      ProfileOptions(
+          icon: Ionicons.finger_print,
+          name: AppLocalizations.of(context)!.biometrics,
+          selectedItemImage: ValueListenableBuilder<bool>(
+            valueListenable: toggleOfBiometrics,
+            builder: (BuildContext context, dynamic value, Widget? child) {
+              return CustomSwitch(
+                  value: toggleOfBiometrics.value,
+                  language: box.get(DatabaseFieldConstant.language),
+                  backgroundColorOfSelection:
+                      toggleOfBiometrics.value ? const Color(0xff34C759) : const Color(0xffE74C4C),
+                  onChanged: (_) async {
+                    await box.put(DatabaseFieldConstant.biometricStatus, (!toggleOfBiometrics.value).toString());
+                    toggleOfBiometrics.value = !toggleOfBiometrics.value;
+                  });
+            },
           ),
+          onTap: () {}),
       ProfileOptions(
         icon: Icons.logout,
         name: AppLocalizations.of(context)!.logout,
@@ -186,6 +203,10 @@ class AccountBloc extends Bloc<AccountService> {
 
   void _refreshAppWithLanguageCode(BuildContext context) async {
     MyApp.of(context)!.rebuild();
+  }
+
+  readBiometricsInitValue() {
+    toggleOfBiometrics.value = box.get(DatabaseFieldConstant.biometricStatus) == "true";
   }
 
   @override

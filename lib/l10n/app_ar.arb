@@ -74,6 +74,16 @@
     "editprofileeinexperiances" : "تعديل الخبرات",
     "areyousurelogout" : "هل أنت متأكد من أنك تريد تسجيل الخروج ؟",
     "accountInformationwillbedeleted" : "سيتم حذف جميع معلومات الحساب ، ولا يمكنك تسجيل الدخول مرة أخرى",
+    "changepassword" : "تغيير كلمة المرور",
+    "oldpassword" : "كلمة المرور القديمة",
+    "newpassword" : "كلمة المرور الجديدة",
+    "newpasswordagain" : "كلمة المرور الجديدة مرة أخرى",
+    "createAccountMaxChar": "• من ٨ ل ٣٠ حرف",
+    "createAccountLowerCase": "•  حرف واحد صغير",
+    "createAccountUpperCase": "• حرف واحد كبير",
+    "createAccountNumber": "• رقم واحد على الأقل",
+    "createAccountchar": "• رمز واحدة على الأقل",
+    "biometrics" : "تسجيل الدخول بالمقاييس الحيوية",
     "logout" : "تسجيل الخروج"
 
 

@@ -20,6 +20,7 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   void didChangeDependencies() {
     logDebugMessage(message: 'Account init Called ...');
+    bloc.readBiometricsInitValue();
     super.didChangeDependencies();
   }
 
