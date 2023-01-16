@@ -49,7 +49,7 @@ class SubView extends StatelessWidget {
                                 Row(
                                   children: [
                                     CustomText(
-                                      title: "ID : " + list[index].id!.toString(),
+                                      title: "ID : ${list[index].id!}",
                                       fontSize: 12,
                                       textColor: const Color(0xff444444),
                                     ),
