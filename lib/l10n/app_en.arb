@@ -109,11 +109,11 @@
     "eventday" : "Day",
     "eventhour" : "Hour",
     "eventDuration" : "Duration",
+    "pending" : "Pending",
+    "inprogress" : "In Progress",
+    "compleated" : "compleated",
+    "nodatatoshow" : "No Data To Show Here",
+    "paymentoption" : "Payment Option",
     "logout" : "Logout"
-
-
-
-
-
 
 }

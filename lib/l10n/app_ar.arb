@@ -109,7 +109,11 @@
     "eventday" : "اليوم",
     "eventhour" : "الساعة",
     "meetingduration" : "مدة الجلسة",
+    "pending" : "قيد الانتظار",
+    "inprogress" : "جاري العمل",
+    "compleated" : "مكتمل",
+    "nodatatoshow" : "لا توجد بيانات لإظهارها هنا",
+    "paymentoption" : "خيارات الدفع",
     "logout" : "تسجيل الخروج"
-
 
 }
