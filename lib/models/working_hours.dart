@@ -7,7 +7,7 @@ class WorkingHourModel {
 
 class WorkingHour {
   final String value;
-  final bool isEnable;
+  bool isEnable;
 
   WorkingHour({required this.value, required this.isEnable});
 }

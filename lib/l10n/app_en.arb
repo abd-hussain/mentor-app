@@ -114,6 +114,7 @@
     "compleated" : "compleated",
     "nodatatoshow" : "No Data To Show Here",
     "paymentoption" : "Payment Option",
+    "editworkingHour" : "Edit Working Hours",
     "logout" : "Logout"
 
 }

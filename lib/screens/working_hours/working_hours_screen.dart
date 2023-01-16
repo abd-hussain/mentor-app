@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_select_items/flutter_multi_select_items.dart';
 import 'package:mentor_app/models/working_hours.dart';
+import 'package:mentor_app/screens/working_hours/widgets/edit_working_hour_bottomsheet.dart';
 import 'package:mentor_app/screens/working_hours/working_hours_bloc.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
@@ -39,6 +40,7 @@ class _WorkingHoursScreenState extends State<WorkingHoursScreen> {
           itemCount: bloc.listOfWorkingHour.length,
           itemBuilder: (context, index) {
             return item(
+              index: index,
               workingHours: bloc.listOfWorkingHour[index].list,
               dayName: bloc.listOfWorkingHour[index].dayName,
             );
@@ -46,7 +48,7 @@ class _WorkingHoursScreenState extends State<WorkingHoursScreen> {
     );
   }
 
-  Widget item({required List<WorkingHour> workingHours, required String dayName}) {
+  Widget item({required List<WorkingHour> workingHours, required String dayName, required int index}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -62,7 +64,17 @@ class _WorkingHoursScreenState extends State<WorkingHoursScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        EditWorkingHourBottomSheetsUtil().workingHour(
+                          context: context,
+                          dayname: dayName,
+                          listOfWorkingHour: bloc.listOfWorkingHour[index].list,
+                          onSave: (newList) {
+                            bloc.listOfWorkingHour[index].list = newList;
+                            setState(() {});
+                          },
+                        );
+                      },
                       icon: const Icon(
                         Icons.edit,
                         color: Color(0xff444444),
