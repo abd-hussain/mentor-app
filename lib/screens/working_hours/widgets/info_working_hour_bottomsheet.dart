@@ -47,7 +47,7 @@ class InfoWorkingHourBottomSheetsUtil {
                     height: 150,
                     width: 150,
                     child: Lottie.asset(
-                      'assets/lottie/62575-freelancer-working.zip',
+                      'assets/lottie/69678-save-money.zip',
                     ),
                   ),
                 ),

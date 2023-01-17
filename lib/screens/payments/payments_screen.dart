@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/screens/payments/payments_bloc.dart';
 import 'package:mentor_app/screens/payments/widgets/bottom_payment.dart';
-import 'package:mentor_app/screens/payments/widgets/tab_header.dart';
-import 'package:mentor_app/screens/payments/widgets/tab_view.dart';
+import 'package:mentor_app/screens/payments/widgets/payment_list_view.dart';
+import 'package:mentor_app/screens/payments/widgets/payment_header_view.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/utils/logger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -40,21 +40,22 @@ class _PaymentsScreenState extends State<PaymentsScreen> with TickerProviderStat
         actions: [
           IconButton(
             onPressed: () {
-              PaymentBottomSheetsUtil().paymentsBottomSheet(context);
+              PaymentBottomSheetsUtil().info(context);
             },
-            icon: const Icon(Icons.settings),
-          )
+            icon: const Icon(
+              Icons.info,
+            ),
+          ),
         ],
       ),
-      body: DefaultTabController(
-        length: 3,
+      body: SafeArea(
         child: Column(
           children: [
-            TabHeaderView(
-              selectedTab: (index) {},
-            ),
-            TabView(
-              list: bloc.listOfPayments,
+            const PaymentHeaderView(),
+            Expanded(
+              child: PaymentListView(
+                list: bloc.listOfPayments,
+              ),
             ),
           ],
         ),

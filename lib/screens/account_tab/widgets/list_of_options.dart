@@ -32,7 +32,7 @@ class ListOfOptions extends StatelessWidget {
           children: [
             const AddMobBanner(),
             titleOptionCollection(title: AppLocalizations.of(context)!.accountsettings),
-            optionCollectionItem(listOfAccountOptions, containerHight: 340),
+            optionCollectionItem(listOfAccountOptions, containerHight: 415),
             titleOptionCollection(title: AppLocalizations.of(context)!.generalsettings),
             optionCollectionItem(listOfSettingsOptions, containerHight: 125),
             titleOptionCollection(title: AppLocalizations.of(context)!.reachouttous),
