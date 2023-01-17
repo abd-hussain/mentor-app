@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditWorkingHourBottomSheetsUtil {
+  StreamController<bool> valueListenable = StreamController<bool>.broadcast();
   Future workingHour(
       {required BuildContext context,
       required String dayname,
@@ -79,11 +82,15 @@ class EditWorkingHourBottomSheetsUtil {
                               textColor: Colors.black,
                               fontSize: 18,
                             ),
-                            Checkbox(
-                                value: listOfWorkingHour[index].isEnable,
-                                onChanged: (va) {
-                                  print(va!);
-                                  listOfWorkingHour[index].isEnable = va!;
+                            StreamBuilder<bool>(
+                                stream: valueListenable.stream,
+                                builder: (context, snapshot) {
+                                  return Checkbox(
+                                      value: listOfWorkingHour[index].isEnable,
+                                      onChanged: (va) {
+                                        listOfWorkingHour[index].isEnable = !listOfWorkingHour[index].isEnable;
+                                        valueListenable.sink.add(true);
+                                      });
                                 }),
                           ],
                         );

@@ -115,6 +115,12 @@
     "nodatatoshow" : "No Data To Show Here",
     "paymentoption" : "Payment Option",
     "editworkingHour" : "Edit Working Hours",
+    "infox" : "Informations",
+    "workinghourstext1" : "When you select one of the hours it means you choose 60 min after this hour",
+    "workinghourstext1example" : "If you select (1:00 pm) that mean you will be available from (1:00 pm) to (2:00 pm)",
+    "workinghourstext2" : "When you want to take any vacation of any type you can directly edit your timesheet to be available on the user's side and when you back you have to edit it back",
+    "workinghourstext3" : "If you cancel any booked appointments you set as available at that time you will be charged 25% of the meeting cost",
+    "example" : "Example",
     "logout" : "Logout"
 
 }
