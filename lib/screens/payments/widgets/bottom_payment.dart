@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mentor_app/shared_widget/points_in_last_view.dart';
 
 class PaymentBottomSheetsUtil {
   Future info(BuildContext context) {
@@ -50,6 +52,27 @@ class PaymentBottomSheetsUtil {
                     ),
                   ),
                 ),
+                const SizedBox(height: 20),
+                PointsInLastViewBooking(
+                  number: "1",
+                  text: AppLocalizations.of(context)!.paymenttext1,
+                ),
+                const SizedBox(height: 20),
+                PointsInLastViewBooking(
+                  number: "2",
+                  text: AppLocalizations.of(context)!.paymenttext2,
+                ),
+                const SizedBox(height: 20),
+                PointsInLastViewBooking(
+                  number: "3",
+                  text: AppLocalizations.of(context)!.paymenttext3,
+                ),
+                const SizedBox(height: 20),
+                PointsInLastViewBooking(
+                  number: "4",
+                  text: AppLocalizations.of(context)!.paymenttext4,
+                ),
+                const SizedBox(height: 20),
               ],
             ),
           );

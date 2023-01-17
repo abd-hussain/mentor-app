@@ -121,6 +121,10 @@
     "workinghourstext2" : "When you want to take any vacation of any type you can directly edit your timesheet to be available on the user's side and when you back you have to edit it back",
     "workinghourstext3" : "If you cancel any booked appointments you set as available at that time you will be charged 25% of the meeting cost",
     "example" : "Example",
+    "paymenttext1" : "All of the Transactions happen at the end of each month",
+    "paymenttext2" : "The transaction total must be at least 100 $",
+    "paymenttext3" : "If you don't reach the minimum amount of the valid transaction the amount will be postponed to the next month",
+    "paymenttext4" : "The transaction will be sent using western union depending on your full name and mobile number",
     "logout" : "Logout"
 
 }
