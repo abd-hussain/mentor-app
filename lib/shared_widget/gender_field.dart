@@ -11,36 +11,34 @@ class GenderField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Stack(
-        children: [
-          CustomTextField(
-            controller: controller,
-            readOnly: true,
-            hintText: AppLocalizations.of(context)!.gender,
-            padding: const EdgeInsets.only(left: 16, right: 8),
-            keyboardType: TextInputType.text,
-            inputFormatters: [
-              LengthLimitingTextInputFormatter(45),
-            ],
-            onChange: (text) => {},
-          ),
-          InkWell(
-            onTap: () async {
-              await BottomSheetsUtil().genderBottomSheet(context, genderList(context), (selectedGender) {
-                controller.text = selectedGender.name;
-              });
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8, right: 16),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 55,
-              ),
+    return Stack(
+      children: [
+        CustomTextField(
+          controller: controller,
+          readOnly: true,
+          hintText: AppLocalizations.of(context)!.gender,
+          padding: const EdgeInsets.only(left: 16, right: 8),
+          keyboardType: TextInputType.text,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(45),
+          ],
+          onChange: (text) => {},
+        ),
+        InkWell(
+          onTap: () async {
+            await BottomSheetsUtil().genderBottomSheet(context, genderList(context), (selectedGender) {
+              controller.text = selectedGender.name;
+            });
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8, right: 16),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 55,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

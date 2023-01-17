@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mentor_app/screens/edit_profile/edit_profile_bloc.dart';
 import 'package:mentor_app/shared_widget/country_field.dart';
+import 'package:mentor_app/shared_widget/custom_attach_textfield.dart';
 import 'package:mentor_app/shared_widget/date_of_birth_field.dart';
 import 'package:mentor_app/shared_widget/gender_field.dart';
 import 'package:mentor_app/shared_widget/image_holder_field.dart';
@@ -127,21 +128,58 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        CountryField(
-                          controller: bloc.countryController,
-                          listOfCountries: bloc.listOfCountries,
-                          selectedCountry: (p0) {
-                            bloc.selectedCountry = p0;
-                          },
-                        ),
-                        GenderField(
-                          controller: bloc.genderController,
-                        ),
-                        const SizedBox(height: 10),
-                      ],
+                    const SizedBox(height: 16),
+                    Container(
+                      color: const Color(0xffE8E8E8),
+                      height: 1,
+                    ),
+                    const SizedBox(height: 16),
+                    Padding(
+                      padding: bloc.box.get(DatabaseFieldConstant.language) == "ar"
+                          ? const EdgeInsets.only(right: 16)
+                          : const EdgeInsets.only(left: 16),
+                      child: Row(
+                        children: [
+                          ImageHolderField(
+                              isFromNetwork: bloc.profileImageUrl != "",
+                              urlImage: bloc.profileImageUrl == "" ? null : bloc.profileImageUrl,
+                              onAddImage: (file) {
+                                bloc.profileImage = file;
+                                bloc.validateFields();
+                              },
+                              onDeleteImage: () {
+                                bloc.profileImage = null;
+                                bloc.profileImageUrl = "";
+                                bloc.validateFields();
+                              }),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                CountryField(
+                                  controller: bloc.countryController,
+                                  listOfCountries: bloc.listOfCountries,
+                                  selectedCountry: (p0) {
+                                    bloc.selectedCountry = p0;
+                                  },
+                                ),
+                                const SizedBox(height: 10),
+                                CustomTextField(
+                                  controller: bloc.cityController,
+                                  hintText: "City",
+                                  keyboardType: TextInputType.name,
+                                  inputFormatters: [
+                                    LengthLimitingTextInputFormatter(45),
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                GenderField(
+                                  controller: bloc.genderController,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 10),
                     Padding(

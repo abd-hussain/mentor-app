@@ -21,6 +21,8 @@ class EditProfileBloc extends Bloc<AccountService> {
   TextEditingController mobileNumberController = TextEditingController();
   TextEditingController countryController = TextEditingController();
   TextEditingController referalCodeController = TextEditingController();
+  TextEditingController idController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
 
   File? profileImage;
   Country? selectedCountry;
