@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:mentor_app/shared_widget/bottom_sheet_util.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ReportAttatchment extends StatelessWidget {
   final Function(File?) attach1;
@@ -32,6 +33,8 @@ class ReportAttatchment extends StatelessWidget {
                 BottomSheetsUtil().addImageBottomSheet(
                   context,
                   false,
+                  AppLocalizations.of(context)!.profilephotosetting,
+                  AppLocalizations.of(context)!.setprofilephoto,
                   deleteCallBack: () {
                     image1Controller.value = null;
                     attach1(null);
@@ -90,6 +93,8 @@ class ReportAttatchment extends StatelessWidget {
                 BottomSheetsUtil().addImageBottomSheet(
                   context,
                   false,
+                  AppLocalizations.of(context)!.profilephotosetting,
+                  AppLocalizations.of(context)!.setprofilephoto,
                   deleteCallBack: () {
                     image2Controller.value = null;
                     attach2(null);
@@ -148,6 +153,8 @@ class ReportAttatchment extends StatelessWidget {
               BottomSheetsUtil().addImageBottomSheet(
                 context,
                 false,
+                AppLocalizations.of(context)!.profilephotosetting,
+                AppLocalizations.of(context)!.setprofilephoto,
                 deleteCallBack: () {
                   image3Controller.value = null;
                   attach3(null);

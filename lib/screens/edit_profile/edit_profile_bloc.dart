@@ -10,6 +10,7 @@ import 'package:mentor_app/utils/mixins.dart';
 class EditProfileBloc extends Bloc<AccountService> {
   bool enableSaveButton = false;
   String profileImageUrl = "";
+  String iDImageUrl = "";
   String? selectedDate;
 
   final box = Hive.box(DatabaseBoxConstant.userInfo);
@@ -25,6 +26,8 @@ class EditProfileBloc extends Bloc<AccountService> {
   TextEditingController cityController = TextEditingController();
 
   File? profileImage;
+  File? iDImage;
+
   Country? selectedCountry;
   List<Country> listOfCountries = [];
 

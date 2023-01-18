@@ -17,7 +17,7 @@ class GenderField extends StatelessWidget {
           controller: controller,
           readOnly: true,
           hintText: AppLocalizations.of(context)!.gender,
-          padding: const EdgeInsets.only(left: 16, right: 8),
+          padding: const EdgeInsets.only(left: 16, right: 16),
           keyboardType: TextInputType.text,
           inputFormatters: [
             LengthLimitingTextInputFormatter(45),
@@ -31,7 +31,7 @@ class GenderField extends StatelessWidget {
             });
           },
           child: Padding(
-            padding: const EdgeInsets.only(left: 8, right: 16),
+            padding: const EdgeInsets.only(left: 16, right: 16),
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
               height: 55,

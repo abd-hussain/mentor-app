@@ -140,16 +140,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           : const EdgeInsets.only(left: 16),
                       child: Row(
                         children: [
-                          ImageHolderField(
-                              isFromNetwork: bloc.profileImageUrl != "",
-                              urlImage: bloc.profileImageUrl == "" ? null : bloc.profileImageUrl,
+                          CustomAttachTextField(
+                              isFromNetwork: bloc.iDImageUrl != "",
+                              urlImage: bloc.iDImageUrl == "" ? null : bloc.iDImageUrl,
                               onAddImage: (file) {
-                                bloc.profileImage = file;
+                                bloc.iDImage = file;
                                 bloc.validateFields();
                               },
                               onDeleteImage: () {
-                                bloc.profileImage = null;
-                                bloc.profileImageUrl = "";
+                                bloc.iDImage = null;
+                                bloc.iDImageUrl = "";
                                 bloc.validateFields();
                               }),
                           Expanded(
@@ -163,15 +163,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   },
                                 ),
                                 const SizedBox(height: 10),
-                                CustomTextField(
-                                  controller: bloc.cityController,
-                                  hintText: "City",
-                                  keyboardType: TextInputType.name,
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(45),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
                                 GenderField(
                                   controller: bloc.genderController,
                                 ),
@@ -181,7 +172,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 16),
+                    Container(
+                      color: const Color(0xffE8E8E8),
+                      height: 1,
+                    ),
+                    const SizedBox(height: 16),
                     Padding(
                       padding: const EdgeInsets.only(left: 16, right: 16),
                       child: CustomText(
@@ -199,7 +195,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         bloc.selectedDate = p0;
                       },
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 16),
+                    Container(
+                      color: const Color(0xffE8E8E8),
+                      height: 1,
+                    ),
+                    const SizedBox(height: 16),
                     CustomTextField(
                       controller: bloc.emailController,
                       hintText: AppLocalizations.of(context)!.emailaddress,
@@ -219,7 +220,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ],
                       onChange: (text) => {},
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 16),
+                    Container(
+                      color: const Color(0xffE8E8E8),
+                      height: 1,
+                    ),
+                    const SizedBox(height: 16),
                     CustomTextField(
                       controller: bloc.referalCodeController,
                       hintText: AppLocalizations.of(context)!.referalcodeprofile,

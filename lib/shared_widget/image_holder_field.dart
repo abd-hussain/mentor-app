@@ -39,6 +39,8 @@ class ImageHolderField extends StatelessWidget {
         BottomSheetsUtil().addImageBottomSheet(
           context,
           image?.path.isNotEmpty ?? false || urlImage != null,
+          AppLocalizations.of(context)!.profilephotosetting,
+          AppLocalizations.of(context)!.setprofilephoto,
           deleteCallBack: () {
             onDeleteImage();
             image = null;

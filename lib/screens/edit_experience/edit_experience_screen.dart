@@ -62,7 +62,7 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 20),
-                        CustomAttachTextField(
+                        CustomTextField(
                           controller: TextEditingController(),
                           hintText: "Latest C.V",
                         ),

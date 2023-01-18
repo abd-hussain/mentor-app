@@ -5,7 +5,7 @@ import 'package:mentor_app/models/https/countries_model.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 
 class BottomSheetsUtil {
-  Future addImageBottomSheet(BuildContext context, bool? image,
+  Future addImageBottomSheet(BuildContext context, bool? image, String title1, String title2,
       {required VoidCallback galleryCallBack,
       required VoidCallback cameraCallBack,
       required VoidCallback deleteCallBack}) {
@@ -25,7 +25,7 @@ class BottomSheetsUtil {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       CustomText(
-                        title: AppLocalizations.of(context)!.profilephotosetting,
+                        title: title1,
                         textColor: Colors.black,
                         fontSize: 18,
                       ),
@@ -56,7 +56,7 @@ class BottomSheetsUtil {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       CustomText(
-                        title: AppLocalizations.of(context)!.setprofilephoto,
+                        title: title2,
                         textColor: Colors.black,
                         fontSize: 18,
                       ),
