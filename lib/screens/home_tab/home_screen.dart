@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/screens/home_tab/home_bloc.dart';
+import 'package:mentor_app/screens/home_tab/widgets/header.dart';
 import 'package:mentor_app/utils/logger.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,6 +27,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      children: [
+        const HeaderHomePage(),
+      ],
+    );
   }
 }

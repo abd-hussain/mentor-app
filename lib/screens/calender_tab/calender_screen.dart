@@ -4,6 +4,7 @@ import 'package:mentor_app/models/https/calender_model.dart';
 import 'package:mentor_app/screens/calender_tab/calender_bloc.dart';
 import 'package:mentor_app/screens/calender_tab/widgets/calender_bottom_sheet.dart';
 import 'package:mentor_app/screens/calender_tab/widgets/meeting_datasource.dart';
+import 'package:mentor_app/screens/home_tab/widgets/header.dart';
 import 'package:mentor_app/screens/main_contaner/main_container_bloc.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/logger.dart';
@@ -35,6 +36,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const HeaderHomePage(),
         const SizedBox(height: 8),
         Expanded(
           child: ValueListenableBuilder<List<CalenderMeetings>>(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentor_app/screens/home_tab/widgets/header.dart';
 import 'package:mentor_app/screens/messages_tab/messages_bloc.dart';
 import 'package:mentor_app/utils/logger.dart';
 
@@ -26,6 +27,10 @@ class _MessagesScreenState extends State<MessagesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      children: [
+        const HeaderHomePage(),
+      ],
+    );
   }
 }

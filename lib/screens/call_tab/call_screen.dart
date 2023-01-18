@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/screens/call_tab/call_bloc.dart';
+import 'package:mentor_app/screens/home_tab/widgets/header.dart';
 import 'package:mentor_app/utils/logger.dart';
 
 class CallScreen extends StatefulWidget {
@@ -26,6 +27,12 @@ class _CallScreenState extends State<CallScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const HeaderHomePage(),
+        ],
+      ),
+    );
   }
 }
