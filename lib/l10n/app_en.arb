@@ -128,6 +128,17 @@
     "paymenttext2" : "The transaction total must be at least 100 $",
     "paymenttext3" : "If you don't reach the minimum amount of the valid transaction the amount will be postponed to the next month",
     "paymenttext4" : "The transaction will be sent using western union depending on your full name and mobile number",
+    "nocalltoday" : "You Dont' Have Any Sessions Today",
+    "checkcallfromcalender" : "Check Your upcoming call from the calendar tab.",
+    "encreasemeetingshint" : "Do you want to Increase the number of requested meetings from you?",
+    "encreasemeetingshintdesc" : "These are some steps it can help you",
+    "encreasemeetingstep1" : "Make Sure Your Profile Information Describe you will",
+    "encreasemeetingstep2" : "Make Sure Your Experiences is filled correctly",
+    "encreasemeetingstep3" : "Your Bio is what the user sees about you make sure you fill correctly and attractive",
+    "encreasemeetingstep4" : "Compare your Hour Rate with the other mentors from the same field, maybe you request more than expectations",
+    "encreasemeetingstep5" : "Add Post From Time to Time",
+    "encreasemeetingstep6" : "Make sure to get the best review from any client you get a meeting with",
+    "encreasemeetingstep7" : "Contact us to know if your filled working hours timesheet is fit with our clients",
     "logout" : "Logout"
 
 }

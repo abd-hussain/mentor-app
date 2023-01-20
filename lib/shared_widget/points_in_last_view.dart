@@ -15,7 +15,7 @@ class PointsInLastViewBooking extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: const Color(0xffE4E9EF),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(50),
           ),
           child: CustomText(
             title: number,
