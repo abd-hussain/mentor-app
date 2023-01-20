@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
-import 'package:intl/intl.dart';
+
 import 'package:mentor_app/screens/register_screen/register_bloc.dart';
 import 'package:mentor_app/shared_widget/country_field.dart';
 import 'package:mentor_app/shared_widget/date_of_birth_field.dart';
 import 'package:mentor_app/shared_widget/gender_field.dart';
 import 'package:mentor_app/shared_widget/image_holder_field.dart';
-import 'package:mentor_app/shared_widget/bottom_sheet_util.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';

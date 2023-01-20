@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:mentor_app/models/authentication_models.dart';
 import 'package:mentor_app/screens/login_screen/login_bloc.dart';
+import 'package:mentor_app/screens/register_screen/widgets/info_bottom_sheet.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -137,7 +138,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(50, 0, 50, 16),
                   child: InkWell(
-                    onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerScreen),
+                    onTap: () {
+                      RegisterInfoBottomSheetsUtil(context: context).bottomSheet(openNext: () {
+                        Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerScreen);
+                      });
+                    },
                     child: CustomText(
                       textAlign: TextAlign.center,
                       fontSize: 14,
