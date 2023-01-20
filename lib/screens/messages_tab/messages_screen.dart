@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/screens/home_tab/widgets/header.dart';
 import 'package:mentor_app/screens/messages_tab/messages_bloc.dart';
+import 'package:mentor_app/screens/messages_tab/widgets/list_messages_widget.dart';
 import 'package:mentor_app/utils/logger.dart';
 
 class MessagesScreen extends StatefulWidget {
@@ -16,6 +17,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
   @override
   void didChangeDependencies() {
     logDebugMessage(message: 'Messages init Called ...');
+    bloc.listOfMessages();
     super.didChangeDependencies();
   }
 
@@ -30,6 +32,16 @@ class _MessagesScreenState extends State<MessagesScreen> {
     return Column(
       children: [
         const HeaderHomePage(),
+        SizedBox(
+          height: MediaQuery.of(context).size.height - 300,
+          child: MessagesList(
+            messagesListNotifier: bloc.messagesListNotifier,
+            onDelete: (p0) {
+              bloc.messagesListNotifier.value!.remove(p0);
+              bloc.deleteMessage(p0.id!);
+            },
+          ),
+        ),
       ],
     );
   }
