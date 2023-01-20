@@ -140,6 +140,13 @@
     "encreasemeetingstep6" : "Make sure to get the best review from any client you get a meeting with",
     "encreasemeetingstep7" : "Contact us to know if your filled working hours timesheet is fit with our clients",
     "noitem" : "No Item To Show",
+    "comingevent" : "Upcoming Events",
+    "intrestedfrom" : "Intrested From",
+    "registernow" : "Register Now",
+    "free" : "Free",
+    "options" : "More Options",
+    "reportevent" : "Report Event",
+    "reportstory" : "Do you want to report this story ?",
     "logout" : "Logout"
 
 }
