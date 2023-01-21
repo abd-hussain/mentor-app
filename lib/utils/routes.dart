@@ -12,7 +12,8 @@ import 'package:mentor_app/screens/main_contaner/main_container.dart';
 import 'package:mentor_app/screens/messages_tab/messages_screen.dart';
 import 'package:mentor_app/screens/notifications/notifications_screen.dart';
 import 'package:mentor_app/screens/payments/payments_screen.dart';
-import 'package:mentor_app/screens/register_screen/register_screen.dart';
+import 'package:mentor_app/screens/register_screen/register_fase2_screen.dart';
+import 'package:mentor_app/screens/register_screen/register_fase3_screen.dart';
 import 'package:mentor_app/screens/report/report_screen.dart';
 import 'package:mentor_app/screens/setup_screen/setup_screen.dart';
 import 'package:mentor_app/screens/tutorials/tutorials_screen.dart';
@@ -29,7 +30,9 @@ class RoutesConstants {
   static const String callScreen = 'callScreen';
   static const String calenderScreen = 'calenderScreen';
   static const String accountScreen = 'accountScreen';
-  static const String registerScreen = 'registerScreen';
+  static const String registerfaze2Screen = 'registerfaze2Screen';
+  static const String registerfaze3Screen = 'registerfaze3Screen';
+
   static const String notificationsScreen = 'notificationsScreen';
   static const String webViewScreen = 'webViewScreen';
   static const String inviteFriendScreen = 'inviteFriendScreen';
@@ -50,7 +53,8 @@ final Map<String, Widget> routes = {
   RoutesConstants.callScreen: const CallScreen(),
   RoutesConstants.calenderScreen: const CalenderScreen(),
   RoutesConstants.accountScreen: const AccountScreen(),
-  RoutesConstants.registerScreen: const RegisterScreen(),
+  RoutesConstants.registerfaze2Screen: const RegisterFaze2Screen(),
+  RoutesConstants.registerfaze3Screen: const RegisterFaze3Screen(),
   RoutesConstants.notificationsScreen: const NotificationsScreen(),
   RoutesConstants.webViewScreen: const WebViewScreen(),
   RoutesConstants.inviteFriendScreen: const InviteFriendsScreen(),

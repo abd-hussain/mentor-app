@@ -147,6 +147,17 @@
     "options" : "More Options",
     "reportevent" : "Report Event",
     "reportstory" : "Do you want to report this story ?",
+    "registertitle" : "The Registration Will Take 10 Minutes To Complete",
+    "registertitledesc" : "We Will Help you in saving your steps",
+    "registerstep1" : "Read and Accept our Terms And Conditions",
+    "registerstep2" : "Fill Information about you",    
+    "registerstep3" : "Fill Your Experiences",
+    "registerstep4" : "set your Working Hours",
+    "registerstep5" : "Setup Your Rate Per Hour",
+    "registerstep6" : "Verify Your Email & Phone Number",
+    "registerstep7" : "Set your Password",
+    "acceptandcontinue" : "Accept & Continue",
+    "next" : "Next",
     "logout" : "Logout"
 
 }

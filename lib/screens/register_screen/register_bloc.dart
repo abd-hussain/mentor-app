@@ -7,6 +7,7 @@ import 'package:mentor_app/utils/constants/database_constant.dart';
 
 class RegisterBloc {
   String profileImageUrl = "";
+  String iDImageUrl = "";
   String? selectedDate;
 
   final box = Hive.box(DatabaseBoxConstant.userInfo);
@@ -14,17 +15,27 @@ class RegisterBloc {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController genderController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController mobileNumberController = TextEditingController();
   TextEditingController countryController = TextEditingController();
   TextEditingController referalCodeController = TextEditingController();
 
   File? profileImage;
+  File? iDImage;
   Country? selectedCountry;
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController mobileNumberController = TextEditingController();
 
   ValueNotifier<bool> enableNextBtn = ValueNotifier<bool>(false);
 
   List<Country> listOfCountries = [];
 
-  validateFields() {}
+  validateFieldsForFaze2() {
+    if (suffixNameController.text.isNotEmpty &&
+        firstNameController.text.isNotEmpty &&
+        lastNameController.text.isNotEmpty &&
+        genderController.text.isNotEmpty &&
+        countryController.text.isNotEmpty) {
+      enableNextBtn.value = true;
+    }
+  }
 }

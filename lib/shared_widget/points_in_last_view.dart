@@ -4,8 +4,10 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 class PointsInLastViewBooking extends StatelessWidget {
   final String number;
   final String text;
+  final Color textColor;
 
-  const PointsInLastViewBooking({required this.number, required this.text, super.key});
+  const PointsInLastViewBooking(
+      {required this.number, required this.text, super.key, this.textColor = const Color(0xff444444)});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class PointsInLastViewBooking extends StatelessWidget {
           ),
           child: CustomText(
             title: number,
-            textColor: const Color(0xff444444),
+            textColor: textColor,
             fontSize: 14,
             fontWeight: FontWeight.bold,
           ),
@@ -28,7 +30,7 @@ class PointsInLastViewBooking extends StatelessWidget {
         Expanded(
           child: CustomText(
             title: text,
-            textColor: const Color(0xff444444),
+            textColor: textColor,
             fontSize: 14,
             maxLins: 4,
           ),

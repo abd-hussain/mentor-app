@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'package:mentor_app/screens/register_screen/register_bloc.dart';
 import 'package:mentor_app/shared_widget/country_field.dart';
+import 'package:mentor_app/shared_widget/custom_attach_textfield.dart';
 import 'package:mentor_app/shared_widget/date_of_birth_field.dart';
 import 'package:mentor_app/shared_widget/gender_field.dart';
 import 'package:mentor_app/shared_widget/image_holder_field.dart';
@@ -12,18 +13,18 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/shared_widget/custom_textfield.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mentor_app/utils/routes.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class RegisterFaze2Screen extends StatefulWidget {
+  const RegisterFaze2Screen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<RegisterFaze2Screen> createState() => _RegisterFaze2ScreenState();
 }
 
-final bloc = RegisterBloc();
-
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
   // TODO Compleate Registration
+  final bloc = RegisterBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
-          bloc.validateFields();
+          bloc.validateFieldsForFaze2();
         },
         child: SafeArea(
           child: SingleChildScrollView(
@@ -50,12 +51,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           urlImage: bloc.profileImageUrl == "" ? null : bloc.profileImageUrl,
                           onAddImage: (file) {
                             bloc.profileImage = file;
-                            bloc.validateFields();
+                            bloc.validateFieldsForFaze2();
                           },
                           onDeleteImage: () {
                             bloc.profileImage = null;
                             bloc.profileImageUrl = "";
-                            bloc.validateFields();
+                            bloc.validateFieldsForFaze2();
                           }),
                       Expanded(
                         child: Column(
@@ -67,6 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(45),
                               ],
+                              onChange: (text) => bloc.validateFieldsForFaze2(),
                             ),
                             const SizedBox(height: 10),
                             CustomTextField(
@@ -76,6 +78,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(45),
                               ],
+                              onChange: (text) => bloc.validateFieldsForFaze2(),
                             ),
                             const SizedBox(height: 10),
                             CustomTextField(
@@ -85,6 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(45),
                               ],
+                              onChange: (text) => bloc.validateFieldsForFaze2(),
                             ),
                           ],
                         ),
@@ -92,21 +96,56 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    CountryField(
-                      controller: bloc.countryController,
-                      listOfCountries: bloc.listOfCountries,
-                      selectedCountry: (p0) {
-                        bloc.selectedCountry = p0;
-                      },
-                    ),
-                    GenderField(controller: bloc.genderController),
-                    const SizedBox(height: 10),
-                  ],
+                const SizedBox(height: 16),
+                Container(
+                  color: const Color(0xffE8E8E8),
+                  height: 1,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 16),
+                Padding(
+                  padding: bloc.box.get(DatabaseFieldConstant.language) == "ar"
+                      ? const EdgeInsets.only(right: 16)
+                      : const EdgeInsets.only(left: 16),
+                  child: Row(
+                    children: [
+                      CustomAttachTextField(
+                          isFromNetwork: bloc.iDImageUrl != "",
+                          urlImage: bloc.iDImageUrl == "" ? null : bloc.iDImageUrl,
+                          onAddImage: (file) {
+                            bloc.iDImage = file;
+                            bloc.validateFieldsForFaze2();
+                          },
+                          onDeleteImage: () {
+                            bloc.iDImage = null;
+                            bloc.iDImageUrl = "";
+                            bloc.validateFieldsForFaze2();
+                          }),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            CountryField(
+                              controller: bloc.countryController,
+                              listOfCountries: bloc.listOfCountries,
+                              selectedCountry: (p0) {
+                                bloc.selectedCountry = p0;
+                              },
+                            ),
+                            const SizedBox(height: 10),
+                            GenderField(
+                              controller: bloc.genderController,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  color: const Color(0xffE8E8E8),
+                  height: 1,
+                ),
+                const SizedBox(height: 16),
                 Padding(
                   padding: const EdgeInsets.only(left: 16, right: 16),
                   child: CustomText(
@@ -118,64 +157,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 10),
                 DateOfBirthField(
-                    selectedDate: bloc.selectedDate,
-                    language: bloc.box.get(DatabaseFieldConstant.language),
-                    dateSelected: (p0) {
-                      bloc.selectedDate = p0;
-                    }),
-                const SizedBox(height: 10),
-                CustomTextField(
-                  controller: bloc.emailController,
-                  hintText: AppLocalizations.of(context)!.emailaddress,
-                  keyboardType: TextInputType.emailAddress,
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(35),
-                  ],
-                  onChange: (text) => {},
+                  selectedDate: bloc.selectedDate,
+                  language: bloc.box.get(DatabaseFieldConstant.language),
+                  dateSelected: (p0) {
+                    bloc.selectedDate = p0;
+                  },
                 ),
-                const SizedBox(height: 10),
-                CustomTextField(
-                  controller: bloc.mobileNumberController,
-                  hintText: AppLocalizations.of(context)!.mobilenumber,
-                  keyboardType: TextInputType.phone,
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(35),
-                  ],
-                  onChange: (text) => {},
+                const SizedBox(height: 16),
+                Container(
+                  color: const Color(0xffE8E8E8),
+                  height: 1,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 16),
                 CustomTextField(
                   controller: bloc.referalCodeController,
                   hintText: AppLocalizations.of(context)!.referalcodeprofile,
                   keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(6),
-                  ],
-                  onChange: (text) => {},
+                  inputFormatters: [LengthLimitingTextInputFormatter(6)],
+                  onChange: (text) => bloc.validateFieldsForFaze2(),
                 ),
                 const SizedBox(height: 20),
                 ValueListenableBuilder<bool>(
                     valueListenable: bloc.enableNextBtn,
                     builder: (context, snapshot, child) {
                       return CustomButton(
-                          buttonTitle: AppLocalizations.of(context)!.submit,
+                          buttonTitle: AppLocalizations.of(context)!.next,
                           enableButton: snapshot,
-                          onTap: () {
-                            final navigator = Navigator.of(context);
-
-                            // bloc.callRequest(context).then((value) async {
-                            //   await bloc.box.put(DatabaseFieldConstant.isUserLoggedIn, true);
-                            //   await bloc.box.put(DatabaseFieldConstant.userFirstName, bloc.firstNameController.text);
-                            //   await bloc.box.put(DatabaseFieldConstant.userid, bloc.userId.toString());
-                            //   if (bloc.selectedCountry != null) {
-                            //     await bloc.box
-                            //         .put(DatabaseFieldConstant.countryId, bloc.selectedCountry!.id.toString());
-                            //     await bloc.box.put(DatabaseFieldConstant.countryFlag, bloc.selectedCountry!.flagImage);
-                            //   }
-                            //   bloc.loadingStatus.value = LoadingStatus.finish;
-
-                            //   await navigator.pushNamedAndRemoveUntil(RoutesConstants.mainContainer, (route) => false);
-                            // });
+                          onTap: () async {
+                            await bloc.box.put(DatabaseFieldConstant.registrationStep, "2");
+                            // ignore: use_build_context_synchronously
+                            Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfaze3Screen);
                           });
                     }),
               ],

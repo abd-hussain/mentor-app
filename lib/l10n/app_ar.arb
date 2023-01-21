@@ -147,6 +147,17 @@
     "options" : "خيارات",
     "reportevent" : "الابلاغ عن هذه الجلسة",
     "reportstory" : "هل تريد الابلاغ عن هذا المنشور ؟",
+    "registertitle" : "سيستغرق التسجيل 10 دقائق لإكماله",
+    "registertitledesc" : "سنساعدك في حفظ خطواتك",
+    "registerstep1" : "اقرأ ووافق على الشروط والأحكام الخاصة بنا",
+    "registerstep2" : "املأ معلومات عنك",    
+    "registerstep3" : "املأ خبراتك",
+    "registerstep4" : "حدد ساعات العمل الخاصة بك",
+    "registerstep5" : "حدد السعر الخاص بك لكل ساعة",
+    "registerstep6" : "تحقق من بريدك الإلكتروني ورقم هاتفك",
+    "registerstep7" : "حدد كلمة مرور",
+    "acceptandcontinue" : "قبول و متابعة",
+    "next" : "التالي",
     "logout" : "تسجيل الخروج"
 
 }

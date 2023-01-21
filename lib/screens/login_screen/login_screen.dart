@@ -139,9 +139,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: const EdgeInsets.fromLTRB(50, 0, 50, 16),
                   child: InkWell(
                     onTap: () {
-                      RegisterInfoBottomSheetsUtil(context: context).bottomSheet(openNext: () {
-                        Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerScreen);
-                      });
+                      final String step = bloc.box.get(DatabaseFieldConstant.registrationStep) ?? "0";
+                      final int stepNum = int.parse(step);
+
+                      final bottomsheet = RegisterInfoBottomSheetsUtil(context: context);
+                      bottomsheet.infoBottomSheet(
+                          step: stepNum,
+                          openNext: () {
+                            if (stepNum == 0) {
+                              bottomsheet.termsBottomSheet(openNext: () {
+                                bloc.box.put(DatabaseFieldConstant.registrationStep, "1");
+                                Navigator.of(context, rootNavigator: true)
+                                    .pushNamed(RoutesConstants.registerfaze2Screen);
+                              });
+                            } else if (stepNum == 1) {
+                              Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfaze2Screen);
+                            } else if (stepNum == 2) {
+                              Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfaze2Screen);
+                            }
+                          });
                     },
                     child: CustomText(
                       textAlign: TextAlign.center,

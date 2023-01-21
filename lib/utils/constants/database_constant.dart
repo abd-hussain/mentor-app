@@ -11,6 +11,7 @@ class DatabaseFieldConstant {
   static const String countryFlag = "country_flag";
   static const String isUserLoggedIn = "isUserLoggedIn";
   static const String userFirstName = "userFirstName";
+  static const String registrationStep = "registrationStep";
 
   static const String biometricU = "biometricU";
   static const String biometricP = "biometricP";
