@@ -1,6 +1,8 @@
 class MethodNameConstant {
   static const String countries = "countries";
   static const String categories = "categories";
+  static const String suffix = "suffix";
+
   static const String mentors = "mentor-list/";
   static const String mentorDetails = "mentor-account/";
   static const String mentorAppointments = "appointment/mentor";

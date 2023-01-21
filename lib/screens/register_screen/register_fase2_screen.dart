@@ -11,9 +11,9 @@ import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/shared_widget/custom_textfield.dart';
+import 'package:mentor_app/shared_widget/suffix_field.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/routes.dart';
 
 class RegisterFaze2Screen extends StatefulWidget {
@@ -24,11 +24,11 @@ class RegisterFaze2Screen extends StatefulWidget {
 }
 
 class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
-  // TODO Compleate Registration
   final bloc = RegisterBloc();
 
   @override
   void didChangeDependencies() {
+    bloc.getlistOfSuffix();
     bloc.getlistOfCountries();
     super.didChangeDependencies();
   }
@@ -73,15 +73,18 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                       Expanded(
                         child: Column(
                           children: [
-                            CustomTextField(
-                              controller: bloc.suffixNameController,
-                              hintText: AppLocalizations.of(context)!.suffixenameprofile,
-                              keyboardType: TextInputType.name,
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(45),
-                              ],
-                              onChange: (text) => bloc.validateFieldsForFaze2(),
-                            ),
+                            ValueListenableBuilder<Object>(
+                                valueListenable: bloc.listOfSuffix,
+                                builder: (context, snapshot, child) {
+                                  return SuffixField(
+                                    controller: bloc.suffixNameController,
+                                    listOfSuffix: bloc.listOfSuffix.value,
+                                    selectedSuffix: (p0) {
+                                      bloc.selectedSuffix = p0;
+                                      bloc.validateFieldsForFaze2();
+                                    },
+                                  );
+                                }),
                             const SizedBox(height: 10),
                             CustomTextField(
                               controller: bloc.firstNameController,
@@ -143,6 +146,7 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                                     listOfCountries: bloc.listOfCountries.value,
                                     selectedCountry: (p0) {
                                       bloc.selectedCountry = p0;
+                                      bloc.validateFieldsForFaze2();
                                     },
                                   );
                                 }),
@@ -211,8 +215,19 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                           enableButton: snapshot,
                           onTap: () async {
                             await bloc.box.put(DatabaseFieldConstant.registrationStep, "2");
+                            await bloc.box.put(TempFieldToRegistrtConstant.suffix, bloc.suffixNameController.text);
+                            await bloc.box.put(TempFieldToRegistrtConstant.firstName, bloc.firstNameController.text);
+                            await bloc.box.put(TempFieldToRegistrtConstant.lastName, bloc.lastNameController.text);
+                            await bloc.box
+                                .put(TempFieldToRegistrtConstant.country, bloc.selectedCountry!.id.toString());
+                            await bloc.box.put(TempFieldToRegistrtConstant.gender, bloc.genderController.text);
+                            await bloc.box.put(TempFieldToRegistrtConstant.profileImage, bloc.profileImage!);
+                            await bloc.box.put(TempFieldToRegistrtConstant.idImage, bloc.iDImage);
+                            await bloc.box.put(TempFieldToRegistrtConstant.dateOfBirth, bloc.selectedDate!);
+                            await bloc.box
+                                .put(TempFieldToRegistrtConstant.referalCode, bloc.referalCodeController.text);
                             // ignore: use_build_context_synchronously
-                            Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfaze3Screen);
+                            Navigator.of(context).pushNamed(RoutesConstants.registerfaze3Screen);
                           });
                     }),
               ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/models/gender_model.dart';
 import 'package:mentor_app/models/https/countries_model.dart';
+import 'package:mentor_app/models/https/suffix_model.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/utils/constants/constant.dart';
 
@@ -254,6 +255,70 @@ class BottomSheetsUtil {
                             Expanded(
                               child: CustomText(
                                 title: listOfCountries[index].name!,
+                                fontSize: 16,
+                                textColor: const Color(0xff444444),
+                              ),
+                            ),
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 15,
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future suffixBottomSheet(BuildContext context, List<SuffixData> listOfSuffix, Function(SuffixData) selectedSuffix) {
+    return showModalBottomSheet(
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(25),
+        ),
+      ),
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomText(
+                title: AppLocalizations.of(context)!.selectCountry,
+                textColor: Colors.black,
+                fontSize: 20,
+              ),
+              const SizedBox(height: 27.0),
+              SizedBox(
+                height: 200,
+                child: ListView.builder(
+                  itemCount: listOfSuffix.length,
+                  itemBuilder: ((context, index) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        selectedSuffix(listOfSuffix[index]);
+                      },
+                      child: SizedBox(
+                        height: 50,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: CustomText(
+                                title: listOfSuffix[index].name!,
                                 fontSize: 16,
                                 textColor: const Color(0xff444444),
                               ),

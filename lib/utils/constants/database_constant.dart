@@ -17,3 +17,15 @@ class DatabaseFieldConstant {
   static const String biometricP = "biometricP";
   static const String biometricStatus = "biometricStatus";
 }
+
+class TempFieldToRegistrtConstant {
+  static const String suffix = "suffix";
+  static const String firstName = "firstName";
+  static const String lastName = "lastName";
+  static const String country = "country";
+  static const String gender = "gender";
+  static const String dateOfBirth = "dateOfBirth";
+  static const String referalCode = "referalCode";
+  static const String idImage = "idImage";
+  static const String profileImage = "profileImage";
+}
