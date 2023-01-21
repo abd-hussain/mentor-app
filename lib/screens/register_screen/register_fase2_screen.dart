@@ -13,6 +13,7 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/shared_widget/custom_textfield.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/routes.dart';
 
 class RegisterFaze2Screen extends StatefulWidget {
@@ -25,6 +26,17 @@ class RegisterFaze2Screen extends StatefulWidget {
 class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
   // TODO Compleate Registration
   final bloc = RegisterBloc();
+
+  @override
+  void didChangeDependencies() {
+    bloc.getlistOfCountries();
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,13 +135,17 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                       Expanded(
                         child: Column(
                           children: [
-                            CountryField(
-                              controller: bloc.countryController,
-                              listOfCountries: bloc.listOfCountries,
-                              selectedCountry: (p0) {
-                                bloc.selectedCountry = p0;
-                              },
-                            ),
+                            ValueListenableBuilder<Object>(
+                                valueListenable: bloc.listOfCountries,
+                                builder: (context, snapshot, child) {
+                                  return CountryField(
+                                    controller: bloc.countryController,
+                                    listOfCountries: bloc.listOfCountries.value,
+                                    selectedCountry: (p0) {
+                                      bloc.selectedCountry = p0;
+                                    },
+                                  );
+                                }),
                             const SizedBox(height: 10),
                             GenderField(
                               controller: bloc.genderController,
@@ -169,6 +185,16 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                   height: 1,
                 ),
                 const SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: CustomText(
+                    title: AppLocalizations.of(context)!.optional,
+                    textAlign: TextAlign.start,
+                    fontSize: 14,
+                    textColor: const Color(0xff384048),
+                  ),
+                ),
+                const SizedBox(height: 10),
                 CustomTextField(
                   controller: bloc.referalCodeController,
                   hintText: AppLocalizations.of(context)!.referalcodeprofile,

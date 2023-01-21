@@ -155,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             } else if (stepNum == 1) {
                               Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfaze2Screen);
                             } else if (stepNum == 2) {
-                              Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfaze2Screen);
+                              Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfaze3Screen);
                             }
                           });
                     },

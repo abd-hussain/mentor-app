@@ -157,7 +157,8 @@
     "registerstep6" : "تحقق من بريدك الإلكتروني ورقم هاتفك",
     "registerstep7" : "حدد كلمة مرور",
     "acceptandcontinue" : "قبول و متابعة",
-    "next" : "التالي",
+    "next" : "التالي",   
+    "optional" : "اختياري",
     "logout" : "تسجيل الخروج"
 
 }

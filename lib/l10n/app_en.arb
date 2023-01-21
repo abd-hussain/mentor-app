@@ -158,6 +158,7 @@
     "registerstep7" : "Set your Password",
     "acceptandcontinue" : "Accept & Continue",
     "next" : "Next",
+    "optional" : "Optional",
     "logout" : "Logout"
 
 }
