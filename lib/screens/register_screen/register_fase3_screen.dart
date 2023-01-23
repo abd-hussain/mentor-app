@@ -40,11 +40,16 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 20),
+                const SizedBox(height: 8),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    color: Colors.white,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: const Color(0xffe0e0e0),
+                      ),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
@@ -62,15 +67,19 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                     ),
                   ),
                 ),
-                FileHolderField(onAddImage: (file) {
-                  bloc.profileImage = file;
-                  bloc.validateFieldsForFaze3();
-                }, onDeleteImage: () {
-                  bloc.profileImage = null;
-                  bloc.profileImageUrl = "";
-                  bloc.validateFieldsForFaze3();
-                }),
-                const SizedBox(height: 10),
+                const SizedBox(height: 8),
+                FileHolderField(
+                  title: AppLocalizations.of(context)!.cv,
+                  onAddFile: (file) {
+                    bloc.cv = file;
+                    bloc.validateFieldsForFaze3();
+                  },
+                  onRemoveFile: () {
+                    bloc.cv = null;
+                    bloc.validateFieldsForFaze3();
+                  },
+                ),
+                const SizedBox(height: 16),
                 ValueListenableBuilder<List<Category>>(
                     valueListenable: bloc.listOfCategories,
                     builder: (context, snapshot, child) {
@@ -83,7 +92,58 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                         },
                       );
                     }),
-                const SizedBox(height: 10),
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ValueListenableBuilder<int>(
+                      valueListenable: bloc.countOfCertifictes,
+                      builder: (context, snapshot, child) {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: bloc.countOfCertifictes.value,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Row(
+                                children: [
+                                  FileHolderField(
+                                    title: "Certificate (${index + 1})",
+                                    onAddFile: (file) {
+                                      bloc.certificatesList.add(file);
+                                      bloc.validateFieldsForFaze3();
+                                    },
+                                    onRemoveFile: () {
+                                      bloc.certificatesList.removeAt(index);
+                                      bloc.validateFieldsForFaze3();
+                                    },
+                                  ),
+                                  const Expanded(child: SizedBox()),
+                                  IconButton(
+                                      onPressed: () {
+                                        bloc.certificatesList = [];
+                                        if (index == 0) {
+                                          bloc.countOfCertifictes.value = bloc.countOfCertifictes.value + 1;
+                                        } else {
+                                          bloc.countOfCertifictes.value = bloc.countOfCertifictes.value - 1;
+                                        }
+                                      },
+                                      icon: Container(
+                                        width: 100,
+                                        height: 100,
+                                        color: index == 0 ? Colors.green[200] : Colors.red[200],
+                                        child: Icon(
+                                          index == 0 ? Icons.add : Icons.remove,
+                                          color: const Color(0xff444444),
+                                        ),
+                                      ))
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      }),
+                ),
               ],
             ),
           ),
