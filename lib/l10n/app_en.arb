@@ -159,6 +159,9 @@
     "acceptandcontinue" : "Accept & Continue",
     "next" : "Next",
     "optional" : "Optional",
+    "biohint" : "Bio (About You)",
+    "cv" : "Upload C.V",
+    "selectCategory" : "Select Category",
     "logout" : "Logout"
 
 }
