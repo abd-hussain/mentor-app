@@ -167,5 +167,9 @@
     "emailformatnotvalid" : "Email Format not valid",
     "or" : "OR",
     "loginbiometric" : "Login Biometric",
+    "eventdetails" : "Event Details",
+    "price" : "Price",
+    "eventdesc" : "Description",
+    "freeseat" : "Available Seats",
     "logout" : "Logout"
 }

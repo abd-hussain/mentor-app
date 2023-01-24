@@ -9,6 +9,7 @@ import 'package:mentor_app/screens/home_tab/widgets/stories.dart';
 import 'package:mentor_app/shared_widget/admob_banner.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/logger.dart';
+import 'package:mentor_app/utils/routes.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -85,9 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             language: bloc.box.get(DatabaseFieldConstant.language),
                             listOfEvents: snapshot,
                             onEventSelected: (event) {
-                              //TODO
-                              // Navigator.of(context, rootNavigator: true)
-                              //     .pushNamed(RoutesConstants.eventDetailsScreen, arguments: {"event_details": event});
+                              Navigator.of(context, rootNavigator: true)
+                                  .pushNamed(RoutesConstants.eventDetailsScreen, arguments: {"event_details": event});
                             },
                             onOptionSelected: (event) {
                               EventOptionBookingBottomSheetsUtil(

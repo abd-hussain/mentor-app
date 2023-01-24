@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:mentor_app/screens/main_contaner/main_container_bloc.dart';
 import 'package:mentor_app/services/auth_services.dart';
+import 'package:mentor_app/services/event_services.dart';
 import 'package:mentor_app/services/filter_services.dart';
 import 'package:mentor_app/services/general/authentication_service.dart';
 import 'package:mentor_app/services/general/network_info_service.dart';
@@ -25,6 +26,7 @@ Future<void> setupLocator() async {
   locator.registerFactory<SettingService>(() => SettingService());
   locator.registerFactory<ReportService>(() => ReportService());
   locator.registerFactory<HomeService>(() => HomeService());
+  locator.registerFactory<EventService>(() => EventService());
 
   locator.registerLazySingleton(() => AuthenticationService());
   locator.registerLazySingleton(() => LocalAuthentication());

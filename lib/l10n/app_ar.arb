@@ -167,5 +167,9 @@
     "emailformatnotvalid" : "شكل البريد الالكتروني غير صالح",
     "or" : "او",
     "loginbiometric" : "الدخول باستخدام المستشعر",
+    "eventdetails" : "تفاصيل الجلسة",
+    "price" : "المبلغ",
+    "eventdesc" : "التفاصيل",
+    "freeseat" : "المقاعد المتاحة",
     "logout" : "تسجيل الخروج"
 }

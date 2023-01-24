@@ -23,16 +23,12 @@ class HomeBloc extends Bloc<HomeService> {
     });
   }
 
-  void reportEvent({required int eventId}) {
-    locator<ReportService>().reportEvent(eventId: eventId).then((value) {
-      eventListNotifier.value = value.data!;
-    });
+  void reportEvent({required int eventId}) async {
+    await locator<ReportService>().reportEvent(eventId: eventId);
   }
 
-  void reportStory({required int storyId}) {
-    locator<ReportService>().reportStory(storyId: storyId).then((value) {
-      storiesListNotifier.value = value.data!;
-    });
+  void reportStory({required int storyId}) async {
+    await locator<ReportService>().reportStory(storyId: storyId);
   }
 
   @override
