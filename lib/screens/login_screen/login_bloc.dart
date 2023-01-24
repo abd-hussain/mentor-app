@@ -21,6 +21,7 @@ class LoginBloc extends Bloc<AuthService> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   BuildContext? maincontext;
+  final box = Hive.box(DatabaseBoxConstant.userInfo);
 
   ValueNotifier<bool> fieldsValidations = ValueNotifier<bool>(false);
 
@@ -34,7 +35,6 @@ class LoginBloc extends Bloc<AuthService> {
 
   ValueNotifier<AuthenticationBiometricType> biometricResultNotifier =
       ValueNotifier<AuthenticationBiometricType>(AuthenticationBiometricType(isAvailable: false, type: null));
-  final box = Hive.box(DatabaseBoxConstant.userInfo);
   bool isBiometricAppeared = false;
   bool biometricStatus = false;
   final authenticationService = locator<AuthenticationService>();
@@ -42,7 +42,7 @@ class LoginBloc extends Bloc<AuthService> {
   fieldValidation() {
     fieldsValidations.value = false;
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      if (validateEmail(emailController.text)) {
+      if (_validateEmail(emailController.text)) {
         errorMessage.value = "";
         fieldsValidations.value = true;
       } else {
@@ -65,7 +65,7 @@ class LoginBloc extends Bloc<AuthService> {
   }
 
   Future<void> initBiometric(BuildContext context) async {
-    if (!(await locator<NetworkInfoService>().isConnected())) {
+    if (await locator<NetworkInfoService>().isConnected()) {
       await _readBiometricData(context);
     }
   }
@@ -73,7 +73,6 @@ class LoginBloc extends Bloc<AuthService> {
   Future<void> _readBiometricData(BuildContext context) async {
     final String biometricU = box.get(DatabaseFieldConstant.biometricU);
     final String biometricP = box.get(DatabaseFieldConstant.biometricP);
-
     isBiometricAppeared = true;
     biometricStatus =
         box.get(DatabaseFieldConstant.biometricStatus) == 'true' && biometricP.isNotEmpty && biometricU.isNotEmpty;
@@ -128,7 +127,7 @@ class LoginBloc extends Bloc<AuthService> {
     return false;
   }
 
-  bool validateEmail(String value) {
+  bool _validateEmail(String value) {
     Pattern pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regex = RegExp(pattern as String);
@@ -140,11 +139,11 @@ class LoginBloc extends Bloc<AuthService> {
         .pushNamedAndRemoveUntil(RoutesConstants.mainContainer, (Route<dynamic> route) => false);
   }
 
-  _saveValuesInMemory({
-    required String userName,
-    required String password,
-  }) {
-    //TODO
+  _saveValuesInMemory({required String userName, required String password, required String token}) async {
+    await box.put(DatabaseFieldConstant.token, token);
+    await box.put(DatabaseFieldConstant.biometricU, userName);
+    await box.put(DatabaseFieldConstant.biometricP, password);
+    await box.put(DatabaseFieldConstant.biometricStatus, "true");
   }
 
   void doLoginCall(
@@ -157,6 +156,7 @@ class LoginBloc extends Bloc<AuthService> {
 
     try {
       final info = await service.login(loginData: loginData);
+      await _saveValuesInMemory(userName: userName, password: password, token: info["data"]);
       loadingStatusNotifier.value = LoadingStatus.finish;
       _openMainScreen(maincontext!);
     } on DioError {

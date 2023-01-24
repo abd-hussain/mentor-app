@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:local_auth/local_auth.dart';
 import 'package:mentor_app/models/authentication_models.dart';
 import 'package:mentor_app/screens/login_screen/login_bloc.dart';
 import 'package:mentor_app/screens/login_screen/widgets/background_container.dart';
+import 'package:mentor_app/screens/login_screen/widgets/biometric_login_view.dart';
 import 'package:mentor_app/screens/login_screen/widgets/email_field.dart';
 import 'package:mentor_app/screens/login_screen/widgets/forgot_password_widget.dart';
 import 'package:mentor_app/screens/login_screen/widgets/password_field.dart';
@@ -135,14 +135,28 @@ class _LoginScreenState extends State<LoginScreen> {
                                           },
                                         );
                                       }),
-                                  const ForgotPasswordWidget(),
                                   ValueListenableBuilder<AuthenticationBiometricType>(
                                       valueListenable: bloc.biometricResultNotifier,
                                       builder: (context, snapshot, child) {
                                         return (snapshot.isAvailable && bloc.biometricStatus)
-                                            ? biometricButton(context, snapshot.type)
+                                            ? BiometrincLoginView(
+                                                biometricType: snapshot.type,
+                                                onPress: () async {
+                                                  if (!bloc.isBiometricAppeared) {
+                                                    await bloc.box.get(DatabaseFieldConstant.biometricStatus) == 'true'
+                                                        ? await bloc.tryToAuthintecateUserByBiometric(context)
+                                                        : ScaffoldMessenger.of(context).showSnackBar(
+                                                            const SnackBar(
+                                                              content: Text(
+                                                                  "Login_BiometricMssage_BiometricLoginIsDisabled"),
+                                                            ),
+                                                          );
+                                                  }
+                                                },
+                                              )
                                             : const SizedBox();
                                       }),
+                                  const ForgotPasswordWidget(),
                                   const SizedBox(height: 16),
                                 ],
                               ),
@@ -200,94 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Padding biometricButton(BuildContext context, BiometricType? biometricType) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20.0, left: 16, right: 16),
-      child: Column(
-        children: [
-          Stack(
-            children: [
-              Column(
-                children: [
-                  const SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 40, right: 40),
-                    child: Container(
-                      height: 1,
-                      color: const Color(0xffE8E8E8),
-                    ),
-                  ),
-                ],
-              ),
-              Center(
-                child: Container(
-                  color: Colors.white,
-                  width: 30,
-                  child: const Center(
-                    child: CustomText(
-                      title: 'OR',
-                      fontSize: 12,
-                      textColor: Color(0xff8F8F8F),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Container(
-            height: 60,
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(
-                Radius.circular(20.0),
-              ),
-            ),
-            child: ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.white),
-                elevation: MaterialStateProperty.all(0),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4.0),
-                    side: const BorderSide(
-                      color: Color(0xffE8E8E8),
-                    ),
-                  ),
-                ),
-              ),
-              child: Row(
-                children: <Widget>[
-                  const Expanded(
-                    child: CustomText(
-                      title: 'Login_Biometric',
-                      textColor: Color(0xff191C1F),
-                      fontSize: 14,
-                    ),
-                  ),
-                  Image.asset(
-                    (biometricType == BiometricType.face) ? 'assets/images/face_id.png' : 'assets/images/touch_id.png',
-                    height: 30,
-                    color: const Color(0xff191C1F),
-                    alignment: Alignment.center,
-                  ),
-                ],
-              ),
-              onPressed: () async {
-                if (!bloc.isBiometricAppeared) {
-                  await bloc.box.get(DatabaseFieldConstant.biometricStatus) == 'true'
-                      ? await bloc.tryToAuthintecateUserByBiometric(context)
-                      : ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text("Login_BiometricMssage_BiometricLoginIsDisabled"),
-                        ));
-                }
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Padding biometricButton(BuildContext context, BiometricType? biometricType) {
+  //   return
+  // }
 }

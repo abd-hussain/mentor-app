@@ -165,5 +165,7 @@
     "forgotpassword" : "نسيت كلمة المرور ؟",
     "wrongemailorpassword" : "خطا بالبريد الالكتروني او كلمة المرور",
     "emailformatnotvalid" : "شكل البريد الالكتروني غير صالح",
+    "or" : "او",
+    "loginbiometric" : "الدخول باستخدام المستشعر",
     "logout" : "تسجيل الخروج"
 }

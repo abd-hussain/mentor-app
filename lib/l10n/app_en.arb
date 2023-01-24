@@ -165,5 +165,7 @@
     "forgotpassword" : "Forgot Password ?",
     "wrongemailorpassword" : "Wrong Email or Password",
     "emailformatnotvalid" : "Email Format not valid",
+    "or" : "OR",
+    "loginbiometric" : "Login Biometric",
     "logout" : "Logout"
 }
