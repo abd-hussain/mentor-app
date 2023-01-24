@@ -12,13 +12,18 @@ class EventView extends StatelessWidget {
   final List<MainEvent> listOfEvents;
   final Function(MainEvent) onEventSelected;
   final Function(MainEvent) onOptionSelected;
+  final Function(MainEvent) onShare;
+
+  final Function() onAddEvent;
 
   const EventView(
       {super.key,
       required this.listOfEvents,
       required this.onEventSelected,
       required this.onOptionSelected,
-      required this.language});
+      required this.language,
+      required this.onAddEvent,
+      required this.onShare});
 
   @override
   Widget build(BuildContext context) {
@@ -27,43 +32,31 @@ class EventView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.only(top: 4, bottom: 4, left: 8, right: 8),
-            color: Colors.grey[300],
-            width: MediaQuery.of(context).size.width,
-            child: CustomText(
-              title: AppLocalizations.of(context)!.comingevent,
-              fontSize: 16,
-              textColor: const Color(0xff444444),
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 375,
-            child: ListView.builder(
-                itemCount: listOfEvents.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  final MainEvent event = listOfEvents[index];
-                  final fromDateTime = DateTime.parse(event.dateFrom!);
-                  final toDateTime = DateTime.parse(event.dateTo!);
-                  final dayName = DateFormat('EEEE').format(fromDateTime);
+          titleView(context),
+          ListView.builder(
+              itemCount: listOfEvents.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                final MainEvent event = listOfEvents[index];
+                final fromDateTime = DateTime.parse(event.dateFrom!);
+                final toDateTime = DateTime.parse(event.dateTo!);
+                final dayName = DateFormat('EEEE').format(fromDateTime);
 
-                  final difference = toDateTime.difference(fromDateTime).inMinutes;
+                final difference = toDateTime.difference(fromDateTime).inMinutes;
 
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: InkWell(
-                      onTap: () => onEventSelected(event),
-                      child: Container(
-                        width: 275,
-                        height: 300,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: const Color(0xff444444), width: 0.5),
-                        ),
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    onTap: () => onEventSelected(event),
+                    child: Container(
+                      height: 430,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: const Color(0xff444444), width: 0.5),
+                      ),
+                      child: Expanded(
                         child: Column(
                           children: [
                             Stack(
@@ -82,6 +75,7 @@ class EventView extends StatelessWidget {
                                       : Image.asset(
                                           'assets/images/avatar.jpeg',
                                           fit: BoxFit.fill,
+                                          height: 100,
                                         ),
                                 ),
                                 Padding(
@@ -217,22 +211,25 @@ class EventView extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(width: 6),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey[400],
-                                        borderRadius: BorderRadius.circular(5),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: const Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      width: 40,
-                                      child: const Center(
-                                        child: Icon(Icons.share_sharp),
+                                    InkWell(
+                                      onTap: () => onShare(event),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[400],
+                                          borderRadius: BorderRadius.circular(5),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 2,
+                                              blurRadius: 5,
+                                              offset: const Offset(0, 2),
+                                            ),
+                                          ],
+                                        ),
+                                        width: 40,
+                                        child: const Center(
+                                          child: Icon(Icons.share_sharp),
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -243,9 +240,38 @@ class EventView extends StatelessWidget {
                         ),
                       ),
                     ),
-                  );
-                }),
+                  ),
+                );
+              }),
+        ],
+      ),
+    );
+  }
+
+  Widget titleView(BuildContext context) {
+    return Container(
+      height: 50,
+      padding: const EdgeInsets.only(top: 4, bottom: 4, left: 8, right: 8),
+      color: Colors.grey[300],
+      width: MediaQuery.of(context).size.width,
+      child: Row(
+        children: [
+          CustomText(
+            title: AppLocalizations.of(context)!.comingevent,
+            fontSize: 16,
+            textColor: const Color(0xff444444),
+            fontWeight: FontWeight.bold,
           ),
+          const Expanded(child: SizedBox()),
+          IconButton(
+              onPressed: () => onAddEvent(),
+              icon: Container(
+                color: Colors.white,
+                child: const Icon(
+                  Icons.add,
+                  color: Color(0xff444444),
+                ),
+              ))
         ],
       ),
     );

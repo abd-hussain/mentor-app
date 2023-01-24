@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mentor_app/locator.dart';
 import 'package:mentor_app/models/https/categories_model.dart';
 import 'package:mentor_app/models/https/countries_model.dart';
 import 'package:mentor_app/models/https/suffix_model.dart';
@@ -58,19 +59,19 @@ class RegisterBloc {
   validateFieldsForFaze3() {}
 
   void getlistOfSuffix() {
-    FilterService().suffix().then((value) {
+    locator<FilterService>().suffix().then((value) {
       listOfSuffix.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
     });
   }
 
   void getlistOfCountries() {
-    FilterService().countries().then((value) {
+    locator<FilterService>().countries().then((value) {
       listOfCountries.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
     });
   }
 
   void getlistOfCategories() {
-    FilterService().categories().then((value) {
+    locator<FilterService>().categories().then((value) {
       listOfCategories.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
     });
   }

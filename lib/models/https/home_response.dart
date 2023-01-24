@@ -13,10 +13,9 @@ class HomeResponse {
 class HomeResponseData {
   List<MainBanner>? mainBanner;
   List<MainStory>? mainStory;
-  List<MainTips>? mainTips;
   List<MainEvent>? mainEvent;
 
-  HomeResponseData({this.mainBanner, this.mainStory, this.mainTips, this.mainEvent});
+  HomeResponseData({this.mainBanner, this.mainStory, this.mainEvent});
 
   HomeResponseData.fromJson(Map<String, dynamic> json) {
     if (json['main_banner'] != null) {
@@ -29,12 +28,6 @@ class HomeResponseData {
       mainStory = <MainStory>[];
       json['main_story'].forEach((v) {
         mainStory!.add(MainStory.fromJson(v));
-      });
-    }
-    if (json['main_tips'] != null) {
-      mainTips = <MainTips>[];
-      json['main_tips'].forEach((v) {
-        mainTips!.add(MainTips.fromJson(v));
       });
     }
     if (json['main_event'] != null) {
@@ -164,29 +157,5 @@ class Owner {
     blocked = json['blocked'];
     profileImg = json['profile_img'];
     countryId = json['country_id'];
-  }
-}
-
-class MainTips {
-  int? id;
-  int? catId;
-  String? title;
-  String? desc;
-  String? note;
-  String? referance;
-  String? image;
-  int? steps;
-
-  MainTips({this.id, this.catId, this.title, this.desc, this.note, this.referance, this.image, this.steps});
-
-  MainTips.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    catId = json['category_id'];
-    title = json['title'];
-    desc = json['desc'];
-    note = json['note'];
-    referance = json['referance'];
-    image = json['image'];
-    steps = json['steps'];
   }
 }

@@ -214,7 +214,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // Padding biometricButton(BuildContext context, BiometricType? biometricType) {
-  //   return
-  // }
 }

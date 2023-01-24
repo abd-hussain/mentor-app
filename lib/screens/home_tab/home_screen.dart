@@ -57,31 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         }
                       }),
                   const SizedBox(height: 8),
-                  ValueListenableBuilder<List<MainEvent>?>(
-                      valueListenable: bloc.eventListNotifier,
-                      builder: (context, snapshot, child) {
-                        if (snapshot != null && snapshot.isNotEmpty) {
-                          return EventView(
-                            language: bloc.box.get(DatabaseFieldConstant.language),
-                            listOfEvents: snapshot,
-                            onEventSelected: (event) {
-                              // Navigator.of(context, rootNavigator: true)
-                              //     .pushNamed(RoutesConstants.eventDetailsScreen, arguments: {"event_details": event});
-                            },
-                            onOptionSelected: (event) {
-                              EventOptionBookingBottomSheetsUtil(
-                                      context: context, language: bloc.box.get(DatabaseFieldConstant.language))
-                                  .bookMeetingBottomSheet(report: () {
-                                bloc.reportEvent(eventId: event.id!);
-                              });
-                            },
-                          );
-                        } else {
-                          return const SizedBox();
-                        }
-                      }),
-                  const SizedBox(height: 20),
-                  const AddMobBanner(),
                   ValueListenableBuilder<List<MainStory>?>(
                       valueListenable: bloc.storiesListNotifier,
                       builder: (context, snapshot, child) {
@@ -92,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               bloc.reportStory(storyId: id);
                             },
                             openMentorProfile: (id) {
+                              //TODO
                               // Navigator.of(context, rootNavigator: true)
                               //     .pushNamed(RoutesConstants.mentorProfileScreen, arguments: {"id": id});
                             },
@@ -101,6 +77,39 @@ class _HomeScreenState extends State<HomeScreen> {
                         }
                       }),
                   const AddMobBanner(),
+                  ValueListenableBuilder<List<MainEvent>?>(
+                      valueListenable: bloc.eventListNotifier,
+                      builder: (context, snapshot, child) {
+                        if (snapshot != null && snapshot.isNotEmpty) {
+                          return EventView(
+                            language: bloc.box.get(DatabaseFieldConstant.language),
+                            listOfEvents: snapshot,
+                            onEventSelected: (event) {
+                              //TODO
+                              // Navigator.of(context, rootNavigator: true)
+                              //     .pushNamed(RoutesConstants.eventDetailsScreen, arguments: {"event_details": event});
+                            },
+                            onOptionSelected: (event) {
+                              EventOptionBookingBottomSheetsUtil(
+                                      context: context, language: bloc.box.get(DatabaseFieldConstant.language))
+                                  .bookMeetingBottomSheet(report: () {
+                                bloc.reportEvent(eventId: event.id!);
+                              });
+                            },
+                            onAddEvent: () {
+                              //TODO
+                            },
+                            onShare: (event) {
+                              //TODO
+                            },
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      }),
+                  const SizedBox(height: 20),
+                  const AddMobBanner(),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),

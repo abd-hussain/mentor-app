@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:mentor_app/models/https/home_response.dart';
 import 'package:mentor_app/models/https/report_request.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:mentor_app/utils/repository/http_repository.dart';
@@ -73,5 +74,23 @@ class ReportService with Service {
         requestType: RequestType.post, methodName: MethodNameConstant.reportIssue, formData: formData);
 
     return true;
+  }
+
+  Future<StoryRespose> reportStory({required int storyId}) async {
+    final response = await repository.callRequest(
+      requestType: RequestType.post,
+      methodName: MethodNameConstant.reportStory,
+      queryParam: {"storyId": storyId, "isMentor": true},
+    );
+    return StoryRespose.fromJson(response);
+  }
+
+  Future<EventRespose> reportEvent({required int eventId}) async {
+    final response = await repository.callRequest(
+      requestType: RequestType.post,
+      methodName: MethodNameConstant.reportEvent,
+      queryParam: {"eventId": eventId, "isMentor": true},
+    );
+    return EventRespose.fromJson(response);
   }
 }
