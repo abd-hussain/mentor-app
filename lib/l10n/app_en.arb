@@ -172,5 +172,6 @@
     "eventdesc" : "Description",
     "freeseat" : "Available Seats",
     "posts" : "Posts",
+    "resetpasswordtitle": "Enter your email below to reset your password",
     "logout" : "Logout"
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/models/authentication_models.dart';
 import 'package:mentor_app/screens/login_screen/login_bloc.dart';
-import 'package:mentor_app/screens/login_screen/widgets/background_container.dart';
 import 'package:mentor_app/screens/login_screen/widgets/biometric_login_view.dart';
-import 'package:mentor_app/screens/login_screen/widgets/email_field.dart';
+import 'package:mentor_app/shared_widget/email_field.dart';
 import 'package:mentor_app/screens/login_screen/widgets/forgot_password_widget.dart';
 import 'package:mentor_app/screens/login_screen/widgets/password_field.dart';
 import 'package:mentor_app/screens/register_screen/widgets/info_bottom_sheet.dart';
+import 'package:mentor_app/shared_widget/background_container.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -38,8 +38,6 @@ class _LoginScreenState extends State<LoginScreen> {
     bloc.onDispose();
     super.dispose();
   }
-
-  //TODO: handle biometrics
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +104,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                       child: ValueListenableBuilder<String>(
                                           valueListenable: bloc.errorMessage,
                                           builder: (context, snapshot, child) {
-                                            print(snapshot);
                                             return CustomText(
                                               title: snapshot,
                                               fontSize: 14,
@@ -125,8 +122,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                           enableButton: snapshot,
                                           onTap: () {
                                             FocusScope.of(context).requestFocus(FocusNode());
-                                            //TODO : Handle Validation
-                                            //TODO : Handle Login
                                             bloc.doLoginCall(
                                               context: context,
                                               userName: bloc.emailController.text.trim(),
@@ -213,5 +208,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
 }
