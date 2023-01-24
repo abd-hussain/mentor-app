@@ -42,8 +42,12 @@ class LoginBloc extends Bloc<AuthService> {
   fieldValidation() {
     fieldsValidations.value = false;
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      errorMessage.value = "";
-      fieldsValidations.value = true;
+      if (validateEmail(emailController.text)) {
+        errorMessage.value = "";
+        fieldsValidations.value = true;
+      } else {
+        errorMessage.value = AppLocalizations.of(maincontext!)!.emailformatnotvalid;
+      }
     }
   }
 
@@ -135,12 +139,6 @@ class LoginBloc extends Bloc<AuthService> {
     Navigator.of(context, rootNavigator: true)
         .pushNamedAndRemoveUntil(RoutesConstants.mainContainer, (Route<dynamic> route) => false);
   }
-
-  // String errorMessageText(BuildContext context) {
-  //   // return "Email Format not valid";
-
-  //   return ;
-  // }
 
   _saveValuesInMemory({
     required String userName,

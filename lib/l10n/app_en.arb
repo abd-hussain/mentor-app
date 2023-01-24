@@ -164,5 +164,6 @@
     "selectCategory" : "Select Category",
     "forgotpassword" : "Forgot Password ?",
     "wrongemailorpassword" : "Wrong Email or Password",
+    "emailformatnotvalid" : "Email Format not valid",
     "logout" : "Logout"
 }
