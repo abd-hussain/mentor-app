@@ -16,13 +16,13 @@ import 'package:mentor_app/utils/routes.dart';
 class LoginBloc extends Bloc<AuthService> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  FocusNode emailFocus = FocusNode();
   FocusNode passwordFocus = FocusNode();
+
+  ValueNotifier<bool> fieldsValidations = ValueNotifier<bool>(false);
 
   ValueNotifier<bool> showHideEmailClearNotifier = ValueNotifier<bool>(false);
   ValueNotifier<bool> showHidePasswordClearNotifier = ValueNotifier<bool>(false);
-  ValueNotifier<bool> showHidePasswordNotifier = ValueNotifier<bool>(false);
-  ValueNotifier<String> errorPasswordMessageNotifier = ValueNotifier<String>("");
+  // ValueNotifier<String> errorPasswordMessageNotifier = ValueNotifier<String>("");
   ValueNotifier<bool> buildNotifier = ValueNotifier<bool>(false);
 
   ValueNotifier<AuthenticationBiometricType> biometricResultNotifier =
@@ -32,22 +32,24 @@ class LoginBloc extends Bloc<AuthService> {
   bool biometricStatus = false;
   final authenticationService = locator<AuthenticationService>();
 
+  fieldValidation() {
+    fieldsValidations.value = false;
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      fieldsValidations.value = true;
+    }
+  }
+
   handleListeners() {
     emailController.addListener(_emailListen);
     passwordController.addListener(_passwordListen);
   }
 
   void _emailListen() {
-    showHideEmailClearNotifier.value = (emailFocus.hasFocus && emailController.text.isNotEmpty);
+    showHideEmailClearNotifier.value = emailController.text.isNotEmpty;
   }
 
   void _passwordListen() {
-    showHidePasswordClearNotifier.value = (passwordFocus.hasFocus && passwordController.text.isNotEmpty);
-  }
-
-  void showHidePassword() {
-    errorPasswordMessageNotifier.value = '';
-    showHidePasswordNotifier.value = !showHidePasswordNotifier.value;
+    showHidePasswordClearNotifier.value = passwordController.text.isNotEmpty;
   }
 
   Future<void> initBiometric(BuildContext context) async {
@@ -124,6 +126,12 @@ class LoginBloc extends Bloc<AuthService> {
   void _openMainScreen(BuildContext context) {
     Navigator.of(context, rootNavigator: true)
         .pushNamedAndRemoveUntil(RoutesConstants.mainContainer, (Route<dynamic> route) => false);
+  }
+
+  String errorMessage() {
+    return "Email Format not valid";
+
+    // return "Wrong Email or Password";
   }
 
   _saveValuesInMemory({

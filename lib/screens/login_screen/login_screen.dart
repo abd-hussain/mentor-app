@@ -3,6 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:mentor_app/models/authentication_models.dart';
 import 'package:mentor_app/screens/login_screen/login_bloc.dart';
+import 'package:mentor_app/screens/login_screen/widgets/background_container.dart';
+import 'package:mentor_app/screens/login_screen/widgets/email_field.dart';
+import 'package:mentor_app/screens/login_screen/widgets/forgot_password_widget.dart';
+import 'package:mentor_app/screens/login_screen/widgets/password_field.dart';
 import 'package:mentor_app/screens/register_screen/widgets/info_bottom_sheet.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
@@ -23,8 +27,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void didChangeDependencies() {
-    bloc.handleListeners();
     bloc.initBiometric(context);
+    bloc.handleListeners();
     super.didChangeDependencies();
   }
 
@@ -45,9 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 Center(
                   child: CustomText(
                     title: AppLocalizations.of(context)!.appTitle,
@@ -66,64 +68,72 @@ class _LoginScreenState extends State<LoginScreen> {
                     maxLins: 2,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 40, 16, 0),
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(15, 4, 3, 3),
-                            spreadRadius: 0.1,
-                            blurRadius: 0.1,
-                            offset: Offset(0.1, 2),
-                          )
-                        ]),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 30),
-                        CustomTextField(
-                          controller: bloc.emailController,
-                          hintText: AppLocalizations.of(context)!.emailaddress,
-                          keyboardType: TextInputType.emailAddress,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(45),
-                          ],
+                BackgroundContainer(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 30),
+                      EmailFieldLogin(
+                        controller: bloc.emailController,
+                        onClear: () {
+                          bloc.emailController.clear();
+                          bloc.showHideEmailClearNotifier.value = false;
+                          bloc.fieldsValidations.value = false;
+                        },
+                        onchange: () => bloc.fieldValidation(),
+                        showHideEmailClearNotifier: bloc.showHideEmailClearNotifier,
+                      ),
+                      const SizedBox(height: 20),
+                      PasswordField(
+                        controller: bloc.passwordController,
+                        onClear: () {
+                          bloc.passwordController.clear();
+                          bloc.showHidePasswordClearNotifier.value = false;
+                          bloc.fieldsValidations.value = false;
+                        },
+                        onchange: () => bloc.fieldValidation(),
+                        showHidePasswordClearNotifier: bloc.showHidePasswordClearNotifier,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Center(
+                          child: CustomText(
+                            title: bloc.errorMessage(),
+                            fontSize: 14,
+                            textAlign: TextAlign.center,
+                            textColor: Colors.red,
+                          ),
                         ),
-                        const SizedBox(height: 20),
-                        CustomTextField(
-                          controller: bloc.passwordController,
-                          hintText: AppLocalizations.of(context)!.password,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(45),
-                          ],
-                        ),
-                        CustomButton(
-                          buttonTitle: AppLocalizations.of(context)!.login,
-                          enableButton: true, //TODO : Handle Validation
-                          onTap: () {
-                            FocusScope.of(context).requestFocus(FocusNode());
-                            //TODO : Handle Validation
-                            //TODO : Handle Login
-                            bloc.doLoginCall(
-                              context: context,
-                              userName: bloc.emailController.text.trim(),
-                              password: bloc.passwordController.text,
+                      ),
+                      ValueListenableBuilder<bool>(
+                          valueListenable: bloc.fieldsValidations,
+                          builder: (context, snapshot, child) {
+                            return CustomButton(
+                              padding: const EdgeInsets.only(left: 16, right: 16),
+                              buttonTitle: AppLocalizations.of(context)!.login,
+                              enableButton: snapshot,
+                              onTap: () {
+                                FocusScope.of(context).requestFocus(FocusNode());
+                                //TODO : Handle Validation
+                                //TODO : Handle Login
+                                bloc.doLoginCall(
+                                  context: context,
+                                  userName: bloc.emailController.text.trim(),
+                                  password: bloc.passwordController.text,
+                                );
+                              },
                             );
-                          },
-                        ),
-                        ValueListenableBuilder<AuthenticationBiometricType>(
-                            valueListenable: bloc.biometricResultNotifier,
-                            builder: (context, snapshot, child) {
-                              return (snapshot.isAvailable && bloc.biometricStatus)
-                                  ? biometricButton(context, snapshot.type)
-                                  : const SizedBox();
-                            }),
-                        const SizedBox(height: 25),
-                      ],
-                    ),
+                          }),
+                      const ForgotPasswordWidget(),
+                      ValueListenableBuilder<AuthenticationBiometricType>(
+                          valueListenable: bloc.biometricResultNotifier,
+                          builder: (context, snapshot, child) {
+                            return (snapshot.isAvailable && bloc.biometricStatus)
+                                ? biometricButton(context, snapshot.type)
+                                : const SizedBox();
+                          }),
+                      const SizedBox(height: 16),
+                    ],
                   ),
                 ),
                 Padding(

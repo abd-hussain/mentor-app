@@ -162,6 +162,7 @@
     "biohint" : "Bio (About You)",
     "cv" : "Upload C.V",
     "selectCategory" : "Select Category",
+    "forgotpassword" : "Forgot Password ?",
     "logout" : "Logout"
 
 }
