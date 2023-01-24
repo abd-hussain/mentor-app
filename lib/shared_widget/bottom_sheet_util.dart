@@ -513,7 +513,6 @@ class BottomSheetsUtil {
       required String profileName,
       required String profileImg,
       required int profileId,
-      required Function(int) openProfile,
       required Function(int) reportStory}) {
     return showModalBottomSheet(
         shape: const RoundedRectangleBorder(
@@ -528,28 +527,25 @@ class BottomSheetsUtil {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         builder: (context) {
           return Padding(
-              padding: const EdgeInsets.only(top: 20, left: 16, right: 16, bottom: 50),
+              padding: const EdgeInsets.only(top: 20, left: 16, right: 16, bottom: 20),
               child: Column(
                 children: [
-                  InkWell(
-                    onTap: () => openProfile(profileId),
-                    child: CircleAvatar(
-                      backgroundColor: const Color(0xff034061),
-                      radius: 30,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(35),
-                        child: profileImg != ""
-                            ? FadeInImage(
-                                placeholder: const AssetImage("assets/images/avatar.jpeg"),
-                                image: NetworkImage(profileImg, scale: 1),
-                              )
-                            : Image.asset(
-                                'assets/images/avatar.jpeg',
-                                width: 50,
-                                height: 50,
-                                fit: BoxFit.fill,
-                              ),
-                      ),
+                  CircleAvatar(
+                    backgroundColor: const Color(0xff034061),
+                    radius: 30,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(35),
+                      child: profileImg != ""
+                          ? FadeInImage(
+                              placeholder: const AssetImage("assets/images/avatar.jpeg"),
+                              image: NetworkImage(profileImg, scale: 1),
+                            )
+                          : Image.asset(
+                              'assets/images/avatar.jpeg',
+                              width: 50,
+                              height: 50,
+                              fit: BoxFit.fill,
+                            ),
                     ),
                   ),
                   CustomText(
@@ -557,7 +553,7 @@ class BottomSheetsUtil {
                     textColor: Colors.black,
                     fontSize: 15,
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 16),
                   Container(
                     height: 250,
                     padding: const EdgeInsets.only(top: 20, left: 16, right: 16, bottom: 20),
@@ -574,7 +570,7 @@ class BottomSheetsUtil {
                       Icons.report,
                       color: Color(0xff444444),
                     ),
-                  )
+                  ),
                 ],
               ));
         });

@@ -13,7 +13,6 @@ class EventView extends StatelessWidget {
   final Function(MainEvent) onEventSelected;
   final Function(MainEvent) onOptionSelected;
   final Function(MainEvent) onShare;
-
   final Function() onAddEvent;
 
   const EventView(

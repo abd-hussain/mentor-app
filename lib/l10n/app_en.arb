@@ -171,5 +171,6 @@
     "price" : "Price",
     "eventdesc" : "Description",
     "freeseat" : "Available Seats",
+    "posts" : "Posts",
     "logout" : "Logout"
 }

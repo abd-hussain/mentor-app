@@ -7,27 +7,38 @@ import 'package:mentor_app/utils/constants/constant.dart';
 
 class StoriesHomePage extends StatelessWidget {
   final List<MainStory> listOfStories;
-  final Function(int id) openMentorProfile;
   final Function(int id) reportStory;
-  const StoriesHomePage(
-      {required this.listOfStories, required this.openMentorProfile, required this.reportStory, Key? key})
+  final Function() onAddStory;
+
+  const StoriesHomePage({required this.listOfStories, required this.reportStory, Key? key, required this.onAddStory})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 140,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: listOfStories.length,
-        itemBuilder: (context, index) {
-          return storyWidget(context: context, story: listOfStories[index], openProfile: (id) => openMentorProfile(id));
-        },
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
+      child: Column(
+        children: [
+          titleView(context),
+          SizedBox(
+            height: 140,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: listOfStories.length,
+              itemBuilder: (context, index) {
+                return storyWidget(
+                  context: context,
+                  story: listOfStories[index],
+                );
+              },
+            ),
+          )
+        ],
       ),
     );
   }
 
-  Widget storyWidget({required BuildContext context, required MainStory story, required Function(int) openProfile}) {
+  Widget storyWidget({required BuildContext context, required MainStory story}) {
     return InkWell(
       onTap: () async {
         await BottomSheetsUtil().showStoryFullView(
@@ -38,7 +49,6 @@ class StoriesHomePage extends StatelessWidget {
                 : "",
             context: context,
             assets: story.assets!,
-            openProfile: (id) => openProfile(id),
             reportStory: (id) async {
               await BottomSheetsUtil().areYouShoureButtomSheet(
                 context: context,
@@ -81,6 +91,35 @@ class StoriesHomePage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget titleView(BuildContext context) {
+    return Container(
+      height: 50,
+      padding: const EdgeInsets.only(top: 4, bottom: 4, left: 8, right: 8),
+      color: Colors.grey[300],
+      width: MediaQuery.of(context).size.width,
+      child: Row(
+        children: [
+          CustomText(
+            title: AppLocalizations.of(context)!.posts,
+            fontSize: 16,
+            textColor: const Color(0xff444444),
+            fontWeight: FontWeight.bold,
+          ),
+          const Expanded(child: SizedBox()),
+          IconButton(
+              onPressed: () => onAddStory(),
+              icon: Container(
+                color: Colors.white,
+                child: const Icon(
+                  Icons.add,
+                  color: Color(0xff444444),
+                ),
+              ))
+        ],
       ),
     );
   }

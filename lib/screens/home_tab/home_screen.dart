@@ -67,10 +67,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             reportStory: (id) {
                               bloc.reportStory(storyId: id);
                             },
-                            openMentorProfile: (id) {
+                            onAddStory: () {
                               //TODO
-                              // Navigator.of(context, rootNavigator: true)
-                              //     .pushNamed(RoutesConstants.mentorProfileScreen, arguments: {"id": id});
                             },
                           );
                         } else {
