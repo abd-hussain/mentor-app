@@ -17,7 +17,7 @@ class PasswordField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ValueNotifier<bool> showHidePasswordNotifier = ValueNotifier<bool>(false);
+    ValueNotifier<bool> showHidePasswordNotifier = ValueNotifier<bool>(true);
 
     void showHidePassword() {
       showHidePasswordNotifier.value = !showHidePasswordNotifier.value;

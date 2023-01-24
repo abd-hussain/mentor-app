@@ -42,9 +42,13 @@ class HttpInterceptor extends InterceptorsWrapper {
         return true;
       case 201:
         return true;
+      case 403:
+        logger.wtf("response.data ${response.data.toString()}");
+        throw DioError(
+            error: HttpException(status: response.statusCode!, message: response.data["detail"], requestId: ""),
+            requestOptions: response.requestOptions);
       default:
         logger.wtf("response.data ${response.data.toString()}");
-
         throw DioError(
             error: HttpException(
                 status: response.statusCode!,

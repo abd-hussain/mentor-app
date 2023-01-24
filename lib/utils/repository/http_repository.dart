@@ -39,7 +39,7 @@ class HttpRepository {
         case RequestType.post:
           response = await dioClient.post(
             methodName,
-            data: formData ?? postBody?.toJson(),
+            data: formData ?? postBody!.toJson(),
             queryParameters: queryParam,
             options: Options(contentType: contentType),
           );

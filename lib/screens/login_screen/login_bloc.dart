@@ -1,28 +1,34 @@
 import 'dart:async';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mentor_app/locator.dart';
 import 'package:mentor_app/models/authentication_models.dart';
+import 'package:mentor_app/models/https/login_request.dart';
 import 'package:mentor_app/services/auth_services.dart';
 import 'package:mentor_app/services/general/authentication_service.dart';
 import 'package:mentor_app/services/general/network_info_service.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
+import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/error/exceptions.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:mentor_app/utils/routes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginBloc extends Bloc<AuthService> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  FocusNode passwordFocus = FocusNode();
 
   ValueNotifier<bool> fieldsValidations = ValueNotifier<bool>(false);
 
   ValueNotifier<bool> showHideEmailClearNotifier = ValueNotifier<bool>(false);
   ValueNotifier<bool> showHidePasswordClearNotifier = ValueNotifier<bool>(false);
-  // ValueNotifier<String> errorPasswordMessageNotifier = ValueNotifier<String>("");
+  ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<String> errorMessage = ValueNotifier<String>("");
+
+//here
   ValueNotifier<bool> buildNotifier = ValueNotifier<bool>(false);
 
   ValueNotifier<AuthenticationBiometricType> biometricResultNotifier =
@@ -35,6 +41,7 @@ class LoginBloc extends Bloc<AuthService> {
   fieldValidation() {
     fieldsValidations.value = false;
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      errorMessage.value = "";
       fieldsValidations.value = true;
     }
   }
@@ -128,11 +135,11 @@ class LoginBloc extends Bloc<AuthService> {
         .pushNamedAndRemoveUntil(RoutesConstants.mainContainer, (Route<dynamic> route) => false);
   }
 
-  String errorMessage() {
-    return "Email Format not valid";
+  // String errorMessage() {
+  //   return "Email Format not valid";
 
-    // return "Wrong Email or Password";
-  }
+  //   // return "Wrong Email or Password";
+  // }
 
   _saveValuesInMemory({
     required String userName,
@@ -145,10 +152,18 @@ class LoginBloc extends Bloc<AuthService> {
       {required BuildContext context,
       required String userName,
       required String password,
-      bool isBiometricLogin = false}) {
-    //TODO
+      bool isBiometricLogin = false}) async {
+    loadingStatusNotifier.value = LoadingStatus.inprogress;
+    final LoginRequest loginData = LoginRequest(email: userName, password: password);
 
-    _openMainScreen(context);
+    try {
+      final info = await service.login(loginData: loginData);
+      loadingStatusNotifier.value = LoadingStatus.finish;
+      // _openMainScreen(context);
+    } on DioError {
+      loadingStatusNotifier.value = LoadingStatus.finish;
+      errorMessage.value = AppLocalizations.of(context)!.wrongemailorpassword;
+    }
   }
 
   @override

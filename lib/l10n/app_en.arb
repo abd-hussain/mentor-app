@@ -163,6 +163,6 @@
     "cv" : "Upload C.V",
     "selectCategory" : "Select Category",
     "forgotpassword" : "Forgot Password ?",
+    "wrongemailorpassword" : "Wrong Email or Password",
     "logout" : "Logout"
-
 }
