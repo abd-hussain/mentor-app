@@ -27,6 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void didChangeDependencies() {
+    bloc.maincontext = context;
     bloc.initBiometric(context);
     bloc.handleListeners();
     super.didChangeDependencies();
@@ -50,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
               valueListenable: bloc.loadingStatusNotifier,
               builder: (context, snapshot, child) {
                 return snapshot == LoadingStatus.inprogress
-                    ? LoadingView()
+                    ? const LoadingView()
                     : SingleChildScrollView(
                         child: Column(
                           children: [
@@ -105,6 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       child: ValueListenableBuilder<String>(
                                           valueListenable: bloc.errorMessage,
                                           builder: (context, snapshot, child) {
+                                            print(snapshot);
                                             return CustomText(
                                               title: snapshot,
                                               fontSize: 14,

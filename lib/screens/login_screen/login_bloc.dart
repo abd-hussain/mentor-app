@@ -20,6 +20,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class LoginBloc extends Bloc<AuthService> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  BuildContext? maincontext;
 
   ValueNotifier<bool> fieldsValidations = ValueNotifier<bool>(false);
 
@@ -135,10 +136,10 @@ class LoginBloc extends Bloc<AuthService> {
         .pushNamedAndRemoveUntil(RoutesConstants.mainContainer, (Route<dynamic> route) => false);
   }
 
-  // String errorMessage() {
-  //   return "Email Format not valid";
+  // String errorMessageText(BuildContext context) {
+  //   // return "Email Format not valid";
 
-  //   // return "Wrong Email or Password";
+  //   return ;
   // }
 
   _saveValuesInMemory({
@@ -159,10 +160,10 @@ class LoginBloc extends Bloc<AuthService> {
     try {
       final info = await service.login(loginData: loginData);
       loadingStatusNotifier.value = LoadingStatus.finish;
-      // _openMainScreen(context);
+      _openMainScreen(maincontext!);
     } on DioError {
+      errorMessage.value = AppLocalizations.of(maincontext!)!.wrongemailorpassword;
       loadingStatusNotifier.value = LoadingStatus.finish;
-      errorMessage.value = AppLocalizations.of(context)!.wrongemailorpassword;
     }
   }
 
