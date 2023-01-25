@@ -30,7 +30,6 @@ class LoginBloc extends Bloc<AuthService> {
   ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   ValueNotifier<String> errorMessage = ValueNotifier<String>("");
 
-//here
   ValueNotifier<bool> buildNotifier = ValueNotifier<bool>(false);
 
   ValueNotifier<AuthenticationBiometricType> biometricResultNotifier =

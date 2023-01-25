@@ -173,5 +173,13 @@
     "freeseat" : "Available Seats",
     "posts" : "Posts",
     "resetpasswordtitle": "Enter your email below to reset your password",
+    "wrongemail" : "Wrong Email",
+    "forgotpasswordconfirmation" : "Forgot Password Confirmation",
+    "forgotpasswordconfirmationtitle" : "We've sent instructions to reset your password to ",
+    "forgotpasswordconfirmationtitle2" : "Please wait a few minutes for it to appear in your inbox and make sure to check your spam folders too",
+    "forgotpasswordconfirmationtitle3" : "If nothing was received, please",
+    "forgotpasswordconfirmationtitle4" : "click here",
+    "forgotpasswordconfirmationtitle5" : "to try again",
+    "backtohome" : "back To Home",
     "logout" : "Logout"
 }

@@ -170,8 +170,16 @@
     "eventdetails" : "تفاصيل الجلسة",
     "price" : "المبلغ",
     "eventdesc" : "التفاصيل",
-    "freeseat" : "المقاعد المتاحة",
+    "freeseat" : "المقاعد المتاحة", 
     "posts" : "المنشورات",
     "resetpasswordtitle": "نحتاج فقط إلى بريدك الإلكتروني المسجل لإرسال تعليمات إعادة تعيين كلمة المرور إليك",
+    "wrongemail" : "خطا بالبريد الالكتروني",
+    "forgotpasswordconfirmation" : "نسيت كلمة المرور",
+    "forgotpasswordconfirmationtitle": "تم إرسال بريد إلكتروني يحتوي على تعليمات إعادة تعيين كلمة المرور إلى ",
+    "forgotpasswordconfirmationtitle2" : "قد يستغرق الأمر بضع دقائق حتى يتم تسليم البريد الإلكتروني",
+    "forgotpasswordconfirmationtitle3" : "إذا لم تتلق أي بريد إلكتروني، فيرجى التحقق من مجلد الرسائل غير المرغوب فيها أو",
+    "forgotpasswordconfirmationtitle4" : "انقر هنا",
+    "forgotpasswordconfirmationtitle5" : "للمحاولة مرة أخرى",
+    "backtohome" : "موافق",
     "logout" : "تسجيل الخروج"
 }

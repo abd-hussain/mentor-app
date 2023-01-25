@@ -6,6 +6,7 @@ import 'package:mentor_app/screens/change_password/change_password_screen.dart';
 import 'package:mentor_app/screens/edit_experience/edit_experience_screen.dart';
 import 'package:mentor_app/screens/edit_profile/edit_profile_screen.dart';
 import 'package:mentor_app/screens/event_details/event_details_screen.dart';
+import 'package:mentor_app/screens/forgot_password/forgot_password_confirmation_screen.dart';
 import 'package:mentor_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:mentor_app/screens/home_tab/home_screen.dart';
 import 'package:mentor_app/screens/invite_friends/invite_friends_screen.dart';
@@ -46,6 +47,7 @@ class RoutesConstants {
   static const String paymentsScreen = 'paymentsScreen';
   static const String forgotPasswordScreen = 'forgotPasswordScreen';
   static const String eventDetailsScreen = 'eventDetailsScreen';
+  static const String forgotPasswordConfirmationScreen = 'forgotPasswordConfirmationScreen';
 }
 
 final Map<String, Widget> routes = {
@@ -70,5 +72,6 @@ final Map<String, Widget> routes = {
   RoutesConstants.workingHoursScreen: const WorkingHoursScreen(),
   RoutesConstants.paymentsScreen: const PaymentsScreen(),
   RoutesConstants.forgotPasswordScreen: const ForgotPasswordScreen(),
+  RoutesConstants.forgotPasswordConfirmationScreen: const ForgotPasswordConfirmationScreen(),
   RoutesConstants.eventDetailsScreen: const EventDetailsScreen(),
 };
