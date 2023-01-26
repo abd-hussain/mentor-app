@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/models/https/home_response.dart';
 import 'package:mentor_app/screens/home_tab/home_bloc.dart';
+import 'package:mentor_app/screens/home_tab/widgets/add_post_bottom_sheet.dart';
 import 'package:mentor_app/screens/home_tab/widgets/event_bottom_sheet.dart';
 import 'package:mentor_app/screens/home_tab/widgets/event_view.dart';
 import 'package:mentor_app/screens/home_tab/widgets/header.dart';
@@ -68,7 +69,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               bloc.reportStory(storyId: id);
                             },
                             onAddStory: () {
-                              //TODO
+                              AddPostBottomSheetsUtil(
+                                      context: context, language: bloc.box.get(DatabaseFieldConstant.language))
+                                  .bottomSheet(postAdded: () {
+                                //TODO
+                              });
                             },
                           );
                         } else {
