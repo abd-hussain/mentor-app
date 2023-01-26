@@ -47,7 +47,7 @@ class ForgotPasswordBloc extends Bloc<AuthService> {
     final ForgotPasswordRequest data = ForgotPasswordRequest(email: emailFieldController.text);
 
     try {
-      final info = await service.forgotPassword(data: data);
+      await service.forgotPassword(data: data);
       loadingStatusNotifier.value = LoadingStatus.finish;
       _openConfirmScreen(maincontext!);
     } on DioError {
