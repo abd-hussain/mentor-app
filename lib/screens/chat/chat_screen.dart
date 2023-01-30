@@ -39,8 +39,11 @@ class _ChatScreenState extends State<ChatScreen> {
           child: Column(
             children: [
               Expanded(
-                child: ChatList(
-                  chatListNotifier: bloc.chatListNotifier,
+                child: RefreshIndicator(
+                  onRefresh: bloc.pullRefresh,
+                  child: ChatList(
+                    chatListNotifier: bloc.chatListNotifier,
+                  ),
                 ),
               ),
               Container(
@@ -52,13 +55,6 @@ class _ChatScreenState extends State<ChatScreen> {
                       child: CustomTextField(
                         controller: bloc.chatController,
                         hintText: AppLocalizations.of(context)!.message,
-                        onChange: (text) {
-                          if (text.isNotEmpty) {
-                            // if (bloc.validateCurrentPassword(context, text)) {
-                            //   FocusScope.of(context).unfocus();
-                            // }
-                          }
-                        },
                       ),
                     ),
                     IconButton(

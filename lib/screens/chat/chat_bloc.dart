@@ -25,6 +25,13 @@ class ChatBloc extends Bloc<MessagesService> {
     });
   }
 
+  Future<void> pullRefresh() async {
+    return Future.delayed(
+      const Duration(milliseconds: 1000),
+      () => _callChatMessages(messageId),
+    );
+  }
+
   void sendMessage() {
     if (chatController.text.isNotEmpty) {
       service.sendMessage(data: ChatRequest(messageId: messageId, message: chatController.text)).whenComplete(() {

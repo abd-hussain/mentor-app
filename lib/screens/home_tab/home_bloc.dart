@@ -15,6 +15,13 @@ class HomeBloc extends Bloc<HomeService> {
   final ValueNotifier<List<MainStory>?> storiesListNotifier = ValueNotifier<List<MainStory>?>(null);
   final ValueNotifier<List<MainEvent>?> eventListNotifier = ValueNotifier<List<MainEvent>?>(null);
 
+  Future<void> pullRefresh() async {
+    return Future.delayed(
+      const Duration(milliseconds: 1000),
+      () => getHome(),
+    );
+  }
+
   void getHome() {
     service.getHome().then((value) {
       if (value.data != null) {
