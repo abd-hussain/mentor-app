@@ -15,5 +15,7 @@ class MessagesBloc extends Bloc<MessagesService> {
   }
 
   @override
-  onDispose() {}
+  onDispose() {
+    messagesListNotifier.dispose();
+  }
 }

@@ -3,6 +3,7 @@ import 'package:mentor_app/screens/home_tab/widgets/header.dart';
 import 'package:mentor_app/screens/messages_tab/messages_bloc.dart';
 import 'package:mentor_app/screens/messages_tab/widgets/list_messages_widget.dart';
 import 'package:mentor_app/utils/logger.dart';
+import 'package:mentor_app/utils/routes.dart';
 
 class MessagesScreen extends StatefulWidget {
   const MessagesScreen({super.key});
@@ -37,7 +38,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
           child: MessagesList(
             messagesListNotifier: bloc.messagesListNotifier,
             onOpen: (item) {
-              // TODO
+              Navigator.of(context, rootNavigator: true)
+                  .pushNamed(RoutesConstants.chatScreen, arguments: {"message_id": item.id});
             },
           ),
         ),

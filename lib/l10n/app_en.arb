@@ -182,5 +182,6 @@
     "forgotpasswordconfirmationtitle5" : "to try again",
     "backtohome" : "back To Home",
     "addnewpost" : "Add New Post",
+    "message" : "Message ...",
     "logout" : "Logout"
 }

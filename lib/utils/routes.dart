@@ -3,6 +3,7 @@ import 'package:mentor_app/screens/account_tab/account_screen.dart';
 import 'package:mentor_app/screens/calender_tab/calender_screen.dart';
 import 'package:mentor_app/screens/call_tab/call_screen.dart';
 import 'package:mentor_app/screens/change_password/change_password_screen.dart';
+import 'package:mentor_app/screens/chat/chat_screen.dart';
 import 'package:mentor_app/screens/edit_experience/edit_experience_screen.dart';
 import 'package:mentor_app/screens/edit_profile/edit_profile_screen.dart';
 import 'package:mentor_app/screens/event_details/event_details_screen.dart';
@@ -48,6 +49,7 @@ class RoutesConstants {
   static const String forgotPasswordScreen = 'forgotPasswordScreen';
   static const String eventDetailsScreen = 'eventDetailsScreen';
   static const String forgotPasswordConfirmationScreen = 'forgotPasswordConfirmationScreen';
+  static const String chatScreen = 'chatScreen';
 }
 
 final Map<String, Widget> routes = {
@@ -74,4 +76,5 @@ final Map<String, Widget> routes = {
   RoutesConstants.forgotPasswordScreen: const ForgotPasswordScreen(),
   RoutesConstants.forgotPasswordConfirmationScreen: const ForgotPasswordConfirmationScreen(),
   RoutesConstants.eventDetailsScreen: const EventDetailsScreen(),
+  RoutesConstants.chatScreen: const ChatScreen(),
 };
