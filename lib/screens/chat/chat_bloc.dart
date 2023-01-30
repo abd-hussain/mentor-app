@@ -26,10 +26,12 @@ class ChatBloc extends Bloc<MessagesService> {
   }
 
   void sendMessage() {
-    service.sendMessage(data: ChatRequest(messageId: messageId, message: chatController.text)).whenComplete(() {
-      chatController.text = "";
-      _callChatMessages(messageId);
-    });
+    if (chatController.text.isNotEmpty) {
+      service.sendMessage(data: ChatRequest(messageId: messageId, message: chatController.text)).whenComplete(() {
+        chatController.text = "";
+        _callChatMessages(messageId);
+      });
+    }
   }
 
   @override
