@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:mentor_app/models/https/home_response.dart';
 import 'package:mentor_app/models/https/report_request.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:mentor_app/utils/repository/http_repository.dart';
@@ -71,7 +70,10 @@ class ReportService with Service {
     });
 
     await repository.callRequest(
-        requestType: RequestType.post, methodName: MethodNameConstant.reportIssue, formData: formData);
+      requestType: RequestType.post,
+      methodName: MethodNameConstant.reportIssue,
+      formData: formData,
+    );
 
     return true;
   }

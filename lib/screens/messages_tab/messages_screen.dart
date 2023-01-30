@@ -36,9 +36,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
           height: MediaQuery.of(context).size.height - 300,
           child: MessagesList(
             messagesListNotifier: bloc.messagesListNotifier,
-            onDelete: (p0) {
-              bloc.messagesListNotifier.value!.remove(p0);
-              bloc.deleteMessage(p0.id!);
+            onOpen: (item) {
+              // TODO
             },
           ),
         ),

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:mentor_app/models/https/notifications_response.dart';
+import 'package:mentor_app/models/https/messages.dart';
 import 'package:mentor_app/screens/notifications/widgets/shimmer_notifications.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mentor_app/utils/constants/constant.dart';
 
 class MessagesList extends StatefulWidget {
-  final ValueNotifier<List<NotificationsResponseData>?> messagesListNotifier;
+  final ValueNotifier<List<MessagesListData>?> messagesListNotifier;
 
-  final Function(NotificationsResponseData) onDelete;
+  final Function(MessagesListData) onOpen;
 
-  const MessagesList({super.key, required this.messagesListNotifier, required this.onDelete});
+  const MessagesList({super.key, required this.messagesListNotifier, required this.onOpen});
 
   @override
   State<MessagesList> createState() => _MessagesListState();
@@ -18,7 +19,7 @@ class MessagesList extends StatefulWidget {
 class _MessagesListState extends State<MessagesList> {
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<List<NotificationsResponseData>?>(
+    return ValueListenableBuilder<List<MessagesListData>?>(
         valueListenable: widget.messagesListNotifier,
         builder: (context, data, child) {
           return data == null
@@ -27,7 +28,12 @@ class _MessagesListState extends State<MessagesList> {
                   ? ListView.builder(
                       itemCount: data.length,
                       itemBuilder: (ctx, index) {
-                        return messageTile(context, data[index], index);
+                        return messageTile(
+                          item: data[index],
+                          onOpen: (item) {
+                            widget.onOpen(item);
+                          },
+                        );
                       })
                   : Center(
                       child: CustomText(
@@ -39,37 +45,19 @@ class _MessagesListState extends State<MessagesList> {
         });
   }
 
-  Widget messageTile(BuildContext context, NotificationsResponseData item, int index) {
-    var parsedDate = DateTime.parse(item.createdAt!);
-    var dateLocal = parsedDate.toLocal();
-
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Dismissible(
-        key: Key(item.title!),
-        direction: DismissDirection.endToStart,
-        onDismissed: (direction) {
-          widget.onDelete(item);
-        },
-        background: Container(
-          alignment: AlignmentDirectional.centerEnd,
-          color: Colors.red,
-          child: const Padding(
-            padding: EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-            child: Icon(
-              Icons.delete,
-              color: Colors.white,
-            ),
-          ),
-        ),
+  Widget messageTile({required MessagesListData item, required Function(MessagesListData) onOpen}) {
+    return InkWell(
+      onTap: () => onOpen(item),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(5),
+            color: Colors.grey[100],
+            borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                spreadRadius: 3,
+                color: Colors.grey.withOpacity(0.4),
+                spreadRadius: 2,
                 blurRadius: 4,
                 offset: const Offset(0, 3),
               ),
@@ -79,48 +67,31 @@ class _MessagesListState extends State<MessagesList> {
             padding: const EdgeInsets.all(8),
             child: Row(
               children: [
-                Column(
-                  children: [
-                    const Icon(
-                      Icons.notifications,
-                      color: Color(0xff444444),
-                    ),
-                    CustomText(
-                      title: "${dateLocal.year}/${dateLocal.month}/${dateLocal.day}",
-                      fontSize: 9,
-                      textColor: const Color(0xff444444),
-                    ),
-                    CustomText(
-                      title: "${dateLocal.hour}:${dateLocal.minute}",
-                      fontSize: 9,
-                      textColor: const Color(0xff444444),
-                    ),
-                  ],
+                const SizedBox(width: 4),
+                CircleAvatar(
+                  backgroundColor: const Color(0xff034061),
+                  radius: 25,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: item.profileImg != ""
+                        ? FadeInImage(
+                            placeholder: const AssetImage("assets/images/avatar.jpeg"),
+                            image: NetworkImage(AppConstant.imagesBaseURLForProfileImages + item.profileImg!, scale: 1),
+                          )
+                        : Image.asset(
+                            'assets/images/avatar.jpeg',
+                            width: 110.0,
+                            height: 110.0,
+                            fit: BoxFit.fill,
+                          ),
+                  ),
                 ),
-                const SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      title: item.title!,
-                      fontSize: 16,
-                      textColor: const Color(0xff444444),
-                      maxLins: 2,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width - 100,
-                      child: CustomText(
-                        title: item.content!,
-                        fontSize: 14,
-                        textColor: const Color(0xff444444),
-                        maxLins: 15,
-                      ),
-                    ),
-                  ],
+                const SizedBox(width: 4),
+                CustomText(
+                  title: "${item.firstName!} ${item.lastName!}",
+                  fontSize: 14,
+                  textColor: const Color(0xff444444),
+                  fontWeight: FontWeight.bold,
                 ),
               ],
             ),

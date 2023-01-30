@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -15,7 +16,7 @@ class AddPostBottomSheetsUtil {
   });
 
   Future bottomSheet({
-    required Function() postAdded,
+    required Function(File) postAdded,
   }) async {
     ValueNotifier<File?> assetsController = ValueNotifier<File?>(null);
 
@@ -89,7 +90,7 @@ class AddPostBottomSheetsUtil {
                   ),
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 16),
               InkWell(
                 onTap: () async {
                   File image = await pickImage(ImageSource.gallery);
@@ -162,6 +163,18 @@ class AddPostBottomSheetsUtil {
                 ),
               ),
               const SizedBox(height: 16),
+              ValueListenableBuilder<File?>(
+                  valueListenable: assetsController,
+                  builder: (context, snapshot, child) {
+                    return CustomButton(
+                      buttonTitle: AppLocalizations.of(context)!.addnewpost,
+                      enableButton: snapshot != null,
+                      onTap: () {
+                        Navigator.pop(context);
+                        postAdded(assetsController.value!);
+                      },
+                    );
+                  })
             ],
           ),
         );

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mentor_app/locator.dart';
@@ -29,6 +31,10 @@ class HomeBloc extends Bloc<HomeService> {
 
   void reportStory({required int storyId}) async {
     await locator<ReportService>().reportStory(storyId: storyId);
+  }
+
+  void addNewStory({required File file}) async {
+    await service.addStiry(file);
   }
 
   @override

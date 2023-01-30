@@ -71,8 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             onAddStory: () {
                               AddPostBottomSheetsUtil(
                                       context: context, language: bloc.box.get(DatabaseFieldConstant.language))
-                                  .bottomSheet(postAdded: () {
-                                //TODO
+                                  .bottomSheet(postAdded: (file) {
+                                bloc.addNewStory(file: file);
                               });
                             },
                           );

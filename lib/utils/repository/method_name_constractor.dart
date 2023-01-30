@@ -25,6 +25,8 @@ class MethodNameConstant {
   static const String home = "mentor-home/";
   static const String event = "event/";
   static const String clientEvent = "event/client";
+  static const String messages = "messages/mentor";
+  static const String chat = "messages/chat";
 
   static const String reportStory = "report/story";
   static const String reportEvent = "report/event";
