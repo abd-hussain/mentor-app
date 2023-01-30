@@ -33,12 +33,15 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(title: AppLocalizations.of(context)!.notifications),
-      body: NotificationsList(
-        notificationsListNotifier: bloc.notificationsListNotifier,
-        onDelete: (p0) {
-          bloc.notificationsListNotifier.value!.remove(p0);
-          bloc.deleteNotification(p0.id!);
-        },
+      body: RefreshIndicator(
+        onRefresh: bloc.pullRefresh,
+        child: NotificationsList(
+          notificationsListNotifier: bloc.notificationsListNotifier,
+          onDelete: (p0) {
+            bloc.notificationsListNotifier.value!.remove(p0);
+            bloc.deleteNotification(p0.id!);
+          },
+        ),
       ),
     );
   }
