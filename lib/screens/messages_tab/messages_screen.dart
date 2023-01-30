@@ -35,12 +35,15 @@ class _MessagesScreenState extends State<MessagesScreen> {
         const HeaderHomePage(),
         SizedBox(
           height: MediaQuery.of(context).size.height - 300,
-          child: MessagesList(
-            messagesListNotifier: bloc.messagesListNotifier,
-            onOpen: (item) {
-              Navigator.of(context, rootNavigator: true)
-                  .pushNamed(RoutesConstants.chatScreen, arguments: {"message_id": item.id});
-            },
+          child: RefreshIndicator(
+            onRefresh: bloc.pullRefresh,
+            child: MessagesList(
+              messagesListNotifier: bloc.messagesListNotifier,
+              onOpen: (item) {
+                Navigator.of(context, rootNavigator: true)
+                    .pushNamed(RoutesConstants.chatScreen, arguments: {"message_id": item.id});
+              },
+            ),
           ),
         ),
       ],
