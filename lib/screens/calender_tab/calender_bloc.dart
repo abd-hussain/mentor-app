@@ -7,6 +7,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class CalenderBloc extends Bloc<AccountService> {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
 
+  Future<dynamic> cancelMeeting(int meetingId) async {
+    //TODO
+    // return locator<AppointmentsService>().cancelAppointment(id: meetingId);
+  }
+
   @override
   onDispose() {}
 }

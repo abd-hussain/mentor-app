@@ -20,7 +20,6 @@ class CalenderBottomSheetsUtil {
 
   Future bookMeetingBottomSheet({
     required Function() cancel,
-    required Function() openEventDetails,
   }) async {
     return await showModalBottomSheet(
         isScrollControlled: true,
@@ -63,19 +62,8 @@ class CalenderBottomSheetsUtil {
                   ],
                 ),
                 const SizedBox(height: 8),
-                metingDetails.type == Type.event ? eventView() : meetingView(),
-                metingDetails.type == Type.event
-                    ? CustomButton(
-                        padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
-                        enableButton: DateTime.now().isBefore(metingDetails.fromTime),
-                        buttonColor: const Color(0xff4CB6EA),
-                        buttonTitle: AppLocalizations.of(context)!.openeventdetails,
-                        onTap: () {
-                          Navigator.pop(context);
-                          openEventDetails();
-                        },
-                      )
-                    : const SizedBox(),
+                meetingView(),
+                const SizedBox(),
                 CustomButton(
                   enableButton: DateTime.now().isBefore(metingDetails.fromTime),
                   padding: const EdgeInsets.all(8.0),
@@ -90,81 +78,6 @@ class CalenderBottomSheetsUtil {
             ),
           );
         });
-  }
-
-  Widget eventView() {
-    final difference = metingDetails.toTime.difference(metingDetails.fromTime).inMinutes;
-
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: CustomText(
-              title: metingDetails.title!,
-              textColor: const Color(0xff444444),
-              fontSize: 16,
-              textAlign: TextAlign.center,
-              maxLins: 4,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Center(
-          child: CustomText(
-            title: AppLocalizations.of(context)!.by,
-            textColor: const Color(0xff444444),
-            fontSize: 14,
-            textAlign: TextAlign.center,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: CustomText(
-              title: "${metingDetails.mentorPrefix} ${metingDetails.mentorFirstName} ${metingDetails.mentorLastName}",
-              textColor: const Color(0xff444444),
-              fontSize: 14,
-              textAlign: TextAlign.center,
-              maxLins: 4,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Center(
-          child: CustomText(
-            title: metingDetails.categoryName,
-            textColor: const Color(0xff444444),
-            fontSize: 14,
-            textAlign: TextAlign.center,
-            maxLins: 4,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        AppointmentDetailsView(
-          title: AppLocalizations.of(context)!.eventdate,
-          desc: "${metingDetails.fromTime.year}/${metingDetails.fromTime.month}/${metingDetails.fromTime.day}",
-        ),
-        AppointmentDetailsView(
-          title: AppLocalizations.of(context)!.eventday,
-          desc: language == "en"
-              ? DateFormat('EEEE').format(metingDetails.fromTime)
-              : DayTime().convertDayToArabic(
-                  DateFormat('EEEE').format(metingDetails.fromTime),
-                ),
-        ),
-        AppointmentDetailsView(
-          title: AppLocalizations.of(context)!.eventtime,
-          desc: DayTime().convertingTimingWithMinToRealTime(metingDetails.fromTime.hour, metingDetails.fromTime.minute),
-        ),
-        AppointmentDetailsView(
-          title: AppLocalizations.of(context)!.eventDuration,
-          desc: "$difference ${AppLocalizations.of(context)!.min}",
-        ),
-        Container(height: 1, color: const Color(0xff444444)),
-      ],
-    );
   }
 
   Widget meetingView() {

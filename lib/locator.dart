@@ -2,12 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:mentor_app/screens/main_contaner/main_container_bloc.dart';
+import 'package:mentor_app/services/appointments_service.dart';
 import 'package:mentor_app/services/auth_services.dart';
 import 'package:mentor_app/services/event_services.dart';
 import 'package:mentor_app/services/filter_services.dart';
 import 'package:mentor_app/services/general/authentication_service.dart';
 import 'package:mentor_app/services/general/network_info_service.dart';
 import 'package:mentor_app/services/home_services.dart';
+import 'package:mentor_app/services/mentor_properties_services.dart';
 import 'package:mentor_app/services/messages_services.dart';
 import 'package:mentor_app/services/noticitions_services.dart';
 import 'package:mentor_app/services/report_service.dart';
@@ -31,6 +33,8 @@ Future<void> setupLocator() async {
   locator.registerFactory<EventService>(() => EventService());
   locator.registerFactory<MessagesService>(() => MessagesService());
   locator.registerFactory<NotificationsService>(() => NotificationsService());
+  locator.registerFactory<AppointmentsService>(() => AppointmentsService());
+  locator.registerFactory<MentorPropertiesService>(() => MentorPropertiesService());
 
   locator.registerLazySingleton(() => AuthenticationService());
   locator.registerLazySingleton(() => LocalAuthentication());

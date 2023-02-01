@@ -14,6 +14,7 @@ class MethodNameConstant {
   static const String cancelAppointment = "appointment/cancel";
   static const String bookevent = "event/book";
   static const String cancelbookevent = "event/bookcancel";
+  static const String mentorWorkingHours = "mentor-prop/working_hours";
 
   static const String discount = "discount/";
 
