@@ -6,6 +6,8 @@ import 'package:mentor_app/screens/working_hours/widgets/info_working_hour_botto
 import 'package:mentor_app/screens/working_hours/working_hours_bloc.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
+import 'package:mentor_app/shared_widget/loading_view.dart';
+import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/logger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -46,18 +48,24 @@ class _WorkingHoursScreenState extends State<WorkingHoursScreen> {
           )
         ],
       ),
-      body: ValueListenableBuilder<List<WorkingHourModel>>(
-          valueListenable: bloc.listOfWorkingHourNotifier,
+      body: ValueListenableBuilder<LoadingStatus>(
+          valueListenable: bloc.loadingStatusNotifier,
           builder: (context, snapshot, child) {
-            return ListView.builder(
-                itemCount: bloc.listOfWorkingHourNotifier.value.length,
-                itemBuilder: (context, index) {
-                  return item(
-                    index: index,
-                    workingHours: bloc.listOfWorkingHourNotifier.value[index].list,
-                    dayName: bloc.listOfWorkingHourNotifier.value[index].dayName,
-                  );
-                });
+            return snapshot == LoadingStatus.inprogress
+                ? const LoadingView()
+                : ValueListenableBuilder<List<WorkingHourModel>>(
+                    valueListenable: bloc.listOfWorkingHourNotifier,
+                    builder: (context, snapshot, child) {
+                      return ListView.builder(
+                          itemCount: bloc.listOfWorkingHourNotifier.value.length,
+                          itemBuilder: (context, index) {
+                            return item(
+                              index: index,
+                              workingHours: bloc.listOfWorkingHourNotifier.value[index].list,
+                              dayName: bloc.listOfWorkingHourNotifier.value[index].dayName,
+                            );
+                          });
+                    });
           }),
     );
   }

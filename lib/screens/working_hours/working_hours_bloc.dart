@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:mentor_app/models/https/working_hour_request.dart';
 import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/services/mentor_properties_services.dart';
+import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/mixins.dart';
 
 class WorkingHoursBloc extends Bloc<MentorPropertiesService> {
+  ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+
   List<WorkingHour> _prepareList(List<int> theList) {
     List<WorkingHour> list = [];
 
@@ -39,7 +42,10 @@ class WorkingHoursBloc extends Bloc<MentorPropertiesService> {
   ValueNotifier<List<WorkingHourModel>> listOfWorkingHourNotifier = ValueNotifier<List<WorkingHourModel>>([]);
 
   void getWorkingHours() {
+    loadingStatusNotifier.value = LoadingStatus.inprogress;
+
     service.getWorkingHours().then((value) {
+      loadingStatusNotifier.value = LoadingStatus.finish;
       if (value.data != null) {
         List<WorkingHourModel> theList = [];
         if (value.data!.workingHoursSaturday != null) {
@@ -70,7 +76,12 @@ class WorkingHoursBloc extends Bloc<MentorPropertiesService> {
   }
 
   void updateWorkingHours(WorkingHoursRequest obj) async {
-    await service.updateWorkingHours(data: obj).whenComplete(() => getWorkingHours());
+    loadingStatusNotifier.value = LoadingStatus.inprogress;
+
+    await service.updateWorkingHours(data: obj).whenComplete(() {
+      loadingStatusNotifier.value = LoadingStatus.finish;
+      getWorkingHours();
+    });
   }
 
   @override
