@@ -6,10 +6,8 @@ class MethodNameConstant {
   static const String forgotPassword = "mentor-auth/forgotpassword";
 
   static const String mentors = "mentor-list/";
-  static const String mentorDetails = "mentor-account/";
   static const String mentorAppointments = "appointment/mentor";
   static const String clientAppointments = "appointment/client";
-  static const String mentoravaliable = "mentor-account/mentor-avaliable";
   static const String bookAppointment = "appointment/book";
   static const String cancelAppointment = "appointment/cancel";
   static const String bookevent = "event/book";
@@ -43,4 +41,6 @@ class MethodNameConstant {
   static const String updateAccount = "client-account/update";
   static const String reportIssue = "report/issue";
   static const String reportSuggestion = "report/suggestion";
+
+  static const String accountInfo = "mentor-account/info";
 }
