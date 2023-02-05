@@ -15,6 +15,7 @@ class EditProfileBloc extends Bloc<AccountService> {
   ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   ValueNotifier<bool> enableSaveButtonNotifier = ValueNotifier<bool>(false);
   ValueNotifier<List<Country>> listOfCountriesNotifier = ValueNotifier<List<Country>>([]);
+  ValueNotifier<List<String>> listOfSpeakingLanguageNotifier = ValueNotifier<List<String>>([]);
 
   String profileImageUrl = "";
   String iDImageUrl = "";
@@ -102,7 +103,9 @@ class EditProfileBloc extends Bloc<AccountService> {
           }
         }
 
-        //TODO
+        if (value.data!.speakingLanguage != null) {
+          listOfSpeakingLanguageNotifier.value = value.data!.speakingLanguage!;
+        }
       }
 
       loadingStatusNotifier.value = LoadingStatus.finish;

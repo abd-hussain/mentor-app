@@ -185,10 +185,53 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               controller: bloc.genderController,
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.only(top: 10, bottom: 16),
-                                              child: Container(
-                                                height: 50,
-                                                decoration: BoxDecoration(border: Border.all(color: Colors.blueAccent)),
+                                              padding: const EdgeInsets.only(top: 10, left: 16, right: 16),
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  CustomText(
+                                                    title: AppLocalizations.of(context)!.speakinglanguage,
+                                                    fontSize: 12,
+                                                    textColor: const Color(0xff444444),
+                                                  ),
+                                                  ValueListenableBuilder<List<String>>(
+                                                      valueListenable: bloc.listOfSpeakingLanguageNotifier,
+                                                      builder: (context, snapshot, child) {
+                                                        return Container(
+                                                          height: 50,
+                                                          decoration: BoxDecoration(
+                                                            border: Border.all(color: const Color(0xffE8E8E8)),
+                                                            borderRadius: BorderRadius.circular(4),
+                                                          ),
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.all(8.0),
+                                                            child: ListView.builder(
+                                                              itemCount: snapshot.length,
+                                                              scrollDirection: Axis.horizontal,
+                                                              itemBuilder: (context, index) {
+                                                                return Padding(
+                                                                  padding: const EdgeInsets.all(4),
+                                                                  child: Container(
+                                                                    padding: const EdgeInsets.all(4),
+                                                                    decoration: BoxDecoration(
+                                                                      color: const Color(0xffE8E8E8),
+                                                                      borderRadius: BorderRadius.circular(4),
+                                                                    ),
+                                                                    child: Center(
+                                                                      child: CustomText(
+                                                                        title: snapshot[index],
+                                                                        fontSize: 14,
+                                                                        textColor: const Color(0xff444444),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              },
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }),
+                                                ],
                                               ),
                                             ),
                                           ],
