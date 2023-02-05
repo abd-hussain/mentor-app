@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mentor_app/models/https/countries_model.dart';
+import 'package:mentor_app/models/https/suffix_model.dart';
+import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/screens/edit_profile/edit_profile_bloc.dart';
 import 'package:mentor_app/shared_widget/country_field.dart';
 import 'package:mentor_app/shared_widget/custom_attach_textfield.dart';
@@ -12,6 +14,8 @@ import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/shared_widget/custom_textfield.dart';
 import 'package:mentor_app/shared_widget/loading_view.dart';
+import 'package:mentor_app/shared_widget/speaking_language_field.dart';
+import 'package:mentor_app/shared_widget/suffix_field.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/logger.dart';
@@ -32,6 +36,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     logDebugMessage(message: 'Edit Profile init Called ...');
     bloc.getProfileInformations(context);
     bloc.getListOfCountries(context);
+    bloc.getlistOfSuffix();
     super.didChangeDependencies();
   }
 
@@ -110,14 +115,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       Expanded(
                                         child: Column(
                                           children: [
-                                            CustomTextField(
-                                              controller: bloc.suffixNameController,
-                                              hintText: AppLocalizations.of(context)!.suffixenameprofile,
-                                              keyboardType: TextInputType.name,
-                                              inputFormatters: [
-                                                LengthLimitingTextInputFormatter(45),
-                                              ],
-                                            ),
+                                            ValueListenableBuilder<List<SuffixData>>(
+                                                valueListenable: bloc.listOfSuffix,
+                                                builder: (context, snapshot, child) {
+                                                  return SuffixField(
+                                                    controller: bloc.suffixNameController,
+                                                    listOfSuffix: bloc.listOfSuffix.value,
+                                                    selectedSuffix: (p0) {
+                                                      //TODO
+                                                      // bloc.selectedSuffix = p0;
+                                                      // bloc.validateFieldsForFaze2();
+                                                    },
+                                                  );
+                                                }),
                                             const SizedBox(height: 10),
                                             CustomTextField(
                                               controller: bloc.firstNameController,
@@ -194,41 +204,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                     fontSize: 12,
                                                     textColor: const Color(0xff444444),
                                                   ),
-                                                  ValueListenableBuilder<List<String>>(
+                                                  ValueListenableBuilder<List<CheckBox>>(
                                                       valueListenable: bloc.listOfSpeakingLanguageNotifier,
                                                       builder: (context, snapshot, child) {
-                                                        return Container(
-                                                          height: 50,
-                                                          decoration: BoxDecoration(
-                                                            border: Border.all(color: const Color(0xffE8E8E8)),
-                                                            borderRadius: BorderRadius.circular(4),
-                                                          ),
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.all(8.0),
-                                                            child: ListView.builder(
-                                                              itemCount: snapshot.length,
-                                                              scrollDirection: Axis.horizontal,
-                                                              itemBuilder: (context, index) {
-                                                                return Padding(
-                                                                  padding: const EdgeInsets.all(4),
-                                                                  child: Container(
-                                                                    padding: const EdgeInsets.all(4),
-                                                                    decoration: BoxDecoration(
-                                                                      color: const Color(0xffE8E8E8),
-                                                                      borderRadius: BorderRadius.circular(4),
-                                                                    ),
-                                                                    child: Center(
-                                                                      child: CustomText(
-                                                                        title: snapshot[index],
-                                                                        fontSize: 14,
-                                                                        textColor: const Color(0xff444444),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              },
-                                                            ),
-                                                          ),
+                                                        return SpeakingLanguageField(
+                                                          listOfLanguages: snapshot,
+                                                          selectedLanguage: (language) {},
                                                         );
                                                       }),
                                                 ],

@@ -184,5 +184,6 @@
     "addnewpost" : "Add New Post",
     "message" : "Message ...",
     "speakinglanguage" : "Speaking language",
+    "selectSuffix" : "Select Suffix",
     "logout" : "Logout"
 }

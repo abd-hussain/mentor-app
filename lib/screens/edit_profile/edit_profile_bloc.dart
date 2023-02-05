@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mentor_app/locator.dart';
 import 'package:mentor_app/models/https/countries_model.dart';
+import 'package:mentor_app/models/https/suffix_model.dart';
+import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/services/filter_services.dart';
 import 'package:mentor_app/shared_widget/account_service.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
@@ -15,7 +17,7 @@ class EditProfileBloc extends Bloc<AccountService> {
   ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   ValueNotifier<bool> enableSaveButtonNotifier = ValueNotifier<bool>(false);
   ValueNotifier<List<Country>> listOfCountriesNotifier = ValueNotifier<List<Country>>([]);
-  ValueNotifier<List<String>> listOfSpeakingLanguageNotifier = ValueNotifier<List<String>>([]);
+  ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier = ValueNotifier<List<CheckBox>>([]);
 
   String profileImageUrl = "";
   String iDImageUrl = "";
@@ -33,6 +35,7 @@ class EditProfileBloc extends Bloc<AccountService> {
   TextEditingController referalCodeController = TextEditingController();
   TextEditingController idController = TextEditingController();
   TextEditingController cityController = TextEditingController();
+  ValueNotifier<List<SuffixData>> listOfSuffix = ValueNotifier<List<SuffixData>>([]);
 
   File? profileImage;
   File? iDImage;
@@ -104,7 +107,7 @@ class EditProfileBloc extends Bloc<AccountService> {
         }
 
         if (value.data!.speakingLanguage != null) {
-          listOfSpeakingLanguageNotifier.value = value.data!.speakingLanguage!;
+          listOfSpeakingLanguageNotifier.value = _prepareList(value.data!.speakingLanguage!);
         }
       }
 
@@ -119,6 +122,23 @@ class EditProfileBloc extends Bloc<AccountService> {
       listOfCountriesNotifier.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
       loadingStatusNotifier.value = LoadingStatus.finish;
     });
+  }
+
+  void getlistOfSuffix() {
+    locator<FilterService>().suffix().then((value) {
+      listOfSuffix.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
+    });
+  }
+
+  List<CheckBox> _prepareList(List<String> theList) {
+    List<CheckBox> list = [];
+
+    list.add(CheckBox(value: "English", isEnable: theList.contains("English")));
+    list.add(CheckBox(value: "العربية", isEnable: theList.contains("العربية")));
+    list.add(CheckBox(value: "Français", isEnable: theList.contains("Français")));
+    list.add(CheckBox(value: "Español", isEnable: theList.contains("Español")));
+
+    return list;
   }
 
   @override

@@ -10,7 +10,7 @@ class EditWorkingHourBottomSheetsUtil {
   Future workingHour(
       {required BuildContext context,
       required String dayname,
-      required List<WorkingHour> listOfWorkingHour,
+      required List<CheckBox> listOfWorkingHour,
       required Function(List<int>) onSave}) {
     return showModalBottomSheet(
         isScrollControlled: true,
@@ -58,7 +58,7 @@ class EditWorkingHourBottomSheetsUtil {
                         onTap: () {
                           List<int> listOfSelectedHour = [];
 
-                          for (WorkingHour item in listOfWorkingHour) {
+                          for (CheckBox item in listOfWorkingHour) {
                             if (item.isEnable) {
                               listOfSelectedHour.add(convertHourStringToInt(item.value));
                             }

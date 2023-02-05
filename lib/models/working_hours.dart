@@ -1,13 +1,13 @@
 class WorkingHourModel {
-  List<WorkingHour> list;
+  List<CheckBox> list;
   String dayName;
 
   WorkingHourModel({required this.list, required this.dayName});
 }
 
-class WorkingHour {
+class CheckBox {
   final String value;
   bool isEnable;
 
-  WorkingHour({required this.value, required this.isEnable});
+  CheckBox({required this.value, required this.isEnable});
 }

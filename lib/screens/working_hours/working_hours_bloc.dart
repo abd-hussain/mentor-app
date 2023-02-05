@@ -8,33 +8,33 @@ import 'package:mentor_app/utils/mixins.dart';
 class WorkingHoursBloc extends Bloc<MentorPropertiesService> {
   ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
 
-  List<WorkingHour> _prepareList(List<int> theList) {
-    List<WorkingHour> list = [];
+  List<CheckBox> _prepareList(List<int> theList) {
+    List<CheckBox> list = [];
 
-    list.add(WorkingHour(value: "1:00 pm", isEnable: theList.contains(1)));
-    list.add(WorkingHour(value: "2:00 pm", isEnable: theList.contains(2)));
-    list.add(WorkingHour(value: "3:00 pm", isEnable: theList.contains(3)));
-    list.add(WorkingHour(value: "4:00 pm", isEnable: theList.contains(4)));
-    list.add(WorkingHour(value: "5:00 pm", isEnable: theList.contains(5)));
-    list.add(WorkingHour(value: "6:00 pm", isEnable: theList.contains(6)));
-    list.add(WorkingHour(value: "7:00 pm", isEnable: theList.contains(7)));
-    list.add(WorkingHour(value: "8:00 pm", isEnable: theList.contains(8)));
-    list.add(WorkingHour(value: "9:00 pm", isEnable: theList.contains(9)));
-    list.add(WorkingHour(value: "10:00 pm", isEnable: theList.contains(10)));
-    list.add(WorkingHour(value: "11:00 pm", isEnable: theList.contains(11)));
-    list.add(WorkingHour(value: "12:00 pm", isEnable: theList.contains(12)));
-    list.add(WorkingHour(value: "1:00 am", isEnable: theList.contains(13)));
-    list.add(WorkingHour(value: "2:00 am", isEnable: theList.contains(14)));
-    list.add(WorkingHour(value: "3:00 am", isEnable: theList.contains(15)));
-    list.add(WorkingHour(value: "4:00 am", isEnable: theList.contains(16)));
-    list.add(WorkingHour(value: "5:00 am", isEnable: theList.contains(17)));
-    list.add(WorkingHour(value: "6:00 am", isEnable: theList.contains(18)));
-    list.add(WorkingHour(value: "7:00 am", isEnable: theList.contains(19)));
-    list.add(WorkingHour(value: "8:00 am", isEnable: theList.contains(20)));
-    list.add(WorkingHour(value: "9:00 am", isEnable: theList.contains(21)));
-    list.add(WorkingHour(value: "10:00 am", isEnable: theList.contains(22)));
-    list.add(WorkingHour(value: "11:00 am", isEnable: theList.contains(23)));
-    list.add(WorkingHour(value: "12:00 am", isEnable: theList.contains(0)));
+    list.add(CheckBox(value: "1:00 pm", isEnable: theList.contains(1)));
+    list.add(CheckBox(value: "2:00 pm", isEnable: theList.contains(2)));
+    list.add(CheckBox(value: "3:00 pm", isEnable: theList.contains(3)));
+    list.add(CheckBox(value: "4:00 pm", isEnable: theList.contains(4)));
+    list.add(CheckBox(value: "5:00 pm", isEnable: theList.contains(5)));
+    list.add(CheckBox(value: "6:00 pm", isEnable: theList.contains(6)));
+    list.add(CheckBox(value: "7:00 pm", isEnable: theList.contains(7)));
+    list.add(CheckBox(value: "8:00 pm", isEnable: theList.contains(8)));
+    list.add(CheckBox(value: "9:00 pm", isEnable: theList.contains(9)));
+    list.add(CheckBox(value: "10:00 pm", isEnable: theList.contains(10)));
+    list.add(CheckBox(value: "11:00 pm", isEnable: theList.contains(11)));
+    list.add(CheckBox(value: "12:00 pm", isEnable: theList.contains(12)));
+    list.add(CheckBox(value: "1:00 am", isEnable: theList.contains(13)));
+    list.add(CheckBox(value: "2:00 am", isEnable: theList.contains(14)));
+    list.add(CheckBox(value: "3:00 am", isEnable: theList.contains(15)));
+    list.add(CheckBox(value: "4:00 am", isEnable: theList.contains(16)));
+    list.add(CheckBox(value: "5:00 am", isEnable: theList.contains(17)));
+    list.add(CheckBox(value: "6:00 am", isEnable: theList.contains(18)));
+    list.add(CheckBox(value: "7:00 am", isEnable: theList.contains(19)));
+    list.add(CheckBox(value: "8:00 am", isEnable: theList.contains(20)));
+    list.add(CheckBox(value: "9:00 am", isEnable: theList.contains(21)));
+    list.add(CheckBox(value: "10:00 am", isEnable: theList.contains(22)));
+    list.add(CheckBox(value: "11:00 am", isEnable: theList.contains(23)));
+    list.add(CheckBox(value: "12:00 am", isEnable: theList.contains(0)));
 
     return list;
   }

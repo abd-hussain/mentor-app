@@ -70,7 +70,7 @@ class _WorkingHoursScreenState extends State<WorkingHoursScreen> {
     );
   }
 
-  Widget item({required List<WorkingHour> workingHours, required String dayName, required int index}) {
+  Widget item({required List<CheckBox> workingHours, required String dayName, required int index}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(

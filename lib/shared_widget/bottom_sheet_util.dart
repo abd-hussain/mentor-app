@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/models/gender_model.dart';
 import 'package:mentor_app/models/https/categories_model.dart';
 import 'package:mentor_app/models/https/countries_model.dart';
 import 'package:mentor_app/models/https/suffix_model.dart';
+import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/utils/constants/constant.dart';
 
@@ -298,7 +301,7 @@ class BottomSheetsUtil {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomText(
-                title: AppLocalizations.of(context)!.selectCountry,
+                title: AppLocalizations.of(context)!.selectSuffix,
                 textColor: Colors.black,
                 fontSize: 20,
               ),
@@ -333,6 +336,100 @@ class BottomSheetsUtil {
                       ),
                     );
                   }),
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future speakingLanguageBottomSheet(
+      BuildContext context, List<CheckBox> listOfLanguage, Function(List<CheckBox>) onSave) {
+    StreamController<bool> valueListenable = StreamController<bool>.broadcast();
+
+    return showModalBottomSheet(
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(25),
+        ),
+      ),
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.close),
+                  ),
+                  const Expanded(child: SizedBox()),
+                  CustomText(
+                    title: AppLocalizations.of(context)!.speakinglanguage,
+                    textColor: Colors.black,
+                    fontSize: 18,
+                  ),
+                  const Expanded(child: SizedBox()),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: InkWell(
+                      onTap: () {
+                        onSave(listOfLanguage);
+                        Navigator.pop(context);
+                      },
+                      child: const CustomText(
+                        title: "Save",
+                        textColor: Color(0xff444444),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: SizedBox(
+                  height: 300,
+                  child: ListView.builder(
+                    itemCount: listOfLanguage.length,
+                    itemBuilder: ((context, index) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomText(
+                            title: listOfLanguage[index].value,
+                            textColor: Colors.black,
+                            fontSize: 18,
+                          ),
+                          StreamBuilder<bool>(
+                              stream: valueListenable.stream,
+                              builder: (context, snapshot) {
+                                return Checkbox(
+                                    value: listOfLanguage[index].isEnable,
+                                    onChanged: (va) {
+                                      listOfLanguage[index].isEnable = !listOfLanguage[index].isEnable;
+                                      valueListenable.sink.add(true);
+                                    });
+                              }),
+                        ],
+                      );
+                    }),
+                  ),
                 ),
               ),
               const SizedBox(height: 16),
