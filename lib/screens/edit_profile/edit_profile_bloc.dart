@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -17,7 +18,9 @@ class EditProfileBloc extends Bloc<AccountService> {
   ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   ValueNotifier<bool> enableSaveButtonNotifier = ValueNotifier<bool>(false);
   ValueNotifier<List<Country>> listOfCountriesNotifier = ValueNotifier<List<Country>>([]);
-  ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier = ValueNotifier<List<CheckBox>>([]);
+  // ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier = ValueNotifier<List<CheckBox>>([]);
+
+  StreamController<List<CheckBox>> listOfSpeakingLanguageNotifier = StreamController<List<CheckBox>>.broadcast();
 
   String profileImageUrl = "";
   String iDImageUrl = "";
@@ -107,7 +110,7 @@ class EditProfileBloc extends Bloc<AccountService> {
         }
 
         if (value.data!.speakingLanguage != null) {
-          listOfSpeakingLanguageNotifier.value = _prepareList(value.data!.speakingLanguage!);
+          listOfSpeakingLanguageNotifier.sink.add(_prepareList(value.data!.speakingLanguage!));
         }
       }
 

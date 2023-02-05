@@ -16,11 +16,18 @@ class SpeakingLanguageField extends StatefulWidget {
 class _SpeakingLanguageFieldState extends State<SpeakingLanguageField> {
   @override
   Widget build(BuildContext context) {
+    List<String> listOfSelectedLanguages = [];
+
+    for (CheckBox item in widget.listOfLanguages) {
+      if (item.isEnable) {
+        listOfSelectedLanguages.add(item.value);
+      }
+    }
+
     return InkWell(
       onTap: () async {
         await BottomSheetsUtil().speakingLanguageBottomSheet(context, widget.listOfLanguages, (languageSelected) {
           widget.selectedLanguage(languageSelected);
-          setState(() {});
         });
       },
       child: Container(
@@ -32,7 +39,7 @@ class _SpeakingLanguageFieldState extends State<SpeakingLanguageField> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListView.builder(
-            itemCount: widget.listOfLanguages.where((element) => element.isEnable).length,
+            itemCount: listOfSelectedLanguages.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return Padding(
@@ -45,7 +52,7 @@ class _SpeakingLanguageFieldState extends State<SpeakingLanguageField> {
                   ),
                   child: Center(
                     child: CustomText(
-                      title: widget.listOfLanguages[index].value,
+                      title: listOfSelectedLanguages[index],
                       fontSize: 14,
                       textColor: const Color(0xff444444),
                     ),

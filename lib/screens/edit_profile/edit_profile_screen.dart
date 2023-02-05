@@ -204,13 +204,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                     fontSize: 12,
                                                     textColor: const Color(0xff444444),
                                                   ),
-                                                  ValueListenableBuilder<List<CheckBox>>(
-                                                      valueListenable: bloc.listOfSpeakingLanguageNotifier,
-                                                      builder: (context, snapshot, child) {
-                                                        return SpeakingLanguageField(
-                                                          listOfLanguages: snapshot,
-                                                          selectedLanguage: (language) {},
-                                                        );
+                                                  StreamBuilder<List<CheckBox>>(
+                                                      stream: bloc.listOfSpeakingLanguageNotifier.stream,
+                                                      builder: (context, snapshot) {
+                                                        return snapshot.hasData
+                                                            ? SpeakingLanguageField(
+                                                                listOfLanguages: snapshot.data!,
+                                                                selectedLanguage: (language) {
+                                                                  bloc.listOfSpeakingLanguageNotifier.add(language);
+                                                                },
+                                                              )
+                                                            : const LoadingView();
                                                       }),
                                                 ],
                                               ),
@@ -279,6 +283,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   controller: bloc.referalCodeController,
                                   hintText: AppLocalizations.of(context)!.referalcodeprofile,
                                   readOnly: true,
+                                  enabled: false,
                                   keyboardType: TextInputType.number,
                                   inputFormatters: [LengthLimitingTextInputFormatter(6)],
                                   onChange: (text) => {},
