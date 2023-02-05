@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mentor_app/models/https/update_password_request.dart';
 import 'package:mentor_app/models/password_strength_model.dart';
 import 'package:mentor_app/password_strenght_logic.dart';
-import 'package:mentor_app/shared_widget/account_service.dart';
+import 'package:mentor_app/services/account_service.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -47,6 +48,14 @@ class ChangePasswordBloc extends Bloc<AccountService> {
   bool checkerOfThePasswordStrength() {
     return PasswordsStrength()
         .checkerOfThePasswordStrength(passwordStrengthValidationNotifier: passwordStrengthValidationNotifier);
+  }
+
+  Future<dynamic> changePasswordRequest() {
+    UpdatePasswordRequest passObj = UpdatePasswordRequest(
+      oldPassword: currentPasswordFieldController.text,
+      newPassword: confirmPasswordFieldController.text,
+    );
+    return service.changePassword(account: passObj);
   }
 
   @override

@@ -1,5 +1,5 @@
 import 'package:mentor_app/models/https/payment_model.dart';
-import 'package:mentor_app/shared_widget/account_service.dart';
+import 'package:mentor_app/services/account_service.dart';
 import 'package:mentor_app/utils/mixins.dart';
 
 class PaymentsBloc extends Bloc<AccountService> {

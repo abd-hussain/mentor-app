@@ -92,17 +92,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           suffixWidget: SizedBox(
                             height: 35,
                             child: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  bloc.currentPassowrdObscureText = !bloc.currentPassowrdObscureText;
-                                });
-                              },
-                              icon: Image.asset(
-                                bloc.currentPassowrdObscureText
-                                    ? 'assets/images/show_password.png'
-                                    : 'assets/images/hide_password.png',
-                              ),
-                            ),
+                                onPressed: () {
+                                  setState(() {
+                                    bloc.currentPassowrdObscureText = !bloc.currentPassowrdObscureText;
+                                  });
+                                },
+                                icon: Icon(bloc.currentPassowrdObscureText ? Icons.visibility : Icons.visibility_off)),
                           ),
                           onChange: (text) {
                             if (text.isNotEmpty) {
@@ -133,11 +128,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   bloc.newPasswordObscureText = !bloc.newPasswordObscureText;
                                 });
                               },
-                              icon: Image.asset(
-                                bloc.newPasswordObscureText
-                                    ? 'assets/images/show_password.png'
-                                    : 'assets/images/hide_password.png',
-                              ),
+                              icon: Icon(bloc.newPasswordObscureText ? Icons.visibility : Icons.visibility_off),
                             ),
                           ),
                           onChange: (text) {
@@ -187,11 +178,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   bloc.confirmPasswordObscureText = !bloc.confirmPasswordObscureText;
                                 });
                               },
-                              icon: Image.asset(
-                                bloc.confirmPasswordObscureText
-                                    ? 'assets/images/show_password.png'
-                                    : 'assets/images/hide_password.png',
-                              ),
+                              icon: Icon(bloc.confirmPasswordObscureText ? Icons.visibility : Icons.visibility_off),
                             ),
                           ),
                           onChange: (text) {
@@ -213,8 +200,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               CustomButton(
                   enableButton: bloc.enableSaveButton,
                   onTap: () {
-                    //TODO
-                    Navigator.of(context).pop();
+                    bloc.changePasswordRequest().whenComplete(() {
+                      Navigator.of(context).pop();
+                    });
                   }),
             ],
           ),

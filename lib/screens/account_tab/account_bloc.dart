@@ -4,7 +4,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:mentor_app/models/profile_options.dart';
 import 'package:mentor_app/myApp.dart';
 import 'package:mentor_app/screens/report/report_screen.dart';
-import 'package:mentor_app/shared_widget/account_service.dart';
+import 'package:mentor_app/services/account_service.dart';
 import 'package:mentor_app/shared_widget/bottom_sheet_util.dart';
 import 'package:mentor_app/shared_widget/custom_switch.dart';
 import 'package:mentor_app/utils/constants/constant.dart';

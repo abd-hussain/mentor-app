@@ -8,7 +8,7 @@ import 'package:mentor_app/models/https/suffix_model.dart';
 import 'package:mentor_app/models/https/update_account_request.dart';
 import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/services/filter_services.dart';
-import 'package:mentor_app/shared_widget/account_service.dart';
+import 'package:mentor_app/services/account_service.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/gender_format.dart';

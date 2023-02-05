@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:mentor_app/models/https/account_info_model.dart';
 import 'package:mentor_app/models/https/update_account_request.dart';
+import 'package:mentor_app/models/https/update_password_request.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:mentor_app/utils/repository/http_repository.dart';
 import 'package:mentor_app/utils/repository/method_name_constractor.dart';
@@ -15,13 +16,20 @@ class AccountService with Service {
   }
 
   Future<dynamic> removeAccount() async {
-    // final response = await repository.callRequest(
-    //   requestType: RequestType.delete,
-    //   methodName: MethodNameConstant.deleteAccount,
-    // );
-    // return response;
+    final response = await repository.callRequest(
+      requestType: RequestType.delete,
+      methodName: MethodNameConstant.deleteAccount,
+    );
+    return response;
+  }
 
-    //TODO : handle calling API of remove account
+  Future<dynamic> changePassword({required UpdatePasswordRequest account}) async {
+    final response = await repository.callRequest(
+      requestType: RequestType.put,
+      methodName: MethodNameConstant.changePassword,
+      postBody: account,
+    );
+    return response;
   }
 
   Future<AccountInfo> updateProfileInfo({required UpdateAccountRequest account}) async {

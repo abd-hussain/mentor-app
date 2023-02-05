@@ -14,7 +14,7 @@ import 'package:mentor_app/services/messages_services.dart';
 import 'package:mentor_app/services/noticitions_services.dart';
 import 'package:mentor_app/services/report_service.dart';
 import 'package:mentor_app/services/settings_service.dart';
-import 'package:mentor_app/shared_widget/account_service.dart';
+import 'package:mentor_app/services/account_service.dart';
 import 'package:mentor_app/utils/day_time.dart';
 import 'package:mentor_app/utils/repository/http_interceptor.dart';
 import 'package:mentor_app/utils/repository/http_repository.dart';
