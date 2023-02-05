@@ -122,9 +122,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                     controller: bloc.suffixNameController,
                                                     listOfSuffix: bloc.listOfSuffix.value,
                                                     selectedSuffix: (p0) {
-                                                      //TODO
-                                                      // bloc.selectedSuffix = p0;
-                                                      // bloc.validateFieldsForFaze2();
+                                                      bloc.validateFields();
                                                     },
                                                   );
                                                 }),
@@ -136,6 +134,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               inputFormatters: [
                                                 LengthLimitingTextInputFormatter(45),
                                               ],
+                                              onChange: (text) {
+                                                bloc.validateFields();
+                                              },
                                             ),
                                             const SizedBox(height: 10),
                                             CustomTextField(
@@ -145,6 +146,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               inputFormatters: [
                                                 LengthLimitingTextInputFormatter(45),
                                               ],
+                                              onChange: (text) {
+                                                bloc.validateFields();
+                                              },
                                             ),
                                           ],
                                         ),
@@ -187,12 +191,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                     listOfCountries: snapshot,
                                                     selectedCountry: (p0) {
                                                       bloc.selectedCountry = p0;
+                                                      bloc.validateFields();
                                                     },
                                                   );
                                                 }),
                                             const SizedBox(height: 10),
                                             GenderField(
                                               controller: bloc.genderController,
+                                              onChange: (p0) => bloc.validateFields(),
                                             ),
                                             Padding(
                                               padding: const EdgeInsets.only(top: 10, left: 16, right: 16),
@@ -212,6 +218,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                                 listOfLanguages: snapshot.data!,
                                                                 selectedLanguage: (language) {
                                                                   bloc.listOfSpeakingLanguageNotifier.add(language);
+                                                                  bloc.validateFields();
                                                                 },
                                                               )
                                                             : const LoadingView();
@@ -246,6 +253,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   language: bloc.box.get(DatabaseFieldConstant.language),
                                   dateSelected: (p0) {
                                     bloc.selectedDate = p0;
+                                    bloc.validateFields();
                                   },
                                 ),
                                 const SizedBox(height: 16),
@@ -261,7 +269,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   inputFormatters: [
                                     LengthLimitingTextInputFormatter(35),
                                   ],
-                                  onChange: (text) => {},
+                                  onChange: (text) => bloc.validateFields(),
                                 ),
                                 const SizedBox(height: 10),
                                 CustomTextField(
@@ -271,7 +279,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   inputFormatters: [
                                     LengthLimitingTextInputFormatter(35),
                                   ],
-                                  onChange: (text) => {},
+                                  onChange: (text) => bloc.validateFields(),
                                 ),
                                 const SizedBox(height: 16),
                                 Container(

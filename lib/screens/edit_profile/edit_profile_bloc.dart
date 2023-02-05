@@ -18,12 +18,9 @@ class EditProfileBloc extends Bloc<AccountService> {
   ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   ValueNotifier<bool> enableSaveButtonNotifier = ValueNotifier<bool>(false);
   ValueNotifier<List<Country>> listOfCountriesNotifier = ValueNotifier<List<Country>>([]);
-  // ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier = ValueNotifier<List<CheckBox>>([]);
 
   StreamController<List<CheckBox>> listOfSpeakingLanguageNotifier = StreamController<List<CheckBox>>.broadcast();
 
-  String profileImageUrl = "";
-  String iDImageUrl = "";
   String? selectedDate;
 
   final box = Hive.box(DatabaseBoxConstant.userInfo);
@@ -40,12 +37,28 @@ class EditProfileBloc extends Bloc<AccountService> {
   TextEditingController cityController = TextEditingController();
   ValueNotifier<List<SuffixData>> listOfSuffix = ValueNotifier<List<SuffixData>>([]);
 
+  String profileImageUrl = "";
   File? profileImage;
+
+  String iDImageUrl = "";
   File? iDImage;
 
   Country? selectedCountry;
 
-  validateFields() {}
+  validateFields() {
+    enableSaveButtonNotifier.value = false;
+    if (suffixNameController.text.isNotEmpty &&
+        firstNameController.text.isNotEmpty &&
+        lastNameController.text.isNotEmpty &&
+        (profileImageUrl != "" || profileImage != null) &&
+        selectedCountry != null &&
+        genderController.text != "" &&
+        (iDImageUrl != "" || iDImage != null) &&
+        emailController.text.isNotEmpty &&
+        mobileNumberController.text.isNotEmpty) {
+      enableSaveButtonNotifier.value = true;
+    }
+  }
 
   void getProfileInformations(BuildContext context) {
     loadingStatusNotifier.value = LoadingStatus.inprogress;
@@ -140,10 +153,17 @@ class EditProfileBloc extends Bloc<AccountService> {
     list.add(CheckBox(value: "العربية", isEnable: theList.contains("العربية")));
     list.add(CheckBox(value: "Français", isEnable: theList.contains("Français")));
     list.add(CheckBox(value: "Español", isEnable: theList.contains("Español")));
+    list.add(CheckBox(value: "Türkçe", isEnable: theList.contains("Türkçe")));
 
     return list;
   }
 
   @override
-  onDispose() {}
+  onDispose() {
+    loadingStatusNotifier.dispose();
+    enableSaveButtonNotifier.dispose();
+    listOfCountriesNotifier.dispose();
+    listOfSpeakingLanguageNotifier.close();
+    listOfSuffix.dispose();
+  }
 }

@@ -7,7 +7,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GenderField extends StatelessWidget {
   final TextEditingController controller;
-  const GenderField({required this.controller, super.key});
+  final Function(String) onChange;
+  const GenderField({required this.controller, super.key, required this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class GenderField extends StatelessWidget {
           inputFormatters: [
             LengthLimitingTextInputFormatter(45),
           ],
-          onChange: (text) => {},
+          onChange: (text) => onChange(controller.text),
         ),
         InkWell(
           onTap: () async {

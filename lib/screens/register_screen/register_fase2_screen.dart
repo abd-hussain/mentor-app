@@ -153,6 +153,7 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                             const SizedBox(height: 10),
                             GenderField(
                               controller: bloc.genderController,
+                              onChange: (p0) {},
                             ),
                           ],
                         ),
