@@ -139,6 +139,10 @@ class AccountBloc extends Bloc<AccountService> {
                     DatabaseFieldConstant.countryFlag,
                     DatabaseFieldConstant.isUserLoggedIn,
                     DatabaseFieldConstant.userFirstName,
+                    DatabaseFieldConstant.registrationStep,
+                    DatabaseFieldConstant.biometricU,
+                    DatabaseFieldConstant.biometricP,
+                    DatabaseFieldConstant.biometricStatus,
                   ]);
 
                   await nav.pushNamedAndRemoveUntil(RoutesConstants.initialRoute, (Route<dynamic> route) => true);
