@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -6,11 +5,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mentor_app/locator.dart';
 import 'package:mentor_app/models/https/countries_model.dart';
 import 'package:mentor_app/models/https/suffix_model.dart';
+import 'package:mentor_app/models/https/update_account_request.dart';
 import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/services/filter_services.dart';
 import 'package:mentor_app/shared_widget/account_service.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
+import 'package:mentor_app/utils/gender_format.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -18,8 +19,7 @@ class EditProfileBloc extends Bloc<AccountService> {
   ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   ValueNotifier<bool> enableSaveButtonNotifier = ValueNotifier<bool>(false);
   ValueNotifier<List<Country>> listOfCountriesNotifier = ValueNotifier<List<Country>>([]);
-
-  StreamController<List<CheckBox>> listOfSpeakingLanguageNotifier = StreamController<List<CheckBox>>.broadcast();
+  ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier = ValueNotifier<List<CheckBox>>([]);
 
   String? selectedDate;
 
@@ -53,8 +53,6 @@ class EditProfileBloc extends Bloc<AccountService> {
         (profileImageUrl != "" || profileImage != null) &&
         selectedCountry != null &&
         genderController.text != "" &&
-        (iDImageUrl != "" || iDImage != null) &&
-        emailController.text.isNotEmpty &&
         mobileNumberController.text.isNotEmpty) {
       enableSaveButtonNotifier.value = true;
     }
@@ -123,7 +121,7 @@ class EditProfileBloc extends Bloc<AccountService> {
         }
 
         if (value.data!.speakingLanguage != null) {
-          listOfSpeakingLanguageNotifier.sink.add(_prepareList(value.data!.speakingLanguage!));
+          listOfSpeakingLanguageNotifier.value = _prepareList(value.data!.speakingLanguage!);
         }
       }
 
@@ -148,7 +146,6 @@ class EditProfileBloc extends Bloc<AccountService> {
 
   List<CheckBox> _prepareList(List<String> theList) {
     List<CheckBox> list = [];
-
     list.add(CheckBox(value: "English", isEnable: theList.contains("English")));
     list.add(CheckBox(value: "العربية", isEnable: theList.contains("العربية")));
     list.add(CheckBox(value: "Français", isEnable: theList.contains("Français")));
@@ -158,12 +155,27 @@ class EditProfileBloc extends Bloc<AccountService> {
     return list;
   }
 
+  Future updateProfileInfo(BuildContext context) async {
+    UpdateAccountRequest account = UpdateAccountRequest(
+        suffix: suffixNameController.text,
+        firstName: firstNameController.text,
+        lastName: lastNameController.text,
+        profileImage: profileImage,
+        iDImage: iDImage,
+        countryId: selectedCountry!.id!,
+        mobileNumber: mobileNumberController.text,
+        dateOfBirth: selectedDate!,
+        gender: GenderFormat().convertStringToIndex(context, genderController.text));
+    //TODO There is Problem In Speacking Language
+    return service.updateProfileInfo(account: account);
+  }
+
   @override
   onDispose() {
     loadingStatusNotifier.dispose();
     enableSaveButtonNotifier.dispose();
     listOfCountriesNotifier.dispose();
-    listOfSpeakingLanguageNotifier.close();
+    listOfSpeakingLanguageNotifier.dispose();
     listOfSuffix.dispose();
   }
 }

@@ -3,31 +3,30 @@ import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/shared_widget/bottom_sheet_util.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 
-class SpeakingLanguageField extends StatefulWidget {
+class SpeakingLanguageField extends StatelessWidget {
   final List<CheckBox> listOfLanguages;
   final Function(List<CheckBox>) selectedLanguage;
 
   const SpeakingLanguageField({required this.listOfLanguages, required this.selectedLanguage, super.key});
 
   @override
-  State<SpeakingLanguageField> createState() => _SpeakingLanguageFieldState();
-}
-
-class _SpeakingLanguageFieldState extends State<SpeakingLanguageField> {
-  @override
   Widget build(BuildContext context) {
     List<String> listOfSelectedLanguages = [];
 
-    for (CheckBox item in widget.listOfLanguages) {
+    for (CheckBox item in listOfLanguages) {
       if (item.isEnable) {
         listOfSelectedLanguages.add(item.value);
       }
     }
 
+    print(listOfLanguages);
+
+    print(listOfSelectedLanguages);
+
     return InkWell(
       onTap: () async {
-        await BottomSheetsUtil().speakingLanguageBottomSheet(context, widget.listOfLanguages, (languageSelected) {
-          widget.selectedLanguage(languageSelected);
+        await BottomSheetsUtil().speakingLanguageBottomSheet(context, listOfLanguages, (languageSelected) {
+          selectedLanguage(languageSelected);
         });
       },
       child: Container(

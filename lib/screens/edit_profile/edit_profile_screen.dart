@@ -60,8 +60,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               return CustomButton(
                   enableButton: snapshot,
                   onTap: () {
-                    //TODO
-                    Navigator.of(context).pop();
+                    bloc.updateProfileInfo(context).whenComplete(() {
+                      Navigator.of(context).pop();
+                    });
                   });
             }),
       ),
@@ -210,18 +211,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                     fontSize: 12,
                                                     textColor: const Color(0xff444444),
                                                   ),
-                                                  StreamBuilder<List<CheckBox>>(
-                                                      stream: bloc.listOfSpeakingLanguageNotifier.stream,
-                                                      builder: (context, snapshot) {
-                                                        return snapshot.hasData
-                                                            ? SpeakingLanguageField(
-                                                                listOfLanguages: snapshot.data!,
-                                                                selectedLanguage: (language) {
-                                                                  bloc.listOfSpeakingLanguageNotifier.add(language);
-                                                                  bloc.validateFields();
-                                                                },
-                                                              )
-                                                            : const LoadingView();
+                                                  ValueListenableBuilder<List<CheckBox>>(
+                                                      valueListenable: bloc.listOfSpeakingLanguageNotifier,
+                                                      builder: (context, snapshot, child) {
+                                                        return SpeakingLanguageField(
+                                                          listOfLanguages: snapshot,
+                                                          selectedLanguage: (language) {
+                                                            bloc.listOfSpeakingLanguageNotifier.value = language;
+                                                            bloc.validateFields();
+                                                          },
+                                                        );
                                                       }),
                                                 ],
                                               ),
@@ -266,6 +265,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   controller: bloc.emailController,
                                   hintText: AppLocalizations.of(context)!.emailaddress,
                                   keyboardType: TextInputType.emailAddress,
+                                  readOnly: true,
+                                  enabled: false,
                                   inputFormatters: [
                                     LengthLimitingTextInputFormatter(35),
                                   ],
