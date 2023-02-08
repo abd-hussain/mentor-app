@@ -31,8 +31,6 @@ class PaymentsBloc extends Bloc<PaymentService> {
   }
 
   Future<dynamic> reportPayment(int id, String message) async {
-    print("id");
-    print(id);
     PaymentReportRequest data = PaymentReportRequest(message: message, paymentId: id);
     return service.reportPayment(data);
   }
