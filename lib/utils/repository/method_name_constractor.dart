@@ -43,4 +43,7 @@ class MethodNameConstant {
   static const String changePassword = "mentor-account/change-password";
 
   static const String accountInfo = "mentor-account/info";
+
+  static const String payments = "mentor-payments/";
+  static const String paymentReport = "mentor-payments/report";
 }

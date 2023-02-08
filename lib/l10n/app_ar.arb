@@ -112,7 +112,9 @@
     "eventday" : "اليوم",
     "eventhour" : "الساعة",
     "meetingduration" : "مدة الجلسة",
+    "rejected" : "مرفوض",
     "pending" : "قيد الانتظار",
+    "recived" : "مستلم",
     "inprogress" : "جاري العمل",
     "compleated" : "مكتمل",
     "nodatatoshow" : "لا توجد بيانات لإظهارها هنا",
@@ -185,5 +187,13 @@
     "message" : "الرساله ...",
     "speakinglanguage" : "اتقان لغات للمحادثه",
     "selectSuffix" : "اختر الكنيه",
+    "totalpayments" : "مجموع المدفوعات",
+    "detailspayments" : "تفاصيل المدفوعات",
+    "alreadyreportpayment" : "لقد أبلغت عن هذه الدفعة ، وسوف يكون الرد خلال الرسائل",
+    "type" : "نوع المعاملة",
+    "note" : "ملاحظه",
+    "debit" : "دائن",
+    "credit" : "مدين",
+    "describeyourproblem" : "صف مشكلتك هنا",
     "logout" : "تسجيل الخروج"
 }

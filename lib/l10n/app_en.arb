@@ -113,6 +113,8 @@
     "eventhour" : "Hour",
     "eventDuration" : "Duration",
     "pending" : "Pending",
+    "rejected" : "Rejected",
+    "recived" : "Recived",
     "inprogress" : "In Progress",
     "compleated" : "compleated",
     "nodatatoshow" : "No Data To Show Here",
@@ -185,5 +187,13 @@
     "message" : "Message ...",
     "speakinglanguage" : "Speaking language",
     "selectSuffix" : "Select Suffix",
+    "totalpayments" : "Total Of Payments",
+    "detailspayments" : "Payments Details",
+    "alreadyreportpayment" : "You Already Report This, will respond in the messages",
+    "type" : "Transaction Type",
+    "note" : "Note",
+    "debit" : "Debit",
+    "credit" : "Credit",
+    "describeyourproblem" : "describe your problem here",
     "logout" : "Logout"
 }
