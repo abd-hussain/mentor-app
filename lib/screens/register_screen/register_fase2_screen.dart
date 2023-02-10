@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:mentor_app/screens/register_screen/register_bloc.dart';
+import 'package:mentor_app/screens/register_screen/widgets/footer_view.dart';
 import 'package:mentor_app/shared_widget/country_field.dart';
 import 'package:mentor_app/shared_widget/custom_attach_textfield.dart';
 import 'package:mentor_app/shared_widget/date_of_birth_field.dart';
@@ -42,6 +43,12 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(title: ""),
+      bottomNavigationBar: RegistrationFooterView(
+        pageCount: 1,
+        pageTitle: "Personal Details",
+        nextPageTitle: "Residential Details",
+        nextPressed: () {},
+      ),
       body: GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
