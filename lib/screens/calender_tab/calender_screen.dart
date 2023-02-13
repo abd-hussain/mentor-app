@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mentor_app/locator.dart';
 import 'package:mentor_app/models/https/calender_model.dart';
 import 'package:mentor_app/screens/calender_tab/calender_bloc.dart';
+import 'package:mentor_app/screens/calender_tab/widgets/calender_bottom_sheet.dart';
 import 'package:mentor_app/screens/calender_tab/widgets/meeting_datasource.dart';
 import 'package:mentor_app/screens/home_tab/widgets/header.dart';
 import 'package:mentor_app/screens/main_contaner/main_container_bloc.dart';
+import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/logger.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -60,23 +62,23 @@ class _CalenderScreenState extends State<CalenderScreen> {
                       ),
                     ),
                     onTap: (calendarTapDetails) {
-                      //TODO
-                      // if (calendarTapDetails.appointments != null &&
-                      //     calendarTapDetails.targetElement == CalendarElement.appointment) {
-                      //   final item = calendarTapDetails.appointments![0] as CalenderMeetings;
-                      //   CalenderBottomSheetsUtil(
-                      //     context: context,
-                      //     metingDetails: item,
-                      //     language: bloc.box.get(DatabaseFieldConstant.language),
-                      //   ).bookMeetingBottomSheet(
-                      //     cancel: () {
-                      //       // bloc.cancelMeeting(item.meetingId).whenComplete(() async {
-                      //       //   locator<MainContainerBloc>().getAppointmentsAndEvents();
-                      //       //   setState(() {});
-                      //       // });
-                      //     },
-                      //   );
-                      // }
+                      if (calendarTapDetails.appointments != null &&
+                          calendarTapDetails.targetElement == CalendarElement.appointment) {
+                        final item = calendarTapDetails.appointments![0] as CalenderMeetings;
+
+                        CalenderBottomSheetsUtil(
+                          context: context,
+                          metingDetails: item,
+                          language: bloc.box.get(DatabaseFieldConstant.language),
+                        ).bookMeetingBottomSheet(
+                          cancel: () {
+                            bloc.cancelMeeting(item.meetingId).whenComplete(() async {
+                              locator<MainContainerBloc>().getMentorAppointments(context);
+                              setState(() {});
+                            });
+                          },
+                        );
+                      }
                     });
               }),
         ),

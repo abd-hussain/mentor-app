@@ -1,12 +1,12 @@
 import 'package:mentor_app/models/model_checker.dart';
 
-class Appointment {
+class Appointments {
   List<AppointmentData>? data;
   String? message;
 
-  Appointment({this.data, this.message});
+  Appointments({this.data, this.message});
 
-  Appointment.fromJson(Map<String, dynamic> json) {
+  Appointments.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <AppointmentData>[];
       json['data'].forEach((v) {
@@ -18,55 +18,55 @@ class Appointment {
 }
 
 class AppointmentData with ModelChecker {
-  String? dateFrom;
   int? id;
-  int? mentorId;
-  String? mentorPrefix;
-  String? mentorFirstName;
-  String? mentorLastName;
-  String? categoryName;
-  String? profileImg;
-  int? appointmentType;
-  int? state;
-
-  double? priceBeforeDiscount;
-  String? createdAt;
+  String? dateFrom;
   String? dateTo;
   int? clientId;
+  int? mentorId;
+  int? appointmentType;
+  double? priceBeforeDiscount;
   int? discountId;
+  int? state;
+  String? profileImg;
+  String? firstName;
+  String? lastName;
+  int? gender;
+  String? dateOfBirth;
+  int? countryId;
 
-  AppointmentData(
-      {this.dateFrom,
-      this.id,
-      this.mentorId,
-      this.priceBeforeDiscount,
-      this.createdAt,
-      this.dateTo,
-      this.clientId,
-      this.mentorPrefix,
-      this.mentorFirstName,
-      this.mentorLastName,
-      this.appointmentType,
-      this.profileImg,
-      this.categoryName,
-      this.discountId});
+  AppointmentData({
+    this.id,
+    this.dateFrom,
+    this.dateTo,
+    this.clientId,
+    this.mentorId,
+    this.appointmentType,
+    this.priceBeforeDiscount,
+    this.discountId,
+    this.state,
+    this.profileImg,
+    this.firstName,
+    this.lastName,
+    this.gender,
+    this.dateOfBirth,
+    this.countryId,
+  });
 
   AppointmentData.fromJson(Map<String, dynamic> json) {
-    dateFrom = json['date_from'] as String?;
     id = json['id'];
-    mentorId = json['mentor_id'] as int?;
-    dateTo = json['date_to'] as String?;
-    mentorPrefix = json['suffixe_name'] as String?;
-    mentorFirstName = json['first_name'] as String?;
-    mentorLastName = json['last_name'] as String?;
-    categoryName = json['categoryName'] as String?;
-    priceBeforeDiscount = convertToDouble(json['price_before_discount']);
-    createdAt = json['created_at'] as String?;
-    dateTo = json['date_to'] as String?;
+    dateFrom = convertToString(json['date_from']);
+    dateTo = convertToString(json['date_to']);
+    clientId = json['client_id'];
+    mentorId = json['mentor_id'];
     appointmentType = json['appointment_type'];
+    priceBeforeDiscount = convertToDouble(json['price_before_discount']);
+    discountId = json['discount_id'];
     state = json['state'];
-    profileImg = json['profile_img'] as String?;
-    clientId = json['client_id'] as int?;
-    discountId = json['discount_id'] as int?;
+    profileImg = convertToString(json['profile_img']);
+    firstName = convertToString(json['first_name']);
+    lastName = convertToString(json['last_name']);
+    gender = json['gender'];
+    dateOfBirth = convertToString(json['date_of_birth']);
+    countryId = json['country_id'];
   }
 }

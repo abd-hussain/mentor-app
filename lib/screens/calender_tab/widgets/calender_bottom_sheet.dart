@@ -45,9 +45,7 @@ class CalenderBottomSheetsUtil {
                     ),
                     const Expanded(child: SizedBox()),
                     CustomText(
-                      title: metingDetails.type == Type.event
-                          ? AppLocalizations.of(context)!.event
-                          : AppLocalizations.of(context)!.meeting,
+                      title: AppLocalizations.of(context)!.meeting,
                       textColor: const Color(0xff444444),
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -98,23 +96,13 @@ class CalenderBottomSheetsUtil {
           padding: const EdgeInsets.all(8.0),
           child: Center(
             child: CustomText(
-              title: "${metingDetails.mentorPrefix} ${metingDetails.mentorFirstName} ${metingDetails.mentorLastName}",
+              title: "${metingDetails.firstName} ${metingDetails.lastName}",
               textColor: const Color(0xff444444),
               fontSize: 14,
               textAlign: TextAlign.center,
               maxLins: 4,
               fontWeight: FontWeight.bold,
             ),
-          ),
-        ),
-        Center(
-          child: CustomText(
-            title: metingDetails.categoryName,
-            textColor: const Color(0xff444444),
-            fontSize: 14,
-            textAlign: TextAlign.center,
-            maxLins: 4,
-            fontWeight: FontWeight.bold,
           ),
         ),
         AppointmentDetailsView(

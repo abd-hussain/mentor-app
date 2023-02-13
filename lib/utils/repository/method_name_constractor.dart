@@ -6,12 +6,11 @@ class MethodNameConstant {
   static const String forgotPassword = "mentor-auth/forgotpassword";
 
   static const String mentors = "mentor-list/";
-  static const String mentorAppointments = "appointment/mentor";
-  static const String clientAppointments = "appointment/client";
-  static const String bookAppointment = "appointment/book";
-  static const String cancelAppointment = "appointment/cancel";
-  static const String bookevent = "event/book";
-  static const String cancelbookevent = "event/bookcancel";
+  static const String mentorAppointments = "mentor-appointment/";
+  static const String cancelAppointment = "mentor-appointment/cancel";
+  static const String compleatedAppointment = "mentor-appointment/compleated";
+  static const String commentAppointment = "mentor-appointment/comment";
+
   static const String mentorWorkingHours = "mentor-prop/working_hours";
 
   static const String discount = "discount/";

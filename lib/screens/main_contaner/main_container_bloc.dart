@@ -1,14 +1,18 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mentor_app/models/https/appointment.dart';
 import 'package:mentor_app/models/https/calender_model.dart';
 import 'package:mentor_app/screens/main_contaner/widgets/tab_navigator.dart';
+import 'package:mentor_app/services/appointments_service.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
+import 'package:mentor_app/utils/gender_format.dart';
+import 'package:mentor_app/utils/mixins.dart';
 import 'package:mentor_app/utils/routes.dart';
 
 enum SelectedTab { home, messages, call, calender, account }
 
-class MainContainerBloc {
+class MainContainerBloc extends Bloc<AppointmentsService> {
   final ValueNotifier<SelectedTab> currentTabIndexNotifier = ValueNotifier<SelectedTab>(SelectedTab.home);
   final ValueNotifier<List<CalenderMeetings>> meetingsListNotifier = ValueNotifier<List<CalenderMeetings>>([]);
   // final box = Hive.box(DatabaseBoxConstant.userInfo);
@@ -55,40 +59,46 @@ class MainContainerBloc {
     }
   }
 
-  // Future<List<CalenderMeetings>> getAppointmentsAndEvents() async {
-  //   List<CalenderMeetings> list = [];
+  void getMentorAppointments(BuildContext context) async {
+    List<CalenderMeetings> list = [];
 
-  //   list.addAll(await _getMentorAppointments());
-  //   meetingsListNotifier.value = list;
-  //   return list;
-  // }
+    await service.getMentorAppointments().then((value) {
+      if (value.data != null) {
+        for (AppointmentData item in value.data!) {
+          final newItem = CalenderMeetings(
+            meetingId: item.id!,
+            firstName: item.firstName!,
+            lastName: item.lastName!,
+            profileImg: item.profileImg!,
+            clientId: item.clientId!,
+            state: handleMeetingState(item.state!),
+            gender: GenderFormat().convertIndexToString(context, item.gender!),
+            fromTime: DateTime.parse(item.dateFrom!),
+            toTime: DateTime.parse(item.dateTo!),
+          );
+          list.add(newItem);
+          meetingsListNotifier.value = list;
+        }
+      }
+    });
+  }
 
-  // Future<List<CalenderMeetings>> _getMentorAppointments() async {
-  //   List<CalenderMeetings> list = [];
+  AppointmentsState handleMeetingState(int index) {
+    if (index == 1) {
+      return AppointmentsState.active;
+    } else if (index == 2) {
+      return AppointmentsState.mentorCancel;
+    } else if (index == 3) {
+      return AppointmentsState.clientCancel;
+    } else if (index == 4) {
+      return AppointmentsState.clientMiss;
+    } else if (index == 5) {
+      return AppointmentsState.mentorMiss;
+    } else {
+      return AppointmentsState.completed;
+    }
+  }
 
-  //TODO
-
-  // await locator<AppointmentsService>().getMentorAppointments(box.get(DatabaseFieldConstant.userid)).then((value) {
-  //   if (value.data != null) {
-  //     for (AppointmentData item in value.data!) {
-  //       final newItem = CalenderMeetings(
-  //         meetingId: item.id!,
-  //         mentorPrefix: item.mentorPrefix!,
-  //         mentorFirstName: item.mentorFirstName!,
-  //         mentorLastName: item.mentorLastName!,
-  //         title: null,
-  //         profileImg: item.profileImg,
-  //         mentorId: item.mentorId!,
-  //         categoryName: item.categoryName!,
-  //         type: Type.meeting,
-  //         fromTime: DateTime.parse(item.dateFrom!),
-  //         toTime: DateTime.parse(item.dateTo!),
-  //       );
-  //       list.add(newItem);
-  //     }
-  //   }
-  // });
-
-  //   return list;
-  // }
+  @override
+  onDispose() {}
 }
