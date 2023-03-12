@@ -57,6 +57,8 @@
 	<false/>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We Need This Permission to hear your voice when you talk to the client</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Please authorize to use the app</string>
 	<key>CFBundleLocalizations</key>
