@@ -1,11 +1,9 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mentor_app/models/https/appointment.dart';
 import 'package:mentor_app/models/https/calender_model.dart';
 import 'package:mentor_app/screens/main_contaner/widgets/tab_navigator.dart';
 import 'package:mentor_app/services/appointments_service.dart';
-import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/gender_format.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:mentor_app/utils/routes.dart';

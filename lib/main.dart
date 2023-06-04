@@ -6,7 +6,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:mentor_app/locator.dart';
-import 'package:mentor_app/myApp.dart';
+import 'package:mentor_app/my_app.dart';
 import 'package:dio/dio.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/error/exceptions.dart';

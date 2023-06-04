@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mentor_app/shared_widget/background_container.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:mentor_app/models/profile_options.dart';
 import 'package:mentor_app/shared_widget/admob_banner.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
@@ -154,7 +155,7 @@ class ListOfOptions extends StatelessWidget {
               TextButton(
                 onPressed: () => _launchWhatsapp(context),
                 child: const Icon(
-                  Icons.whatsapp,
+                  Ionicons.logo_whatsapp,
                   color: Color(0xff444444),
                 ),
               ),
@@ -242,14 +243,17 @@ class ListOfOptions extends StatelessWidget {
   }
 
   void _launchWhatsapp(BuildContext context) async {
+    final localize = AppLocalizations.of(context)!;
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
     var whatsapp = AppConstant.whatsappNumber;
     var whatsappAndroid = Uri.parse("whatsapp://send?phone=$whatsapp&text=hello");
     if (await canLaunchUrl(whatsappAndroid)) {
       await launchUrl(whatsappAndroid);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
+      scaffoldMessenger.showSnackBar(
         SnackBar(
-          content: Text(AppLocalizations.of(context)!.whatsappnotinstalled),
+          content: Text(localize.whatsappnotinstalled),
         ),
       );
     }

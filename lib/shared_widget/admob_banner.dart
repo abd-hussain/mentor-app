@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:mentor_app/utils/addsHelper.dart';
+import 'package:mentor_app/utils/adds_helper.dart';
 
 class AddMobBanner extends StatefulWidget {
   const AddMobBanner({Key? key}) : super(key: key);

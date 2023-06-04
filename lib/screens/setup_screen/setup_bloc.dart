@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mentor_app/models/https/countries_model.dart';
-import 'package:mentor_app/myApp.dart';
+import 'package:mentor_app/my_app.dart';
 import 'package:mentor_app/services/filter_services.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/mixins.dart';
