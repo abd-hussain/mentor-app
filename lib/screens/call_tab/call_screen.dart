@@ -30,10 +30,10 @@ class _CallScreenState extends State<CallScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
       child: Column(
         children: [
-          const HeaderHomePage(),
+          HeaderHomePage(),
           CallView(),
           // noCallView(),
         ],

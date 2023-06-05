@@ -37,14 +37,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: AppLocalizations.of(context)!.eventdetails, actions: [
-        IconButton(
-          onPressed: () {
-            //TODO: handle share
-          },
-          icon: const Icon(Icons.share),
-        )
-      ]),
+      appBar: customAppBar(title: AppLocalizations.of(context)!.eventdetails),
       body: SafeArea(
         child: ValueListenableBuilder<LoadingStatus>(
             valueListenable: bloc.loadingStatus,

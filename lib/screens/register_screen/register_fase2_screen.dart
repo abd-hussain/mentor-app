@@ -9,7 +9,6 @@ import 'package:mentor_app/shared_widget/date_of_birth_field.dart';
 import 'package:mentor_app/shared_widget/gender_field.dart';
 import 'package:mentor_app/shared_widget/image_holder_field.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
-import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/shared_widget/custom_textfield.dart';
 import 'package:mentor_app/shared_widget/suffix_field.dart';
@@ -43,12 +42,31 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(title: ""),
-      bottomNavigationBar: RegistrationFooterView(
-        pageCount: 1,
-        pageTitle: "Personal Details",
-        nextPageTitle: "Residential Details",
-        nextPressed: () {},
-      ),
+      bottomNavigationBar: ValueListenableBuilder<bool>(
+          valueListenable: bloc.enableNextBtn,
+          builder: (context, snapshot, child) {
+            return RegistrationFooterView(
+              pageCount: 2,
+              pageTitle: "Personal Details",
+              nextPageTitle: "Experiences",
+              enableNextButton: snapshot,
+              nextPressed: () async {
+                final navigator = Navigator.of(context);
+                await bloc.box.put(DatabaseFieldConstant.registrationStep, "2");
+                await bloc.box.put(TempFieldToRegistrtConstant.suffix, bloc.suffixNameController.text);
+                await bloc.box.put(TempFieldToRegistrtConstant.firstName, bloc.firstNameController.text);
+                await bloc.box.put(TempFieldToRegistrtConstant.lastName, bloc.lastNameController.text);
+                await bloc.box.put(TempFieldToRegistrtConstant.country, bloc.selectedCountry!.id.toString());
+                await bloc.box.put(TempFieldToRegistrtConstant.gender, bloc.genderController.text);
+                //TODO: this keys must be handled and validated
+                // await bloc.box.put(TempFieldToRegistrtConstant.profileImage, bloc.profileImage!);
+                // await bloc.box.put(TempFieldToRegistrtConstant.idImage, bloc.iDImage);
+                // await bloc.box.put(TempFieldToRegistrtConstant.dateOfBirth, bloc.selectedDate!);
+                await bloc.box.put(TempFieldToRegistrtConstant.referalCode, bloc.referalCodeController.text);
+                navigator.pushNamed(RoutesConstants.registerfaze3Screen);
+              },
+            );
+          }),
       body: GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
@@ -215,29 +233,6 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                   onChange: (text) => bloc.validateFieldsForFaze2(),
                 ),
                 const SizedBox(height: 20),
-                ValueListenableBuilder<bool>(
-                    valueListenable: bloc.enableNextBtn,
-                    builder: (context, snapshot, child) {
-                      return CustomButton(
-                          buttonTitle: AppLocalizations.of(context)!.next,
-                          enableButton: snapshot,
-                          onTap: () async {
-                            await bloc.box.put(DatabaseFieldConstant.registrationStep, "2");
-                            await bloc.box.put(TempFieldToRegistrtConstant.suffix, bloc.suffixNameController.text);
-                            await bloc.box.put(TempFieldToRegistrtConstant.firstName, bloc.firstNameController.text);
-                            await bloc.box.put(TempFieldToRegistrtConstant.lastName, bloc.lastNameController.text);
-                            await bloc.box
-                                .put(TempFieldToRegistrtConstant.country, bloc.selectedCountry!.id.toString());
-                            await bloc.box.put(TempFieldToRegistrtConstant.gender, bloc.genderController.text);
-                            await bloc.box.put(TempFieldToRegistrtConstant.profileImage, bloc.profileImage!);
-                            await bloc.box.put(TempFieldToRegistrtConstant.idImage, bloc.iDImage);
-                            await bloc.box.put(TempFieldToRegistrtConstant.dateOfBirth, bloc.selectedDate!);
-                            await bloc.box
-                                .put(TempFieldToRegistrtConstant.referalCode, bloc.referalCodeController.text);
-                            // ignore: use_build_context_synchronously
-                            Navigator.of(context).pushNamed(RoutesConstants.registerfaze3Screen);
-                          });
-                    }),
               ],
             ),
           ),

@@ -1,9 +1,13 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/shared_widget/points_in_last_view.dart';
+import 'package:mentor_app/utils/constants/constant.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class RegisterInfoBottomSheetsUtil {
   final BuildContext context;
@@ -135,6 +139,8 @@ class RegisterInfoBottomSheetsUtil {
     );
   }
 
+  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {Factory(() => EagerGestureRecognizer())};
+
   Future termsBottomSheet({required Function() openNext}) async {
     return await showModalBottomSheet(
         isScrollControlled: true,
@@ -189,14 +195,17 @@ class RegisterInfoBottomSheetsUtil {
                   margin: const EdgeInsets.all(15.0),
                   padding: const EdgeInsets.all(3.0),
                   decoration: BoxDecoration(border: Border.all(color: const Color(0xff444444))),
-                  child: ListView.builder(
-                      itemCount: 5,
-                      itemBuilder: (context, index) {
-                        return PointsInLastViewBooking(
-                          number: "-",
-                          text: "messages",
-                        );
-                      }),
+                  child: WebView(
+                    initialUrl: AppConstant.termsLink,
+                    gestureRecognizers: gestureRecognizers,
+                    navigationDelegate: (NavigationRequest request) {
+                      return NavigationDecision.navigate;
+                    },
+                    onWebViewCreated: (WebViewController webViewController) {
+                      webViewController = webViewController;
+                      webViewController.loadUrl(AppConstant.termsLink);
+                    },
+                  ),
                 ),
                 CustomButton(
                   enableButton: true,

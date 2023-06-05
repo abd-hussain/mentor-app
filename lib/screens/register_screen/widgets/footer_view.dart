@@ -8,15 +8,17 @@ class RegistrationFooterView extends StatelessWidget {
   final int maxpageCount;
   final String pageTitle;
   final String nextPageTitle;
+  final bool enableNextButton;
   final Function() nextPressed;
 
   const RegistrationFooterView(
       {super.key,
       required this.pageCount,
-      this.maxpageCount = 3,
+      this.maxpageCount = 7,
       required this.pageTitle,
       required this.nextPageTitle,
-      required this.nextPressed});
+      required this.nextPressed,
+      required this.enableNextButton});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,23 @@ class RegistrationFooterView extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                CustomText(title: "$pageCount/$maxpageCount", fontSize: 22),
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Center(
+                        child: CustomText(
+                      title: "$pageCount/$maxpageCount",
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    )),
+                  ),
+                ),
                 const SizedBox(width: 8),
                 Expanded(
                     child: Column(
@@ -40,11 +58,12 @@ class RegistrationFooterView extends StatelessWidget {
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
+                    const SizedBox(height: 8),
                     CustomText(title: "${AppLocalizations.of(context)!.next}: $nextPageTitle", fontSize: 12)
                   ],
                 )),
                 CustomButton(
-                  enableButton: true,
+                  enableButton: enableNextButton,
                   buttonTitle: AppLocalizations.of(context)!.next,
                   onTap: () => nextPressed(),
                 )

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/models/https/categories_model.dart';
 import 'package:mentor_app/screens/register_screen/register_bloc.dart';
+import 'package:mentor_app/screens/register_screen/widgets/footer_view.dart';
 import 'package:mentor_app/shared_widget/category_field.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -31,6 +32,17 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(title: ""),
+      bottomNavigationBar: ValueListenableBuilder<bool>(
+          valueListenable: bloc.enableNextBtn,
+          builder: (context, snapshot, child) {
+            return RegistrationFooterView(
+              pageCount: 3,
+              pageTitle: "Experiences",
+              nextPageTitle: "Working Hours",
+              enableNextButton: snapshot,
+              nextPressed: () async {},
+            );
+          }),
       body: GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();

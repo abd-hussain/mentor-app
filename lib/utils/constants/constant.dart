@@ -15,10 +15,11 @@ class AppConstant {
   static const String imagesBaseURLForEvents = "https://www.helpera.app/static/events/";
   static const String imagesBaseURLForProfileImages = "https://www.helpera.app/profileImg/";
 
+  static const String termsLink = "https://www.helpera.app/static/web/terms.html";
+  static const String aboutusLink = "https://www.helpera.app/static/web/aboutus.html";
+  static const String privacypolicyLink = "https://www.helpera.app/static/web/privacypolicy.html";
+
   // //TODO: Review This Links
-  static const String termsLink = "https://talabay.net/";
-  static const String aboutusLink = "https://talabay.net/";
-  static const String privacypolicyLink = "https://www.talabat.com/jordan/privacy";
   static const String whatsappNumber = "+962795190663";
   static const String linkedinLink = "https://www.linkedin.com/";
   static const String facebookLink = "https://www.facebook.com/";
