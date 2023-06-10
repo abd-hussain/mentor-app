@@ -14,9 +14,10 @@ class _AddMobBannerState extends State<AddMobBanner> {
   bool _isBannerAdReady = false;
 
   @override
-  void initState() {
+  void didChangeDependencies() {
     MobileAds.instance
         .updateRequestConfiguration(RequestConfiguration(testDeviceIds: ['33BE2250B43518CCDA7DE426D04EE231']));
+
     _bannerAd = BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
       request: const AdRequest(),
@@ -33,10 +34,15 @@ class _AddMobBannerState extends State<AddMobBanner> {
           ad.dispose();
         },
       ),
-    );
+    )..load();
 
-    _bannerAd.load();
-    super.initState();
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _bannerAd.dispose();
+    super.dispose();
   }
 
   @override

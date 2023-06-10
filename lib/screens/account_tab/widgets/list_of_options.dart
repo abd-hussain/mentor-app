@@ -31,7 +31,6 @@ class ListOfOptions extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const AddMobBanner(),
             titleOptionCollection(title: AppLocalizations.of(context)!.accountsettings),
             optionCollectionItem(listOfAccountOptions, containerHight: 405),
             titleOptionCollection(title: AppLocalizations.of(context)!.generalsettings),

@@ -27,13 +27,10 @@ class RegisterBloc {
   File? profileImage;
   File? iDImage;
   File? cv;
-  List<File> certificatesList = [];
 
   Country? selectedCountry;
   SuffixData? selectedSuffix;
   Category? selectedCategory;
-
-  ValueNotifier<int> countOfCertifictes = ValueNotifier<int>(1);
 
   TextEditingController emailController = TextEditingController();
   TextEditingController mobileNumberController = TextEditingController();

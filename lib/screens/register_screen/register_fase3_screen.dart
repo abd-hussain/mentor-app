@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/models/https/categories_model.dart';
 import 'package:mentor_app/screens/register_screen/register_bloc.dart';
+import 'package:mentor_app/screens/register_screen/widgets/certificate_view.dart';
 import 'package:mentor_app/screens/register_screen/widgets/footer_view.dart';
 import 'package:mentor_app/shared_widget/category_field.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
@@ -52,6 +53,19 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                const SizedBox(height: 16),
+                ValueListenableBuilder<List<Category>>(
+                    valueListenable: bloc.listOfCategories,
+                    builder: (context, snapshot, child) {
+                      return CategoryField(
+                        controller: bloc.categoryController,
+                        listOfCategory: bloc.listOfCategories.value,
+                        selectedCategory: (p0) {
+                          bloc.selectedCategory = p0;
+                          bloc.validateFieldsForFaze3();
+                        },
+                      );
+                    }),
                 const SizedBox(height: 8),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -79,9 +93,9 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 8),
                 FileHolderField(
                   title: AppLocalizations.of(context)!.cv,
+                  width: MediaQuery.of(context).size.width,
                   onAddFile: (file) {
                     bloc.cv = file;
                     bloc.validateFieldsForFaze3();
@@ -91,70 +105,9 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                     bloc.validateFieldsForFaze3();
                   },
                 ),
-                const SizedBox(height: 16),
-                ValueListenableBuilder<List<Category>>(
-                    valueListenable: bloc.listOfCategories,
-                    builder: (context, snapshot, child) {
-                      return CategoryField(
-                        controller: bloc.categoryController,
-                        listOfCategory: bloc.listOfCategories.value,
-                        selectedCategory: (p0) {
-                          bloc.selectedCategory = p0;
-                          bloc.validateFieldsForFaze3();
-                        },
-                      );
-                    }),
                 const SizedBox(height: 8),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ValueListenableBuilder<int>(
-                      valueListenable: bloc.countOfCertifictes,
-                      builder: (context, snapshot, child) {
-                        return ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: bloc.countOfCertifictes.value,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: Row(
-                                children: [
-                                  FileHolderField(
-                                    title: "Certificate (${index + 1})",
-                                    onAddFile: (file) {
-                                      bloc.certificatesList.add(file);
-                                      bloc.validateFieldsForFaze3();
-                                    },
-                                    onRemoveFile: () {
-                                      bloc.certificatesList.removeAt(index);
-                                      bloc.validateFieldsForFaze3();
-                                    },
-                                  ),
-                                  const Expanded(child: SizedBox()),
-                                  IconButton(
-                                      onPressed: () {
-                                        bloc.certificatesList = [];
-                                        if (index == 0) {
-                                          bloc.countOfCertifictes.value = bloc.countOfCertifictes.value + 1;
-                                        } else {
-                                          bloc.countOfCertifictes.value = bloc.countOfCertifictes.value - 1;
-                                        }
-                                      },
-                                      icon: Container(
-                                        width: 100,
-                                        height: 100,
-                                        color: index == 0 ? Colors.green[200] : Colors.red[200],
-                                        child: Icon(
-                                          index == 0 ? Icons.add : Icons.remove,
-                                          color: const Color(0xff444444),
-                                        ),
-                                      ))
-                                ],
-                              ),
-                            );
-                          },
-                        );
-                      }),
+                CertificateView(
+                  certificatesListCallBack: (p0) {},
                 ),
               ],
             ),
