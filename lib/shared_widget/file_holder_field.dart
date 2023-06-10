@@ -38,8 +38,8 @@ class FileHolderField extends StatelessWidget {
                 onAddFile(File(result.files.single.path!));
               }
             } catch (error) {
-              print(error);
-              print("Can not Upload");
+              debugPrint(error.toString());
+              debugPrint("Can not Upload");
             }
           } else {
             fileController.value = null;

@@ -43,7 +43,7 @@ class _RegisterFaze7ScreenState extends State<RegisterFaze7Screen> {
           FocusManager.instance.primaryFocus?.unfocus();
           bloc.validateFieldsForFaze7();
         },
-        child: SafeArea(
+        child: const SafeArea(
           child: SingleChildScrollView(
             child: Column(
               children: [],

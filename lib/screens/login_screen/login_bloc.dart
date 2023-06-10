@@ -105,7 +105,12 @@ class LoginBloc extends Bloc<AuthService> {
           if (!(await locator<NetworkInfoService>().isConnected())) {
             throw ConnectionException(message: "Please check your internet connection");
           } else {
-            doLoginCall(context: context, userName: biometricU, password: biometricP, isBiometricLogin: true);
+            doLoginCall(
+              context: context,
+              userName: biometricU,
+              password: biometricP,
+              isBiometricLogin: true,
+            );
             isBiometricAppeared = false;
           }
         } else {

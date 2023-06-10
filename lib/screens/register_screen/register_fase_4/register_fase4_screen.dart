@@ -5,6 +5,8 @@ import 'package:mentor_app/screens/register_screen/widgets/footer_view.dart';
 import 'package:mentor_app/screens/working_hours/widgets/edit_working_hour_bottomsheet.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/shared_widget/working_hours.dart';
+import 'package:mentor_app/utils/constants/database_constant.dart';
+import 'package:mentor_app/utils/routes.dart';
 
 class RegisterFaze4Screen extends StatefulWidget {
   const RegisterFaze4Screen({super.key});
@@ -39,7 +41,13 @@ class _RegisterFaze4ScreenState extends State<RegisterFaze4Screen> {
               pageTitle: "Working Hours",
               nextPageTitle: "Rate Per Hour",
               enableNextButton: snapshot,
-              nextPressed: () async {},
+              nextPressed: () async {
+                final navigator = Navigator.of(context);
+                await bloc.box
+                    .put(TempFieldToRegistrtConstant.workingHours, bloc.listOfWorkingHourNotifier.value.toString());
+                await bloc.box.put(DatabaseFieldConstant.registrationStep, "4");
+                navigator.pushNamed(RoutesConstants.registerfaze5Screen);
+              },
             );
           }),
       body: GestureDetector(
@@ -62,6 +70,11 @@ class _RegisterFaze4ScreenState extends State<RegisterFaze4Screen> {
                           dayname: bloc.listOfWorkingHourNotifier.value[index].dayName,
                           listOfWorkingHour: bloc.listOfWorkingHourNotifier.value[index].list,
                           onSave: (newList) {
+                            bloc.listOfWorkingHourNotifier.value[index] = WorkingHourModel(
+                                list: bloc.prepareList(newList),
+                                dayName: bloc.listOfWorkingHourNotifier.value[index].dayName);
+
+                            bloc.validateFieldsForFaze4();
                             setState(() {});
                           },
                         );

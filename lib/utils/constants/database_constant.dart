@@ -32,4 +32,5 @@ class TempFieldToRegistrtConstant {
   static const String category = "category";
   static const String cv = "cv";
   static const String certificates = "certificates";
+  static const String workingHours = "workingHours";
 }

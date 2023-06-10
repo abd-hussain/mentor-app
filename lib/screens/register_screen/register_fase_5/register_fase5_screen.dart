@@ -23,6 +23,8 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
     super.dispose();
   }
 
+  //TODO we are here
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +45,7 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
           FocusManager.instance.primaryFocus?.unfocus();
           bloc.validateFieldsForFaze5();
         },
-        child: SafeArea(
+        child: const SafeArea(
           child: SingleChildScrollView(
             child: Column(
               children: [],
