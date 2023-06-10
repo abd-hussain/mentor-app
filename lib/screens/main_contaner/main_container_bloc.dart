@@ -8,18 +8,17 @@ import 'package:mentor_app/utils/gender_format.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:mentor_app/utils/routes.dart';
 
-enum SelectedTab { home, messages, call, calender, account }
+enum SelectedTab { home, payment, call, calender, account }
 
 class MainContainerBloc extends Bloc<AppointmentsService> {
   final ValueNotifier<SelectedTab> currentTabIndexNotifier = ValueNotifier<SelectedTab>(SelectedTab.home);
   final ValueNotifier<List<CalenderMeetings>> meetingsListNotifier = ValueNotifier<List<CalenderMeetings>>([]);
-  // final box = Hive.box(DatabaseBoxConstant.userInfo);
 
   GlobalKey<ConvexAppBarState> appBarKey = GlobalKey<ConvexAppBarState>();
 
   List<TabNavigator> navTabs = const [
     TabNavigator(initialRoute: RoutesConstants.homeScreen),
-    TabNavigator(initialRoute: RoutesConstants.messagesScreen),
+    TabNavigator(initialRoute: RoutesConstants.paymentsScreen),
     TabNavigator(initialRoute: RoutesConstants.callScreen),
     TabNavigator(initialRoute: RoutesConstants.calenderScreen),
     TabNavigator(initialRoute: RoutesConstants.accountScreen)
@@ -30,7 +29,7 @@ class MainContainerBloc extends Bloc<AppointmentsService> {
       case 0:
         return SelectedTab.home;
       case 1:
-        return SelectedTab.messages;
+        return SelectedTab.payment;
       case 2:
         return SelectedTab.call;
       case 3:
@@ -44,7 +43,7 @@ class MainContainerBloc extends Bloc<AppointmentsService> {
     switch (tab) {
       case SelectedTab.home:
         return 0;
-      case SelectedTab.messages:
+      case SelectedTab.payment:
         return 1;
       case SelectedTab.call:
         return 2;

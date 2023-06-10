@@ -1,6 +1,5 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:mentor_app/locator.dart';
 import 'package:mentor_app/screens/main_contaner/main_container_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -46,7 +45,7 @@ class _MainContainerState extends State<MainContainer> {
         style: TabStyle.fixedCircle,
         items: [
           TabItem(icon: Icons.home, title: AppLocalizations.of(context)!.containerHomeIconTitle),
-          TabItem(icon: Ionicons.chatbubble_ellipses, title: AppLocalizations.of(context)!.containerMessagesIconTitle),
+          TabItem(icon: Icons.payments_outlined, title: AppLocalizations.of(context)!.payments),
           const TabItem(icon: Icons.call),
           TabItem(icon: Icons.calendar_month, title: AppLocalizations.of(context)!.containerCalenderIconTitle),
           TabItem(icon: Icons.person, title: AppLocalizations.of(context)!.containerAccountIconTitle),

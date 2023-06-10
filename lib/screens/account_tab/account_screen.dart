@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mentor_app/screens/account_tab/account_bloc.dart';
 import 'package:mentor_app/screens/account_tab/widgets/header.dart';
 import 'package:mentor_app/screens/account_tab/widgets/list_of_options.dart';
-import 'package:mentor_app/screens/account_tab/widgets/sub_header.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/logger.dart';
@@ -37,8 +36,6 @@ class _AccountScreenState extends State<AccountScreen> {
         ProfileHeader(
           firstName: bloc.box.get(DatabaseFieldConstant.userFirstName) ?? "",
         ),
-        const ProfileSubHeader(),
-        const SizedBox(height: 8),
         ValueListenableBuilder<LoadingStatus>(
             valueListenable: bloc.loadingStatus,
             builder: (context, snapshot, child) {

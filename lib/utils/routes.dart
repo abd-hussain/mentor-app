@@ -3,7 +3,6 @@ import 'package:mentor_app/screens/account_tab/account_screen.dart';
 import 'package:mentor_app/screens/calender_tab/calender_screen.dart';
 import 'package:mentor_app/screens/call_tab/call_screen.dart';
 import 'package:mentor_app/screens/change_password/change_password_screen.dart';
-import 'package:mentor_app/screens/chat/chat_screen.dart';
 import 'package:mentor_app/screens/edit_experience/edit_experience_screen.dart';
 import 'package:mentor_app/screens/edit_profile/edit_profile_screen.dart';
 import 'package:mentor_app/screens/event_details/event_details_screen.dart';
@@ -13,9 +12,8 @@ import 'package:mentor_app/screens/home_tab/home_screen.dart';
 import 'package:mentor_app/screens/invite_friends/invite_friends_screen.dart';
 import 'package:mentor_app/screens/login_screen/login_screen.dart';
 import 'package:mentor_app/screens/main_contaner/main_container.dart';
-import 'package:mentor_app/screens/messages_tab/messages_screen.dart';
 import 'package:mentor_app/screens/notifications/notifications_screen.dart';
-import 'package:mentor_app/screens/payments/payments_screen.dart';
+import 'package:mentor_app/screens/payments_tab/payments_screen.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_2/register_fase2_screen.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_3/register_fase3_screen.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_4/register_fase4_screen.dart';
@@ -34,7 +32,6 @@ class RoutesConstants {
   static const String reportScreen = 'reportScreen';
   static const String mainContainer = 'mainContainer';
   static const String homeScreen = 'homeScreen';
-  static const String messagesScreen = 'messagesScreen';
   static const String callScreen = 'callScreen';
   static const String calenderScreen = 'calenderScreen';
   static const String accountScreen = 'accountScreen';
@@ -65,7 +62,6 @@ final Map<String, Widget> routes = {
   RoutesConstants.loginScreen: const LoginScreen(),
   RoutesConstants.mainContainer: const MainContainer(),
   RoutesConstants.homeScreen: const HomeScreen(),
-  RoutesConstants.messagesScreen: const MessagesScreen(),
   RoutesConstants.callScreen: const CallScreen(),
   RoutesConstants.calenderScreen: const CalenderScreen(),
   RoutesConstants.accountScreen: const AccountScreen(),
@@ -88,5 +84,4 @@ final Map<String, Widget> routes = {
   RoutesConstants.forgotPasswordScreen: const ForgotPasswordScreen(),
   RoutesConstants.forgotPasswordConfirmationScreen: const ForgotPasswordConfirmationScreen(),
   RoutesConstants.eventDetailsScreen: const EventDetailsScreen(),
-  RoutesConstants.chatScreen: const ChatScreen(),
 };
