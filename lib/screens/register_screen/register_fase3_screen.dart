@@ -7,6 +7,8 @@ import 'package:mentor_app/shared_widget/category_field.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/shared_widget/file_holder_field.dart';
+import 'package:mentor_app/utils/constants/database_constant.dart';
+import 'package:mentor_app/utils/routes.dart';
 
 class RegisterFaze3Screen extends StatefulWidget {
   const RegisterFaze3Screen({super.key});
@@ -41,7 +43,15 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
               pageTitle: "Experiences",
               nextPageTitle: "Working Hours",
               enableNextButton: snapshot,
-              nextPressed: () async {},
+              nextPressed: () async {
+                final navigator = Navigator.of(context);
+                await bloc.box.put(TempFieldToRegistrtConstant.bio, bloc.bioController.text);
+                await bloc.box.put(TempFieldToRegistrtConstant.category, bloc.selectedCategory!.id.toString());
+                await bloc.box.put(TempFieldToRegistrtConstant.cv, bloc.cv.toString());
+                await bloc.box.put(TempFieldToRegistrtConstant.certificates, bloc.listOfCertificates.toString());
+                await bloc.box.put(DatabaseFieldConstant.registrationStep, "3");
+                navigator.pushNamed(RoutesConstants.registerfaze4Screen);
+              },
             );
           }),
       body: GestureDetector(
@@ -87,6 +97,7 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,
                         ),
+                        onChanged: (text) => bloc.validateFieldsForFaze3(),
                         maxLines: 5,
                         maxLength: 200,
                       ),
@@ -107,7 +118,10 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                 ),
                 const SizedBox(height: 8),
                 CertificateView(
-                  certificatesListCallBack: (p0) {},
+                  certificatesListCallBack: (p0) {
+                    bloc.listOfCertificates = p0;
+                    bloc.validateFieldsForFaze3();
+                  },
                 ),
               ],
             ),

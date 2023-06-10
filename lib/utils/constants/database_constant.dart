@@ -28,4 +28,8 @@ class TempFieldToRegistrtConstant {
   static const String referalCode = "referalCode";
   static const String idImage = "idImage";
   static const String profileImage = "profileImage";
+  static const String bio = "bio";
+  static const String category = "category";
+  static const String cv = "cv";
+  static const String certificates = "certificates";
 }

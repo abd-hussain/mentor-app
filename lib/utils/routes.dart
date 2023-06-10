@@ -18,6 +18,10 @@ import 'package:mentor_app/screens/notifications/notifications_screen.dart';
 import 'package:mentor_app/screens/payments/payments_screen.dart';
 import 'package:mentor_app/screens/register_screen/register_fase2_screen.dart';
 import 'package:mentor_app/screens/register_screen/register_fase3_screen.dart';
+import 'package:mentor_app/screens/register_screen/register_fase4_screen.dart';
+import 'package:mentor_app/screens/register_screen/register_fase5_screen.dart';
+import 'package:mentor_app/screens/register_screen/register_fase6_screen.dart';
+import 'package:mentor_app/screens/register_screen/register_fase7_screen.dart';
 import 'package:mentor_app/screens/report/report_screen.dart';
 import 'package:mentor_app/screens/setup_screen/setup_screen.dart';
 import 'package:mentor_app/screens/tutorials/tutorials_screen.dart';
@@ -36,6 +40,10 @@ class RoutesConstants {
   static const String accountScreen = 'accountScreen';
   static const String registerfaze2Screen = 'registerfaze2Screen';
   static const String registerfaze3Screen = 'registerfaze3Screen';
+  static const String registerfaze4Screen = 'registerfaze4Screen';
+  static const String registerfaze5Screen = 'registerfaze5Screen';
+  static const String registerfaze6Screen = 'registerfaze6Screen';
+  static const String registerfaze7Screen = 'registerfaze7Screen';
 
   static const String notificationsScreen = 'notificationsScreen';
   static const String webViewScreen = 'webViewScreen';
@@ -63,6 +71,10 @@ final Map<String, Widget> routes = {
   RoutesConstants.accountScreen: const AccountScreen(),
   RoutesConstants.registerfaze2Screen: const RegisterFaze2Screen(),
   RoutesConstants.registerfaze3Screen: const RegisterFaze3Screen(),
+  RoutesConstants.registerfaze4Screen: const RegisterFaze4Screen(),
+  RoutesConstants.registerfaze5Screen: const RegisterFaze5Screen(),
+  RoutesConstants.registerfaze6Screen: const RegisterFaze6Screen(),
+  RoutesConstants.registerfaze7Screen: const RegisterFaze7Screen(),
   RoutesConstants.notificationsScreen: const NotificationsScreen(),
   RoutesConstants.webViewScreen: const WebViewScreen(),
   RoutesConstants.inviteFriendScreen: const InviteFriendsScreen(),

@@ -176,18 +176,38 @@ class _LoginScreenState extends State<LoginScreen> {
                                   bottomsheet.infoBottomSheet(
                                       step: stepNum,
                                       openNext: () {
-                                        if (stepNum == 0) {
-                                          bottomsheet.termsBottomSheet(openNext: () {
-                                            bloc.box.put(DatabaseFieldConstant.registrationStep, "1");
+                                        switch (stepNum) {
+                                          case 1:
                                             Navigator.of(context, rootNavigator: true)
                                                 .pushNamed(RoutesConstants.registerfaze2Screen);
-                                          });
-                                        } else if (stepNum == 1) {
-                                          Navigator.of(context, rootNavigator: true)
-                                              .pushNamed(RoutesConstants.registerfaze2Screen);
-                                        } else if (stepNum == 2) {
-                                          Navigator.of(context, rootNavigator: true)
-                                              .pushNamed(RoutesConstants.registerfaze3Screen);
+                                            break;
+                                          case 2:
+                                            Navigator.of(context, rootNavigator: true)
+                                                .pushNamed(RoutesConstants.registerfaze3Screen);
+                                            break;
+                                          case 3:
+                                            Navigator.of(context, rootNavigator: true)
+                                                .pushNamed(RoutesConstants.registerfaze4Screen);
+                                            break;
+                                          case 4:
+                                            Navigator.of(context, rootNavigator: true)
+                                                .pushNamed(RoutesConstants.registerfaze5Screen);
+                                            break;
+                                          case 5:
+                                            Navigator.of(context, rootNavigator: true)
+                                                .pushNamed(RoutesConstants.registerfaze6Screen);
+                                            break;
+                                          case 6:
+                                            Navigator.of(context, rootNavigator: true)
+                                                .pushNamed(RoutesConstants.registerfaze7Screen);
+                                            break;
+                                          default:
+                                            bottomsheet.termsBottomSheet(openNext: () {
+                                              bloc.box.put(DatabaseFieldConstant.registrationStep, "1");
+                                              Navigator.of(context, rootNavigator: true)
+                                                  .pushNamed(RoutesConstants.registerfaze2Screen);
+                                            });
+                                            break;
                                         }
                                       });
                                 },

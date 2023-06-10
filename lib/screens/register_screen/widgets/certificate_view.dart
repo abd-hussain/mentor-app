@@ -39,7 +39,6 @@ class _CertificateViewState extends State<CertificateView> {
                       widget.certificatesListCallBack(certificatesList);
                     },
                   ),
-                  const Expanded(child: SizedBox()),
                   IconButton(
                     icon: Container(
                       width: 100,

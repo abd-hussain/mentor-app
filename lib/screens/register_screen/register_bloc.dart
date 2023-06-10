@@ -27,6 +27,7 @@ class RegisterBloc {
   File? profileImage;
   File? iDImage;
   File? cv;
+  List<File?> listOfCertificates = [];
 
   Country? selectedCountry;
   SuffixData? selectedSuffix;
@@ -53,7 +54,19 @@ class RegisterBloc {
     }
   }
 
-  validateFieldsForFaze3() {}
+  validateFieldsForFaze3() {
+    if (bioController.text.isNotEmpty &&
+        categoryController.text.isNotEmpty &&
+        cv != null &&
+        listOfCertificates.isNotEmpty) {
+      enableNextBtn.value = true;
+    }
+  }
+
+  validateFieldsForFaze4() {}
+  validateFieldsForFaze5() {}
+  validateFieldsForFaze6() {}
+  validateFieldsForFaze7() {}
 
   void getlistOfSuffix() {
     locator<FilterService>().suffix().then((value) {

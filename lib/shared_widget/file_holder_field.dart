@@ -29,9 +29,9 @@ class FileHolderField extends StatelessWidget {
           if (fileController.value == null) {
             try {
               FilePickerResult? result = await FilePicker.platform.pickFiles(
-                  // type: FileType.custom,
-                  // allowedExtensions: ['jpg', 'pdf', 'doc'],
-                  );
+                type: FileType.custom,
+                allowedExtensions: ['jpg', 'pdf', 'doc'],
+              );
 
               if (result != null) {
                 fileController.value = File(result.files.single.path!);
@@ -46,40 +46,42 @@ class FileHolderField extends StatelessWidget {
             onRemoveFile();
           }
         },
-        child: Container(
-          height: 50,
-          width: width,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: const Color(0xffE8E8E8))),
-          child: ValueListenableBuilder<File?>(
+        child: ValueListenableBuilder<File?>(
             valueListenable: fileController,
             builder: (context, snapshot, child) {
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomText(
-                    title: title,
-                    fontSize: 12,
-                    textAlign: TextAlign.center,
-                    textColor: Colors.black,
+              return Container(
+                height: 50,
+                width: width,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: snapshot != null ? const Color(0xff034061) : const Color(0xffe0e0e0),
                   ),
-                  snapshot != null
-                      ? const Icon(
-                          Icons.remove,
-                          color: Color(0xff444444),
-                        )
-                      : const Icon(
-                          Icons.add,
-                          color: Color(0xff444444),
-                        ),
-                ],
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomText(
+                      title: title,
+                      fontSize: 12,
+                      textAlign: TextAlign.center,
+                      textColor: Colors.black,
+                    ),
+                    snapshot != null
+                        ? const Icon(
+                            Icons.remove,
+                            color: Color(0xff444444),
+                          )
+                        : const Icon(
+                            Icons.add,
+                            color: Color(0xff444444),
+                          ),
+                  ],
+                ),
               );
-            },
-          ),
-        ),
+            }),
       ),
     );
   }
