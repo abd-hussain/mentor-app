@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:mentor_app/screens/register_screen/register_bloc.dart';
+import 'package:mentor_app/screens/register_screen/register_fase_6/register_fase6_bloc.dart';
 import 'package:mentor_app/screens/register_screen/widgets/footer_view.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 
-class RegisterFaze7Screen extends StatefulWidget {
-  const RegisterFaze7Screen({super.key});
+class RegisterFaze6Screen extends StatefulWidget {
+  const RegisterFaze6Screen({super.key});
 
   @override
-  State<RegisterFaze7Screen> createState() => _RegisterFaze7ScreenState();
+  State<RegisterFaze6Screen> createState() => _RegisterFaze6ScreenState();
 }
 
-class _RegisterFaze7ScreenState extends State<RegisterFaze7Screen> {
-  final bloc = RegisterBloc();
+class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
+  final bloc = Register6Bloc();
 
   @override
   void didChangeDependencies() {
@@ -31,9 +31,9 @@ class _RegisterFaze7ScreenState extends State<RegisterFaze7Screen> {
           valueListenable: bloc.enableNextBtn,
           builder: (context, snapshot, child) {
             return RegistrationFooterView(
-              pageCount: 7,
-              pageTitle: "Setup Password",
-              nextPageTitle: "You will be ready to go",
+              pageCount: 6,
+              pageTitle: "Verify Email & Phone",
+              nextPageTitle: "Setup Password",
               enableNextButton: snapshot,
               nextPressed: () async {},
             );
@@ -41,7 +41,7 @@ class _RegisterFaze7ScreenState extends State<RegisterFaze7Screen> {
       body: GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
-          bloc.validateFieldsForFaze7();
+          bloc.validateFieldsForFaze6();
         },
         child: SafeArea(
           child: SingleChildScrollView(

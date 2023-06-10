@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mentor_app/screens/register_screen/register_bloc.dart';
+import 'package:mentor_app/screens/register_screen/register_fase_5/register_fase5_bloc.dart';
 import 'package:mentor_app/screens/register_screen/widgets/footer_view.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 
@@ -11,7 +11,7 @@ class RegisterFaze5Screen extends StatefulWidget {
 }
 
 class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
-  final bloc = RegisterBloc();
+  final bloc = Register5Bloc();
 
   @override
   void didChangeDependencies() {

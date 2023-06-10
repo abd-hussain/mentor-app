@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mentor_app/models/https/countries_model.dart';
 
-import 'package:mentor_app/screens/register_screen/register_bloc.dart';
+import 'package:mentor_app/screens/register_screen/register_fase_2/register_fase2_bloc.dart';
 import 'package:mentor_app/screens/register_screen/widgets/footer_view.dart';
 import 'package:mentor_app/shared_widget/country_field.dart';
 import 'package:mentor_app/shared_widget/custom_attach_textfield.dart';
@@ -25,7 +25,7 @@ class RegisterFaze2Screen extends StatefulWidget {
 }
 
 class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
-  final bloc = RegisterBloc();
+  final bloc = Register2Bloc();
 
   @override
   void didChangeDependencies() {
