@@ -6,7 +6,7 @@ class UpdateAccountRequest {
   String? lastName;
   int? gender;
   int countryId;
-  List<String>? speackingLanguage;
+  String? speackingLanguage;
   File? profileImage;
   File? iDImage;
   String dateOfBirth;

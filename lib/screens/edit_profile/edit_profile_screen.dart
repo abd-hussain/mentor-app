@@ -35,7 +35,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void didChangeDependencies() {
     logDebugMessage(message: 'Edit Profile init Called ...');
     bloc.getProfileInformations(context);
-    bloc.getListOfCountries(context);
     bloc.getlistOfSuffix();
     super.didChangeDependencies();
   }

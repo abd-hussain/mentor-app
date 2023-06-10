@@ -13,9 +13,8 @@ class DateOfBirthField extends StatelessWidget {
   Widget build(BuildContext context) {
     late DateTime date;
     if (selectedDate != null) {
-      date = DateFormat('yyyy/MM/dd').parse(selectedDate!);
-    } else {
-      date = DateTime(1992, 05, 22);
+      print(selectedDate);
+      date = DateFormat('dd/MM/yyyy').parse(selectedDate!);
     }
 
     return Padding(
@@ -27,7 +26,7 @@ class DateOfBirthField extends StatelessWidget {
         dateFormat: "yyyy/MM/dd",
         locale: DatePicker.localeFromString(language),
         onChange: (DateTime newDate, _) {
-          dateSelected(DateFormat("yyyy/MM/dd").format(newDate));
+          dateSelected(DateFormat("dd/MM/yyyy").format(newDate));
         },
         pickerTheme: const DateTimePickerTheme(
           itemTextStyle: TextStyle(color: Color(0xff384048), fontSize: 15),

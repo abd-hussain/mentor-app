@@ -3,31 +3,47 @@ import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/shared_widget/bottom_sheet_util.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 
-class SpeakingLanguageField extends StatelessWidget {
+class SpeakingLanguageField extends StatefulWidget {
   final List<CheckBox> listOfLanguages;
   final Function(List<CheckBox>) selectedLanguage;
 
-  const SpeakingLanguageField({required this.listOfLanguages, required this.selectedLanguage, super.key});
+  const SpeakingLanguageField({required this.listOfLanguages, super.key, required this.selectedLanguage});
 
   @override
-  Widget build(BuildContext context) {
-    List<String> listOfSelectedLanguages = [];
+  State<SpeakingLanguageField> createState() => _SpeakingLanguageFieldState();
+}
 
-    for (CheckBox item in listOfLanguages) {
+class _SpeakingLanguageFieldState extends State<SpeakingLanguageField> {
+  List<String> listOfSelectedLanguages = [];
+
+  @override
+  void initState() {
+    for (CheckBox item in widget.listOfLanguages) {
       if (item.isEnable) {
         listOfSelectedLanguages.add(item.value);
       }
     }
+    super.initState();
+  }
 
-    print(listOfLanguages);
-
-    print(listOfSelectedLanguages);
-
+  @override
+  Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        await BottomSheetsUtil().speakingLanguageBottomSheet(context, listOfLanguages, (languageSelected) {
-          selectedLanguage(languageSelected);
-        });
+        await BottomSheetsUtil().speakingLanguageBottomSheet(
+            context: context,
+            listOfLanguage: widget.listOfLanguages,
+            onSave: (languageSelected) {
+              setState(() {
+                listOfSelectedLanguages = [];
+                for (CheckBox item in languageSelected) {
+                  if (item.isEnable) {
+                    listOfSelectedLanguages.add(item.value);
+                  }
+                }
+                widget.selectedLanguage(languageSelected);
+              });
+            });
       },
       child: Container(
         height: 50,

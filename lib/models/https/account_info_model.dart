@@ -61,7 +61,7 @@ class DBCountries {
   String? flagImage;
   String? currencyArabic;
   String? nameArabic;
-  String? prefixNumber;
+  String? dialCode;
   String? createdAt;
   String? nameEnglish;
   int? id;
@@ -72,7 +72,7 @@ class DBCountries {
       {this.flagImage,
       this.currencyArabic,
       this.nameArabic,
-      this.prefixNumber,
+      this.dialCode,
       this.createdAt,
       this.nameEnglish,
       this.id,
@@ -83,7 +83,7 @@ class DBCountries {
     flagImage = json['flag_image'];
     currencyArabic = json['currency_arabic'];
     nameArabic = json['name_arabic'];
-    prefixNumber = json['prefix_number'];
+    dialCode = json['dialCode'];
     createdAt = json['created_at'];
     nameEnglish = json['name_english'];
     id = json['id'];

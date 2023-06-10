@@ -20,7 +20,7 @@ class EditProfileBloc extends Bloc<AccountService> {
   ValueNotifier<bool> enableSaveButtonNotifier = ValueNotifier<bool>(false);
   ValueNotifier<List<Country>> listOfCountriesNotifier = ValueNotifier<List<Country>>([]);
   ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier = ValueNotifier<List<CheckBox>>([]);
-
+  List<String> listOfSpeakingLanguage = [];
   String? selectedDate;
 
   final box = Hive.box(DatabaseBoxConstant.userInfo);
@@ -58,7 +58,7 @@ class EditProfileBloc extends Bloc<AccountService> {
     }
   }
 
-  void getProfileInformations(BuildContext context) {
+  void getProfileInformations(BuildContext context) async {
     loadingStatusNotifier.value = LoadingStatus.inprogress;
     service.getProfileInfo().then((value) {
       if (value.data != null) {
@@ -95,15 +95,16 @@ class EditProfileBloc extends Bloc<AccountService> {
 
         if (value.data!.dBCountries != null) {
           selectedCountry = Country(
-              id: value.data!.dBCountries!.id!,
-              flagImage: value.data!.dBCountries!.flagImage!,
-              name: box.get(DatabaseFieldConstant.language) == "en"
-                  ? value.data!.dBCountries!.nameEnglish!
-                  : value.data!.dBCountries!.nameArabic!,
-              currency: box.get(DatabaseFieldConstant.language) == "en"
-                  ? value.data!.dBCountries!.currencyEnglish!
-                  : value.data!.dBCountries!.currencyArabic!,
-              prefixNumber: value.data!.dBCountries!.prefixNumber!);
+            id: value.data!.dBCountries!.id ?? 0,
+            flagImage: value.data!.dBCountries!.flagImage ?? "",
+            name: box.get(DatabaseFieldConstant.language) == "en"
+                ? value.data!.dBCountries!.nameEnglish ?? ""
+                : value.data!.dBCountries!.nameArabic ?? "",
+            currency: box.get(DatabaseFieldConstant.language) == "en"
+                ? value.data!.dBCountries!.currencyEnglish ?? ""
+                : value.data!.dBCountries!.currencyArabic ?? "",
+            prefixNumber: value.data!.dBCountries!.dialCode!,
+          );
 
           countryController.text = box.get(DatabaseFieldConstant.language) == "en"
               ? value.data!.dBCountries!.nameEnglish!
@@ -125,13 +126,11 @@ class EditProfileBloc extends Bloc<AccountService> {
         }
       }
 
-      loadingStatusNotifier.value = LoadingStatus.finish;
+      getListOfCountries(context);
     });
   }
 
   void getListOfCountries(BuildContext context) {
-    loadingStatusNotifier.value = LoadingStatus.inprogress;
-
     locator<FilterService>().countries().then((value) async {
       listOfCountriesNotifier.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
       loadingStatusNotifier.value = LoadingStatus.finish;
@@ -156,16 +155,30 @@ class EditProfileBloc extends Bloc<AccountService> {
   }
 
   Future updateProfileInfo(BuildContext context) async {
+    String speackingLanguage = "";
+
+    for (CheckBox item in listOfSpeakingLanguageNotifier.value) {
+      if (item.isEnable) {
+        if (speackingLanguage.isEmpty) {
+          speackingLanguage = item.value;
+        } else {
+          speackingLanguage = "$speackingLanguage, ${item.value}";
+        }
+      }
+    }
+
     UpdateAccountRequest account = UpdateAccountRequest(
-        suffix: suffixNameController.text,
-        firstName: firstNameController.text,
-        lastName: lastNameController.text,
-        profileImage: profileImage,
-        iDImage: iDImage,
-        countryId: selectedCountry!.id!,
-        mobileNumber: mobileNumberController.text,
-        dateOfBirth: selectedDate!,
-        gender: GenderFormat().convertStringToIndex(context, genderController.text));
+      suffix: suffixNameController.text,
+      firstName: firstNameController.text,
+      lastName: lastNameController.text,
+      profileImage: profileImage,
+      iDImage: iDImage,
+      countryId: selectedCountry!.id!,
+      mobileNumber: mobileNumberController.text,
+      dateOfBirth: selectedDate!,
+      speackingLanguage: speackingLanguage.toString(),
+      gender: GenderFormat().convertStringToIndex(context, genderController.text),
+    );
     //TODO There is Problem In Speacking Language
     return service.updateProfileInfo(account: account);
   }
