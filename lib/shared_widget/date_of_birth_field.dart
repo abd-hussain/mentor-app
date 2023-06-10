@@ -11,9 +11,8 @@ class DateOfBirthField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late DateTime date;
+    DateTime? date;
     if (selectedDate != null) {
-      print(selectedDate);
       date = DateFormat('dd/MM/yyyy').parse(selectedDate!);
     }
 
@@ -21,7 +20,7 @@ class DateOfBirthField extends StatelessWidget {
       padding: const EdgeInsets.only(left: 16, right: 16),
       child: DatePickerWidget(
         firstDate: DateTime(1945, 01, 01),
-        lastDate: DateTime(DateTime.now().year - 10, 1, 1),
+        lastDate: DateTime(DateTime.now().year - 18, 1, 1),
         initialDate: date,
         dateFormat: "yyyy/MM/dd",
         locale: DatePicker.localeFromString(language),

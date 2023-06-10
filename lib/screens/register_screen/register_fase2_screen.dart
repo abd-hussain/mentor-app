@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mentor_app/models/https/countries_model.dart';
 
 import 'package:mentor_app/screens/register_screen/register_bloc.dart';
 import 'package:mentor_app/screens/register_screen/widgets/footer_view.dart';
@@ -52,17 +53,16 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
               enableNextButton: snapshot,
               nextPressed: () async {
                 final navigator = Navigator.of(context);
-                await bloc.box.put(DatabaseFieldConstant.registrationStep, "2");
                 await bloc.box.put(TempFieldToRegistrtConstant.suffix, bloc.suffixNameController.text);
                 await bloc.box.put(TempFieldToRegistrtConstant.firstName, bloc.firstNameController.text);
                 await bloc.box.put(TempFieldToRegistrtConstant.lastName, bloc.lastNameController.text);
                 await bloc.box.put(TempFieldToRegistrtConstant.country, bloc.selectedCountry!.id.toString());
                 await bloc.box.put(TempFieldToRegistrtConstant.gender, bloc.genderController.text);
-                //TODO: this keys must be handled and validated
-                // await bloc.box.put(TempFieldToRegistrtConstant.profileImage, bloc.profileImage!);
-                // await bloc.box.put(TempFieldToRegistrtConstant.idImage, bloc.iDImage);
-                // await bloc.box.put(TempFieldToRegistrtConstant.dateOfBirth, bloc.selectedDate!);
+                await bloc.box.put(TempFieldToRegistrtConstant.profileImage, bloc.profileImage.toString());
+                await bloc.box.put(TempFieldToRegistrtConstant.idImage, bloc.iDImage.toString());
+                await bloc.box.put(TempFieldToRegistrtConstant.dateOfBirth, bloc.selectedDate);
                 await bloc.box.put(TempFieldToRegistrtConstant.referalCode, bloc.referalCodeController.text);
+                await bloc.box.put(DatabaseFieldConstant.registrationStep, "2");
                 navigator.pushNamed(RoutesConstants.registerfaze3Screen);
               },
             );
@@ -115,9 +115,7 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                               controller: bloc.firstNameController,
                               hintText: AppLocalizations.of(context)!.firstnameprofile,
                               keyboardType: TextInputType.name,
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(45),
-                              ],
+                              inputFormatters: [LengthLimitingTextInputFormatter(45)],
                               onChange: (text) => bloc.validateFieldsForFaze2(),
                             ),
                             const SizedBox(height: 10),
@@ -125,9 +123,7 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                               controller: bloc.lastNameController,
                               hintText: AppLocalizations.of(context)!.lastnameprofile,
                               keyboardType: TextInputType.name,
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(45),
-                              ],
+                              inputFormatters: [LengthLimitingTextInputFormatter(45)],
                               onChange: (text) => bloc.validateFieldsForFaze2(),
                             ),
                           ],
@@ -138,8 +134,8 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                 ),
                 const SizedBox(height: 16),
                 Container(
-                  color: const Color(0xffE8E8E8),
                   height: 1,
+                  color: const Color(0xffE8E8E8),
                 ),
                 const SizedBox(height: 16),
                 Padding(
@@ -163,12 +159,12 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                       Expanded(
                         child: Column(
                           children: [
-                            ValueListenableBuilder<Object>(
+                            ValueListenableBuilder<List<Country>>(
                                 valueListenable: bloc.listOfCountries,
                                 builder: (context, snapshot, child) {
                                   return CountryField(
                                     controller: bloc.countryController,
-                                    listOfCountries: bloc.listOfCountries.value,
+                                    listOfCountries: snapshot,
                                     selectedCountry: (p0) {
                                       bloc.selectedCountry = p0;
                                       bloc.validateFieldsForFaze2();
@@ -178,7 +174,7 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                             const SizedBox(height: 10),
                             GenderField(
                               controller: bloc.genderController,
-                              onChange: (p0) {},
+                              onChange: (p0) => bloc.validateFieldsForFaze2(),
                             ),
                           ],
                         ),
@@ -188,8 +184,8 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                 ),
                 const SizedBox(height: 16),
                 Container(
-                  color: const Color(0xffE8E8E8),
                   height: 1,
+                  color: const Color(0xffE8E8E8),
                 ),
                 const SizedBox(height: 16),
                 Padding(
@@ -207,6 +203,7 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                   language: bloc.box.get(DatabaseFieldConstant.language),
                   dateSelected: (p0) {
                     bloc.selectedDate = p0;
+                    bloc.validateFieldsForFaze2();
                   },
                 ),
                 const SizedBox(height: 16),
