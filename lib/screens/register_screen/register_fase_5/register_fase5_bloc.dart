@@ -6,5 +6,47 @@ class Register5Bloc {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
 
   ValueNotifier<bool> enableNextBtn = ValueNotifier<bool>(false);
-  validateFieldsForFaze5() {}
+
+  TextEditingController ratePerHourController = TextEditingController();
+
+  validateFieldsForFaze5() {
+    if (ratePerHourController.text.isNotEmpty) {
+      double convertedText = double.tryParse(ratePerHourController.text) ?? 0.0;
+      if (convertedText > 0) {
+        enableNextBtn.value = true;
+      } else {
+        enableNextBtn.value = false;
+      }
+    } else {
+      enableNextBtn.value = false;
+    }
+  }
+
+  encreseRatePerHourBy1() {
+    if (ratePerHourController.text.isEmpty) {
+      ratePerHourController.text = "1.0";
+    }
+
+    double convertedText = double.tryParse(ratePerHourController.text) ?? 0.0;
+
+    if (convertedText < 1000) {
+      convertedText = convertedText + 1;
+      ratePerHourController.text = convertedText.toStringAsFixed(2);
+    }
+
+    validateFieldsForFaze5();
+  }
+
+  decreseRatePerHourBy1() {
+    if (ratePerHourController.text.isEmpty) {
+      ratePerHourController.text = "1.0";
+    }
+    double convertedText = double.tryParse(ratePerHourController.text) ?? 0.0;
+
+    if (convertedText > 1) {
+      convertedText = convertedText - 1;
+      ratePerHourController.text = convertedText.toStringAsFixed(2);
+    }
+    validateFieldsForFaze5();
+  }
 }

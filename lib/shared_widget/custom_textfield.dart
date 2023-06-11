@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final Widget? suffixWidget;
   final TextInputType? keyboardType;
+  final TextAlign textAlign;
   final List<TextInputFormatter>? inputFormatters;
   final Function(String text)? onChange;
 
@@ -27,6 +28,7 @@ class CustomTextField extends StatelessWidget {
       this.inputFormatters,
       this.onChange,
       this.padding = const EdgeInsets.only(left: 16, right: 16),
+      this.textAlign = TextAlign.start,
       super.key});
 
   @override
@@ -34,6 +36,7 @@ class CustomTextField extends StatelessWidget {
     return Padding(
         padding: padding,
         child: TextField(
+          textAlign: textAlign,
           obscureText: obscureText,
           enabled: enabled,
           readOnly: readOnly,
