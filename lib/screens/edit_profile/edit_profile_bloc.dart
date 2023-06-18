@@ -103,7 +103,7 @@ class EditProfileBloc extends Bloc<AccountService> {
             currency: box.get(DatabaseFieldConstant.language) == "en"
                 ? value.data!.dBCountries!.currencyEnglish ?? ""
                 : value.data!.dBCountries!.currencyArabic ?? "",
-            prefixNumber: value.data!.dBCountries!.dialCode!,
+            dialCode: value.data!.dBCountries!.dialCode!,
           );
 
           countryController.text = box.get(DatabaseFieldConstant.language) == "en"

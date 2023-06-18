@@ -7,8 +7,6 @@ class DatabaseFieldConstant {
   static const String token = "token";
   static const String language = "language";
   static const String userid = "userid";
-  static const String countryId = "country_id";
-  static const String countryFlag = "country_flag";
   static const String isUserLoggedIn = "isUserLoggedIn";
   static const String userFirstName = "userFirstName";
   static const String registrationStep = "registrationStep";
@@ -16,6 +14,14 @@ class DatabaseFieldConstant {
   static const String biometricU = "biometricU";
   static const String biometricP = "biometricP";
   static const String biometricStatus = "biometricStatus";
+
+  static const String selectedCountryId = "selectedCountryId";
+  static const String selectedCountryFlag = "selectedCountryFlag";
+  static const String selectedCountryName = "selectedCountryName";
+  static const String selectedCountryCurrency = "selectedCountryCurrency";
+  static const String selectedCountryDialCode = "selectedCountryDialCode";
+  static const String selectedCountryMinLenght = "selectedCountryMinLenght";
+  static const String selectedCountryMaxLenght = "selectedCountryMaxLenght";
 }
 
 class TempFieldToRegistrtConstant {

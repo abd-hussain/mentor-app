@@ -28,8 +28,6 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
     super.dispose();
   }
 
-  //TODO we are here
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -69,7 +67,7 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
                     padding: const EdgeInsets.all(8.0),
                     child: CustomText(
                       title:
-                          "This Rate will shown to the user per hour, when they try to reserve any appointment with you",
+                          "This Rate will be shown to the user per hour when they try to reserve an appointment with you",
                       fontSize: 14,
                       maxLins: 3,
                       textColor: const Color(0xff444444),
@@ -80,7 +78,7 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CustomText(
-                      title: "We encarge you to set a relaestice number to get more reservation",
+                      title: "We encourage you to set a realistic number to get more reservations",
                       fontSize: 14,
                       maxLins: 3,
                       textAlign: TextAlign.center,
@@ -91,7 +89,7 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CustomText(
-                      title: "Recumended Rate Per Hour for you is",
+                      title: "Recommended Rate Per Hour for you is",
                       fontSize: 14,
                       textAlign: TextAlign.center,
                       textColor: Color(0xff444444),

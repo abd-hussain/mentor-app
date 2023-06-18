@@ -22,15 +22,19 @@ class Country {
   String? flagImage;
   String? name;
   String? currency;
-  String? prefixNumber;
+  String? dialCode;
+  int? minLength;
+  int? maxLength;
 
-  Country({this.id, this.flagImage, this.name, this.currency, this.prefixNumber});
+  Country({this.id, this.flagImage, this.name, this.currency, this.dialCode, this.maxLength, this.minLength});
 
   Country.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     flagImage = AppConstant.imagesBaseURLForCountries + json['flag_image'];
     name = json['name'];
     currency = json['currency'];
-    prefixNumber = json['prefix_number'];
+    dialCode = json['dialCode'];
+    minLength = json['minLength'];
+    maxLength = json['maxLength'];
   }
 }

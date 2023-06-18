@@ -196,5 +196,13 @@
     "credit" : "Credit",
     "describeyourproblem" : "describe your problem here",
     "slogen" : "The Latest Consultations Technology",
-    "logout" : "Logout"
+    "logout" : "Logout",
+    "enteryourotpnumberexample" : "Example on the acceptable numbers 123456",
+    "enteryourphonenumberexample" : "Example on the acceptable numbers 795190663",
+    "enteryouremailexample" : "Example on the acceptable email abed.99@gmail.com",
+    "entermobilenumber" : "Enter Mobile Number",
+    "mobilenumbernotvalid" : "Entered Mobile Number is not valid"
+
+
+
 }

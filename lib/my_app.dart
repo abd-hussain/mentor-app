@@ -65,7 +65,7 @@ class MyAppState extends State<MyApp> {
             transitionDuration: const Duration(milliseconds: 100),
             pageBuilder: (_, __, ___) => routes[settings.name]!);
       },
-      initialRoute: myBox.get(DatabaseFieldConstant.countryId) != null
+      initialRoute: myBox.get(DatabaseFieldConstant.selectedCountryId) != null
           ? RoutesConstants.loginScreen
           : RoutesConstants.initialRoute,
     );

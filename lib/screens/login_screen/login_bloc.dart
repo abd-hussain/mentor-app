@@ -70,8 +70,8 @@ class LoginBloc extends Bloc<AuthService> {
   }
 
   Future<void> _readBiometricData(BuildContext context) async {
-    final String biometricU = box.get(DatabaseFieldConstant.biometricU);
-    final String biometricP = box.get(DatabaseFieldConstant.biometricP);
+    final String biometricU = box.get(DatabaseFieldConstant.biometricU) ?? "";
+    final String biometricP = box.get(DatabaseFieldConstant.biometricP) ?? "";
     isBiometricAppeared = true;
     biometricStatus =
         box.get(DatabaseFieldConstant.biometricStatus) == 'true' && biometricP.isNotEmpty && biometricU.isNotEmpty;

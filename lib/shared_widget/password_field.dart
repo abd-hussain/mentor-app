@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class PasswordField extends StatelessWidget {
   final TextEditingController controller;
   final ValueNotifier<bool> showHidePasswordClearNotifier;
+  final String hintText;
   final Function() onchange;
   final Function() onClear;
   const PasswordField(
@@ -13,6 +14,7 @@ class PasswordField extends StatelessWidget {
       required this.controller,
       required this.showHidePasswordClearNotifier,
       required this.onchange,
+      this.hintText = "",
       required this.onClear});
 
   @override
@@ -30,7 +32,7 @@ class PasswordField extends StatelessWidget {
           builder: (context, showHidePasswordSnapshot, child) {
             return CustomTextField(
               controller: controller,
-              hintText: AppLocalizations.of(context)!.password,
+              hintText: hintText == "" ? AppLocalizations.of(context)!.password : hintText,
               obscureText: showHidePasswordSnapshot,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(45),

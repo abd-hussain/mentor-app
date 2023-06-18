@@ -4,7 +4,7 @@ import 'package:mentor_app/screens/login_screen/login_bloc.dart';
 import 'package:mentor_app/screens/login_screen/widgets/biometric_login_view.dart';
 import 'package:mentor_app/shared_widget/email_field.dart';
 import 'package:mentor_app/screens/login_screen/widgets/forgot_password_widget.dart';
-import 'package:mentor_app/screens/login_screen/widgets/password_field.dart';
+import 'package:mentor_app/shared_widget/password_field.dart';
 import 'package:mentor_app/screens/register_screen/widgets/info_bottom_sheet.dart';
 import 'package:mentor_app/shared_widget/background_container.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';

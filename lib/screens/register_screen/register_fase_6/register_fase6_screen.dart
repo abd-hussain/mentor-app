@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_6/register_fase6_bloc.dart';
+import 'package:mentor_app/screens/register_screen/register_fase_6/widgets/fields_fase_1.dart';
+import 'package:mentor_app/screens/register_screen/register_fase_6/widgets/fields_fase_2.dart';
+import 'package:mentor_app/screens/register_screen/register_fase_6/widgets/fields_fase_3.dart';
+import 'package:mentor_app/screens/register_screen/register_fase_6/widgets/fields_fase_4.dart';
 import 'package:mentor_app/screens/register_screen/widgets/footer_view.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
+import 'package:mentor_app/utils/constants/database_constant.dart';
+import 'package:mentor_app/utils/enums/loading_status.dart';
+import 'package:mentor_app/utils/routes.dart';
 
 class RegisterFaze6Screen extends StatefulWidget {
   const RegisterFaze6Screen({super.key});
@@ -15,6 +22,7 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
 
   @override
   void didChangeDependencies() {
+    bloc.listOfCountries();
     super.didChangeDependencies();
   }
 
@@ -22,7 +30,6 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
   void dispose() {
     super.dispose();
   }
-  //TODO we are here
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +42,13 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
               pageCount: 6,
               pageTitle: "Verify Email & Phone",
               nextPageTitle: "Setup Password",
-              enableNextButton: snapshot,
-              nextPressed: () async {},
+              enableNextButton: true, //snapshot,
+              nextPressed: () async {
+                final navigator = Navigator.of(context);
+                // await bloc.box.put(TempFieldToRegistrtConstant.ratePerHour, bloc.ratePerHourController.text);
+                await bloc.box.put(DatabaseFieldConstant.registrationStep, "6");
+                navigator.pushNamed(RoutesConstants.registerfaze7Screen);
+              },
             );
           }),
       body: GestureDetector(
@@ -44,12 +56,29 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
           FocusManager.instance.primaryFocus?.unfocus();
           bloc.validateFieldsForFaze6();
         },
-        child: const SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [],
-            ),
-          ),
+        child: SafeArea(
+          child: ValueListenableBuilder<LoadingStatus>(
+              valueListenable: bloc.loadingStatus,
+              builder: (context, loadingStatus, child) {
+                if (loadingStatus == LoadingStatus.inprogress) {
+                  return const Center(child: CircularProgressIndicator());
+                } else {
+                  return SingleChildScrollView(
+                    child: ValueListenableBuilder<FieldCanShow>(
+                        valueListenable: bloc.fieldShowingStatus,
+                        builder: (context, fieldShowingStatus, child) {
+                          return Column(
+                            children: [
+                              FieldsFase1(bloc: bloc),
+                              FieldsFase2(bloc: bloc, fieldShowingStatus: fieldShowingStatus),
+                              FieldsFase3(bloc: bloc, fieldShowingStatus: fieldShowingStatus),
+                              fieldShowingStatus == FieldCanShow.phoneNumberOTP ? FieldsFase4(bloc: bloc) : Container(),
+                            ],
+                          );
+                        }),
+                  );
+                }
+              }),
         ),
       ),
     );

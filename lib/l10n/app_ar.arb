@@ -196,5 +196,13 @@
     "credit" : "مدين",
     "describeyourproblem" : "صف مشكلتك هنا",
     "slogen" : "أحدث تقنيات الاستشارات",
-    "logout" : "تسجيل الخروج"
+    "logout" : "تسجيل الخروج",
+    "enteryourotpnumberexample" : "مثال على الارقام المقبوله 123456",
+    "enteryourphonenumberexample" : "مثال على الارقام المقبوله 795190663",
+    "enteryouremailexample" : "مثال على البريد الإلكتروني المقبول abed.99@gmail.com",
+    "entermobilenumber" : "أدخل رقم الهاتف",
+    "mobilenumbernotvalid" : "رقم الهاتف المدخل غير صحيح"
+
+
+
 }
