@@ -25,25 +25,13 @@ class Register6Bloc {
 
   validateFieldsForFaze6() {
     emailFieldShowingStatusValidated.value = _validateEmail(emailController.text);
-    // if (emailOTPController.text == "000000") {
-    //   fieldShowingStatus.value = FieldCanShow.emailOTPValidated;
-    // } else {
-    //   fieldShowingStatus.value = FieldCanShow.emailValidated;
-    // }
-
-    // if (fieldShowingStatus.value == FieldCanShow.email) {
-    //   fieldShowingStatus.value = FieldCanShow.emailOTP;
-    // }
-    // if (fieldShowingStatus.value == FieldCanShow.phoneNumber) {
-    //   fieldShowingStatus.value = FieldCanShow.phoneNumberOTP;
-    // }
+    mobileFieldShowingStatusValidated.value = mobileNumber.isNotEmpty;
   }
 
   handleListeners() {
     emailOTPController.addListener(() {
       validateFieldsForFaze6();
     });
-    // confirmPasswordController.addListener(_confirmPasswordListen);
   }
 
   Country returnSelectedCountryFromDatabase() {

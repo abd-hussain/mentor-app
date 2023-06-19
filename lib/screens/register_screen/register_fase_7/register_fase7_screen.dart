@@ -48,8 +48,8 @@ class _RegisterFaze7ScreenState extends State<RegisterFaze7Screen> {
                 nextPressed: () async {
                   final navigator = Navigator.of(context);
                   // await bloc.box.put(TempFieldToRegistrtConstant.ratePerHour, bloc.ratePerHourController.text);
-                  // await bloc.box.put(DatabaseFieldConstant.registrationStep, "5");
-                  // navigator.pushNamed(RoutesConstants.registerfaze6Screen);
+                  await bloc.box.put(DatabaseFieldConstant.registrationStep, "7");
+                  navigator.pushNamed(RoutesConstants.loginScreen);
                 },
               );
             }),

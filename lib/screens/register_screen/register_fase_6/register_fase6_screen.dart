@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_6/register_fase6_bloc.dart';
-import 'package:mentor_app/screens/register_screen/register_fase_6/widgets/email_header.dart';
-import 'package:mentor_app/screens/register_screen/register_fase_6/widgets/mobile_number_header.dart';
-
-import 'package:mentor_app/screens/register_screen/register_fase_6/widgets/mobile_number_widget.dart';
-import 'package:mentor_app/screens/register_screen/register_fase_6/widgets/pin_field.dart';
+import 'package:mentor_app/screens/register_screen/register_fase_6/widgets/section_one_view.dart';
+import 'package:mentor_app/screens/register_screen/register_fase_6/widgets/section_two_view.dart';
 import 'package:mentor_app/screens/register_screen/widgets/footer_view.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
-import 'package:mentor_app/shared_widget/custom_text.dart';
-import 'package:mentor_app/shared_widget/custom_textfield.dart';
+import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mentor_app/utils/routes.dart';
 
 class RegisterFaze6Screen extends StatefulWidget {
   const RegisterFaze6Screen({super.key});
@@ -47,10 +42,10 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
               nextPageTitle: "Setup Password",
               enableNextButton: snapshot,
               nextPressed: () async {
-                // final navigator = Navigator.of(context);
+                final navigator = Navigator.of(context);
                 // await bloc.box.put(TempFieldToRegistrtConstant.ratePerHour, bloc.ratePerHourController.text);
-                // await bloc.box.put(DatabaseFieldConstant.registrationStep, "6");
-                // navigator.pushNamed(RoutesConstants.registerfaze7Screen);
+                await bloc.box.put(DatabaseFieldConstant.registrationStep, "6");
+                navigator.pushNamed(RoutesConstants.registerfaze7Screen);
               },
             );
           }),
@@ -69,102 +64,26 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                   return SingleChildScrollView(
                     child: Column(
                       children: [
-                        const EmailHeader(),
-                        CustomTextField(
-                          controller: bloc.emailController,
-                          hintText: AppLocalizations.of(context)!.emailaddress,
-                          keyboardType: TextInputType.emailAddress,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(35),
-                          ],
-                          onChange: (text) {
-                            bloc.emailOTPController.text = "";
-                            bloc.validateFieldsForFaze6();
-                          },
+                        SectionOneView(
+                          emailController: bloc.emailController,
+                          emailOTPController: bloc.emailOTPController,
+                          emailFieldShowingStatusValidated: bloc.emailFieldShowingStatusValidated,
+                          onchange: () => bloc.validateFieldsForFaze6(),
                         ),
-                        ValueListenableBuilder<bool>(
-                            valueListenable: bloc.emailFieldShowingStatusValidated,
-                            builder: (context, snapshot, child) {
-                              return snapshot
-                                  ? Column(
-                                      children: [
-                                        const SizedBox(height: 16),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 16, right: 16),
-                                          child: CustomText(
-                                            title: "Please Enter OTP You recive on the email",
-                                            fontSize: 14,
-                                            textColor: Color(0xff444444),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 16, right: 16),
-                                          child: CustomText(
-                                            title: AppLocalizations.of(context)!.enteryourotpnumberexample,
-                                            fontSize: 11,
-                                            textColor: Colors.grey,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 14),
-                                        PinField(pinController: bloc.emailOTPController),
-                                        const SizedBox(height: 16),
-                                        Container(
-                                          height: 1,
-                                          color: const Color(0xffE8E8E8),
-                                        ),
-                                      ],
-                                    )
-                                  : Container();
-                            }),
-                        const MobileNumberHeader(),
-                        MobileNumberField(
+                        SectionTwoView(
                           initialCountry: bloc.returnSelectedCountryFromDatabase(),
                           countryList: bloc.countriesList,
-                          selectedCountryCode: (selectedCode) {
-                            bloc.countryCode = selectedCode;
+                          countryCodeCallBack: (value) {
+                            bloc.countryCode = value;
+                            bloc.validateFieldsForFaze6();
                           },
-                          enteredPhoneNumber: (mobileNumber) {
-                            bloc.mobileNumber = mobileNumber;
+                          mobileNumberCallBack: (value) {
+                            bloc.mobileNumber = value;
+                            bloc.validateFieldsForFaze6();
                           },
+                          phoneNumberOTPController: bloc.phoneNumberOTPController,
+                          mobileFieldShowingStatusValidated: bloc.mobileFieldShowingStatusValidated,
                         ),
-                        const SizedBox(height: 16),
-                        ValueListenableBuilder<bool>(
-                            valueListenable: bloc.mobileFieldShowingStatusValidated,
-                            builder: (context, snapshot, child) {
-                              return snapshot
-                                  ? Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 16, right: 16),
-                                          child: CustomText(
-                                            title: "Please Enter OTP You recive on the Phone Number",
-                                            fontSize: 14,
-                                            textColor: Color(0xff444444),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 16, right: 16),
-                                          child: CustomText(
-                                            title: AppLocalizations.of(context)!.enteryourotpnumberexample,
-                                            fontSize: 11,
-                                            textColor: Colors.grey,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 14),
-                                        PinField(
-                                          pinController: bloc.phoneNumberOTPController,
-                                        ),
-                                        const SizedBox(height: 16),
-                                        Container(
-                                          height: 1,
-                                          color: const Color(0xffE8E8E8),
-                                        ),
-                                      ],
-                                    )
-                                  : Container();
-                            })
                       ],
                     ),
                   );
