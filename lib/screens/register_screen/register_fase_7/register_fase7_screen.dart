@@ -4,6 +4,8 @@ import 'package:mentor_app/screens/register_screen/register_fase_7/widgets/passw
 import 'package:mentor_app/screens/register_screen/widgets/footer_view.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/shared_widget/password_field.dart';
+import 'package:mentor_app/utils/constants/database_constant.dart';
+import 'package:mentor_app/utils/routes.dart';
 
 class RegisterFaze7Screen extends StatefulWidget {
   const RegisterFaze7Screen({super.key});
@@ -43,7 +45,12 @@ class _RegisterFaze7ScreenState extends State<RegisterFaze7Screen> {
                 pageTitle: "Setup Password",
                 nextPageTitle: "You will be ready to go",
                 enableNextButton: snapshot,
-                nextPressed: () async {},
+                nextPressed: () async {
+                  final navigator = Navigator.of(context);
+                  // await bloc.box.put(TempFieldToRegistrtConstant.ratePerHour, bloc.ratePerHourController.text);
+                  // await bloc.box.put(DatabaseFieldConstant.registrationStep, "5");
+                  // navigator.pushNamed(RoutesConstants.registerfaze6Screen);
+                },
               );
             }),
         body: GestureDetector(

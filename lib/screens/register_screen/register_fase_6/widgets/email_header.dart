@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:mentor_app/screens/register_screen/register_fase_6/register_fase6_bloc.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
-import 'package:mentor_app/shared_widget/custom_textfield.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class FieldsFase1 extends StatelessWidget {
-  final Register6Bloc bloc;
-  const FieldsFase1({super.key, required this.bloc});
+class EmailHeader extends StatelessWidget {
+  const EmailHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,18 +28,6 @@ class FieldsFase1 extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 14),
-        CustomTextField(
-          controller: bloc.emailController,
-          hintText: AppLocalizations.of(context)!.emailaddress,
-          keyboardType: TextInputType.emailAddress,
-          inputFormatters: [
-            LengthLimitingTextInputFormatter(35),
-          ],
-          onChange: (text) {
-            bloc.emailOTPController.text = "";
-            bloc.validateFieldsForFaze6();
-          },
-        ),
       ],
     );
   }

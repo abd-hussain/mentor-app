@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:mentor_app/screens/register_screen/register_fase_6/register_fase6_bloc.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 
@@ -15,9 +14,8 @@ enum OTPSTATUS {
 
 class PinField extends StatefulWidget {
   final TextEditingController pinController;
-  final Register6Bloc bloc;
 
-  const PinField({super.key, required this.pinController, required this.bloc});
+  const PinField({super.key, required this.pinController});
 
   @override
   State<PinField> createState() => _PinFieldState();
@@ -32,18 +30,18 @@ class _PinFieldState extends State<PinField> {
 
   @override
   void didChangeDependencies() {
-    widget.bloc.emailController.addListener(() {
-      timerStartNumberSec = 0;
-      timerStartNumberMin = 0;
-      widget.pinController.text = "";
-      otpValidationStatus.value = OTPSTATUS.idk;
-    });
+    // widget.bloc.emailController.addListener(() {
+    //   timerStartNumberSec = 0;
+    //   timerStartNumberMin = 0;
+    //   widget.pinController.text = "";
+    //   otpValidationStatus.value = OTPSTATUS.idk;
+    // });
 
     widget.pinController.addListener(() {
       if (widget.pinController.text.length == 6) {
         if (widget.pinController.text == "000000") {
           otpValidationStatus.value = OTPSTATUS.valid;
-          widget.bloc.fieldShowingStatus.value = FieldCanShow.phoneNumber;
+          // widget.bloc.fieldShowingStatus.value = FieldCanShow.phoneNumber;
         } else {
           otpValidationStatus.value = OTPSTATUS.notValid;
         }

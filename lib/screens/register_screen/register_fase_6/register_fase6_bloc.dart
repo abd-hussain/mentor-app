@@ -6,40 +6,44 @@ import 'package:mentor_app/services/filter_services.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
 
-enum FieldCanShow {
-  email,
-  emailOTP,
-  phoneNumber,
-  phoneNumberOTP,
-}
-
 class Register6Bloc {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
   ValueNotifier<LoadingStatus> loadingStatus = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
-  ValueNotifier<FieldCanShow> fieldShowingStatus = ValueNotifier<FieldCanShow>(FieldCanShow.email);
 
   ValueNotifier<bool> enableNextBtn = ValueNotifier<bool>(false);
 
   TextEditingController emailController = TextEditingController();
   TextEditingController emailOTPController = TextEditingController();
+  ValueNotifier<bool> emailFieldShowingStatusValidated = ValueNotifier<bool>(false);
 
   TextEditingController phoneNumberOTPController = TextEditingController();
+  ValueNotifier<bool> mobileFieldShowingStatusValidated = ValueNotifier<bool>(false);
 
   String countryCode = "";
   String mobileNumber = "";
   List<Country> countriesList = [];
 
   validateFieldsForFaze6() {
-    if (_validateEmail(emailController.text)) {
-      if (fieldShowingStatus.value == FieldCanShow.email) {
-        fieldShowingStatus.value = FieldCanShow.emailOTP;
-      }
-      if (fieldShowingStatus.value == FieldCanShow.phoneNumber) {
-        fieldShowingStatus.value = FieldCanShow.phoneNumberOTP;
-      }
-    } else {
-      fieldShowingStatus.value = FieldCanShow.email;
-    }
+    emailFieldShowingStatusValidated.value = _validateEmail(emailController.text);
+    // if (emailOTPController.text == "000000") {
+    //   fieldShowingStatus.value = FieldCanShow.emailOTPValidated;
+    // } else {
+    //   fieldShowingStatus.value = FieldCanShow.emailValidated;
+    // }
+
+    // if (fieldShowingStatus.value == FieldCanShow.email) {
+    //   fieldShowingStatus.value = FieldCanShow.emailOTP;
+    // }
+    // if (fieldShowingStatus.value == FieldCanShow.phoneNumber) {
+    //   fieldShowingStatus.value = FieldCanShow.phoneNumberOTP;
+    // }
+  }
+
+  handleListeners() {
+    emailOTPController.addListener(() {
+      validateFieldsForFaze6();
+    });
+    // confirmPasswordController.addListener(_confirmPasswordListen);
   }
 
   Country returnSelectedCountryFromDatabase() {
