@@ -68,22 +68,29 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                           emailController: bloc.emailController,
                           emailOTPController: bloc.emailOTPController,
                           emailFieldShowingStatusValidated: bloc.emailFieldShowingStatusValidated,
-                          onchange: () => bloc.validateFieldsForFaze6(),
+                          onEmailchange: () => bloc.validateFieldsForFaze6(),
+                          onPinChange: (p0) {
+                            bloc.pinCode1 = p0;
+                            bloc.validateFieldsForFaze6();
+                          },
                         ),
                         SectionTwoView(
-                          initialCountry: bloc.returnSelectedCountryFromDatabase(),
-                          countryList: bloc.countriesList,
-                          countryCodeCallBack: (value) {
-                            bloc.countryCode = value;
-                            bloc.validateFieldsForFaze6();
-                          },
-                          mobileNumberCallBack: (value) {
-                            bloc.mobileNumber = value;
-                            bloc.validateFieldsForFaze6();
-                          },
-                          phoneNumberOTPController: bloc.phoneNumberOTPController,
-                          mobileFieldShowingStatusValidated: bloc.mobileFieldShowingStatusValidated,
-                        ),
+                            initialCountry: bloc.returnSelectedCountryFromDatabase(),
+                            countryList: bloc.countriesList,
+                            countryCodeCallBack: (value) {
+                              bloc.countryCode = value;
+                              bloc.validateFieldsForFaze6();
+                            },
+                            mobileNumberCallBack: (value) {
+                              bloc.mobileNumber = value;
+                              bloc.validateFieldsForFaze6();
+                            },
+                            phoneNumberOTPController: bloc.phoneNumberOTPController,
+                            mobileFieldShowingStatusValidated: bloc.mobileFieldShowingStatusValidated,
+                            onPinChange: (p0) {
+                              bloc.pinCode2 = p0;
+                              bloc.validateFieldsForFaze6();
+                            }),
                       ],
                     ),
                   );

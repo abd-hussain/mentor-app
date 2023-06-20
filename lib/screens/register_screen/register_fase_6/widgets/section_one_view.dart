@@ -9,12 +9,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SectionOneView extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController emailOTPController;
-  final Function onchange;
+  final Function onEmailchange;
+  final Function(OTPSTATUS) onPinChange;
 
   final ValueNotifier<bool> emailFieldShowingStatusValidated;
   const SectionOneView({
     super.key,
-    required this.onchange,
+    required this.onEmailchange,
+    required this.onPinChange,
     required this.emailController,
     required this.emailOTPController,
     required this.emailFieldShowingStatusValidated,
@@ -34,7 +36,8 @@ class SectionOneView extends StatelessWidget {
           ],
           onChange: (text) {
             emailOTPController.text = "";
-            onchange();
+
+            onEmailchange();
           },
         ),
         ValueListenableBuilder<bool>(
@@ -62,7 +65,12 @@ class SectionOneView extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 14),
-                        PinField(pinController: emailOTPController),
+                        PinField(
+                          pinController: emailOTPController,
+                          callBack: (p0) {
+                            onPinChange(p0);
+                          },
+                        ),
                         const SizedBox(height: 16),
                         Container(
                           height: 1,

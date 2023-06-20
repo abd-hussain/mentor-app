@@ -14,8 +14,9 @@ enum OTPSTATUS {
 
 class PinField extends StatefulWidget {
   final TextEditingController pinController;
+  final Function(OTPSTATUS) callBack;
 
-  const PinField({super.key, required this.pinController});
+  const PinField({super.key, required this.pinController, required this.callBack});
 
   @override
   State<PinField> createState() => _PinFieldState();
@@ -41,9 +42,11 @@ class _PinFieldState extends State<PinField> {
       if (widget.pinController.text.length == 6) {
         if (widget.pinController.text == "000000") {
           otpValidationStatus.value = OTPSTATUS.valid;
+          widget.callBack(OTPSTATUS.valid);
           // widget.bloc.fieldShowingStatus.value = FieldCanShow.phoneNumber;
         } else {
           otpValidationStatus.value = OTPSTATUS.notValid;
+          widget.callBack(OTPSTATUS.notValid);
         }
         // bloc.callVerifyRequset().then((value) async {
         //   if (value.data != null) {
@@ -59,6 +62,8 @@ class _PinFieldState extends State<PinField> {
         //     bloc.otpNotValid.value = true;
         //   }
         // });
+      } else {
+        otpValidationStatus.value = OTPSTATUS.idk;
       }
     });
 

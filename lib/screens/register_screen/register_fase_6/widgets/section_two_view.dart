@@ -13,6 +13,7 @@ class SectionTwoView extends StatelessWidget {
   final Function(String) mobileNumberCallBack;
   final ValueNotifier<bool> mobileFieldShowingStatusValidated;
   final TextEditingController phoneNumberOTPController;
+  final Function(OTPSTATUS) onPinChange;
 
   const SectionTwoView({
     super.key,
@@ -22,6 +23,7 @@ class SectionTwoView extends StatelessWidget {
     required this.mobileNumberCallBack,
     required this.mobileFieldShowingStatusValidated,
     required this.phoneNumberOTPController,
+    required this.onPinChange,
   });
 
   @override
@@ -33,9 +35,12 @@ class SectionTwoView extends StatelessWidget {
           initialCountry: initialCountry,
           countryList: countryList,
           selectedCountryCode: (selectedCode) {
+            phoneNumberOTPController.text = "";
             countryCodeCallBack(selectedCode);
           },
           enteredPhoneNumber: (mobileNumber) {
+            phoneNumberOTPController.text = "";
+
             mobileNumberCallBack(mobileNumber);
           },
         ),
@@ -66,6 +71,9 @@ class SectionTwoView extends StatelessWidget {
                         const SizedBox(height: 14),
                         PinField(
                           pinController: phoneNumberOTPController,
+                          callBack: (p0) {
+                            onPinChange(p0);
+                          },
                         ),
                         const SizedBox(height: 16),
                         Container(
