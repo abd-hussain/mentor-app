@@ -51,7 +51,17 @@ class _RatePerHourScreenState extends State<RatePerHourScreen> {
                     child: Column(
                       children: [
                         Container(
-                          color: Colors.white,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 0.5,
+                                blurRadius: 5,
+                                offset: const Offset(0, 0.1),
+                              ),
+                            ],
+                          ),
                           child: Padding(
                             padding: const EdgeInsets.all(16),
                             child: Column(

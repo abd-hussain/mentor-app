@@ -3,6 +3,7 @@ import 'package:mentor_app/models/https/categories_model.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_3/register_fase3_bloc.dart';
 import 'package:mentor_app/screens/register_screen/widgets/certificate_view.dart';
 import 'package:mentor_app/screens/register_screen/widgets/footer_view.dart';
+import 'package:mentor_app/shared_widget/bio_field.dart';
 import 'package:mentor_app/shared_widget/category_field.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -77,32 +78,9 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                       );
                     }),
                 const SizedBox(height: 8),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: const Color(0xffe0e0e0),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        controller: bloc.bioController,
-                        decoration: InputDecoration(
-                          hintText: AppLocalizations.of(context)!.biohint,
-                          hintMaxLines: 2,
-                          hintStyle: const TextStyle(fontSize: 15),
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                        ),
-                        onChanged: (text) => bloc.validateFieldsForFaze3(),
-                        maxLines: 5,
-                        maxLength: 200,
-                      ),
-                    ),
-                  ),
+                BioField(
+                  bioController: bloc.bioController,
+                  onChanged: (text) => bloc.validateFieldsForFaze3(),
                 ),
                 FileHolderField(
                   title: AppLocalizations.of(context)!.cv,

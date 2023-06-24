@@ -7,10 +7,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CategoryField extends StatelessWidget {
   final TextEditingController controller;
+  final bool isEnable;
   final List<Category> listOfCategory;
   final Function(Category) selectedCategory;
   const CategoryField(
-      {required this.controller, required this.listOfCategory, required this.selectedCategory, super.key});
+      {required this.controller,
+      required this.listOfCategory,
+      required this.selectedCategory,
+      this.isEnable = true,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +23,7 @@ class CategoryField extends StatelessWidget {
       children: [
         CustomTextField(
           readOnly: true,
+          enabled: isEnable,
           controller: controller,
           hintText: AppLocalizations.of(context)!.selectCategory,
           padding: const EdgeInsets.only(left: 8, right: 8),
@@ -27,12 +33,14 @@ class CategoryField extends StatelessWidget {
           ],
         ),
         InkWell(
-          onTap: () async {
-            await BottomSheetsUtil().categoryBottomSheet(context, listOfCategory, (categorySelected) {
-              controller.text = categorySelected.name!;
-              selectedCategory(categorySelected);
-            });
-          },
+          onTap: isEnable
+              ? () async {
+                  await BottomSheetsUtil().categoryBottomSheet(context, listOfCategory, (categorySelected) {
+                    controller.text = categorySelected.name!;
+                    selectedCategory(categorySelected);
+                  });
+                }
+              : null,
           child: Padding(
             padding: const EdgeInsets.only(left: 8, right: 16),
             child: SizedBox(

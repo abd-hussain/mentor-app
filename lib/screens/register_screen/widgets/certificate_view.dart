@@ -5,7 +5,8 @@ import 'package:mentor_app/shared_widget/file_holder_field.dart';
 
 class CertificateView extends StatefulWidget {
   final Function(List<File>) certificatesListCallBack;
-  const CertificateView({super.key, required this.certificatesListCallBack});
+  final double width;
+  const CertificateView({super.key, required this.certificatesListCallBack, this.width = 64});
 
   @override
   State<CertificateView> createState() => _CertificateViewState();
@@ -29,7 +30,7 @@ class _CertificateViewState extends State<CertificateView> {
                 children: [
                   FileHolderField(
                     title: "Certificate (${index + 1})",
-                    width: MediaQuery.of(context).size.width - 64,
+                    width: MediaQuery.of(context).size.width - widget.width,
                     onAddFile: (file) {
                       certificatesList.add(file);
                       widget.certificatesListCallBack(certificatesList);
