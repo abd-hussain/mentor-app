@@ -7,6 +7,7 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/shared_widget/custom_textfield.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/routes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterFaze5Screen extends StatefulWidget {
   const RegisterFaze5Screen({super.key});
@@ -66,8 +67,7 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CustomText(
-                      title:
-                          "This Rate will be shown to the user per hour when they try to reserve an appointment with you",
+                      title: AppLocalizations.of(context)!.rateperhourdesc1,
                       fontSize: 14,
                       maxLins: 3,
                       textColor: const Color(0xff444444),
@@ -78,21 +78,21 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CustomText(
-                      title: "We encourage you to set a realistic number to get more reservations",
+                      title: AppLocalizations.of(context)!.rateperhourdesc2,
                       fontSize: 14,
                       maxLins: 3,
                       textAlign: TextAlign.center,
-                      textColor: Color(0xff444444),
+                      textColor: const Color(0xff444444),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CustomText(
-                      title: "Recommended Rate Per Hour for you is",
+                      title: AppLocalizations.of(context)!.rateperhourdesc3,
                       fontSize: 14,
                       textAlign: TextAlign.center,
-                      textColor: Color(0xff444444),
+                      textColor: const Color(0xff444444),
                       fontWeight: FontWeight.bold,
                     ),
                   ),

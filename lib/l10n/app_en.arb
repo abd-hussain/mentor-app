@@ -201,8 +201,11 @@
     "enteryourphonenumberexample" : "Example on the acceptable numbers 795190663",
     "enteryouremailexample" : "Example on the acceptable email abed.99@gmail.com",
     "entermobilenumber" : "Enter Mobile Number",
-    "mobilenumbernotvalid" : "Entered Mobile Number is not valid"
-
+    "mobilenumbernotvalid" : "Entered Mobile Number is not valid",
+    "rateperhour" : "Edit Rate Per Hour",
+    "rateperhourdesc1" : "This Rate will be shown to the user per hour when they try to reserve an appointment with you",
+    "rateperhourdesc2" : "We encourage you to set a realistic number to get more reservations",
+    "rateperhourdesc3" : "Recommended Rate Per Hour for you is"
 
 
 }

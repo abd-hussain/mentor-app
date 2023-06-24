@@ -37,6 +37,11 @@ class AccountBloc extends Bloc<AccountService> {
         onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.workingHoursScreen),
       ),
       ProfileOptions(
+        icon: Ionicons.cash_outline,
+        name: AppLocalizations.of(context)!.rateperhour,
+        onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.ratePerHourScreen),
+      ),
+      ProfileOptions(
         icon: Icons.password,
         name: AppLocalizations.of(context)!.editprofilepassword,
         onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.changePasswordScreen),
