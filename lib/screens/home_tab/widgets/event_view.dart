@@ -27,7 +27,7 @@ class EventView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+      padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -265,14 +265,15 @@ class EventView extends StatelessWidget {
           ),
           const Expanded(child: SizedBox()),
           IconButton(
-              onPressed: () => onAddEvent(),
-              icon: Container(
-                color: Colors.white,
-                child: const Icon(
-                  Icons.add,
-                  color: Color(0xff444444),
-                ),
-              ))
+            onPressed: () => onAddEvent(),
+            icon: Container(
+              color: Colors.white,
+              child: const Icon(
+                Icons.add,
+                color: Color(0xff444444),
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -24,10 +24,7 @@ class MethodNameConstant {
   static const String event = "event/";
   static const String clientEvent = "event/client";
 
-  static const String reportStory = "report/story";
   static const String reportEvent = "report/event";
-
-  static const String tipsQuestions = "tips/";
 
   static const String uploadContactList = "settings/leads";
   static const String auth = "client-auth";

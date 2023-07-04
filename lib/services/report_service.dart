@@ -78,15 +78,6 @@ class ReportService with Service {
     return true;
   }
 
-  Future<dynamic> reportStory({required int storyId}) async {
-    return await repository.callRequest(
-      requestType: RequestType.post,
-      methodName: MethodNameConstant.reportStory,
-      queryParam: {"storyId": storyId, "isMentor": true},
-      postBody: null,
-    );
-  }
-
   Future<dynamic> reportEvent({required int eventId}) async {
     return await repository.callRequest(
       requestType: RequestType.post,
