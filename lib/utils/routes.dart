@@ -5,7 +5,6 @@ import 'package:mentor_app/screens/call_tab/call_screen.dart';
 import 'package:mentor_app/screens/change_password/change_password_screen.dart';
 import 'package:mentor_app/screens/edit_experience/edit_experience_screen.dart';
 import 'package:mentor_app/screens/edit_profile/edit_profile_screen.dart';
-import 'package:mentor_app/screens/event_details/event_details_screen.dart';
 import 'package:mentor_app/screens/forgot_password/forgot_password_confirmation_screen.dart';
 import 'package:mentor_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:mentor_app/screens/home_tab/home_screen.dart';
@@ -87,5 +86,4 @@ final Map<String, Widget> routes = {
   RoutesConstants.paymentsScreen: const PaymentsScreen(),
   RoutesConstants.forgotPasswordScreen: const ForgotPasswordScreen(),
   RoutesConstants.forgotPasswordConfirmationScreen: const ForgotPasswordConfirmationScreen(),
-  RoutesConstants.eventDetailsScreen: const EventDetailsScreen(),
 };

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:mentor_app/locator.dart';
 import 'package:mentor_app/services/general/network_info_service.dart';
+import 'package:mentor_app/utils/constants/constant.dart';
 import 'package:mentor_app/utils/error/exceptions.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:mentor_app/utils/repository/http_interceptor.dart';
@@ -16,7 +17,9 @@ class HttpRepository {
       FormData? formData,
       String contentType = Headers.jsonContentType}) async {
     Response response;
-    const baseUrl = 'https://www.helpera.app/';
+
+    const baseUrl = AppConstant.applicationMainURL;
+
     if (await locator<NetworkInfoService>().isConnected()) {
       final dioClient = locator<Dio>()
         ..options = BaseOptions(
@@ -35,6 +38,7 @@ class HttpRepository {
             queryParameters: queryParam,
             options: Options(contentType: contentType),
           );
+
           break;
         case RequestType.post:
           response = await dioClient.post(

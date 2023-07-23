@@ -7,9 +7,8 @@ import 'package:mentor_app/utils/error/exceptions.dart';
 
 class NetworkInfoService {
   ValueNotifier<bool> networkStateConnection = ValueNotifier<bool>(false);
-
+  late ConnectivityResult result;
   Future<bool> isConnected() async {
-    late ConnectivityResult result;
     try {
       result = await Connectivity().checkConnectivity();
     } on PlatformException catch (e) {

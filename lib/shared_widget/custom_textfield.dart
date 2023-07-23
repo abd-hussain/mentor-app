@@ -15,6 +15,7 @@ class CustomTextField extends StatelessWidget {
   final TextAlign textAlign;
   final List<TextInputFormatter>? inputFormatters;
   final Function(String text)? onChange;
+  final Function()? onEditingComplete;
 
   const CustomTextField(
       {required this.controller,
@@ -27,6 +28,7 @@ class CustomTextField extends StatelessWidget {
       this.keyboardType,
       this.inputFormatters,
       this.onChange,
+      this.onEditingComplete,
       this.padding = const EdgeInsets.only(left: 16, right: 16),
       this.textAlign = TextAlign.start,
       super.key});
@@ -34,8 +36,8 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: padding,
-        child: TextField(
+      padding: padding,
+      child: TextField(
           textAlign: textAlign,
           obscureText: obscureText,
           enabled: enabled,
@@ -69,6 +71,11 @@ class CustomTextField extends StatelessWidget {
               onChange!(text);
             }
           },
-        ));
+          onEditingComplete: () {
+            if (onEditingComplete != null) {
+              onEditingComplete!();
+            }
+          }),
+    );
   }
 }

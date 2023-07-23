@@ -11,6 +11,7 @@ class MainBannerHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BannerCarousel(
+      height: MediaQuery.of(context).size.height - 350,
       customizedBanners: _listOfBanners(bannerList),
       activeColor: const Color(0xff4CB6EA),
     );

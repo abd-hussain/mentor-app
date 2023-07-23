@@ -77,13 +77,4 @@ class ReportService with Service {
 
     return true;
   }
-
-  Future<dynamic> reportEvent({required int eventId}) async {
-    return await repository.callRequest(
-      requestType: RequestType.post,
-      methodName: MethodNameConstant.reportEvent,
-      queryParam: {"eventId": eventId, "isMentor": true},
-      postBody: null,
-    );
-  }
 }

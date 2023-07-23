@@ -7,13 +7,13 @@ class AppConstant {
   // static const String useridToPass = "useridToPass";
   // static const String apikeyToPass = "apikeyToPass";
   // static const String tokenToPass = "tokenToPass";
-  static const String imagesBaseURLForCountries = "https://www.helpera.app/static/countries/";
-  static const String imagesBaseURLForCategories = "https://www.helpera.app/static/categories/";
-  static const String imagesBaseURLForBanners = "https://www.helpera.app/static/banners/";
-  static const String imagesBaseURLForMentors = "https://www.helpera.app/static/mentorsImg/";
-  static const String imagesBaseURLForStories = "https://www.helpera.app/static/story/";
-  static const String imagesBaseURLForEvents = "https://www.helpera.app/static/events/";
-  static const String imagesBaseURLForProfileImages = "https://www.helpera.app/profileImg/";
+  static const String applicationMainURL = "http://127.0.0.1:8000/"; //'https://www.helpera.app/'
+
+  static const String imagesBaseURLForCountries = "${AppConstant.applicationMainURL}static/countries/";
+  static const String imagesBaseURLForCategories = "${AppConstant.applicationMainURL}static/categories/";
+  static const String imagesBaseURLForBanners = "${AppConstant.applicationMainURL}static/banners/";
+  static const String imagesBaseURLForMentors = "${AppConstant.applicationMainURL}static/mentorsImg/";
+  static const String imagesBaseURLForProfileImages = "${AppConstant.applicationMainURL}profileImg/";
 
   static const String termsLink = "https://www.helpera.app/static/web/terms.html";
   static const String aboutusLink = "https://www.helpera.app/static/web/aboutus.html";
