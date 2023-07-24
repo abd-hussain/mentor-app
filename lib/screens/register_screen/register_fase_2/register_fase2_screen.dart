@@ -243,10 +243,17 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                                   if (snapshot == null) {
                                     return Container();
                                   } else {
-                                    return CustomText(
-                                      title: snapshot ? "Code is Valid" : "Not Valid Code",
-                                      fontSize: 12,
-                                      textColor: snapshot ? Colors.green : Colors.red,
+                                    return Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 20, right: 20),
+                                          child: CustomText(
+                                            title: snapshot ? "Code is Valid" : "Not Valid Code",
+                                            fontSize: 12,
+                                            textColor: snapshot ? Colors.green : Colors.red,
+                                          ),
+                                        ),
+                                      ],
                                     );
                                   }
                                 }),
