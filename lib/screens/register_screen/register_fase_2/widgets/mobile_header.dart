@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class MobileNumberHeader extends StatelessWidget {
-  const MobileNumberHeader({super.key});
+class MobileHeader extends StatelessWidget {
+  const MobileHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +13,9 @@ class MobileNumberHeader extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 16, right: 16),
           child: CustomText(
-            title: "Please Enter Your Phone Number",
+            title: AppLocalizations.of(context)!.pleaseenteryourphonenumber,
             fontSize: 14,
-            textColor: Color(0xff444444),
+            textColor: const Color(0xff444444),
           ),
         ),
         const SizedBox(height: 5),

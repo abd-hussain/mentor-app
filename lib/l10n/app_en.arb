@@ -156,8 +156,7 @@
     "registerstep3" : "Fill Your Experiences",
     "registerstep4" : "set your Working Hours",
     "registerstep5" : "Setup Your Rate Per Hour",
-    "registerstep6" : "Verify Your Email & Phone Number",
-    "registerstep7" : "Set your Password",
+    "registerstep6" : "Set your Password",
     "acceptandcontinue" : "Accept & Continue",
     "next" : "Next",
     "optional" : "Optional",
@@ -221,7 +220,11 @@
     "save" : "Save",
     "pm" : "pm",
     "am" : "am",
-    "verifyemailandphone" : "Verify Email & Phone"
+    "verifyemailandphone" : "Verify Email & Phone",
+    "setuppassword" : "Setup Password",
+    "emailformatvalid" : "Email is valid",
+    "pleaseenteryourrmailaddress" : "Please Enter Your Email Address",
+    "pleaseenteryourphonenumber" : "Please Enter Your Phone Number"
 
 
 

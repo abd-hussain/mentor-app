@@ -197,10 +197,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                             Navigator.of(context, rootNavigator: true)
                                                 .pushNamed(RoutesConstants.registerfaze6Screen);
                                             break;
-                                          case 6:
-                                            Navigator.of(context, rootNavigator: true)
-                                                .pushNamed(RoutesConstants.registerfaze7Screen);
-                                            break;
                                           default:
                                             bottomsheet.termsBottomSheet(openNext: () {
                                               bloc.box.put(DatabaseFieldConstant.registrationStep, "1");

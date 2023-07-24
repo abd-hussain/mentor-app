@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_6/register_fase6_bloc.dart';
-import 'package:mentor_app/screens/register_screen/register_fase_6/widgets/section_one_view.dart';
-import 'package:mentor_app/screens/register_screen/register_fase_6/widgets/section_two_view.dart';
+import 'package:mentor_app/screens/register_screen/register_fase_6/widgets/email_header.dart';
+import 'package:mentor_app/screens/register_screen/register_fase_6/widgets/password_complexity.dart';
 import 'package:mentor_app/screens/register_screen/widgets/footer_view.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
+import 'package:mentor_app/shared_widget/custom_text.dart';
+import 'package:mentor_app/shared_widget/custom_textfield.dart';
+import 'package:mentor_app/shared_widget/password_field.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
-import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -21,7 +24,7 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
 
   @override
   void didChangeDependencies() {
-    bloc.listOfCountries();
+    bloc.handleListeners();
     super.didChangeDependencies();
   }
 
@@ -32,71 +35,101 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: customAppBar(title: ""),
-      bottomNavigationBar: ValueListenableBuilder<bool>(
-          valueListenable: bloc.enableNextBtn,
-          builder: (context, snapshot, child) {
-            return RegistrationFooterView(
-              pageCount: 6,
-              pageTitle: AppLocalizations.of(context)!.verifyemailandphone,
-              nextPageTitle: "Setup Password",
-              enableNextButton: snapshot,
-              nextPressed: () async {
-                final navigator = Navigator.of(context);
-                // await bloc.box.put(TempFieldToRegistrtConstant.ratePerHour, bloc.ratePerHourController.text);
-                await bloc.box.put(DatabaseFieldConstant.registrationStep, "6");
-                navigator.pushNamed(RoutesConstants.registerfaze7Screen);
-              },
-            );
-          }),
-      body: GestureDetector(
-        onTap: () {
-          FocusManager.instance.primaryFocus?.unfocus();
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+        if (bloc.emailController.text.isEmpty) {
+          bloc.validateEmail.value = null;
+        } else {
           bloc.validateFieldsForFaze6();
-        },
-        child: SafeArea(
-          child: ValueListenableBuilder<LoadingStatus>(
-              valueListenable: bloc.loadingStatus,
-              builder: (context, loadingStatus, child) {
-                if (loadingStatus == LoadingStatus.inprogress) {
-                  return const Center(child: CircularProgressIndicator());
-                } else {
-                  return SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SectionOneView(
-                          emailController: bloc.emailController,
-                          emailOTPController: bloc.emailOTPController,
-                          emailFieldShowingStatusValidated: bloc.emailFieldShowingStatusValidated,
-                          onEmailchange: () => bloc.validateFieldsForFaze6(),
-                          onPinChange: (p0) {
-                            bloc.pinCode1 = p0;
-                            bloc.validateFieldsForFaze6();
-                          },
-                        ),
-                        SectionTwoView(
-                            initialCountry: bloc.returnSelectedCountryFromDatabase(),
-                            countryList: bloc.countriesList,
-                            countryCodeCallBack: (value) {
-                              bloc.countryCode = value;
-                              bloc.validateFieldsForFaze6();
-                            },
-                            mobileNumberCallBack: (value) {
-                              bloc.mobileNumber = value;
-                              bloc.validateFieldsForFaze6();
-                            },
-                            phoneNumberOTPController: bloc.phoneNumberOTPController,
-                            mobileFieldShowingStatusValidated: bloc.mobileFieldShowingStatusValidated,
-                            onPinChange: (p0) {
-                              bloc.pinCode2 = p0;
-                              bloc.validateFieldsForFaze6();
-                            }),
-                      ],
-                    ),
-                  );
-                }
-              }),
+        }
+      },
+      child: Scaffold(
+        appBar: customAppBar(title: ""),
+        bottomNavigationBar: ValueListenableBuilder<bool>(
+            valueListenable: bloc.enableNextBtn,
+            builder: (context, snapshot, child) {
+              return RegistrationFooterView(
+                pageCount: 6,
+                pageTitle: "Setup Password",
+                nextPageTitle: "You will be ready to go",
+                enableNextButton: snapshot,
+                nextPressed: () async {
+                  final navigator = Navigator.of(context);
+                  // await bloc.box.put(TempFieldToRegistrtConstant.ratePerHour, bloc.ratePerHourController.text);
+                  await bloc.box.put(DatabaseFieldConstant.registrationStep, "6");
+                  navigator.pushNamed(RoutesConstants.loginScreen);
+                },
+              );
+            }),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const EmailHeader(),
+                CustomTextField(
+                  controller: bloc.emailController,
+                  hintText: AppLocalizations.of(context)!.emailaddress,
+                  keyboardType: TextInputType.emailAddress,
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(35),
+                  ],
+                  onChange: (text) {
+                    bloc.validateFieldsForFaze6();
+                  },
+                ),
+                ValueListenableBuilder<bool?>(
+                    valueListenable: bloc.validateEmail,
+                    builder: (context, snapshot, child) {
+                      if (snapshot == null) {
+                        return Container();
+                      } else {
+                        return Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20, right: 20),
+                              child: CustomText(
+                                title: snapshot
+                                    ? AppLocalizations.of(context)!.emailformatvalid
+                                    : AppLocalizations.of(context)!.emailformatnotvalid,
+                                fontSize: 12,
+                                textColor: snapshot ? Colors.green : Colors.red,
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+                    }),
+                const SizedBox(height: 30),
+                PasswordField(
+                  controller: bloc.passwordController,
+                  showHidePasswordClearNotifier: bloc.showHidePasswordClearNotifier,
+                  onClear: () {
+                    bloc.passwordController.clear();
+                    bloc.showHidePasswordClearNotifier.value = false;
+                  },
+                  onchange: () => bloc.validateFieldsForFaze6(),
+                ),
+                const SizedBox(height: 20),
+                PasswordField(
+                  controller: bloc.confirmPasswordController,
+                  hintText: "Confirm Password",
+                  showHidePasswordClearNotifier: bloc.showHideConfirmPasswordClearNotifier,
+                  onClear: () {
+                    bloc.confirmPasswordController.clear();
+                    bloc.showHideConfirmPasswordClearNotifier.value = false;
+                  },
+                  onchange: () => bloc.validateFieldsForFaze6(),
+                ),
+                const SizedBox(height: 20),
+                PasswordComplexity(
+                  passwordEquilConfirmPasswordNotifier: bloc.passwordEquilConfirmPasswordNotifier,
+                  passwordHaveNumberNotifier: bloc.passwordHaveNumberNotifier,
+                  passwordMoreThan8CharNotifier: bloc.passwordMoreThan8CharNotifier,
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );

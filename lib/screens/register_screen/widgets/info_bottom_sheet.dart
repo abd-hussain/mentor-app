@@ -118,12 +118,6 @@ class RegisterInfoBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep6,
                 textColor: step >= 6 ? Colors.green : const Color(0xff444444),
               ),
-              const SizedBox(height: 20),
-              PointsInLastViewBooking(
-                number: step >= 7 ? "*" : "7",
-                text: AppLocalizations.of(context)!.registerstep7,
-                textColor: step >= 7 ? Colors.green : const Color(0xff444444),
-              ),
               CustomButton(
                 enableButton: true,
                 buttonTitle: AppLocalizations.of(context)!.registerAccount,

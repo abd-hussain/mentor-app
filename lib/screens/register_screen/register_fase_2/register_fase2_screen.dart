@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:mentor_app/models/https/countries_model.dart';
 
 import 'package:mentor_app/screens/register_screen/register_fase_2/register_fase2_bloc.dart';
+import 'package:mentor_app/screens/register_screen/register_fase_2/widgets/mobile_header.dart';
+import 'package:mentor_app/screens/register_screen/register_fase_2/widgets/mobile_number_widget.dart';
 import 'package:mentor_app/screens/register_screen/widgets/footer_view.dart';
 import 'package:mentor_app/shared_widget/country_field.dart';
 import 'package:mentor_app/shared_widget/custom_attach_textfield.dart';
@@ -46,14 +48,15 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(title: ""),
-      bottomNavigationBar: ValueListenableBuilder<bool>(
-          valueListenable: bloc.enableNextBtn,
-          builder: (context, snapshot, child) {
+      bottomNavigationBar: StreamBuilder<bool?>(
+          initialData: false,
+          stream: bloc.enableNextBtn.stream,
+          builder: (context, snapshot) {
             return RegistrationFooterView(
               pageCount: 2,
               pageTitle: AppLocalizations.of(context)!.personaldetails,
               nextPageTitle: AppLocalizations.of(context)!.experiences,
-              enableNextButton: snapshot,
+              enableNextButton: snapshot.data!,
               nextPressed: () async {
                 final navigator = Navigator.of(context);
                 await bloc.box.put(TempFieldToRegistrtConstant.suffix, bloc.suffixNameController.text);
@@ -64,6 +67,9 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                 await bloc.box.put(TempFieldToRegistrtConstant.profileImage, bloc.profileImage.toString());
                 await bloc.box.put(TempFieldToRegistrtConstant.idImage, bloc.iDImage.toString());
                 await bloc.box.put(TempFieldToRegistrtConstant.dateOfBirth, bloc.selectedDate);
+                await bloc.box.put(TempFieldToRegistrtConstant.dateOfBirth, bloc.selectedDate);
+                await bloc.box.put(TempFieldToRegistrtConstant.phoneNumber, bloc.countryCode + bloc.mobileController);
+
                 await bloc.box.put(TempFieldToRegistrtConstant.referalCode,
                     bloc.validateReferalCode.value == true ? bloc.referalCodeController.text : "");
                 await bloc.box.put(DatabaseFieldConstant.registrationStep, "2");
@@ -197,6 +203,29 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                             const SizedBox(height: 16),
                             Container(height: 1, color: const Color(0xffE8E8E8)),
                             const SizedBox(height: 16),
+                            const MobileHeader(),
+                            ValueListenableBuilder<List<Country>>(
+                                valueListenable: bloc.listOfCountries,
+                                builder: (context, snapshot, child) {
+                                  return MobileNumberField(
+                                      initialCountry: bloc.returnSelectedCountryFromDatabase(),
+                                      countryList: snapshot,
+                                      selectedCountryCode: (selectedCode) {
+                                        bloc.countryCode = selectedCode;
+                                        bloc.validateFieldsForFaze2();
+                                      },
+                                      enteredPhoneNumber: (mobileNumber) {
+                                        bloc.mobileController = mobileNumber;
+                                        bloc.validateFieldsForFaze2();
+                                      },
+                                      validatePhoneNumber: (value) {
+                                        bloc.validatePhoneNumber = value;
+                                        bloc.validateFieldsForFaze2();
+                                      });
+                                }),
+                            const SizedBox(height: 16),
+                            Container(height: 1, color: const Color(0xffE8E8E8)),
+                            const SizedBox(height: 16),
                             Padding(
                               padding: const EdgeInsets.only(left: 16, right: 16),
                               child: CustomText(
@@ -248,8 +277,9 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                                         Padding(
                                           padding: const EdgeInsets.only(left: 20, right: 20),
                                           child: CustomText(
-                                            title:
-                                                snapshot ? AppLocalizations.of(context)!.codevalid : AppLocalizations.of(context)!.codenotvalid,
+                                            title: snapshot
+                                                ? AppLocalizations.of(context)!.codevalid
+                                                : AppLocalizations.of(context)!.codenotvalid,
                                             fontSize: 12,
                                             textColor: snapshot ? Colors.green : Colors.red,
                                           ),

@@ -10,13 +10,15 @@ class MobileNumberField extends StatefulWidget {
   final List<Country> countryList;
   final Function(String) selectedCountryCode;
   final Function(String) enteredPhoneNumber;
+  final Function(bool) validatePhoneNumber;
 
   const MobileNumberField(
       {required this.selectedCountryCode,
       required this.initialCountry,
       super.key,
       required this.countryList,
-      required this.enteredPhoneNumber});
+      required this.enteredPhoneNumber,
+      required this.validatePhoneNumber});
 
   @override
   State<MobileNumberField> createState() => _MobileNumberFieldState();
@@ -49,18 +51,18 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.ltr,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16),
-        child: ValueListenableBuilder<Country>(
-            valueListenable: selectedPhoneCountryNotifier,
-            builder: (context, selectedPhoneCountryData, child) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 8),
-                  TextField(
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16),
+      child: ValueListenableBuilder<Country>(
+          valueListenable: selectedPhoneCountryNotifier,
+          builder: (context, selectedPhoneCountryData, child) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 8),
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: TextField(
                     onChanged: (text) async {
                       setState(() {});
                     },
@@ -74,6 +76,8 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
                       FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                     ],
                     decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
                       hintText: AppLocalizations.of(context)!.entermobilenumber,
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -133,12 +137,12 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 2),
-                  _returnErrorMessageForPhoneNumber(selectedPhoneCountryData),
-                ],
-              );
-            }),
-      ),
+                ),
+                const SizedBox(height: 2),
+                _returnErrorMessageForPhoneNumber(selectedPhoneCountryData),
+              ],
+            );
+          }),
     );
   }
 
@@ -161,11 +165,14 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
 
   Color _returnCorrectColor(Country selectedCountry) {
     if (controller.text.isEmpty) {
+      widget.validatePhoneNumber(false);
       return const Color(0xffE8E8E8);
     } else if (selectedCountry.minLength! <= controller.text.length &&
         controller.text.length <= selectedCountry.maxLength!) {
+      widget.validatePhoneNumber(true);
       return const Color(0xff4CB6EA);
     } else {
+      widget.validatePhoneNumber(false);
       return const Color(0xffE74C4C);
     }
   }

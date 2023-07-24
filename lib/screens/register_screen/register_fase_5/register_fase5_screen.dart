@@ -44,7 +44,7 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
               return RegistrationFooterView(
                 pageCount: 5,
                 pageTitle: AppLocalizations.of(context)!.rateperhourtitle,
-                nextPageTitle: AppLocalizations.of(context)!.verifyemailandphone,
+                nextPageTitle: AppLocalizations.of(context)!.setuppassword,
                 enableNextButton: snapshot,
                 nextPressed: () async {
                   final navigator = Navigator.of(context);

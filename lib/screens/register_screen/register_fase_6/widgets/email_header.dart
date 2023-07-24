@@ -13,9 +13,9 @@ class EmailHeader extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 16, right: 16),
           child: CustomText(
-            title: "Please Enter Your Email Address",
+            title: AppLocalizations.of(context)!.pleaseenteryourrmailaddress,
             fontSize: 14,
-            textColor: Color(0xff444444),
+            textColor:const Color(0xff444444),
           ),
         ),
         const SizedBox(height: 5),

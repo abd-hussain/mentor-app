@@ -156,8 +156,7 @@
     "registerstep3" : "املأ خبراتك",
     "registerstep4" : "حدد ساعات العمل الخاصة بك",
     "registerstep5" : "حدد السعر الخاص بك لكل ساعة",
-    "registerstep6" : "تحقق من بريدك الإلكتروني ورقم هاتفك",
-    "registerstep7" : "حدد كلمة مرور",
+    "registerstep6" : "حدد كلمة مرور",
     "acceptandcontinue" : "قبول و متابعة",
     "next" : "التالي",   
     "optional" : "اختياري",
@@ -221,14 +220,11 @@
     "save" : "حفظ",
     "pm" : "مساءً",
     "am" : "صباحا",
-    "verifyemailandphone" : "التحقق من البريد والهاتف"
-
-
-
-
-
-
-
+    "verifyemailandphone" : "التحقق من البريد والهاتف",
+    "setuppassword" : "إعداد كلمة المرور",
+    "emailformatvalid" : "البريد الالكتروني صالح",
+    "pleaseenteryourrmailaddress" : "يرجى إدخال عنوان البريد الإلكتروني الخاص بك",
+    "pleaseenteryourphonenumber" : "يرجى إدخال رقم الهاتف الخاص بك"
 
 
 }

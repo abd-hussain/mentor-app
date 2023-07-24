@@ -38,18 +38,39 @@ class Register2Bloc {
   ValueNotifier<List<SuffixData>> listOfSuffix = ValueNotifier<List<SuffixData>>([]);
   StreamController<LoadingStatus> loadingStatusController = StreamController<LoadingStatus>();
 
-  ValueNotifier<bool> enableNextBtn = ValueNotifier<bool>(false);
+  String countryCode = "";
+  String mobileController = "";
+  bool validatePhoneNumber = false;
+
+  StreamController<bool> enableNextBtn = StreamController<bool>();
 
   validateFieldsForFaze2() {
+    enableNextBtn.sink.add(false);
+
     if (suffixNameController.text.isNotEmpty &&
         firstNameController.text.isNotEmpty &&
         lastNameController.text.isNotEmpty &&
         genderController.text.isNotEmpty &&
         countryController.text.isNotEmpty &&
+        validatePhoneNumber &&
+        mobileController.isNotEmpty &&
         profileImage != null &&
         iDImage != null) {
-      enableNextBtn.value = true;
+      enableNextBtn.sink.add(true);
     }
+  }
+
+  Country returnSelectedCountryFromDatabase() {
+    countryCode = box.get(DatabaseFieldConstant.selectedCountryName);
+    return Country(
+      id: int.parse(box.get(DatabaseFieldConstant.selectedCountryId)),
+      flagImage: box.get(DatabaseFieldConstant.selectedCountryFlag),
+      name: box.get(DatabaseFieldConstant.selectedCountryName),
+      currency: box.get(DatabaseFieldConstant.selectedCountryCurrency),
+      dialCode: box.get(DatabaseFieldConstant.selectedCountryDialCode),
+      maxLength: int.parse(box.get(DatabaseFieldConstant.selectedCountryMaxLenght)),
+      minLength: int.parse(box.get(DatabaseFieldConstant.selectedCountryMinLenght)),
+    );
   }
 
   void getlistOfSuffix() {
