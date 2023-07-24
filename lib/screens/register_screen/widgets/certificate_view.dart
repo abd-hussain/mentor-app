@@ -30,7 +30,7 @@ class _CertificateViewState extends State<CertificateView> {
                 children: [
                   FileHolderField(
                     title: "Certificate (${index + 1})",
-                    width: MediaQuery.of(context).size.width - widget.width,
+                    width: MediaQuery.of(context).size.width - 68,
                     onAddFile: (file) {
                       certificatesList.add(file);
                       widget.certificatesListCallBack(certificatesList);
@@ -42,8 +42,7 @@ class _CertificateViewState extends State<CertificateView> {
                   ),
                   IconButton(
                     icon: Container(
-                      width: 100,
-                      height: 100,
+                      width: 50,
                       decoration: BoxDecoration(
                         color: index == 0 ? Colors.green[200] : Colors.red[200],
                         borderRadius: BorderRadius.circular(8),

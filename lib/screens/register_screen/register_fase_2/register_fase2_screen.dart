@@ -51,8 +51,8 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
           builder: (context, snapshot, child) {
             return RegistrationFooterView(
               pageCount: 2,
-              pageTitle: "Personal Details",
-              nextPageTitle: "Experiences",
+              pageTitle: AppLocalizations.of(context)!.personaldetails,
+              nextPageTitle: AppLocalizations.of(context)!.experiences,
               enableNextButton: snapshot,
               nextPressed: () async {
                 final navigator = Navigator.of(context);
@@ -248,7 +248,8 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                                         Padding(
                                           padding: const EdgeInsets.only(left: 20, right: 20),
                                           child: CustomText(
-                                            title: snapshot ? "Code is Valid" : "Not Valid Code",
+                                            title:
+                                                snapshot ? AppLocalizations.of(context)!.codevalid : AppLocalizations.of(context)!.codenotvalid,
                                             fontSize: 12,
                                             textColor: snapshot ? Colors.green : Colors.red,
                                           ),

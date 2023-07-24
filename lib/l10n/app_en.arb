@@ -205,7 +205,25 @@
     "rateperhour" : "Edit Rate Per Hour",
     "rateperhourdesc1" : "This Rate will be shown to the user per hour when they try to reserve an appointment with you",
     "rateperhourdesc2" : "We encourage you to set a realistic number to get more reservations",
-    "rateperhourdesc3" : "Recommended Rate Per Hour for you is"
+    "rateperhourdesc3" : "Recommended Rate Per Hour for you is",
+    "personaldetails" : "Personal Details",
+    "experiences" : "Experiences",
+    "codevalid" : "Code is Valid",
+    "codenotvalid" : "Not Valid Code",
+    "rateperhourtitle" : "Rate Per Hour",
+    "saturday" : "Saturday",
+    "sunday" : "Sunday",
+    "monday" : "Monday",
+    "tuesday" : "Tuesday",
+    "wednesday" : "Wednesday",
+    "thursday" : "Thursday",
+    "friday" : "Friday",
+    "save" : "Save",
+    "pm" : "pm",
+    "am" : "am",
+    "verifyemailandphone" : "Verify Email & Phone"
+
+
 
 
 }

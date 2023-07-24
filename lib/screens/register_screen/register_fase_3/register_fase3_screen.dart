@@ -8,7 +8,9 @@ import 'package:mentor_app/shared_widget/category_field.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/shared_widget/file_holder_field.dart';
+import 'package:mentor_app/shared_widget/loading_view.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
+import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/routes.dart';
 
 class RegisterFaze3Screen extends StatefulWidget {
@@ -41,8 +43,8 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
           builder: (context, snapshot, child) {
             return RegistrationFooterView(
               pageCount: 3,
-              pageTitle: "Experiences",
-              nextPageTitle: "Working Hours",
+              pageTitle: AppLocalizations.of(context)!.experiences,
+              nextPageTitle: AppLocalizations.of(context)!.workinghour,
               enableNextButton: snapshot,
               nextPressed: () async {
                 final navigator = Navigator.of(context);
@@ -55,57 +57,64 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
               },
             );
           }),
-      body: GestureDetector(
-        onTap: () {
-          FocusManager.instance.primaryFocus?.unfocus();
-          bloc.validateFieldsForFaze3();
-        },
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 16),
-                ValueListenableBuilder<List<Category>>(
-                    valueListenable: bloc.listOfCategories,
-                    builder: (context, snapshot, child) {
-                      return CategoryField(
-                        controller: bloc.categoryController,
-                        listOfCategory: bloc.listOfCategories.value,
-                        selectedCategory: (p0) {
-                          bloc.selectedCategory = p0;
-                          bloc.validateFieldsForFaze3();
-                        },
-                      );
-                    }),
-                const SizedBox(height: 8),
-                BioField(
-                  bioController: bloc.bioController,
-                  onChanged: (text) => bloc.validateFieldsForFaze3(),
-                ),
-                FileHolderField(
-                  title: AppLocalizations.of(context)!.cv,
-                  width: MediaQuery.of(context).size.width,
-                  onAddFile: (file) {
-                    bloc.cv = file;
-                    bloc.validateFieldsForFaze3();
-                  },
-                  onRemoveFile: () {
-                    bloc.cv = null;
-                    bloc.validateFieldsForFaze3();
-                  },
-                ),
-                const SizedBox(height: 8),
-                CertificateView(
-                  certificatesListCallBack: (p0) {
-                    bloc.listOfCertificates = p0;
-                    bloc.validateFieldsForFaze3();
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+      body: StreamBuilder<LoadingStatus>(
+          initialData: LoadingStatus.inprogress,
+          stream: bloc.loadingStatusController.stream,
+          builder: (context, snapshot) {
+            return snapshot.data == LoadingStatus.inprogress
+                ? const LoadingView()
+                : GestureDetector(
+                    onTap: () {
+                      FocusManager.instance.primaryFocus?.unfocus();
+                      bloc.validateFieldsForFaze3();
+                    },
+                    child: SafeArea(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 16),
+                            ValueListenableBuilder<List<Category>>(
+                                valueListenable: bloc.listOfCategories,
+                                builder: (context, snapshot, child) {
+                                  return CategoryField(
+                                    controller: bloc.categoryController,
+                                    listOfCategory: bloc.listOfCategories.value,
+                                    selectedCategory: (p0) {
+                                      bloc.selectedCategory = p0;
+                                      bloc.validateFieldsForFaze3();
+                                    },
+                                  );
+                                }),
+                            const SizedBox(height: 8),
+                            BioField(
+                              bioController: bloc.bioController,
+                              onChanged: (text) => bloc.validateFieldsForFaze3(),
+                            ),
+                            FileHolderField(
+                              title: AppLocalizations.of(context)!.cv,
+                              width: MediaQuery.of(context).size.width,
+                              onAddFile: (file) {
+                                bloc.cv = file;
+                                bloc.validateFieldsForFaze3();
+                              },
+                              onRemoveFile: () {
+                                bloc.cv = null;
+                                bloc.validateFieldsForFaze3();
+                              },
+                            ),
+                            const SizedBox(height: 8),
+                            CertificateView(
+                              certificatesListCallBack: (p0) {
+                                bloc.listOfCertificates = p0;
+                                bloc.validateFieldsForFaze3();
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+          }),
     );
   }
 }

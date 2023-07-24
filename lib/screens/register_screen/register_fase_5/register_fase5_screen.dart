@@ -43,8 +43,8 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
             builder: (context, snapshot, child) {
               return RegistrationFooterView(
                 pageCount: 5,
-                pageTitle: "Rate Per Hour",
-                nextPageTitle: "Verify Email & Phone",
+                pageTitle: AppLocalizations.of(context)!.rateperhourtitle,
+                nextPageTitle: AppLocalizations.of(context)!.verifyemailandphone,
                 enableNextButton: snapshot,
                 nextPressed: () async {
                   final navigator = Navigator.of(context);
@@ -107,43 +107,46 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          color: Colors.grey[200],
-                          child: IconButton(
-                            icon: const Icon(Icons.remove),
-                            onPressed: () => bloc.decreseRatePerHourBy1(),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            color: Colors.grey[200],
+                            child: IconButton(
+                              icon: const Icon(Icons.remove),
+                              onPressed: () => bloc.decreseRatePerHourBy1(),
+                            ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: CustomTextField(
-                          controller: bloc.ratePerHourController,
-                          hintText: "Rate Per Hour",
-                          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(4),
-                          ],
-                          fontSize: 18,
-                          textAlign: TextAlign.center,
-                          padding: const EdgeInsets.all(0),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          color: Colors.grey[200],
-                          child: IconButton(
-                            icon: const Icon(Icons.add),
-                            onPressed: () => bloc.encreseRatePerHourBy1(),
+                        Expanded(
+                          flex: 2,
+                          child: CustomTextField(
+                            controller: bloc.ratePerHourController,
+                            hintText: AppLocalizations.of(context)!.rateperhourtitle,
+                            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(4),
+                            ],
+                            fontSize: 18,
+                            textAlign: TextAlign.center,
+                            padding: const EdgeInsets.all(0),
                           ),
                         ),
-                      ),
-                    ],
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            color: Colors.grey[200],
+                            child: IconButton(
+                              icon: const Icon(Icons.add),
+                              onPressed: () => bloc.encreseRatePerHourBy1(),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

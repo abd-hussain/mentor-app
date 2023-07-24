@@ -7,6 +7,7 @@ import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/shared_widget/working_hours.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/routes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterFaze4Screen extends StatefulWidget {
   const RegisterFaze4Screen({super.key});
@@ -20,7 +21,8 @@ class _RegisterFaze4ScreenState extends State<RegisterFaze4Screen> {
 
   @override
   void didChangeDependencies() {
-    bloc.fillListOfWorkingHourNotifier();
+    bloc.fillListOfWorkingHourNotifier(context);
+
     super.didChangeDependencies();
   }
 
@@ -38,8 +40,8 @@ class _RegisterFaze4ScreenState extends State<RegisterFaze4Screen> {
           builder: (context, snapshot, child) {
             return RegistrationFooterView(
               pageCount: 4,
-              pageTitle: "Working Hours",
-              nextPageTitle: "Rate Per Hour",
+              pageTitle: AppLocalizations.of(context)!.workinghour,
+              nextPageTitle: AppLocalizations.of(context)!.rateperhourtitle,
               enableNextButton: snapshot,
               nextPressed: () async {
                 final navigator = Navigator.of(context);
@@ -71,7 +73,7 @@ class _RegisterFaze4ScreenState extends State<RegisterFaze4Screen> {
                           listOfWorkingHour: bloc.listOfWorkingHourNotifier.value[index].list,
                           onSave: (newList) {
                             bloc.listOfWorkingHourNotifier.value[index] = WorkingHourModel(
-                                list: bloc.prepareList(newList),
+                                list: bloc.prepareList(context, newList),
                                 dayName: bloc.listOfWorkingHourNotifier.value[index].dayName);
 
                             bloc.validateFieldsForFaze4();

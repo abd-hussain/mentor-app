@@ -7,6 +7,7 @@ import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/routes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterFaze6Screen extends StatefulWidget {
   const RegisterFaze6Screen({super.key});
@@ -38,7 +39,7 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
           builder: (context, snapshot, child) {
             return RegistrationFooterView(
               pageCount: 6,
-              pageTitle: "Verify Email & Phone",
+              pageTitle: AppLocalizations.of(context)!.verifyemailandphone,
               nextPageTitle: "Setup Password",
               enableNextButton: snapshot,
               nextPressed: () async {
