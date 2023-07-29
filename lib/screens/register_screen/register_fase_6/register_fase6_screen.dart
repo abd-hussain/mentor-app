@@ -57,8 +57,8 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                 nextPressed: () async {
                   final navigator = Navigator.of(context);
                   // await bloc.box.put(TempFieldToRegistrtConstant.ratePerHour, bloc.ratePerHourController.text);
-                  await bloc.box.put(DatabaseFieldConstant.registrationStep, "6");
-                  navigator.pushNamed(RoutesConstants.loginScreen);
+                  // await bloc.box.put(DatabaseFieldConstant.registrationStep, "6");
+                  // navigator.pushNamed(RoutesConstants.loginScreen);
                 },
               );
             }),
@@ -113,7 +113,7 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                 const SizedBox(height: 20),
                 PasswordField(
                   controller: bloc.confirmPasswordController,
-                  hintText: "Confirm Password",
+                  hintText: AppLocalizations.of(context)!.confirmpassword,
                   showHidePasswordClearNotifier: bloc.showHideConfirmPasswordClearNotifier,
                   onClear: () {
                     bloc.confirmPasswordController.clear();

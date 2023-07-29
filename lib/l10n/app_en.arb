@@ -224,7 +224,11 @@
     "setuppassword" : "Setup Password",
     "emailformatvalid" : "Email is valid",
     "pleaseenteryourrmailaddress" : "Please Enter Your Email Address",
-    "pleaseenteryourphonenumber" : "Please Enter Your Phone Number"
+    "pleaseenteryourphonenumber" : "Please Enter Your Phone Number",
+    "confirmpassword" : "Confirm Password",
+    "passwordequilconfirmpassword" : "Password Equial Confirm Password",
+    "passwordmorethan8char" : "Password More than 8 character",
+    "passwordhavenumbers" : "Password Have Numbers"
 
 
 

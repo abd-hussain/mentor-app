@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PasswordComplexity extends StatelessWidget {
   final ValueNotifier<bool> passwordEquilConfirmPasswordNotifier;
@@ -22,17 +23,17 @@ class PasswordComplexity extends StatelessWidget {
           ValueListenableBuilder<bool>(
               valueListenable: passwordEquilConfirmPasswordNotifier,
               builder: (context, snapshot, child) {
-                return condition("Password Equial Confirm Password", snapshot);
+                return condition(AppLocalizations.of(context)!.passwordequilconfirmpassword, snapshot);
               }),
           ValueListenableBuilder<bool>(
               valueListenable: passwordMoreThan8CharNotifier,
               builder: (context, snapshot, child) {
-                return condition("Password More than 8 character", snapshot);
+                return condition(AppLocalizations.of(context)!.passwordmorethan8char, snapshot);
               }),
           ValueListenableBuilder<bool>(
               valueListenable: passwordHaveNumberNotifier,
               builder: (context, snapshot, child) {
-                return condition("Password Have Numbers", snapshot);
+                return condition(AppLocalizations.of(context)!.passwordhavenumbers, snapshot);
               }),
         ],
       ),

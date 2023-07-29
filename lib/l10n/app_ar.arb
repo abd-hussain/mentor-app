@@ -224,7 +224,12 @@
     "setuppassword" : "إعداد كلمة المرور",
     "emailformatvalid" : "البريد الالكتروني صالح",
     "pleaseenteryourrmailaddress" : "يرجى إدخال عنوان البريد الإلكتروني الخاص بك",
-    "pleaseenteryourphonenumber" : "يرجى إدخال رقم الهاتف الخاص بك"
+    "pleaseenteryourphonenumber" : "يرجى إدخال رقم الهاتف الخاص بك",
+    "confirmpassword" : "تأكيد كلمة المرور",
+    "passwordequilconfirmpassword" : "كلمة المرور تساوي تأكيد كلمة المرور",
+    "passwordmorethan8char" : "كلمة المرور أكثر من 8 أحرف",
+    "passwordhavenumbers" : "كلمة السر تحتوي أرقام"
+
 
 
 }
