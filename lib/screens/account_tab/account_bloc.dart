@@ -120,6 +120,11 @@ class AccountBloc extends Bloc<AccountService> {
         onTap: () => _openAboutUs(context),
       ),
       ProfileOptions(
+        icon: Ionicons.code,
+        name: AppLocalizations.of(context)!.version_details,
+        onTap: () => _openVersionPage(context),
+      ),
+      ProfileOptions(
         icon: Ionicons.person_add,
         name: AppLocalizations.of(context)!.invite_friends,
         onTap: () => _openInviteFriends(context),
@@ -192,6 +197,10 @@ class AccountBloc extends Bloc<AccountService> {
 
   void _openInviteFriends(BuildContext context) {
     Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.inviteFriendScreen);
+  }
+
+  void _openVersionPage(BuildContext context) {
+    Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.versioningScreen);
   }
 
   void _changeLanguage(BuildContext context) async {

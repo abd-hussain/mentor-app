@@ -228,7 +228,9 @@
     "confirmpassword" : "تأكيد كلمة المرور",
     "passwordequilconfirmpassword" : "كلمة المرور تساوي تأكيد كلمة المرور",
     "passwordmorethan8char" : "كلمة المرور أكثر من 8 أحرف",
-    "passwordhavenumbers" : "كلمة السر تحتوي أرقام"
+    "passwordhavenumbers" : "كلمة السر تحتوي أرقام",
+    "version_details" : "تفاصيل الاصدارات"
+
 
 
 

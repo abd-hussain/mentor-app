@@ -228,7 +228,8 @@
     "confirmpassword" : "Confirm Password",
     "passwordequilconfirmpassword" : "Password Equial Confirm Password",
     "passwordmorethan8char" : "Password More than 8 character",
-    "passwordhavenumbers" : "Password Have Numbers"
+    "passwordhavenumbers" : "Password Have Numbers",
+    "version_details" : "Versions Details"
 
 
 

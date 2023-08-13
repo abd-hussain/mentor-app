@@ -25,6 +25,8 @@ class MethodNameConstant {
   static const String home = "mentor-home/";
 
   static const String uploadContactList = "settings/leads";
+  static const String versions = "settings/versions";
+
   static const String auth = "client-auth";
   static const String authDebuging = "client-auth-debug";
   static const String authVerify = "client-auth-verify";

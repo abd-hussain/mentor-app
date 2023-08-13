@@ -38,7 +38,7 @@ class ListOfOptions extends StatelessWidget {
             titleOptionCollection(title: AppLocalizations.of(context)!.reachouttous),
             optionCollectionItem(listOfReachOutUsOptions, containerHight: 125),
             titleOptionCollection(title: AppLocalizations.of(context)!.support),
-            optionCollectionItem(listOfSupportOptions, containerHight: 125),
+            optionCollectionItem(listOfSupportOptions, containerHight: 190),
             const SizedBox(height: 8),
             const AddMobBanner(),
             footerView(context),
