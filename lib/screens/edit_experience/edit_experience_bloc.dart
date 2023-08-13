@@ -10,7 +10,6 @@ class EditExperienceBloc extends Bloc<AccountService> {
   ValueNotifier<bool> enableSaveButton = ValueNotifier<bool>(false);
   final box = Hive.box(DatabaseBoxConstant.userInfo);
 
-  TextEditingController bioController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
 
   File? cv;
@@ -21,10 +20,7 @@ class EditExperienceBloc extends Bloc<AccountService> {
   }
 
   validateFields() {
-    if (bioController.text.isNotEmpty &&
-        categoryController.text.isNotEmpty &&
-        cv != null &&
-        listOfCertificates.isNotEmpty) {
+    if (categoryController.text.isNotEmpty && cv != null && listOfCertificates.isNotEmpty) {
       enableSaveButton.value = true;
     }
   }

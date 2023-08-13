@@ -24,6 +24,7 @@ class AccountInfoData {
   DBCountries? dBCountries;
   String? referalCode;
   String? idImg;
+  String? bio;
 
   AccountInfoData(
       {this.profileImg,
@@ -38,7 +39,8 @@ class AccountInfoData {
       this.countryId,
       this.dBCountries,
       this.referalCode,
-      this.idImg});
+      this.idImg,
+      this.bio});
 
   AccountInfoData.fromJson(Map<String, dynamic> json) {
     profileImg = json['profile_img'];
@@ -54,6 +56,7 @@ class AccountInfoData {
     dBCountries = json['DB_Countries'] != null ? DBCountries.fromJson(json['DB_Countries']) : null;
     referalCode = json['referal_code'];
     idImg = json['id_img'];
+    bio = json['bio'];
   }
 }
 

@@ -27,6 +27,7 @@ class EditProfileBloc extends Bloc<AccountService> {
   TextEditingController suffixNameController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
+  TextEditingController bioController = TextEditingController();
 
   TextEditingController genderController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -53,7 +54,8 @@ class EditProfileBloc extends Bloc<AccountService> {
         (profileImageUrl != "" || profileImage != null) &&
         selectedCountry != null &&
         genderController.text != "" &&
-        mobileNumberController.text.isNotEmpty) {
+        mobileNumberController.text.isNotEmpty &&
+        bioController.text.isNotEmpty) {
       enableSaveButtonNotifier.value = true;
     }
   }
@@ -79,6 +81,9 @@ class EditProfileBloc extends Bloc<AccountService> {
         }
         if (value.data!.referalCode != null) {
           referalCodeController.text = value.data!.referalCode!;
+        }
+        if (value.data!.bio != null) {
+          bioController.text = value.data!.bio!;
         }
 
         if (value.data!.profileImg != null) {

@@ -4,6 +4,7 @@ import 'package:mentor_app/models/https/countries_model.dart';
 import 'package:mentor_app/models/https/suffix_model.dart';
 import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/screens/edit_profile/edit_profile_bloc.dart';
+import 'package:mentor_app/shared_widget/bio_field.dart';
 import 'package:mentor_app/shared_widget/country_field.dart';
 import 'package:mentor_app/shared_widget/custom_attach_textfield.dart';
 import 'package:mentor_app/shared_widget/date_of_birth_field.dart';
@@ -74,6 +75,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   : GestureDetector(
                       onTap: () {
                         FocusScope.of(context).unfocus();
+                        bloc.validateFields();
                       },
                       child: SingleChildScrollView(
                         child: Padding(
@@ -155,6 +157,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       ),
                                     ],
                                   ),
+                                ),
+                                const SizedBox(height: 16),
+                                Container(
+                                  color: const Color(0xffE8E8E8),
+                                  height: 1,
+                                ),
+                                const SizedBox(height: 16),
+                                BioField(
+                                  bioController: bloc.bioController,
+                                  onChanged: (text) => bloc.validateFields(),
                                 ),
                                 const SizedBox(height: 16),
                                 Container(
@@ -274,17 +286,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 const SizedBox(height: 10),
                                 CustomTextField(
                                   controller: bloc.mobileNumberController,
+                                  readOnly: true,
+                                  enabled: false,
                                   hintText: AppLocalizations.of(context)!.mobilenumber,
                                   keyboardType: TextInputType.phone,
                                   inputFormatters: [
                                     LengthLimitingTextInputFormatter(35),
                                   ],
                                   onChange: (text) => bloc.validateFields(),
-                                ),
-                                const SizedBox(height: 16),
-                                Container(
-                                  color: const Color(0xffE8E8E8),
-                                  height: 1,
                                 ),
                                 const SizedBox(height: 16),
                                 CustomTextField(

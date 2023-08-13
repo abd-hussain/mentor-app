@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/screens/edit_experience/edit_experience_bloc.dart';
 import 'package:mentor_app/screens/register_screen/widgets/certificate_view.dart';
-import 'package:mentor_app/shared_widget/bio_field.dart';
 import 'package:mentor_app/shared_widget/category_field.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
@@ -71,10 +70,6 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                             selectedCategory: (p0) {},
                           ),
                           const SizedBox(height: 8),
-                          BioField(
-                            bioController: bloc.bioController,
-                            onChanged: (text) => bloc.validateFields(),
-                          ),
                           FileHolderField(
                             title: AppLocalizations.of(context)!.cv,
                             width: MediaQuery.of(context).size.width,
