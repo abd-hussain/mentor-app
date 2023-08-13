@@ -51,7 +51,7 @@ class EditProfileBloc extends Bloc<AccountService> {
     if (suffixNameController.text.isNotEmpty &&
         firstNameController.text.isNotEmpty &&
         lastNameController.text.isNotEmpty &&
-        (profileImageUrl != "" || profileImage != null) &&
+        //  (profileImageUrl != "" || profileImage != null) &&
         selectedCountry != null &&
         genderController.text != "" &&
         mobileNumberController.text.isNotEmpty &&
@@ -151,11 +151,35 @@ class EditProfileBloc extends Bloc<AccountService> {
   List<CheckBox> _prepareList(List<String> theList) {
     List<CheckBox> list = [];
 
-    list.add(CheckBox(value: "English", isEnable: theList.contains("English")));
-    list.add(CheckBox(value: "العربية", isEnable: theList.contains("العربية")));
-    list.add(CheckBox(value: "Français", isEnable: theList.contains("Français")));
-    list.add(CheckBox(value: "Español", isEnable: theList.contains("Español")));
-    list.add(CheckBox(value: "Türkçe", isEnable: theList.contains("Türkçe")));
+    bool en = false;
+    bool ar = false;
+    bool fr = false;
+    bool es = false;
+    bool tu = false;
+
+    for (var item in theList) {
+      if (item.contains("English")) {
+        en = true;
+      }
+      if (item.contains("العربية")) {
+        ar = true;
+      }
+      if (item.contains("Français")) {
+        fr = true;
+      }
+      if (item.contains("Español")) {
+        es = true;
+      }
+      if (item.contains("Türkçe")) {
+        tu = true;
+      }
+    }
+
+    list.add(CheckBox(value: "English", isEnable: en));
+    list.add(CheckBox(value: "العربية", isEnable: ar));
+    list.add(CheckBox(value: "Français", isEnable: fr));
+    list.add(CheckBox(value: "Español", isEnable: es));
+    list.add(CheckBox(value: "Türkçe", isEnable: tu));
 
     return list;
   }
@@ -185,7 +209,6 @@ class EditProfileBloc extends Bloc<AccountService> {
       speackingLanguage: speackingLanguage.toString(),
       gender: GenderFormat().convertStringToIndex(context, genderController.text),
     );
-    //TODO There is Problem In Speacking Language
     return service.updateProfileInfo(account: account);
   }
 

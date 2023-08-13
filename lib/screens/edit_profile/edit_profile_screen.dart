@@ -19,7 +19,6 @@ import 'package:mentor_app/shared_widget/speaking_language_field.dart';
 import 'package:mentor_app/shared_widget/suffix_field.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
-import 'package:mentor_app/utils/logger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -34,7 +33,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   void didChangeDependencies() {
-    logDebugMessage(message: 'Edit Profile init Called ...');
     bloc.getProfileInformations(context);
     bloc.getlistOfSuffix();
     super.didChangeDependencies();
@@ -113,6 +111,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             bloc.profileImage = null;
                                             bloc.profileImageUrl = "";
                                             bloc.validateFields();
+                                            setState(() {});
                                           }),
                                       Expanded(
                                         child: Column(
@@ -191,6 +190,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             bloc.iDImage = null;
                                             bloc.iDImageUrl = "";
                                             bloc.validateFields();
+                                            setState(() {});
                                           }),
                                       Expanded(
                                         child: Column(

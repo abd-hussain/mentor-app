@@ -86,7 +86,7 @@ class CustomAttachTextField extends StatelessWidget {
                     ? ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(
-                          AppConstant.imagesBaseURLForMentors + urlImage!,
+                          AppConstant.imagesIDBaseURLForMentors + urlImage!,
                           width: 100,
                           height: 115,
                           fit: BoxFit.cover,

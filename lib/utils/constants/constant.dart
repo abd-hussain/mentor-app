@@ -13,6 +13,8 @@ class AppConstant {
   static const String imagesBaseURLForCategories = "${AppConstant.applicationMainURL}static/categories/";
   static const String imagesBaseURLForBanners = "${AppConstant.applicationMainURL}static/banners/";
   static const String imagesBaseURLForMentors = "${AppConstant.applicationMainURL}static/mentorsImg/";
+  static const String imagesIDBaseURLForMentors = "${AppConstant.applicationMainURL}static/mentorsIDs/";
+
   static const String imagesBaseURLForProfileImages = "${AppConstant.applicationMainURL}profileImg/";
 
   static const String termsLink = "https://www.helpera.app/static/web/terms.html";
