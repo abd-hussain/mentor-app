@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mentor_app/services/mentor_properties_services.dart';
+import 'package:mentor_app/services/mentor_settings.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/mixins.dart';
 
-class RatePerHourBloc extends Bloc<MentorPropertiesService> {
+class RatePerHourBloc extends Bloc<MentorSettingsService> {
   ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   ValueNotifier<bool> enableSaveButton = ValueNotifier<bool>(false);
 
@@ -11,13 +11,18 @@ class RatePerHourBloc extends Bloc<MentorPropertiesService> {
 
   double recumendedRatePerHour = 22.0;
 
-  void getHourPerRate() {
+  void getHourPerRate() async {
     loadingStatusNotifier.value = LoadingStatus.inprogress;
-    ratePerHourController.text = "22.00";
-    loadingStatusNotifier.value = LoadingStatus.finish;
+
+    service.getHourRate().then((value) {
+      ratePerHourController.text = "$value";
+      loadingStatusNotifier.value = LoadingStatus.finish;
+    });
   }
 
-  Future<void> changeRateRequest() async {}
+  Future<void> changeRateRequest() async {
+    return service.updateHourRate(newRate: ratePerHourController.text);
+  }
 
   validateFieldsForFaze5() {
     if (ratePerHourController.text.isNotEmpty) {
@@ -61,8 +66,5 @@ class RatePerHourBloc extends Bloc<MentorPropertiesService> {
   }
 
   @override
-  onDispose() {
-    // TODO: implement onDispose
-    throw UnimplementedError();
-  }
+  onDispose() {}
 }

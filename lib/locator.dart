@@ -9,6 +9,7 @@ import 'package:mentor_app/services/general/authentication_service.dart';
 import 'package:mentor_app/services/general/network_info_service.dart';
 import 'package:mentor_app/services/home_services.dart';
 import 'package:mentor_app/services/mentor_properties_services.dart';
+import 'package:mentor_app/services/mentor_settings.dart';
 import 'package:mentor_app/services/noticitions_services.dart';
 import 'package:mentor_app/services/payment_services.dart';
 import 'package:mentor_app/services/report_service.dart';
@@ -33,6 +34,7 @@ Future<void> setupLocator() async {
   locator.registerFactory<AppointmentsService>(() => AppointmentsService());
   locator.registerFactory<MentorPropertiesService>(() => MentorPropertiesService());
   locator.registerFactory<PaymentService>(() => PaymentService());
+  locator.registerFactory<MentorSettingsService>(() => MentorSettingsService());
 
   locator.registerLazySingleton(() => AuthenticationService());
   locator.registerLazySingleton(() => LocalAuthentication());

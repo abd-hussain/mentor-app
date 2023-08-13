@@ -15,6 +15,8 @@ class MethodNameConstant {
 
   static const String mentorWorkingHours = "mentor-prop/working_hours";
 
+  static const String mentorSettingsRate = "/mentor-settings/hour-rate";
+
   static const String discount = "discount/";
 
   static const String loyalityRules = "loyality/rules";
