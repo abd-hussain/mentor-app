@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/screens/edit_experience/edit_experience_bloc.dart';
-import 'package:mentor_app/screens/register_screen/widgets/certificate_view.dart';
+import 'package:mentor_app/screens/edit_experience/widgets/majors_view.dart';
 import 'package:mentor_app/shared_widget/category_field.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
-import 'package:mentor_app/shared_widget/file_holder_field.dart';
-import 'package:mentor_app/utils/logger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditExperienceScreen extends StatefulWidget {
@@ -19,7 +18,7 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
   final bloc = EditExperienceBloc();
   @override
   void didChangeDependencies() {
-    logDebugMessage(message: 'Edit Experience init Called ...');
+    bloc.getListOfMajors();
     bloc.getUserExperiance();
     super.didChangeDependencies();
   }
@@ -66,30 +65,42 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                           CategoryField(
                             controller: bloc.categoryController,
                             isEnable: false,
+                            padding: const EdgeInsets.all(0),
                             listOfCategory: const [],
                             selectedCategory: (p0) {},
                           ),
                           const SizedBox(height: 8),
-                          FileHolderField(
-                            title: AppLocalizations.of(context)!.cv,
-                            width: MediaQuery.of(context).size.width,
-                            onAddFile: (file) {
-                              bloc.cv = file;
-                              bloc.validateFields();
-                            },
-                            onRemoveFile: () {
-                              bloc.cv = null;
-                              bloc.validateFields();
-                            },
-                          ),
-                          const SizedBox(height: 8),
-                          CertificateView(
-                            width: 128,
-                            certificatesListCallBack: (p0) {
-                              bloc.listOfCertificates = p0;
-                              bloc.validateFields();
-                            },
-                          ),
+                          ValueListenableBuilder<List<CheckBox>>(
+                              valueListenable: bloc.listOfMajorsNotifier,
+                              builder: (context, snapshot, child) {
+                                return MajorsView(
+                                  listOfMajors: snapshot,
+                                  selectedMajors: (major) {
+                                    bloc.listOfMajorsNotifier.value = major;
+                                    bloc.validateFields();
+                                  },
+                                );
+                              }),
+                          // FileHolderField(
+                          //   title: AppLocalizations.of(context)!.cv,
+                          //   width: MediaQuery.of(context).size.width,
+                          //   onAddFile: (file) {
+                          //     bloc.cv = file;
+                          //     bloc.validateFields();
+                          //   },
+                          //   onRemoveFile: () {
+                          //     bloc.cv = null;
+                          //     bloc.validateFields();
+                          //   },
+                          // ),
+                          // const SizedBox(height: 8),
+                          // CertificateView(
+                          //   width: 128,
+                          //   certificatesListCallBack: (p0) {
+                          //     bloc.listOfCertificates = p0;
+                          //     bloc.validateFields();
+                          //   },
+                          // ),
                         ],
                       ),
                     ),

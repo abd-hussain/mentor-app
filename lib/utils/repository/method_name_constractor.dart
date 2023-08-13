@@ -3,6 +3,7 @@ class MethodNameConstant {
   static const String categories = "categories";
   static const String suffix = "suffix";
   static const String referalCode = "referalcode";
+  static const String majors = "/majors";
 
   static const String login = "mentor-auth/login";
   static const String forgotPassword = "mentor-auth/forgotpassword";
@@ -16,6 +17,8 @@ class MethodNameConstant {
   static const String mentorWorkingHours = "mentor-prop/working_hours";
 
   static const String mentorSettingsRate = "/mentor-settings/hour-rate";
+  static const String changePassword = "mentor-settings/change-password";
+  static const String deleteAccount = "mentor-settings/delete";
 
   static const String discount = "discount/";
 
@@ -33,10 +36,8 @@ class MethodNameConstant {
   static const String authDebuging = "client-auth-debug";
   static const String authVerify = "client-auth-verify";
   static const String account = "client-account/";
-  static const String deleteAccount = "mentor-account/delete";
   static const String reportIssue = "report/issue";
   static const String reportSuggestion = "report/suggestion";
-  static const String changePassword = "mentor-account/change-password";
 
   static const String accountInfo = "mentor-account/info";
 

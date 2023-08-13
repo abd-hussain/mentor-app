@@ -8,10 +8,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class CategoryField extends StatelessWidget {
   final TextEditingController controller;
   final bool isEnable;
+  final EdgeInsets padding;
   final List<Category> listOfCategory;
   final Function(Category) selectedCategory;
   const CategoryField(
       {required this.controller,
+      this.padding = const EdgeInsets.only(left: 16, right: 16),
       required this.listOfCategory,
       required this.selectedCategory,
       this.isEnable = true,
@@ -26,7 +28,7 @@ class CategoryField extends StatelessWidget {
           enabled: isEnable,
           controller: controller,
           hintText: AppLocalizations.of(context)!.selectCategory,
-          padding: const EdgeInsets.only(left: 8, right: 8),
+          padding: padding,
           keyboardType: TextInputType.name,
           inputFormatters: [
             LengthLimitingTextInputFormatter(45),

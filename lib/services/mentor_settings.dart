@@ -1,3 +1,4 @@
+import 'package:mentor_app/models/https/suffix_model.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:mentor_app/utils/repository/http_repository.dart';
 import 'package:mentor_app/utils/repository/method_name_constractor.dart';
@@ -20,5 +21,14 @@ class MentorSettingsService with Service {
     );
 
     return response;
+  }
+
+  Future<List<SuffixData>?> getMajors() async {
+    final response = await repository.callRequest(
+      requestType: RequestType.get,
+      methodName: MethodNameConstant.majors,
+    );
+
+    return Suffix.fromJson(response).data;
   }
 }
