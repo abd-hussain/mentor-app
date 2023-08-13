@@ -67,7 +67,6 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                 await bloc.box.put(TempFieldToRegistrtConstant.profileImage, bloc.profileImage.toString());
                 await bloc.box.put(TempFieldToRegistrtConstant.idImage, bloc.iDImage.toString());
                 await bloc.box.put(TempFieldToRegistrtConstant.dateOfBirth, bloc.selectedDate);
-                await bloc.box.put(TempFieldToRegistrtConstant.dateOfBirth, bloc.selectedDate);
                 await bloc.box.put(TempFieldToRegistrtConstant.phoneNumber, bloc.countryCode + bloc.mobileController);
 
                 await bloc.box.put(TempFieldToRegistrtConstant.referalCode,

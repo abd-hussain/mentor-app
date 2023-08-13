@@ -25,6 +25,11 @@ class _MainContainerState extends State<MainContainer> {
     return Scaffold(
       backgroundColor: const Color(0xffF5F6F7),
       resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        toolbarHeight: 0,
+        elevation: 0,
+        backgroundColor: const Color(0xff034061),
+      ),
       body: SafeArea(
           child: ValueListenableBuilder<SelectedTab>(
               valueListenable: _bloc.currentTabIndexNotifier,

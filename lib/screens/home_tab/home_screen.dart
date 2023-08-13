@@ -45,9 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       valueListenable: bloc.bannerListNotifier,
                       builder: (context, snapshot, child) {
                         if (snapshot != null && snapshot.isNotEmpty) {
-                          return MainBannerHomePage(
-                            bannerList: snapshot,
-                          );
+                          return MainBannerHomePage(bannerList: snapshot);
                         } else {
                           return const SizedBox();
                         }

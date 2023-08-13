@@ -38,7 +38,18 @@ class TempFieldToRegistrtConstant {
   static const String category = "category";
   static const String cv = "cv";
   static const String certificates = "certificates";
-  static const String workingHours = "workingHours";
+  static const String speakingLanguages = "speakingLanguages";
+
+  static const String saturdayWH = "saturdayWH";
+  static const String sundayWH = "sundayWH";
+  static const String mondayWH = "mondayWH";
+  static const String tuesdayWH = "tuesdayWH";
+  static const String wednesdayWH = "wednesdayWH";
+  static const String thursdayWH = "thursdayWH";
+  static const String fridayWH = "fridayWH";
+
   static const String ratePerHour = "ratePerHour";
   static const String phoneNumber = "phoneNumber";
+  static const String email = "email";
+  static const String password = "password";
 }

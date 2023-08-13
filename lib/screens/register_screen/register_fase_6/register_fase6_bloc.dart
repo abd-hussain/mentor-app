@@ -42,6 +42,8 @@ class Register6Bloc {
   validateFieldsForFaze6() {
     validateEmail.value = _validateEmail(emailController.text);
 
+    //TODO : validate if email already exsist in our app
+
     if (passwordController.text.isNotEmpty && confirmPasswordController.text.isNotEmpty) {
       passwordEquilConfirmPasswordNotifier.value = (passwordController.text == confirmPasswordController.text);
       passwordMoreThan8CharNotifier.value =

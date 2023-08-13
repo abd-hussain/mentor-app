@@ -44,18 +44,16 @@ class _CertificateViewState extends State<CertificateView> {
                     icon: Container(
                       width: 50,
                       decoration: BoxDecoration(
-                        color: index == 0 ? Colors.green[200] : Colors.red[200],
+                        color: index == 0 && countOfCertifictes.value < 3 ? Colors.green[200] : Colors.red[200],
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Icon(
-                        index == 0 ? Icons.add : Icons.remove,
+                        index == 0 && countOfCertifictes.value < 3 ? Icons.add : Icons.remove,
                         color: const Color(0xff444444),
                       ),
                     ),
                     onPressed: () {
-                      // certificatesList = [];
-                      // widget.certificatesListCallBack(certificatesList);
-                      if (index == 0) {
+                      if (index == 0 && countOfCertifictes.value < 3) {
                         countOfCertifictes.value = countOfCertifictes.value + 1;
                       } else {
                         countOfCertifictes.value = countOfCertifictes.value - 1;

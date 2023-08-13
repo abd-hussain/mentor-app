@@ -45,8 +45,49 @@ class _RegisterFaze4ScreenState extends State<RegisterFaze4Screen> {
               enableNextButton: snapshot,
               nextPressed: () async {
                 final navigator = Navigator.of(context);
-                await bloc.box
-                    .put(TempFieldToRegistrtConstant.workingHours, bloc.listOfWorkingHourNotifier.value.toString());
+
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.saturdayWH,
+                    bloc.listOfWorkingHourNotifier.value
+                        .where((element) => element.dayName == AppLocalizations.of(context)!.saturday)
+                        .toList()
+                        .toString());
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.sundayWH,
+                    bloc.listOfWorkingHourNotifier.value
+                        .where((element) => element.dayName == AppLocalizations.of(context)!.sunday)
+                        .toList()
+                        .toString());
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.mondayWH,
+                    bloc.listOfWorkingHourNotifier.value
+                        .where((element) => element.dayName == AppLocalizations.of(context)!.monday)
+                        .toList()
+                        .toString());
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.tuesdayWH,
+                    bloc.listOfWorkingHourNotifier.value
+                        .where((element) => element.dayName == AppLocalizations.of(context)!.tuesday)
+                        .toList()
+                        .toString());
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.wednesdayWH,
+                    bloc.listOfWorkingHourNotifier.value
+                        .where((element) => element.dayName == AppLocalizations.of(context)!.wednesday)
+                        .toList()
+                        .toString());
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.thursdayWH,
+                    bloc.listOfWorkingHourNotifier.value
+                        .where((element) => element.dayName == AppLocalizations.of(context)!.thursday)
+                        .toList()
+                        .toString());
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.fridayWH,
+                    bloc.listOfWorkingHourNotifier.value
+                        .where((element) => element.dayName == AppLocalizations.of(context)!.friday)
+                        .toList()
+                        .toString());
                 await bloc.box.put(DatabaseFieldConstant.registrationStep, "4");
                 navigator.pushNamed(RoutesConstants.registerfaze5Screen);
               },

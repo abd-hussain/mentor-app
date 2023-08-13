@@ -48,6 +48,7 @@ class _SpeakingLanguageFieldState extends State<SpeakingLanguageField> {
       child: Container(
         height: 50,
         decoration: BoxDecoration(
+          color: Colors.white,
           border: Border.all(color: const Color(0xffE8E8E8)),
           borderRadius: BorderRadius.circular(4),
         ),

@@ -145,6 +145,7 @@ class EditProfileBloc extends Bloc<AccountService> {
 
   List<CheckBox> _prepareList(List<String> theList) {
     List<CheckBox> list = [];
+
     list.add(CheckBox(value: "English", isEnable: theList.contains("English")));
     list.add(CheckBox(value: "العربية", isEnable: theList.contains("العربية")));
     list.add(CheckBox(value: "Français", isEnable: theList.contains("Français")));

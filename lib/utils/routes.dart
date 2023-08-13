@@ -19,6 +19,7 @@ import 'package:mentor_app/screens/register_screen/register_fase_3/register_fase
 import 'package:mentor_app/screens/register_screen/register_fase_4/register_fase4_screen.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_5/register_fase5_screen.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_6/register_fase6_screen.dart';
+import 'package:mentor_app/screens/register_screen/register_final_fase/register_final_screen.dart';
 import 'package:mentor_app/screens/report/report_screen.dart';
 import 'package:mentor_app/screens/setup_screen/setup_screen.dart';
 import 'package:mentor_app/screens/tutorials/tutorials_screen.dart';
@@ -39,6 +40,7 @@ class RoutesConstants {
   static const String registerfaze4Screen = 'registerfaze4Screen';
   static const String registerfaze5Screen = 'registerfaze5Screen';
   static const String registerfaze6Screen = 'registerfaze6Screen';
+  static const String registerfinalfazeScreen = 'registerfinalfazeScreen';
 
   static const String notificationsScreen = 'notificationsScreen';
   static const String webViewScreen = 'webViewScreen';
@@ -70,6 +72,7 @@ final Map<String, Widget> routes = {
   RoutesConstants.registerfaze4Screen: const RegisterFaze4Screen(),
   RoutesConstants.registerfaze5Screen: const RegisterFaze5Screen(),
   RoutesConstants.registerfaze6Screen: const RegisterFaze6Screen(),
+  RoutesConstants.registerfinalfazeScreen: const RegisterFinalScreen(),
   RoutesConstants.notificationsScreen: const NotificationsScreen(),
   RoutesConstants.webViewScreen: const WebViewScreen(),
   RoutesConstants.inviteFriendScreen: const InviteFriendsScreen(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/models/https/categories_model.dart';
+import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_3/register_fase3_bloc.dart';
 import 'package:mentor_app/screens/register_screen/widgets/certificate_view.dart';
 import 'package:mentor_app/screens/register_screen/widgets/footer_view.dart';
@@ -7,8 +8,10 @@ import 'package:mentor_app/shared_widget/bio_field.dart';
 import 'package:mentor_app/shared_widget/category_field.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/shared_widget/file_holder_field.dart';
 import 'package:mentor_app/shared_widget/loading_view.dart';
+import 'package:mentor_app/shared_widget/speaking_language_field.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/routes.dart';
@@ -52,6 +55,9 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                 await bloc.box.put(TempFieldToRegistrtConstant.category, bloc.selectedCategory!.id.toString());
                 await bloc.box.put(TempFieldToRegistrtConstant.cv, bloc.cv.toString());
                 await bloc.box.put(TempFieldToRegistrtConstant.certificates, bloc.listOfCertificates.toString());
+                await bloc.box.put(TempFieldToRegistrtConstant.speakingLanguages,
+                    bloc.listOfSpeakingLanguageNotifier.value.toString());
+
                 await bloc.box.put(DatabaseFieldConstant.registrationStep, "3");
                 navigator.pushNamed(RoutesConstants.registerfaze4Screen);
               },
@@ -90,6 +96,25 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                               bioController: bloc.bioController,
                               onChanged: (text) => bloc.validateFieldsForFaze3(),
                             ),
+                            CustomText(
+                              title: AppLocalizations.of(context)!.speakinglanguage,
+                              fontSize: 12,
+                              textColor: const Color(0xff444444),
+                            ),
+                            ValueListenableBuilder<List<CheckBox>>(
+                                valueListenable: bloc.listOfSpeakingLanguageNotifier,
+                                builder: (context, snapshot, child) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SpeakingLanguageField(
+                                      listOfLanguages: snapshot,
+                                      selectedLanguage: (language) {
+                                        bloc.listOfSpeakingLanguageNotifier.value = language;
+                                        bloc.validateFieldsForFaze3();
+                                      },
+                                    ),
+                                  );
+                                }),
                             FileHolderField(
                               title: AppLocalizations.of(context)!.cv,
                               width: MediaQuery.of(context).size.width,

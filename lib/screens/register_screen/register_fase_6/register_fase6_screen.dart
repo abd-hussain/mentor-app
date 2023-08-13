@@ -56,9 +56,10 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                 enableNextButton: snapshot,
                 nextPressed: () async {
                   final navigator = Navigator.of(context);
-                  // await bloc.box.put(TempFieldToRegistrtConstant.ratePerHour, bloc.ratePerHourController.text);
-                  // await bloc.box.put(DatabaseFieldConstant.registrationStep, "6");
-                  // navigator.pushNamed(RoutesConstants.loginScreen);
+                  await bloc.box.put(TempFieldToRegistrtConstant.email, bloc.emailController.text);
+                  await bloc.box.put(TempFieldToRegistrtConstant.password, bloc.passwordController.text);
+                  await bloc.box.put(DatabaseFieldConstant.registrationStep, "6");
+                  navigator.pushNamed(RoutesConstants.registerfinalfazeScreen);
                 },
               );
             }),
