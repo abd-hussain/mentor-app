@@ -40,6 +40,7 @@ class MethodNameConstant {
   static const String reportSuggestion = "report/suggestion";
 
   static const String accountInfo = "mentor-account/info";
+  static const String accountExperiance = "mentor-account/exp-info";
 
   static const String payments = "mentor-payments/";
   static const String paymentReport = "mentor-payments/report";

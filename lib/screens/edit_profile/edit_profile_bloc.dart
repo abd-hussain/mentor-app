@@ -51,7 +51,7 @@ class EditProfileBloc extends Bloc<AccountService> {
     if (suffixNameController.text.isNotEmpty &&
         firstNameController.text.isNotEmpty &&
         lastNameController.text.isNotEmpty &&
-        //  (profileImageUrl != "" || profileImage != null) &&
+        (profileImageUrl != "" || profileImage != null) &&
         selectedCountry != null &&
         genderController.text != "" &&
         mobileNumberController.text.isNotEmpty &&

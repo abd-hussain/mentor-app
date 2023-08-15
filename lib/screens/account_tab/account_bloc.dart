@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:mentor_app/locator.dart';
 import 'package:mentor_app/models/profile_options.dart';
 import 'package:mentor_app/my_app.dart';
 import 'package:mentor_app/screens/report/report_screen.dart';
 import 'package:mentor_app/services/account_service.dart';
+import 'package:mentor_app/services/mentor_settings.dart';
 import 'package:mentor_app/shared_widget/bottom_sheet_util.dart';
 import 'package:mentor_app/shared_widget/custom_switch.dart';
 import 'package:mentor_app/utils/constants/constant.dart';
@@ -143,7 +145,7 @@ class AccountBloc extends Bloc<AccountService> {
               context: context,
               message: AppLocalizations.of(context)!.accountInformationwillbedeleted,
               sure: () async {
-                service.removeAccount().whenComplete(() async {
+                locator<MentorSettingsService>().removeAccount().whenComplete(() async {
                   final box = await Hive.openBox(DatabaseBoxConstant.userInfo);
                   box.deleteAll([
                     DatabaseFieldConstant.apikey,

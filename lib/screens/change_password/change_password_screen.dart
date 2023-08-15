@@ -8,7 +8,6 @@ import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/shared_widget/custom_textfield.dart';
-import 'package:mentor_app/utils/logger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
@@ -23,7 +22,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   @override
   void didChangeDependencies() {
-    logDebugMessage(message: 'Change Password init Called ...');
     bloc.infoNotifier.value = AppLocalizations.of(context)!.fillcurrentpassword;
     super.didChangeDependencies();
   }

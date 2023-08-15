@@ -3,12 +3,12 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mentor_app/models/https/update_password_request.dart';
 import 'package:mentor_app/models/password_strength_model.dart';
 import 'package:mentor_app/password_strenght_logic.dart';
-import 'package:mentor_app/services/account_service.dart';
+import 'package:mentor_app/services/mentor_settings.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ChangePasswordBloc extends Bloc<AccountService> {
+class ChangePasswordBloc extends Bloc<MentorSettingsService> {
   bool currentPassowrdObscureText = true;
   bool newPasswordObscureText = true;
   bool confirmPasswordObscureText = true;

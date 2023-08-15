@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mentor_app/models/https/categories_model.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/shared_widget/custom_textfield.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CategoryField extends StatelessWidget {
+class ExperianceSinceField extends StatelessWidget {
   final TextEditingController controller;
   final bool isEnable;
   final EdgeInsets padding;
-  final List<Category> listOfCategory;
-  final Function(Category) selectedCategory;
-  const CategoryField(
+  const ExperianceSinceField(
       {required this.controller,
       this.padding = const EdgeInsets.only(left: 16, right: 16),
-      required this.listOfCategory,
-      required this.selectedCategory,
       this.isEnable = true,
       super.key});
 
@@ -27,7 +22,7 @@ class CategoryField extends StatelessWidget {
           readOnly: true,
           enabled: isEnable,
           controller: controller,
-          hintText: AppLocalizations.of(context)!.selectCategory,
+          hintText: AppLocalizations.of(context)!.experience_since,
           padding: padding,
           keyboardType: TextInputType.name,
           inputFormatters: [
@@ -37,9 +32,8 @@ class CategoryField extends StatelessWidget {
         InkWell(
           onTap: isEnable
               ? () async {
-                  await categoryBottomSheet(context, listOfCategory, (categorySelected) {
-                    controller.text = categorySelected.name!;
-                    selectedCategory(categorySelected);
+                  await experianceSinceBottomSheet(context, (selected) {
+                    controller.text = selected;
                   });
                 }
               : null,
@@ -55,7 +49,59 @@ class CategoryField extends StatelessWidget {
     );
   }
 
-  Future categoryBottomSheet(BuildContext context, List<Category> listOfCategory, Function(Category) selectedCategory) {
+  Future experianceSinceBottomSheet(BuildContext context, Function(String) selectedYear) {
+    List<String> listOfYears = [
+      "2023",
+      "2022",
+      "2021",
+      "2020",
+      "2019",
+      "2018",
+      "2017",
+      "2016",
+      "2015",
+      "2014",
+      "2013",
+      "2012",
+      "2011",
+      "2010",
+      "2009",
+      "2008",
+      "2007",
+      "2006",
+      "2005",
+      "2004",
+      "2003",
+      "2002",
+      "2001",
+      "2000",
+      "1999",
+      "1998",
+      "1997",
+      "1996",
+      "1995",
+      "1994",
+      "1993",
+      "1992",
+      "1991",
+      "1990",
+      "1989",
+      "1988",
+      "1987",
+      "1986",
+      "1985",
+      "1984",
+      "1983",
+      "1982",
+      "1981",
+      "1980",
+      "1979",
+      "1978",
+      "1977",
+      "1976",
+      "1975",
+      "1974",
+    ];
     return showModalBottomSheet(
       isScrollControlled: true,
       backgroundColor: Colors.white,
@@ -82,25 +128,21 @@ class CategoryField extends StatelessWidget {
               SizedBox(
                 height: 200,
                 child: ListView.builder(
-                  itemCount: listOfCategory.length,
+                  itemCount: listOfYears.length,
                   itemBuilder: ((context, index) {
                     return InkWell(
                       onTap: () {
                         Navigator.of(context).pop();
-                        selectedCategory(listOfCategory[index]);
+                        selectedYear(listOfYears[index]);
                       },
                       child: SizedBox(
                         height: 50,
                         child: Row(
                           children: [
-                            Image.network(
-                              listOfCategory[index].icon!,
-                              width: 20,
-                            ),
                             const SizedBox(width: 10),
                             Expanded(
                               child: CustomText(
-                                title: listOfCategory[index].name!,
+                                title: listOfYears[index],
                                 fontSize: 16,
                                 textColor: const Color(0xff444444),
                               ),

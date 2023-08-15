@@ -35,15 +35,15 @@ class _MajorsViewState extends State<MajorsView> {
         await majorsBottomSheet(
             context: context,
             listOfMajors: widget.listOfMajors,
-            onSave: (languageSelected) {
+            onSave: (selected) {
               setState(() {
                 listOfSelectedMajors = [];
-                for (CheckBox item in languageSelected) {
+                for (CheckBox item in selected) {
                   if (item.isEnable) {
                     listOfSelectedMajors.add(item.value);
                   }
                 }
-                widget.selectedMajors(languageSelected);
+                widget.selectedMajors(selected);
               });
             });
       },
@@ -148,13 +148,17 @@ Future majorsBottomSheet(
                   itemCount: listOfMajors.length,
                   itemBuilder: ((context, index) {
                     return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(
-                          title: listOfMajors[index].value,
-                          textColor: Colors.black,
-                          fontSize: 18,
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 1.5,
+                          child: CustomText(
+                            title: listOfMajors[index].value,
+                            textColor: Colors.black,
+                            fontSize: 15,
+                            maxLins: 3,
+                          ),
                         ),
+                        Expanded(child: Container()),
                         StreamBuilder<bool>(
                             stream: valueListenable.stream,
                             builder: (context, snapshot) {

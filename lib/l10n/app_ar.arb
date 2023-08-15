@@ -230,7 +230,9 @@
     "passwordmorethan8char" : "كلمة المرور أكثر من 8 أحرف",
     "passwordhavenumbers" : "كلمة السر تحتوي أرقام",
     "version_details" : "تفاصيل الاصدارات",
-    "majors" : "التخصصات"
+    "majors" : "التخصصات",
+    "experience_since" : "خبرة منذ"
+
 
 
 

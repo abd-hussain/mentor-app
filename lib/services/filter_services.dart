@@ -39,7 +39,15 @@ class FilterService with Service {
       methodName: MethodNameConstant.referalCode,
       postBody: ReferalCodeRequest(code: code),
     );
-    print(response["data"]);
     return response["data"];
+  }
+
+  Future<List<SuffixData>?> getMajors() async {
+    final response = await repository.callRequest(
+      requestType: RequestType.get,
+      methodName: MethodNameConstant.majors,
+    );
+
+    return Suffix.fromJson(response).data;
   }
 }

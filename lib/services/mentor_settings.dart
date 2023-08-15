@@ -1,4 +1,4 @@
-import 'package:mentor_app/models/https/suffix_model.dart';
+import 'package:mentor_app/models/https/update_password_request.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:mentor_app/utils/repository/http_repository.dart';
 import 'package:mentor_app/utils/repository/method_name_constractor.dart';
@@ -23,12 +23,20 @@ class MentorSettingsService with Service {
     return response;
   }
 
-  Future<List<SuffixData>?> getMajors() async {
+  Future<dynamic> removeAccount() async {
     final response = await repository.callRequest(
-      requestType: RequestType.get,
-      methodName: MethodNameConstant.majors,
+      requestType: RequestType.delete,
+      methodName: MethodNameConstant.deleteAccount,
     );
+    return response;
+  }
 
-    return Suffix.fromJson(response).data;
+  Future<dynamic> changePassword({required UpdatePasswordRequest account}) async {
+    final response = await repository.callRequest(
+      requestType: RequestType.put,
+      methodName: MethodNameConstant.changePassword,
+      postBody: account,
+    );
+    return response;
   }
 }
