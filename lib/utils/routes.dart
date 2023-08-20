@@ -8,6 +8,7 @@ import 'package:mentor_app/screens/edit_profile/edit_profile_screen.dart';
 import 'package:mentor_app/screens/forgot_password/forgot_password_confirmation_screen.dart';
 import 'package:mentor_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:mentor_app/screens/home_tab/home_screen.dart';
+import 'package:mentor_app/screens/inside_call/inside_call_screen.dart';
 import 'package:mentor_app/screens/invite_friends/invite_friends_screen.dart';
 import 'package:mentor_app/screens/login_screen/login_screen.dart';
 import 'package:mentor_app/screens/main_contaner/main_container.dart';
@@ -58,6 +59,7 @@ class RoutesConstants {
   static const String eventDetailsScreen = 'eventDetailsScreen';
   static const String forgotPasswordConfirmationScreen = 'forgotPasswordConfirmationScreen';
   static const String versioningScreen = 'versioningScreen';
+  static const String insideCallScreen = 'InsideCallScreen';
 }
 
 final Map<String, Widget> routes = {
@@ -67,6 +69,7 @@ final Map<String, Widget> routes = {
   RoutesConstants.mainContainer: const MainContainer(),
   RoutesConstants.homeScreen: const HomeScreen(),
   RoutesConstants.callScreen: const CallScreen(),
+  RoutesConstants.insideCallScreen: const InsideCallScreen(),
   RoutesConstants.calenderScreen: const CalenderScreen(),
   RoutesConstants.accountScreen: const AccountScreen(),
   RoutesConstants.registerfaze2Screen: const RegisterFaze2Screen(),

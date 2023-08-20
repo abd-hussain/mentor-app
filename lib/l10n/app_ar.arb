@@ -247,7 +247,14 @@
     "dateofbirth" : "تاريخ الميلاد",
     "clientnote" : "ملاحظه العميل",
     "mentornote" : "ملاحظه المدرب",
-    "addeditnote": "اضافة / تعديل ملاحظه"
+    "remanintime" : "الوقت المتبقي للجلسة",
+    "appointmentdetails" : "تفاصيل الموعد",
+    "cancelmeetingmessage" : "بالضغط على تأكيد ، ستلغي الجلسة وستخسر نصف تكلفة الجلسة",
+    "waitingyoutojoin" : "في انتظار انضمامك",
+    "waitingyoutojoindesc" : "مرشدك في انتظارك للانضمام ، سيتم إلغاء هذه المكالمة إذا تأخرت أكثر من 7 دقائق",
+    "addeditnote": "اضافة / تعديل ملاحظه",
+    "joinnow" : "انضم الآن"
+
 
 
 }

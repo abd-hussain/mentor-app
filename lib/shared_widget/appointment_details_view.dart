@@ -38,6 +38,7 @@ class AppointmentDetailsView extends StatelessWidget {
                       title: desc,
                       fontSize: 14,
                       maxLins: 4,
+                      textAlign: TextAlign.end,
                       fontWeight: FontWeight.bold,
                       textColor: descColor,
                     ),

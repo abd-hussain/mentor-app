@@ -247,7 +247,14 @@
     "dateofbirth" : "Date of birth",
     "clientnote" : "Client Note",
     "mentornote" : "Mentor Note",
-    "addeditnote": "Add / Edit Note"
+    "remanintime" : "Remaining Time for the Meeting",
+    "appointmentdetails" : "Appointment Details",
+    "cancelmeetingmessage" : "By pressing confirm you will cancel the meeting and you will lose half of the meeting cost",
+    "waitingyoutojoin" : "Waiting you to join",
+    "waitingyoutojoindesc" : "Your Mentor waiting you to join, this call will be canceled if you late more than 7 min",
+    "addeditnote": "Add / Edit Note",
+    "joinnow" : "Join Now"
+
 
 
 
