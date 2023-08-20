@@ -17,6 +17,8 @@ class CalenderMeetings {
   final DateTime toTime;
   final double priceBefore;
   final double priceAfter;
+  final String clientnote;
+  final String mentornote;
 
   const CalenderMeetings({
     required this.dateOfBirth,
@@ -34,5 +36,7 @@ class CalenderMeetings {
     required this.gender,
     required this.state,
     required this.appointmentType,
+    required this.clientnote,
+    required this.mentornote,
   });
 }

@@ -244,7 +244,10 @@
     "instant" : "فورية",
     "pricebefore" : "السعر قبل الخصم",
     "priceafter" : "السعر بعد الخصم",
-    "dateofbirth" : "تاريخ الميلاد"
+    "dateofbirth" : "تاريخ الميلاد",
+    "clientnote" : "ملاحظه العميل",
+    "mentornote" : "ملاحظه المدرب",
+    "addeditnote": "اضافة / تعديل ملاحظه"
 
 
 }

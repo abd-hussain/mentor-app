@@ -1,3 +1,4 @@
+import 'package:mentor_app/models/https/add_comment_appointment.dart';
 import 'package:mentor_app/models/https/appointment.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:mentor_app/utils/repository/http_repository.dart';
@@ -33,11 +34,11 @@ class AppointmentsService with Service {
     return response;
   }
 
-  Future<void> addCommentToAppointment({required int id}) async {
+  Future<void> addCommentToAppointment({required AddCommentToAppointment body}) async {
     final response = await repository.callRequest(
       requestType: RequestType.post,
-      methodName: MethodNameConstant.compleatedAppointment,
-      queryParam: {"id": id},
+      methodName: MethodNameConstant.commentAppointment,
+      postBody: body,
     );
 
     return response;

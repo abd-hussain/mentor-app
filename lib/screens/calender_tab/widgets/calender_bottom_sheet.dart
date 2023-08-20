@@ -20,8 +20,89 @@ class CalenderBottomSheetsUtil {
     required this.language,
   });
 
+  Future addNoteMeetingBottomSheet({
+    required String note,
+    required Function(String) confirm,
+  }) async {
+    TextEditingController controller = TextEditingController();
+    return await showModalBottomSheet(
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(25),
+          ),
+        ),
+        enableDrag: true,
+        useRootNavigator: true,
+        context: context,
+        backgroundColor: Colors.white,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        builder: (context) {
+          controller.text = note;
+          return GestureDetector(
+            onTap: () {
+              FocusScope.of(context).unfocus();
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20, left: 16, right: 16, bottom: 20),
+              child: Wrap(
+                children: [
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 50,
+                      ),
+                      const Expanded(child: SizedBox()),
+                      CustomText(
+                        title: AppLocalizations.of(context)!.addeditnote,
+                        textColor: const Color(0xff444444),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      const Expanded(child: SizedBox()),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(Icons.close),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  TextFormField(
+                    controller: controller,
+                    maxLines: 3,
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!.note,
+                      icon: const Icon(Icons.message),
+                    ),
+                    onEditingComplete: () {
+                      FocusScope.of(context).unfocus();
+                    },
+                  ),
+                  Container(height: 1, color: const Color(0xff444444)),
+                  CustomButton(
+                    enableButton: true,
+                    padding: const EdgeInsets.all(8.0),
+                    buttonColor: const Color(0xff4CB6EA),
+                    buttonTitle: AppLocalizations.of(context)!.submit,
+                    onTap: () {
+                      Navigator.pop(context);
+                      confirm(controller.text);
+                    },
+                  ),
+                  const SizedBox(height: 300)
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   Future bookMeetingBottomSheet({
     required Function() cancel,
+    required Function() addeditnote,
   }) async {
     return await showModalBottomSheet(
         isScrollControlled: true,
@@ -63,7 +144,16 @@ class CalenderBottomSheetsUtil {
                 ),
                 const SizedBox(height: 8),
                 meetingView(),
-                const SizedBox(),
+                CustomButton(
+                  enableButton: true,
+                  padding: const EdgeInsets.all(8.0),
+                  buttonColor: const Color(0xff4CB6EA),
+                  buttonTitle: AppLocalizations.of(context)!.addeditnote,
+                  onTap: () {
+                    Navigator.pop(context);
+                    addeditnote();
+                  },
+                ),
                 CustomButton(
                   enableButton: DateTime.now().isBefore(metingDetails.fromTime) &&
                       metingDetails.state == AppointmentsState.active,
@@ -99,6 +189,7 @@ class CalenderBottomSheetsUtil {
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.eventdate,
           desc: "${metingDetails.fromTime.year}/${metingDetails.fromTime.month}/${metingDetails.fromTime.day}",
+          padding: const EdgeInsets.all(8),
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.eventday,
@@ -107,24 +198,40 @@ class CalenderBottomSheetsUtil {
               : DayTime().convertDayToArabic(
                   DateFormat('EEEE').format(metingDetails.fromTime),
                 ),
+          padding: const EdgeInsets.all(8),
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.sessiontype,
           desc: _sessionType(metingDetails.appointmentType),
+          padding: const EdgeInsets.all(8),
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.meetingtime,
           desc: DayTime().convertingTimingWithMinToRealTime(metingDetails.fromTime.hour, metingDetails.fromTime.minute),
+          padding: const EdgeInsets.all(8),
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.meetingduration,
           desc: "$difference ${AppLocalizations.of(context)!.min}",
+          padding: const EdgeInsets.all(8),
         ),
         AppointmentDetailsView(
-            title: AppLocalizations.of(context)!.meetingstatus,
-            desc: _sessionStatusString(metingDetails.state),
-            descColor: metingDetails.state == AppointmentsState.active ? Colors.green : Colors.red),
+          title: AppLocalizations.of(context)!.meetingstatus,
+          desc: _sessionStatusString(metingDetails.state),
+          descColor: metingDetails.state == AppointmentsState.active ? Colors.green : Colors.red,
+          padding: const EdgeInsets.all(8),
+        ),
         PriceView(priceBeforeDiscount: metingDetails.priceBefore, priceAfterDiscount: metingDetails.priceAfter),
+        AppointmentDetailsView(
+          title: AppLocalizations.of(context)!.clientnote,
+          desc: metingDetails.clientnote == "" ? AppLocalizations.of(context)!.noitem : metingDetails.clientnote,
+          padding: const EdgeInsets.all(8),
+        ),
+        AppointmentDetailsView(
+          title: AppLocalizations.of(context)!.mentornote,
+          desc: metingDetails.mentornote == "" ? AppLocalizations.of(context)!.noitem : metingDetails.mentornote,
+          padding: const EdgeInsets.all(8),
+        ),
         Container(height: 1, color: const Color(0xff444444)),
       ],
     );

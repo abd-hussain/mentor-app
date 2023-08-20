@@ -78,6 +78,8 @@ class MainContainerBloc extends Bloc<AppointmentsService> {
             priceAfter: item.priceAfterDiscount!,
             countryId: item.countryId!,
             countryFlag: item.countryFlag!,
+            mentornote: item.mentornote ?? "",
+            clientnote: item.clientnote ?? "",
           );
           list.add(newItem);
           meetingsListNotifier.value = list;

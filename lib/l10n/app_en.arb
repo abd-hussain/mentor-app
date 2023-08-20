@@ -244,7 +244,10 @@
     "instant" : "Instant",
     "pricebefore" : "Price Before Discount",
     "priceafter" : "Price After Discount",
-    "dateofbirth" : "Date of birth"
+    "dateofbirth" : "Date of birth",
+    "clientnote" : "Client Note",
+    "mentornote" : "Mentor Note",
+    "addeditnote": "Add / Edit Note"
 
 
 
