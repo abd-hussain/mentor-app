@@ -72,6 +72,12 @@ class MainContainerBloc extends Bloc<AppointmentsService> {
             gender: GenderFormat().convertIndexToString(context, item.gender!),
             fromTime: DateTime.parse(item.dateFrom!),
             toTime: DateTime.parse(item.dateTo!),
+            dateOfBirth: item.dateOfBirth!,
+            appointmentType: item.appointmentType!,
+            priceBefore: item.priceBeforeDiscount!,
+            priceAfter: item.priceAfterDiscount!,
+            countryId: item.countryId!,
+            countryFlag: item.countryFlag!,
           );
           list.add(newItem);
           meetingsListNotifier.value = list;

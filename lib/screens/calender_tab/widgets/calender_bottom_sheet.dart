@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:mentor_app/models/https/calender_model.dart';
+import 'package:mentor_app/screens/calender_tab/widgets/client_info_view.dart';
 import 'package:mentor_app/shared_widget/appointment_details_view.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
@@ -93,19 +94,7 @@ class CalenderBottomSheetsUtil {
             fontWeight: FontWeight.bold,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: CustomText(
-              title: "${metingDetails.firstName} ${metingDetails.lastName}",
-              textColor: const Color(0xff444444),
-              fontSize: 14,
-              textAlign: TextAlign.center,
-              maxLins: 4,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
+        ClientInfoView(metingDetails: metingDetails),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.eventdate,
           desc: "${metingDetails.fromTime.year}/${metingDetails.fromTime.month}/${metingDetails.fromTime.day}",
@@ -119,6 +108,10 @@ class CalenderBottomSheetsUtil {
                 ),
         ),
         AppointmentDetailsView(
+          title: AppLocalizations.of(context)!.sessiontype,
+          desc: _sessionType(metingDetails.appointmentType),
+        ),
+        AppointmentDetailsView(
           title: AppLocalizations.of(context)!.meetingtime,
           desc: DayTime().convertingTimingWithMinToRealTime(metingDetails.fromTime.hour, metingDetails.fromTime.minute),
         ),
@@ -130,9 +123,25 @@ class CalenderBottomSheetsUtil {
             title: AppLocalizations.of(context)!.meetingstatus,
             desc: _sessionStatusString(metingDetails.state),
             descColor: metingDetails.state == AppointmentsState.active ? Colors.green : Colors.red),
+        AppointmentDetailsView(
+          title: AppLocalizations.of(context)!.pricebefore,
+          desc: "${metingDetails.priceBefore}",
+        ),
+        AppointmentDetailsView(
+          title: AppLocalizations.of(context)!.priceafter,
+          desc: "${metingDetails.priceAfter}",
+        ),
         Container(height: 1, color: const Color(0xff444444)),
       ],
     );
+  }
+
+  String _sessionType(int id) {
+    if (id == 1) {
+      return AppLocalizations.of(context)!.schudule;
+    } else {
+      return AppLocalizations.of(context)!.instant;
+    }
   }
 
   String _sessionStatusString(AppointmentsState state) {

@@ -238,7 +238,15 @@
     "clientmisscall" : "Client Miss The Call",
     "mentorcancelcall" : "Mentor Cancel The Call",
     "clientcancelcall" : "Client Cancel The Call",
-    "active" : "Active"
+    "active" : "Active",
+    "sessiontype" : "Session Type",
+    "schudule" : "Scheduled",
+    "instant" : "Instant",
+    "pricebefore" : "Price Before Discount",
+    "priceafter" : "Price After Discount",
+    "dateofbirth" : "Date of birth"
+
+
 
 
 

@@ -25,7 +25,7 @@ class AppointmentData with ModelChecker {
   int? mentorId;
   int? appointmentType;
   double? priceBeforeDiscount;
-  int? discountId;
+  double? priceAfterDiscount;
   int? state;
   String? profileImg;
   String? firstName;
@@ -33,6 +33,7 @@ class AppointmentData with ModelChecker {
   int? gender;
   String? dateOfBirth;
   int? countryId;
+  String? countryFlag;
 
   AppointmentData({
     this.id,
@@ -42,7 +43,7 @@ class AppointmentData with ModelChecker {
     this.mentorId,
     this.appointmentType,
     this.priceBeforeDiscount,
-    this.discountId,
+    this.priceAfterDiscount,
     this.state,
     this.profileImg,
     this.firstName,
@@ -50,6 +51,7 @@ class AppointmentData with ModelChecker {
     this.gender,
     this.dateOfBirth,
     this.countryId,
+    this.countryFlag,
   });
 
   AppointmentData.fromJson(Map<String, dynamic> json) {
@@ -60,7 +62,7 @@ class AppointmentData with ModelChecker {
     mentorId = json['mentor_id'];
     appointmentType = json['appointment_type'];
     priceBeforeDiscount = convertToDouble(json['price_before_discount']);
-    discountId = json['discount_id'];
+    priceAfterDiscount = convertToDouble(json['price_after_discount']);
     state = json['state'];
     profileImg = convertToString(json['profile_img']);
     firstName = convertToString(json['first_name']);
@@ -68,5 +70,6 @@ class AppointmentData with ModelChecker {
     gender = json['gender'];
     dateOfBirth = convertToString(json['date_of_birth']);
     countryId = json['country_id'];
+    countryFlag = json['flag_image'];
   }
 }

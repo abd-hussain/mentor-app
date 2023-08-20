@@ -238,11 +238,13 @@
     "clientmisscall" : "العميل اضاع المكالمة",
     "mentorcancelcall" : "المدرب الغى المكالمه",
     "clientcancelcall" : "العميل الغى المكالمه",
-    "active" : "فعالة"
-
-
-
-
+    "active" : "فعالة",
+    "sessiontype" : "نوع الجلسة",
+    "schudule" : "مجدوله",
+    "instant" : "فورية",
+    "pricebefore" : "السعر قبل الخصم",
+    "priceafter" : "السعر بعد الخصم",
+    "dateofbirth" : "تاريخ الميلاد"
 
 
 }
