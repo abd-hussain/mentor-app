@@ -232,7 +232,13 @@
     "version_details" : "تفاصيل الاصدارات",
     "majors" : "التخصصات",
     "experience_since" : "خبرة منذ",
-    "certificate" : "شهادة"
+    "certificate" : "شهادة",
+    "meetingstatus" : "حالة الجلسة",
+    "mentormisscall" : "المدرب اضاع المكالمة",
+    "clientmisscall" : "العميل اضاع المكالمة",
+    "mentorcancelcall" : "المدرب الغى المكالمه",
+    "clientcancelcall" : "العميل الغى المكالمه",
+    "active" : "فعالة"
 
 
 

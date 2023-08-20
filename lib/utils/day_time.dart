@@ -26,7 +26,9 @@ class DayTime {
   }
 
   String convertingTimingWithMinToRealTime(int hour, int min) {
-    if (hour > 0 && hour <= 9) {
+    if (hour == 0) {
+      return "12:${_minFraction(min)} am";
+    } else if (hour > 0 && hour <= 9) {
       return "0$hour:${_minFraction(min)} am";
     } else if (hour > 9 && hour <= 12) {
       return "$hour:${_minFraction(min)} am";

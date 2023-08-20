@@ -4,9 +4,15 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 class AppointmentDetailsView extends StatelessWidget {
   final String title;
   final String desc;
+  final Color descColor;
   final bool forceView;
 
-  const AppointmentDetailsView({required this.title, required this.desc, this.forceView = false, super.key});
+  const AppointmentDetailsView(
+      {required this.title,
+      required this.desc,
+      this.forceView = false,
+      super.key,
+      this.descColor = const Color(0xff554d56)});
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +33,14 @@ class AppointmentDetailsView extends StatelessWidget {
                     title: desc,
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    textColor: const Color(0xff554d56),
+                    textColor: descColor,
                   ),
                 )
               : CustomText(
                   title: desc,
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  textColor: const Color(0xff554d56),
+                  textColor: descColor,
                 ),
         ],
       ),

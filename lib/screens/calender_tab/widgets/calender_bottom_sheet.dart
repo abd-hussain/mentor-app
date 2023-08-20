@@ -63,7 +63,8 @@ class CalenderBottomSheetsUtil {
                 meetingView(),
                 const SizedBox(),
                 CustomButton(
-                  enableButton: DateTime.now().isBefore(metingDetails.fromTime),
+                  enableButton: DateTime.now().isBefore(metingDetails.fromTime) &&
+                      metingDetails.state == AppointmentsState.active,
                   padding: const EdgeInsets.all(8.0),
                   buttonColor: const Color(0xffda1100),
                   buttonTitle: AppLocalizations.of(context)!.cancelappointment,
@@ -125,8 +126,34 @@ class CalenderBottomSheetsUtil {
           title: AppLocalizations.of(context)!.meetingduration,
           desc: "$difference ${AppLocalizations.of(context)!.min}",
         ),
+        AppointmentDetailsView(
+            title: AppLocalizations.of(context)!.meetingstatus,
+            desc: _sessionStatusString(metingDetails.state),
+            descColor: metingDetails.state == AppointmentsState.active ? Colors.green : Colors.red),
         Container(height: 1, color: const Color(0xff444444)),
       ],
     );
+  }
+
+  String _sessionStatusString(AppointmentsState state) {
+    switch (state) {
+      case AppointmentsState.active:
+        return AppLocalizations.of(context)!.active;
+
+      case AppointmentsState.clientCancel:
+        return AppLocalizations.of(context)!.clientcancelcall;
+
+      case AppointmentsState.mentorCancel:
+        return AppLocalizations.of(context)!.mentorcancelcall;
+
+      case AppointmentsState.clientMiss:
+        return AppLocalizations.of(context)!.clientmisscall;
+
+      case AppointmentsState.mentorMiss:
+        return AppLocalizations.of(context)!.mentormisscall;
+
+      case AppointmentsState.completed:
+        return AppLocalizations.of(context)!.compleated;
+    }
   }
 }

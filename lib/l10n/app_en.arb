@@ -232,7 +232,14 @@
     "version_details" : "Versions Details",
     "majors" : "Majors",
     "experience_since" : "Experience Since",
-    "certificate" : "Certificate"
+    "certificate" : "Certificate",
+    "meetingstatus" : "Session Status",
+    "mentormisscall" : "Mentor Miss The Call",
+    "clientmisscall" : "Client Miss The Call",
+    "mentorcancelcall" : "Mentor Cancel The Call",
+    "clientcancelcall" : "Client Cancel The Call",
+    "active" : "Active"
+
 
 
 
