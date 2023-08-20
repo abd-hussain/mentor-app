@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:mentor_app/shared_widget/file_holder_field.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CertificateView extends StatefulWidget {
   final Function(List<File>) certificatesListCallBack;
@@ -29,8 +30,9 @@ class _CertificateViewState extends State<CertificateView> {
               return Row(
                 children: [
                   FileHolderField(
-                    title: "Certificate (${index + 1})",
+                    title: "${AppLocalizations.of(context)!.certificate} (${index + 1})",
                     width: MediaQuery.of(context).size.width - 68,
+                    currentFile: null,
                     onAddFile: (file) {
                       certificatesList.add(file);
                       widget.certificatesListCallBack(certificatesList);

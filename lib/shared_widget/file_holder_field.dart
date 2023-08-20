@@ -4,9 +4,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 
-class FileHolderField extends StatelessWidget {
+class FileHolderField extends StatefulWidget {
   final String title;
   final double width;
+  final File? currentFile;
   final Function(File image) onAddFile;
   final Function() onRemoveFile;
 
@@ -14,14 +15,28 @@ class FileHolderField extends StatelessWidget {
     super.key,
     required this.onAddFile,
     required this.title,
+    required this.currentFile,
     required this.onRemoveFile,
     required this.width,
   });
 
   @override
-  Widget build(BuildContext context) {
-    ValueNotifier<File?> fileController = ValueNotifier<File?>(null);
+  State<FileHolderField> createState() => _FileHolderFieldState();
+}
 
+class _FileHolderFieldState extends State<FileHolderField> {
+  ValueNotifier<File?> fileController = ValueNotifier<File?>(null);
+
+  @override
+  void initState() {
+    if (widget.currentFile != null) {
+      fileController.value = widget.currentFile;
+    }
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
@@ -35,7 +50,7 @@ class FileHolderField extends StatelessWidget {
 
               if (result != null) {
                 fileController.value = File(result.files.single.path!);
-                onAddFile(File(result.files.single.path!));
+                widget.onAddFile(File(result.files.single.path!));
               }
             } catch (error) {
               debugPrint(error.toString());
@@ -43,7 +58,7 @@ class FileHolderField extends StatelessWidget {
             }
           } else {
             fileController.value = null;
-            onRemoveFile();
+            widget.onRemoveFile();
           }
         },
         child: ValueListenableBuilder<File?>(
@@ -51,7 +66,7 @@ class FileHolderField extends StatelessWidget {
             builder: (context, snapshot, child) {
               return Container(
                 height: 50,
-                width: width,
+                width: widget.width,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
@@ -64,7 +79,7 @@ class FileHolderField extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomText(
-                      title: title,
+                      title: widget.title,
                       fontSize: 12,
                       textAlign: TextAlign.center,
                       textColor: Colors.black,

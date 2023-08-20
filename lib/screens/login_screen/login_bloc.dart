@@ -65,7 +65,9 @@ class LoginBloc extends Bloc<AuthService> {
 
   Future<void> initBiometric(BuildContext context) async {
     if (await locator<NetworkInfoService>().isConnected()) {
-      await _readBiometricData(context);
+      if (context.mounted) {
+        await _readBiometricData(context);
+      }
     }
   }
 
@@ -94,31 +96,35 @@ class LoginBloc extends Bloc<AuthService> {
 
   Future tryToAuthintecateUserByBiometric(BuildContext context) async {
     if (await authenticationService.isBiometricAvailable()) {
-      if (await authenticationService.shouldAllowBiometricAuthenticationToContinue(Theme.of(context).platform)) {
-        // continue with authentication
-        isBiometricAppeared = true;
-        final authentication = await authenticationService.authenticateUser("Please use your biometric signature");
-        if (authentication.success) {
-          final String biometricU = box.get(DatabaseFieldConstant.biometricU);
-          final String biometricP = box.get(DatabaseFieldConstant.biometricP);
+      if (context.mounted) {
+        if (await authenticationService.shouldAllowBiometricAuthenticationToContinue(Theme.of(context).platform)) {
+          // continue with authentication
+          isBiometricAppeared = true;
+          final authentication = await authenticationService.authenticateUser("Please use your biometric signature");
+          if (authentication.success) {
+            final String biometricU = box.get(DatabaseFieldConstant.biometricU);
+            final String biometricP = box.get(DatabaseFieldConstant.biometricP);
 
-          if (!(await locator<NetworkInfoService>().isConnected())) {
-            throw ConnectionException(message: "Please check your internet connection");
+            if (!(await locator<NetworkInfoService>().isConnected())) {
+              throw ConnectionException(message: "Please check your internet connection");
+            } else {
+              if (context.mounted) {
+                doLoginCall(
+                  context: context,
+                  userName: biometricU,
+                  password: biometricP,
+                  isBiometricLogin: true,
+                );
+                isBiometricAppeared = false;
+              }
+            }
           } else {
-            doLoginCall(
-              context: context,
-              userName: biometricU,
-              password: biometricP,
-              isBiometricLogin: true,
-            );
             isBiometricAppeared = false;
           }
-        } else {
-          isBiometricAppeared = false;
         }
+      } else {
+        isBiometricAppeared = false;
       }
-    } else {
-      isBiometricAppeared = false;
     }
   }
 

@@ -8,6 +8,7 @@ import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
+import 'package:mentor_app/shared_widget/file_holder_field.dart';
 import 'package:mentor_app/shared_widget/loading_view.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
 
@@ -82,6 +83,9 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                                       ExperianceSinceField(
                                         controller: bloc.experianceSinceController,
                                         padding: const EdgeInsets.all(0),
+                                        onSelected: () {
+                                          bloc.validateFields();
+                                        },
                                       ),
                                       const SizedBox(height: 16),
                                       Row(
@@ -105,26 +109,72 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                                               },
                                             );
                                           }),
-                                      // FileHolderField(
-                                      //   title: AppLocalizations.of(context)!.cv,
-                                      //   width: MediaQuery.of(context).size.width,
-                                      //   onAddFile: (file) {
-                                      //     bloc.cv = file;
-                                      //     bloc.validateFields();
-                                      //   },
-                                      //   onRemoveFile: () {
-                                      //     bloc.cv = null;
-                                      //     bloc.validateFields();
-                                      //   },
-                                      // ),
-                                      // const SizedBox(height: 8),
-                                      // CertificateView(
-                                      //   width: 128,
-                                      //   certificatesListCallBack: (p0) {
-                                      //     bloc.listOfCertificates = p0;
-                                      //     bloc.validateFields();
-                                      //   },
-                                      // ),
+                                      const SizedBox(height: 8),
+                                      FileHolderField(
+                                        title: AppLocalizations.of(context)!.cv,
+                                        width: MediaQuery.of(context).size.width,
+                                        currentFile: bloc.cert1,
+                                        onAddFile: (file) {
+                                          bloc.cv = file;
+                                          bloc.validateFields();
+                                        },
+                                        onRemoveFile: () {
+                                          bloc.cv = null;
+
+                                          bloc.validateFields();
+                                        },
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Center(
+                                        child: Column(
+                                          children: [
+                                            FileHolderField(
+                                              title: "${AppLocalizations.of(context)!.certificate} 1",
+                                              width: MediaQuery.of(context).size.width / 2,
+                                              currentFile: bloc.cert1,
+                                              onAddFile: (file) {
+                                                bloc.cv = file;
+                                                bloc.validateFields();
+                                              },
+                                              onRemoveFile: () {
+                                                bloc.cv = null;
+
+                                                bloc.validateFields();
+                                              },
+                                            ),
+                                            const SizedBox(height: 8),
+                                            FileHolderField(
+                                              title: "${AppLocalizations.of(context)!.certificate} 2",
+                                              width: MediaQuery.of(context).size.width / 2,
+                                              currentFile: bloc.cert1,
+                                              onAddFile: (file) {
+                                                bloc.cv = file;
+                                                bloc.validateFields();
+                                              },
+                                              onRemoveFile: () {
+                                                bloc.cv = null;
+
+                                                bloc.validateFields();
+                                              },
+                                            ),
+                                            const SizedBox(height: 8),
+                                            FileHolderField(
+                                              title: "${AppLocalizations.of(context)!.certificate} 3",
+                                              width: MediaQuery.of(context).size.width / 2,
+                                              currentFile: bloc.cert1,
+                                              onAddFile: (file) {
+                                                bloc.cv = file;
+                                                bloc.validateFields();
+                                              },
+                                              onRemoveFile: () {
+                                                bloc.cv = null;
+
+                                                bloc.validateFields();
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -136,8 +186,9 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                                   return CustomButton(
                                       enableButton: snapshot,
                                       onTap: () {
-                                        //TODO
-                                        Navigator.of(context).pop();
+                                        bloc.updateProfileExperiance().whenComplete(() {
+                                          Navigator.of(context).pop();
+                                        });
                                       });
                                 }),
                           ],

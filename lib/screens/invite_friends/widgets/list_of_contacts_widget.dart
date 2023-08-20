@@ -65,8 +65,10 @@ class _ListOfContactsWidgetState extends State<ListOfContactsWidget> {
               }
 
               if (await canSendSMS()) {
-                String message = "${AppLocalizations.of(context)!.smsmessage} ${AppConstant.appLink}";
-                await sendSMS(message: message, recipients: recipents, sendDirect: false);
+                if (context.mounted) {
+                  String message = "${AppLocalizations.of(context)!.smsmessage} ${AppConstant.appLink}";
+                  await sendSMS(message: message, recipients: recipents, sendDirect: false);
+                }
               }
             },
           ),

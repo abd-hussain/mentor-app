@@ -118,6 +118,7 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                             FileHolderField(
                               title: AppLocalizations.of(context)!.cv,
                               width: MediaQuery.of(context).size.width,
+                              currentFile: null,
                               onAddFile: (file) {
                                 bloc.cv = file;
                                 bloc.validateFieldsForFaze3();

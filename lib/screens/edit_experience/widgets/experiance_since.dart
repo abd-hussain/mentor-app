@@ -4,15 +4,31 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/shared_widget/custom_textfield.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ExperianceSinceField extends StatelessWidget {
+class ExperianceSinceField extends StatefulWidget {
   final TextEditingController controller;
   final bool isEnable;
   final EdgeInsets padding;
+  final VoidCallback onSelected;
   const ExperianceSinceField(
       {required this.controller,
       this.padding = const EdgeInsets.only(left: 16, right: 16),
       this.isEnable = true,
+      required this.onSelected,
       super.key});
+
+  @override
+  State<ExperianceSinceField> createState() => _ExperianceSinceFieldState();
+}
+
+class _ExperianceSinceFieldState extends State<ExperianceSinceField> {
+  @override
+  void initState() {
+    widget.controller.addListener(() {
+      widget.onSelected();
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +36,20 @@ class ExperianceSinceField extends StatelessWidget {
       children: [
         CustomTextField(
           readOnly: true,
-          enabled: isEnable,
-          controller: controller,
+          enabled: widget.isEnable,
+          controller: widget.controller,
           hintText: AppLocalizations.of(context)!.experience_since,
-          padding: padding,
+          padding: widget.padding,
           keyboardType: TextInputType.name,
           inputFormatters: [
             LengthLimitingTextInputFormatter(45),
           ],
         ),
         InkWell(
-          onTap: isEnable
+          onTap: widget.isEnable
               ? () async {
                   await experianceSinceBottomSheet(context, (selected) {
-                    controller.text = selected;
+                    widget.controller.text = selected;
                   });
                 }
               : null,
@@ -120,7 +136,7 @@ class ExperianceSinceField extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomText(
-                title: AppLocalizations.of(context)!.selectCategory,
+                title: AppLocalizations.of(context)!.experience_since,
                 textColor: Colors.black,
                 fontSize: 20,
               ),
