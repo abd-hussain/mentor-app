@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:mentor_app/models/https/calender_model.dart';
 import 'package:mentor_app/screens/calender_tab/widgets/client_info_view.dart';
+import 'package:mentor_app/screens/calender_tab/widgets/price_view.dart';
 import 'package:mentor_app/shared_widget/appointment_details_view.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
@@ -123,14 +124,7 @@ class CalenderBottomSheetsUtil {
             title: AppLocalizations.of(context)!.meetingstatus,
             desc: _sessionStatusString(metingDetails.state),
             descColor: metingDetails.state == AppointmentsState.active ? Colors.green : Colors.red),
-        AppointmentDetailsView(
-          title: AppLocalizations.of(context)!.pricebefore,
-          desc: "${metingDetails.priceBefore}",
-        ),
-        AppointmentDetailsView(
-          title: AppLocalizations.of(context)!.priceafter,
-          desc: "${metingDetails.priceAfter}",
-        ),
+        PriceView(priceBeforeDiscount: metingDetails.priceBefore, priceAfterDiscount: metingDetails.priceAfter),
         Container(height: 1, color: const Color(0xff444444)),
       ],
     );
