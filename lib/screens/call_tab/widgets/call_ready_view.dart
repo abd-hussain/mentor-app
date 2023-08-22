@@ -8,7 +8,8 @@ import 'package:mentor_app/utils/routes.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class CallReadyView extends StatelessWidget {
-  const CallReadyView({super.key});
+  final String channelId;
+  const CallReadyView({super.key, required this.channelId});
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +63,9 @@ class CallReadyView extends StatelessWidget {
                   onTap: () async {
                     PermissionHandler().handlePermission(Permission.camera).whenComplete(() {
                       PermissionHandler().handlePermission(Permission.microphone).whenComplete(() {
-                        //TODO : handleChannelName
                         Navigator.of(context, rootNavigator: true)
                             .pushNamed(RoutesConstants.insideCallScreen, arguments: {
-                          "channelName": "test079",
+                          "channelName": channelId,
                         });
                       });
                     });

@@ -36,6 +36,7 @@ class AppointmentData with ModelChecker {
   String? countryFlag;
   String? mentornote;
   String? clientnote;
+  String? channelID;
 
   AppointmentData({
     this.id,
@@ -56,6 +57,7 @@ class AppointmentData with ModelChecker {
     this.countryFlag,
     this.mentornote,
     this.clientnote,
+    this.channelID,
   });
 
   AppointmentData.fromJson(Map<String, dynamic> json) {
@@ -77,5 +79,6 @@ class AppointmentData with ModelChecker {
     countryFlag = json['flag_image'];
     mentornote = json['note_from_mentor'];
     clientnote = json['note_from_client'];
+    channelID = convertToString(json['channel_id']);
   }
 }

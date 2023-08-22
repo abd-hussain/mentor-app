@@ -11,16 +11,16 @@ class CallBloc extends Bloc<AccountService> {
 
   CalenderMeetings? checkIfThereIsAnyMeetingTodayAndReturnTheNearOne(List<CalenderMeetings> listOfData) {
     final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
+    final today = DateTime(now.year, now.month, now.day, now.hour, now.minute);
     List<CalenderMeetings> newList = [];
-    for (var appointment in listOfData) {
-      Duration diffrent =
-          today.difference(DateTime(appointment.fromTime.year, appointment.fromTime.month, appointment.fromTime.day));
-
-      if (diffrent.inHours <= 24) {
+    for (CalenderMeetings appointment in listOfData) {
+      Duration diffrent = today.difference(DateTime(appointment.fromTime.year, appointment.fromTime.month,
+          appointment.fromTime.day, appointment.fromTime.hour, appointment.fromTime.minute));
+      if (diffrent.inHours >= -24 && diffrent.inHours <= 24) {
         newList.add(appointment);
       }
     }
+
     if (newList.isNotEmpty) {
       CalenderMeetings returnedAppointment = newList[0];
 

@@ -51,10 +51,10 @@ class _CallScreenState extends State<CallScreen> {
 
                     if (appointment.fromTime.isAfter(DateTime.now())) {
                       timeDifference = appointment.fromTime.subtract(Duration(
-                          days: 0,
-                          hours: DateTime.now().hour,
-                          minutes: DateTime.now().minute,
-                          seconds: DateTime.now().second));
+                        hours: DateTime.now().hour,
+                        minutes: DateTime.now().minute,
+                        seconds: DateTime.now().second,
+                      ));
                     }
 
                     if (timeDifference.hour > 0 || timeDifference.minute > 0 || timeDifference.second > 0) {
@@ -75,7 +75,8 @@ class _CallScreenState extends State<CallScreen> {
                         },
                       );
                     } else {
-                      return const CallReadyView();
+                      //TODO : Delete the call if the user not enter for more than 10 min
+                      return CallReadyView(channelId: appointment.channelID);
                     }
                   } else {
                     return noCallView();

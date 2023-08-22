@@ -15,9 +15,6 @@ class VersioningBloc extends Bloc<SettingService> {
 
   getVerionsDetails() {
     service.getVersions().then((value) {
-      print("value.data");
-      print(value.data);
-
       versionsListNotifier.value = value.data;
     });
   }

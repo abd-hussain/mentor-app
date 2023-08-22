@@ -80,10 +80,11 @@ class MainContainerBloc extends Bloc<AppointmentsService> {
             countryFlag: item.countryFlag!,
             mentornote: item.mentornote ?? "",
             clientnote: item.clientnote ?? "",
+            channelID: item.channelID ?? "",
           );
           list.add(newItem);
-          meetingsListNotifier.value = list;
         }
+        meetingsListNotifier.value = list;
       }
     });
   }
