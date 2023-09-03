@@ -75,7 +75,6 @@ class _CallScreenState extends State<CallScreen> {
                         },
                       );
                     } else {
-                      //TODO : Delete the call if the user not enter for more than 10 min
                       return CallReadyView(channelId: appointment.channelID);
                     }
                   } else {

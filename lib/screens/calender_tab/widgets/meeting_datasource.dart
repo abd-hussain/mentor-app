@@ -27,7 +27,13 @@ class MeetingDataSource extends CalendarDataSource {
 
   @override
   Color getColor(int index) {
-    return const Color(0xff444444);
+    if (appointments![index].state == AppointmentsState.active) {
+      return const Color(0xff006400);
+    } else if (appointments![index].state == AppointmentsState.completed) {
+      return const Color(0xff444444);
+    } else {
+      return const Color(0xff880808);
+    }
   }
 
   @override

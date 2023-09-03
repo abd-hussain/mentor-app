@@ -17,7 +17,9 @@ class CallBloc extends Bloc<AccountService> {
       Duration diffrent = today.difference(DateTime(appointment.fromTime.year, appointment.fromTime.month,
           appointment.fromTime.day, appointment.fromTime.hour, appointment.fromTime.minute));
       if (diffrent.inHours >= -24 && diffrent.inHours <= 24) {
-        newList.add(appointment);
+        if (appointment.state == AppointmentsState.active) {
+          newList.add(appointment);
+        }
       }
     }
 
