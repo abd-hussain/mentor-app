@@ -31,36 +31,42 @@ class PaymentResponseData {
 }
 
 class DBMentorPayments with ModelChecker {
-  double? amount;
-  int? id;
-  String? descriptions;
-  int? type;
   int? mentorId;
   int? status;
   int? durations;
+  String? currencyEnglish;
   String? notes;
   String? createdAt;
+  int? id;
+  double? amount;
+  String? currencyArabic;
+  String? descriptions;
+  int? type;
 
   DBMentorPayments(
-      {this.amount,
-      this.id,
-      this.descriptions,
-      this.type,
-      this.mentorId,
+      {this.mentorId,
       this.status,
       this.durations,
+      this.currencyEnglish,
       this.notes,
-      this.createdAt});
+      this.createdAt,
+      this.id,
+      this.amount,
+      this.currencyArabic,
+      this.descriptions,
+      this.type});
 
   DBMentorPayments.fromJson(Map<String, dynamic> json) {
-    amount = convertToDouble(json['amount']);
-    id = json['id'];
-    descriptions = json['descriptions'];
-    type = json['type'];
     mentorId = json['mentor_id'];
     status = json['status'];
     durations = json['durations'];
+    currencyEnglish = json['currency_english'];
     notes = json['notes'];
     createdAt = json['created_at'];
+    id = json['id'];
+    amount = json['amount'];
+    currencyArabic = json['currency_arabic'];
+    descriptions = json['descriptions'];
+    type = json['type'];
   }
 }

@@ -3,12 +3,17 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 
 class PaymentHeaderView extends StatelessWidget {
-  final String rejectedAmount;
-  final String pendingAmount;
-  final String recivedAmount;
+  final double rejectedAmount;
+  final double pendingAmount;
+  final double recivedAmount;
+  final String currency;
 
   const PaymentHeaderView(
-      {super.key, required this.rejectedAmount, required this.pendingAmount, required this.recivedAmount});
+      {super.key,
+      required this.rejectedAmount,
+      required this.pendingAmount,
+      required this.recivedAmount,
+      required this.currency});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +34,7 @@ class PaymentHeaderView extends StatelessWidget {
     );
   }
 
-  Widget item(String title, String amount, Color color) {
+  Widget item(String title, double amount, Color color) {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
@@ -50,7 +55,7 @@ class PaymentHeaderView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomText(
-                title: "\$ $amount",
+                title: "$amount $currency",
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 textColor: const Color(0xff444444),

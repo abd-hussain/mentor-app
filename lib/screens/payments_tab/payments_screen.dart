@@ -7,7 +7,6 @@ import 'package:mentor_app/screens/payments_tab/widgets/bottom_payment.dart';
 import 'package:mentor_app/screens/payments_tab/widgets/payment_list_view.dart';
 import 'package:mentor_app/screens/payments_tab/widgets/payment_header_view.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
-import 'package:mentor_app/utils/logger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PaymentsScreen extends StatefulWidget {
@@ -22,7 +21,6 @@ class _PaymentsScreenState extends State<PaymentsScreen> with TickerProviderStat
 
   @override
   void didChangeDependencies() {
-    logDebugMessage(message: 'Payments init Called ...');
     bloc.getListOfPayments();
     super.didChangeDependencies();
   }
@@ -46,9 +44,10 @@ class _PaymentsScreenState extends State<PaymentsScreen> with TickerProviderStat
                     ? Column(
                         children: [
                           PaymentHeaderView(
-                            pendingAmount: bloc.pendingTotalAmount.toString(),
-                            recivedAmount: bloc.recivedTotalAmount.toString(),
-                            rejectedAmount: bloc.rejectedTotalAmount.toString(),
+                            pendingAmount: bloc.pendingTotalAmount,
+                            recivedAmount: bloc.recivedTotalAmount,
+                            rejectedAmount: bloc.rejectedTotalAmount,
+                            currency: bloc.currency,
                           ),
                           Row(
                             children: [

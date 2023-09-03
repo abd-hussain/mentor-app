@@ -26,26 +26,20 @@ class MainBannerHomePage extends StatelessWidget {
   }
 
   Widget _banner({required MainBanner obj}) {
-    return InkWell(
-      onTap: () {
-        //TODO handle Tab Here click
-        print(obj.actionType);
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              spreadRadius: 0,
-              blurRadius: 4,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child: Image.network(
-          AppConstant.imagesBaseURLForBanners + obj.image!,
-          fit: BoxFit.fill,
-        ),
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            spreadRadius: 0,
+            blurRadius: 4,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Image.network(
+        AppConstant.imagesBaseURLForBanners + obj.image!,
+        fit: BoxFit.fill,
       ),
     );
   }
