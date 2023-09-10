@@ -58,7 +58,7 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                   final navigator = Navigator.of(context);
                   await bloc.box.put(TempFieldToRegistrtConstant.email, bloc.emailController.text);
                   await bloc.box.put(TempFieldToRegistrtConstant.password, bloc.passwordController.text);
-                  await bloc.box.put(DatabaseFieldConstant.registrationStep, "6");
+                  await bloc.box.put(DatabaseFieldConstant.registrationStep, "7");
                   navigator.pushNamed(RoutesConstants.registerfinalfazeScreen);
                 },
               );

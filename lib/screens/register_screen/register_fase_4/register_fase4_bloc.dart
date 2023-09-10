@@ -3,6 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mentor_app/utils/day_time.dart';
 
 class Register4Bloc {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
@@ -72,5 +73,22 @@ class Register4Bloc {
     }
 
     enableNextBtn.value = isButtonEnabled;
+  }
+
+  List<int> filterListOfTiming({required String dayName}) {
+    List<int> newList = [];
+
+    List<WorkingHourModel> selectedList = listOfWorkingHourNotifier.value;
+
+    for (var item in selectedList) {
+      if (item.dayName == dayName) {
+        for (var item2 in item.list) {
+          if (item2.isEnable) {
+            newList.add(DayTime().getHourFromTimeString(item2.value));
+          }
+        }
+      }
+    }
+    return newList;
   }
 }

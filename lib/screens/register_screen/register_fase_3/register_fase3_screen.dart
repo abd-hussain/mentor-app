@@ -53,12 +53,20 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                 final navigator = Navigator.of(context);
                 await bloc.box.put(TempFieldToRegistrtConstant.bio, bloc.bioController.text);
                 await bloc.box.put(TempFieldToRegistrtConstant.category, bloc.selectedCategory!.id.toString());
-                await bloc.box.put(TempFieldToRegistrtConstant.cv, bloc.cv.toString());
-                await bloc.box.put(TempFieldToRegistrtConstant.certificates, bloc.listOfCertificates.toString());
-                await bloc.box.put(TempFieldToRegistrtConstant.speakingLanguages,
-                    bloc.listOfSpeakingLanguageNotifier.value.toString());
 
-                await bloc.box.put(DatabaseFieldConstant.registrationStep, "3");
+                await bloc.box.put(TempFieldToRegistrtConstant.cv, bloc.cv != null ? bloc.cv!.path : null);
+
+                await bloc.box
+                    .put(TempFieldToRegistrtConstant.certificates1, bloc.cert1 != null ? bloc.cert1!.path : null);
+                await bloc.box
+                    .put(TempFieldToRegistrtConstant.certificates2, bloc.cert2 != null ? bloc.cert2!.path : null);
+                await bloc.box
+                    .put(TempFieldToRegistrtConstant.certificates3, bloc.cert3 != null ? bloc.cert3!.path : null);
+
+                await bloc.box.put(TempFieldToRegistrtConstant.speakingLanguages,
+                    bloc.filterListOfSelectedLanguage(bloc.listOfSpeakingLanguageNotifier.value));
+
+                await bloc.box.put(DatabaseFieldConstant.registrationStep, "4");
                 navigator.pushNamed(RoutesConstants.registerfaze4Screen);
               },
             );
@@ -130,8 +138,11 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                             ),
                             const SizedBox(height: 8),
                             CertificateView(
-                              certificatesListCallBack: (p0) {
-                                bloc.listOfCertificates = p0;
+                              onChange: (cert1, cert2, cert3) {
+                                bloc.cert1 = cert1;
+                                bloc.cert2 = cert2;
+                                bloc.cert3 = cert3;
+
                                 bloc.validateFieldsForFaze3();
                               },
                             ),

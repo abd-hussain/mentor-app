@@ -1,6 +1,7 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:mentor_app/locator.dart';
+import 'package:mentor_app/main_context.dart';
 import 'package:mentor_app/screens/main_contaner/main_container_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -15,6 +16,8 @@ class _MainContainerState extends State<MainContainer> {
 
   @override
   void didChangeDependencies() {
+    locator<MainContext>().mainContext = context;
+
     _bloc.getMentorAppointments(context);
     super.didChangeDependencies();
   }

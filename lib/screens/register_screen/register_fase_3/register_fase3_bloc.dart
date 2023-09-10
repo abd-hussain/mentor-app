@@ -16,7 +16,10 @@ class Register3Bloc {
   TextEditingController bioController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
   File? cv;
-  List<File?> listOfCertificates = [];
+  File? cert1;
+  File? cert2;
+  File? cert3;
+
   Category? selectedCategory;
 
   ValueNotifier<bool> enableNextBtn = ValueNotifier<bool>(false);
@@ -25,10 +28,11 @@ class Register3Bloc {
   ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier = ValueNotifier<List<CheckBox>>([]);
 
   validateFieldsForFaze3() {
+    enableNextBtn.value = false;
     if (bioController.text.isNotEmpty &&
         categoryController.text.isNotEmpty &&
         cv != null &&
-        listOfCertificates.isNotEmpty &&
+        cert1 != null &&
         listOfSpeakingLanguageNotifier.value.isNotEmpty) {
       enableNextBtn.value = true;
     }
@@ -42,6 +46,17 @@ class Register3Bloc {
       listOfSpeakingLanguageNotifier.value = _prepareList();
       loadingStatusController.sink.add(LoadingStatus.finish);
     });
+  }
+
+  List<String> filterListOfSelectedLanguage(List<CheckBox> list) {
+    List<String> newList = [];
+    for (var item in list) {
+      if (item.isEnable) {
+        newList.add(item.value);
+      }
+    }
+
+    return newList;
   }
 
   List<CheckBox> _prepareList() {

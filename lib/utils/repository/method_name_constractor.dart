@@ -44,4 +44,6 @@ class MethodNameConstant {
 
   static const String payments = "mentor-payments/";
   static const String paymentReport = "mentor-payments/report";
+
+  static const String register = "mentor/register";
 }

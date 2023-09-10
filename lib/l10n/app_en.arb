@@ -157,6 +157,7 @@
     "registerstep4" : "set your Working Hours",
     "registerstep5" : "Setup Your Rate Per Hour",
     "registerstep6" : "Set your Password",
+    "registerstep7" : "Submit your Informations",
     "acceptandcontinue" : "Accept & Continue",
     "next" : "Next",
     "optional" : "Optional",
@@ -253,7 +254,9 @@
     "waitingyoutojoin" : "Waiting you to join",
     "waitingyoutojoindesc" : "Your Mentor waiting you to join, this call will be canceled if you late more than 7 min",
     "addeditnote": "Add / Edit Note",
-    "joinnow" : "Join Now"
+    "joinnow" : "Join Now",
+    "createprofile" : "Creating Profile ...",
+    "createprofiledesc" : "This may take some time to be finished"
 
 
 

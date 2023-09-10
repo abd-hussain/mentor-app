@@ -22,6 +22,8 @@ class DatabaseFieldConstant {
   static const String selectedCountryDialCode = "selectedCountryDialCode";
   static const String selectedCountryMinLenght = "selectedCountryMinLenght";
   static const String selectedCountryMaxLenght = "selectedCountryMaxLenght";
+
+  static const String pushNotificationToken = "pushNotificationToken";
 }
 
 class TempFieldToRegistrtConstant {
@@ -37,7 +39,10 @@ class TempFieldToRegistrtConstant {
   static const String bio = "bio";
   static const String category = "category";
   static const String cv = "cv";
-  static const String certificates = "certificates";
+  static const String certificates1 = "certificates1";
+  static const String certificates2 = "certificates2";
+  static const String certificates3 = "certificates3";
+
   static const String speakingLanguages = "speakingLanguages";
 
   static const String saturdayWH = "saturdayWH";

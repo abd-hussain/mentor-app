@@ -14,6 +14,11 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>ar</string>
+	</array>
 	<key>CFBundleName</key>
 	<string>mentor_app</string>
 	<key>CFBundlePackageType</key>
@@ -24,25 +29,33 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-0120000896649737~8364658293</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
+	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Please allow access to camera in order to register your profile pictures</string>
 	<key>NSContactsUsageDescription</key>
 	<string>We need to access your contact list to allow you invite your friends</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Please authorize to use the app</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We Need This Permission to hear your voice when you talk to the client</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please allow access to gallery in order to register your profile pictures</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
-	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-0120000896649737~8364658293</string>
-	<key>UISupportsDocumentBrowser</key>
-	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -53,25 +66,11 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UISupportsDocumentBrowser</key>
+	<true/>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>We Need This Permission to hear your voice when you talk to the client</string>
-	<key>NSFaceIDUsageDescription</key>
-	<string>Please authorize to use the app</string>
-	<key>CFBundleLocalizations</key>
-	<array>
-		<string>en</string>
-		<string>ar</string>
-	</array>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-		<key>NSAllowsArbitraryLoadsInWebContent</key>
-		<true/>
-	</dict>
 </dict>
 </plist>

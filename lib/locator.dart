@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:mentor_app/main_context.dart';
 import 'package:mentor_app/screens/main_contaner/main_container_bloc.dart';
 import 'package:mentor_app/services/appointments_service.dart';
 import 'package:mentor_app/services/auth_services.dart';
@@ -12,6 +13,7 @@ import 'package:mentor_app/services/mentor_properties_services.dart';
 import 'package:mentor_app/services/mentor_settings.dart';
 import 'package:mentor_app/services/noticitions_services.dart';
 import 'package:mentor_app/services/payment_services.dart';
+import 'package:mentor_app/services/register_service.dart';
 import 'package:mentor_app/services/report_service.dart';
 import 'package:mentor_app/services/settings_service.dart';
 import 'package:mentor_app/services/account_service.dart';
@@ -22,6 +24,8 @@ import 'package:mentor_app/utils/repository/http_repository.dart';
 GetIt locator = GetIt.instance;
 
 Future<void> setupLocator() async {
+  locator.registerLazySingleton(() => MainContext());
+
   locator.registerSingleton<NetworkInfoService>(NetworkInfoService());
 
   locator.registerFactory<FilterService>(() => FilterService());
@@ -35,6 +39,7 @@ Future<void> setupLocator() async {
   locator.registerFactory<MentorPropertiesService>(() => MentorPropertiesService());
   locator.registerFactory<PaymentService>(() => PaymentService());
   locator.registerFactory<MentorSettingsService>(() => MentorSettingsService());
+  locator.registerFactory<RegisterService>(() => RegisterService());
 
   locator.registerLazySingleton(() => AuthenticationService());
   locator.registerLazySingleton(() => LocalAuthentication());

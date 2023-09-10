@@ -64,14 +64,16 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                 await bloc.box.put(TempFieldToRegistrtConstant.lastName, bloc.lastNameController.text);
                 await bloc.box.put(TempFieldToRegistrtConstant.country, bloc.selectedCountry!.id.toString());
                 await bloc.box.put(TempFieldToRegistrtConstant.gender, bloc.genderController.text);
-                await bloc.box.put(TempFieldToRegistrtConstant.profileImage, bloc.profileImage.toString());
-                await bloc.box.put(TempFieldToRegistrtConstant.idImage, bloc.iDImage.toString());
+                await bloc.box.put(TempFieldToRegistrtConstant.profileImage,
+                    bloc.profileImage != null ? bloc.profileImage!.path : null);
+                await bloc.box
+                    .put(TempFieldToRegistrtConstant.idImage, bloc.iDImage != null ? bloc.iDImage!.path : null);
                 await bloc.box.put(TempFieldToRegistrtConstant.dateOfBirth, bloc.selectedDate);
                 await bloc.box.put(TempFieldToRegistrtConstant.phoneNumber, bloc.countryCode + bloc.mobileController);
 
                 await bloc.box.put(TempFieldToRegistrtConstant.referalCode,
                     bloc.validateReferalCode.value == true ? bloc.referalCodeController.text : "");
-                await bloc.box.put(DatabaseFieldConstant.registrationStep, "2");
+                await bloc.box.put(DatabaseFieldConstant.registrationStep, "3");
                 navigator.pushNamed(RoutesConstants.registerfaze3Screen);
               },
             );
