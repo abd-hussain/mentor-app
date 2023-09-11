@@ -54,8 +54,8 @@ class RegisterFinalBloc extends Bloc<RegisterService> {
       workingHoursWednesday: box.get(TempFieldToRegistrtConstant.wednesdayWH) ?? [],
       workingHoursThursday: box.get(TempFieldToRegistrtConstant.thursdayWH) ?? [],
       workingHoursFriday: box.get(TempFieldToRegistrtConstant.fridayWH) ?? [],
-      experienceSince: "", //TODO
-      majors: ["1"], //TODO
+      experienceSince: box.get(TempFieldToRegistrtConstant.experianceSince) ?? "",
+      majors: box.get(TempFieldToRegistrtConstant.majors) ?? [],
     );
 
     await service.callRegister(data: model);

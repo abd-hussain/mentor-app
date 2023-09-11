@@ -25,7 +25,6 @@ class EditExperienceBloc extends Bloc<AccountService> {
   File? cert1;
   File? cert2;
   File? cert3;
-  // List<File?> listOfCertificates = [];
   List<SuffixData> listOfAllMajors = [];
 
   getListOfMajors() {
@@ -124,9 +123,7 @@ class EditExperienceBloc extends Bloc<AccountService> {
   validateFields() {
     enableSaveButton.value = false;
 
-    if (experianceSinceController.text.isNotEmpty && listOfMajorsNotifier.value.isNotEmpty && cv != null
-        // listOfCertificates.isNotEmpty
-        ) {
+    if (experianceSinceController.text.isNotEmpty && listOfMajorsNotifier.value.isNotEmpty && cv != null) {
       enableSaveButton.value = true;
     }
   }

@@ -38,12 +38,14 @@ class TempFieldToRegistrtConstant {
   static const String profileImage = "profileImage";
   static const String bio = "bio";
   static const String category = "category";
+  static const String experianceSince = "experianceSince";
   static const String cv = "cv";
   static const String certificates1 = "certificates1";
   static const String certificates2 = "certificates2";
   static const String certificates3 = "certificates3";
 
   static const String speakingLanguages = "speakingLanguages";
+  static const String majors = "majors";
 
   static const String saturdayWH = "saturdayWH";
   static const String sundayWH = "sundayWH";

@@ -7,6 +7,8 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 class FileHolderField extends StatefulWidget {
   final String title;
   final double width;
+  final double height;
+
   final File? currentFile;
   final Function(File image) onAddFile;
   final Function() onRemoveFile;
@@ -18,6 +20,7 @@ class FileHolderField extends StatefulWidget {
     required this.currentFile,
     required this.onRemoveFile,
     required this.width,
+    this.height = 50,
   });
 
   @override
@@ -65,7 +68,7 @@ class _FileHolderFieldState extends State<FileHolderField> {
             valueListenable: fileController,
             builder: (context, snapshot, child) {
               return Container(
-                height: 50,
+                height: widget.height,
                 width: widget.width,
                 decoration: BoxDecoration(
                   color: Colors.white,

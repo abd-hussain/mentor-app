@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mentor_app/locator.dart';
 import 'package:mentor_app/models/https/categories_model.dart';
+import 'package:mentor_app/models/https/suffix_model.dart';
 import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/services/filter_services.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
@@ -15,6 +16,8 @@ class Register3Bloc {
 
   TextEditingController bioController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
+  TextEditingController experianceSinceController = TextEditingController();
+
   File? cv;
   File? cert1;
   File? cert2;
@@ -26,11 +29,14 @@ class Register3Bloc {
   ValueNotifier<List<Category>> listOfCategories = ValueNotifier<List<Category>>([]);
   StreamController<LoadingStatus> loadingStatusController = StreamController<LoadingStatus>();
   ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier = ValueNotifier<List<CheckBox>>([]);
+  ValueNotifier<List<CheckBox>> listOfMajorsNotifier = ValueNotifier<List<CheckBox>>([]);
 
   validateFieldsForFaze3() {
     enableNextBtn.value = false;
     if (bioController.text.isNotEmpty &&
         categoryController.text.isNotEmpty &&
+        experianceSinceController.text.isNotEmpty &&
+        listOfMajorsNotifier.value.isNotEmpty &&
         cv != null &&
         cert1 != null &&
         listOfSpeakingLanguageNotifier.value.isNotEmpty) {
@@ -48,11 +54,31 @@ class Register3Bloc {
     });
   }
 
+  getListOfMajors() {
+    locator<FilterService>().getMajors().then((value) {
+      List<SuffixData> listOfAllMajors = value!;
+      for (var mainItem in listOfAllMajors) {
+        listOfMajorsNotifier.value.add(CheckBox(value: mainItem.name!, isEnable: false, id: mainItem.id!));
+      }
+    });
+  }
+
   List<String> filterListOfSelectedLanguage(List<CheckBox> list) {
     List<String> newList = [];
     for (var item in list) {
       if (item.isEnable) {
         newList.add(item.value);
+      }
+    }
+
+    return newList;
+  }
+
+  List<int> filterListOfSelectedMajors(List<CheckBox> list) {
+    List<int> newList = [];
+    for (var item in list) {
+      if (item.isEnable) {
+        newList.add(item.id!);
       }
     }
 

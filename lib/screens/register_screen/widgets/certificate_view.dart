@@ -5,11 +5,15 @@ import 'package:mentor_app/shared_widget/file_holder_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CertificateView extends StatefulWidget {
+  final double width;
+  final double height;
   final Function(File?, File?, File?) onChange;
 
   const CertificateView({
     super.key,
     required this.onChange,
+    required this.width,
+    this.height = 50,
   });
 
   @override
@@ -29,6 +33,8 @@ class _CertificateViewState extends State<CertificateView> {
             builder: (context, snapshot, child) {
               return certView(
                   index: 1,
+                  width: widget.width,
+                  height: widget.height,
                   file: snapshot,
                   onAddFile: (file) {
                     certificate1.value = file;
@@ -44,6 +50,8 @@ class _CertificateViewState extends State<CertificateView> {
             builder: (context, snapshot, child) {
               return certView(
                   index: 2,
+                  width: widget.width,
+                  height: widget.height,
                   file: snapshot,
                   onAddFile: (file) {
                     certificate2.value = file;
@@ -59,6 +67,8 @@ class _CertificateViewState extends State<CertificateView> {
             builder: (context, snapshot, child) {
               return certView(
                   index: 3,
+                  width: widget.width,
+                  height: widget.height,
                   file: snapshot,
                   onAddFile: (file) {
                     certificate3.value = file;
@@ -75,15 +85,19 @@ class _CertificateViewState extends State<CertificateView> {
 
   Widget certView({
     required int index,
+    required double width,
+    required double height,
     required File? file,
     required Function(File) onAddFile,
     required Function() onRemove,
   }) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         FileHolderField(
           title: "${AppLocalizations.of(context)!.certificate} $index",
-          width: MediaQuery.of(context).size.width - 16,
+          width: width,
+          height: height,
           currentFile: file,
           onAddFile: (file) {
             onAddFile(file);

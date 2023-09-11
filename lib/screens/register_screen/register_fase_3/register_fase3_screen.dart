@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/models/https/categories_model.dart';
 import 'package:mentor_app/models/working_hours.dart';
+import 'package:mentor_app/screens/edit_experience/widgets/experiance_since.dart';
+import 'package:mentor_app/screens/edit_experience/widgets/majors_view.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_3/register_fase3_bloc.dart';
 import 'package:mentor_app/screens/register_screen/widgets/certificate_view.dart';
 import 'package:mentor_app/screens/register_screen/widgets/footer_view.dart';
@@ -29,6 +31,7 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
   @override
   void didChangeDependencies() {
     bloc.getlistOfCategories();
+    bloc.getListOfMajors();
     super.didChangeDependencies();
   }
 
@@ -53,6 +56,7 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                 final navigator = Navigator.of(context);
                 await bloc.box.put(TempFieldToRegistrtConstant.bio, bloc.bioController.text);
                 await bloc.box.put(TempFieldToRegistrtConstant.category, bloc.selectedCategory!.id.toString());
+                await bloc.box.put(TempFieldToRegistrtConstant.experianceSince, bloc.experianceSinceController.text);
 
                 await bloc.box.put(TempFieldToRegistrtConstant.cv, bloc.cv != null ? bloc.cv!.path : null);
 
@@ -62,9 +66,10 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                     .put(TempFieldToRegistrtConstant.certificates2, bloc.cert2 != null ? bloc.cert2!.path : null);
                 await bloc.box
                     .put(TempFieldToRegistrtConstant.certificates3, bloc.cert3 != null ? bloc.cert3!.path : null);
-
                 await bloc.box.put(TempFieldToRegistrtConstant.speakingLanguages,
                     bloc.filterListOfSelectedLanguage(bloc.listOfSpeakingLanguageNotifier.value));
+                await bloc.box.put(TempFieldToRegistrtConstant.majors,
+                    bloc.filterListOfSelectedMajors(bloc.listOfMajorsNotifier.value));
 
                 await bloc.box.put(DatabaseFieldConstant.registrationStep, "4");
                 navigator.pushNamed(RoutesConstants.registerfaze4Screen);
@@ -99,10 +104,22 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                                     },
                                   );
                                 }),
-                            const SizedBox(height: 8),
-                            BioField(
-                              bioController: bloc.bioController,
-                              onChanged: (text) => bloc.validateFieldsForFaze3(),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+                              child: ExperianceSinceField(
+                                controller: bloc.experianceSinceController,
+                                padding: const EdgeInsets.all(0),
+                                onSelected: () {
+                                  bloc.validateFieldsForFaze3();
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0, right: 8),
+                              child: BioField(
+                                bioController: bloc.bioController,
+                                onChanged: (text) => bloc.validateFieldsForFaze3(),
+                              ),
                             ),
                             CustomText(
                               title: AppLocalizations.of(context)!.speakinglanguage,
@@ -113,7 +130,7 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                                 valueListenable: bloc.listOfSpeakingLanguageNotifier,
                                 builder: (context, snapshot, child) {
                                   return Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
                                     child: SpeakingLanguageField(
                                       listOfLanguages: snapshot,
                                       selectedLanguage: (language) {
@@ -123,29 +140,63 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                                     ),
                                   );
                                 }),
-                            FileHolderField(
-                              title: AppLocalizations.of(context)!.cv,
-                              width: MediaQuery.of(context).size.width,
-                              currentFile: null,
-                              onAddFile: (file) {
-                                bloc.cv = file;
-                                bloc.validateFieldsForFaze3();
-                              },
-                              onRemoveFile: () {
-                                bloc.cv = null;
-                                bloc.validateFieldsForFaze3();
-                              },
+                            CustomText(
+                              title: AppLocalizations.of(context)!.majors,
+                              fontSize: 12,
+                              textColor: const Color(0xff191C1F),
                             ),
-                            const SizedBox(height: 8),
-                            CertificateView(
-                              onChange: (cert1, cert2, cert3) {
-                                bloc.cert1 = cert1;
-                                bloc.cert2 = cert2;
-                                bloc.cert3 = cert3;
+                            ValueListenableBuilder<List<CheckBox>>(
+                                valueListenable: bloc.listOfMajorsNotifier,
+                                builder: (context, snapshot, child) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
+                                    child: MajorsView(
+                                      listOfMajors: snapshot,
+                                      selectedMajors: (major) {
+                                        bloc.listOfMajorsNotifier.value = major;
+                                        bloc.validateFieldsForFaze3();
+                                      },
+                                    ),
+                                  );
+                                }),
+                            Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Container(height: 0.5, color: const Color(0xff444444)),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FileHolderField(
+                                    title: AppLocalizations.of(context)!.cv,
+                                    height: 150,
+                                    width: MediaQuery.of(context).size.width / 3,
+                                    currentFile: null,
+                                    onAddFile: (file) {
+                                      bloc.cv = file;
+                                      bloc.validateFieldsForFaze3();
+                                    },
+                                    onRemoveFile: () {
+                                      bloc.cv = null;
+                                      bloc.validateFieldsForFaze3();
+                                    },
+                                  ),
+                                  CertificateView(
+                                    width: MediaQuery.of(context).size.width / 2,
+                                    height: 40,
+                                    onChange: (cert1, cert2, cert3) {
+                                      bloc.cert1 = cert1;
+                                      bloc.cert2 = cert2;
+                                      bloc.cert3 = cert3;
 
-                                bloc.validateFieldsForFaze3();
-                              },
+                                      bloc.validateFieldsForFaze3();
+                                    },
+                                  ),
+                                ],
+                              ),
                             ),
+                            const SizedBox(height: 16),
                           ],
                         ),
                       ),
