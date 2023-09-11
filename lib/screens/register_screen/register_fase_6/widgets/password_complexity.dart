@@ -23,17 +23,23 @@ class PasswordComplexity extends StatelessWidget {
           ValueListenableBuilder<bool>(
               valueListenable: passwordEquilConfirmPasswordNotifier,
               builder: (context, snapshot, child) {
-                return condition(AppLocalizations.of(context)!.passwordequilconfirmpassword, snapshot);
+                return condition(
+                    AppLocalizations.of(context)!.passwordequilconfirmpassword,
+                    snapshot);
               }),
           ValueListenableBuilder<bool>(
               valueListenable: passwordMoreThan8CharNotifier,
               builder: (context, snapshot, child) {
-                return condition(AppLocalizations.of(context)!.passwordmorethan8char, snapshot);
+                return condition(
+                    AppLocalizations.of(context)!.passwordmorethan8char,
+                    snapshot);
               }),
           ValueListenableBuilder<bool>(
               valueListenable: passwordHaveNumberNotifier,
               builder: (context, snapshot, child) {
-                return condition(AppLocalizations.of(context)!.passwordhavenumbers, snapshot);
+                return condition(
+                    AppLocalizations.of(context)!.passwordhavenumbers,
+                    snapshot);
               }),
         ],
       ),

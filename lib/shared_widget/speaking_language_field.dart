@@ -7,7 +7,10 @@ class SpeakingLanguageField extends StatefulWidget {
   final List<CheckBox> listOfLanguages;
   final Function(List<CheckBox>) selectedLanguage;
 
-  const SpeakingLanguageField({required this.listOfLanguages, super.key, required this.selectedLanguage});
+  const SpeakingLanguageField(
+      {required this.listOfLanguages,
+      super.key,
+      required this.selectedLanguage});
 
   @override
   State<SpeakingLanguageField> createState() => _SpeakingLanguageFieldState();

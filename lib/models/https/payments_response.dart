@@ -24,8 +24,9 @@ class PaymentResponseData {
   PaymentResponseData({this.dBMentorPayments, this.reportMessage});
 
   PaymentResponseData.fromJson(Map<String, dynamic> json) {
-    dBMentorPayments =
-        json['DB_Mentor_Payments'] != null ? DBMentorPayments.fromJson(json['DB_Mentor_Payments']) : null;
+    dBMentorPayments = json['DB_Mentor_Payments'] != null
+        ? DBMentorPayments.fromJson(json['DB_Mentor_Payments'])
+        : null;
     reportMessage = json['report_message'];
   }
 }

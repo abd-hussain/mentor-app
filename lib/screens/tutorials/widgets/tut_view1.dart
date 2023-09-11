@@ -18,7 +18,8 @@ class TutView extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(top: 50, bottom: 50, left: 16, right: 16),
+              padding: const EdgeInsets.only(
+                  top: 50, bottom: 50, left: 16, right: 16),
               child: CustomText(
                 title: title,
                 fontSize: 24,

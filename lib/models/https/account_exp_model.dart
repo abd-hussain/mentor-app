@@ -5,7 +5,9 @@ class AccountExperiance {
   AccountExperiance({this.data, this.message});
 
   AccountExperiance.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? AccountExperianceData.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? AccountExperianceData.fromJson(json['data'])
+        : null;
     message = json['message'];
   }
 }
@@ -20,7 +22,13 @@ class AccountExperianceData {
   String? categoryName;
 
   AccountExperianceData(
-      {this.cv, this.cert1, this.cert2, this.cert3, this.majors, this.experienceSince, this.categoryName});
+      {this.cv,
+      this.cert1,
+      this.cert2,
+      this.cert3,
+      this.majors,
+      this.experienceSince,
+      this.categoryName});
 
   AccountExperianceData.fromJson(Map<String, dynamic> json) {
     cv = json['cv'];

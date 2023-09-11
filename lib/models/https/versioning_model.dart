@@ -22,7 +22,8 @@ class VersioningData {
   bool? isForced;
   int? platform;
 
-  VersioningData({this.id, this.number, this.content, this.isForced, this.platform});
+  VersioningData(
+      {this.id, this.number, this.content, this.isForced, this.platform});
 
   VersioningData.fromJson(Map<String, dynamic> json) {
     id = json['id'];

@@ -5,9 +5,13 @@ import 'package:mentor_app/screens/notifications/widgets/shimmer_notifications.d
 import 'package:mentor_app/shared_widget/custom_text.dart';
 
 class NotificationsList extends StatefulWidget {
-  final ValueNotifier<List<NotificationsResponseData>?> notificationsListNotifier;
+  final ValueNotifier<List<NotificationsResponseData>?>
+      notificationsListNotifier;
   final Function(NotificationsResponseData) onDelete;
-  const NotificationsList({super.key, required this.notificationsListNotifier, required this.onDelete});
+  const NotificationsList(
+      {super.key,
+      required this.notificationsListNotifier,
+      required this.onDelete});
 
   @override
   State<NotificationsList> createState() => _NotificationsListState();
@@ -37,7 +41,8 @@ class _NotificationsListState extends State<NotificationsList> {
         });
   }
 
-  Widget notificationTile(BuildContext context, NotificationsResponseData item, int index) {
+  Widget notificationTile(
+      BuildContext context, NotificationsResponseData item, int index) {
     var parsedDate = DateTime.parse(item.createdAt!);
     var dateLocal = parsedDate.toLocal();
 
@@ -84,7 +89,8 @@ class _NotificationsListState extends State<NotificationsList> {
                       color: Color(0xff444444),
                     ),
                     CustomText(
-                      title: "${dateLocal.year}/${dateLocal.month}/${dateLocal.day}",
+                      title:
+                          "${dateLocal.year}/${dateLocal.month}/${dateLocal.day}",
                       fontSize: 9,
                       textColor: const Color(0xff444444),
                     ),

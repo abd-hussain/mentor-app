@@ -11,7 +11,8 @@ class ForgotPasswordWidget extends StatelessWidget {
     return Center(
       child: TextButton(
         onPressed: () {
-          Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.forgotPasswordScreen);
+          Navigator.of(context, rootNavigator: true)
+              .pushNamed(RoutesConstants.forgotPasswordScreen);
         },
         child: CustomText(
           title: AppLocalizations.of(context)!.forgotpassword,

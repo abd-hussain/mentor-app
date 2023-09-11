@@ -7,7 +7,8 @@ class EventDetails {
   EventDetails({this.data, this.message});
 
   EventDetails.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? EventDetailsData.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? EventDetailsData.fromJson(json['data']) : null;
     message = json['message'];
   }
 }

@@ -38,8 +38,11 @@ class ClientInfoView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       child: metingDetails.profileImg != ""
                           ? FadeInImage(
-                              placeholder: const AssetImage("assets/images/avatar.jpeg"),
-                              image: NetworkImage(AppConstant.imagesBaseURLForMentors + metingDetails.profileImg,
+                              placeholder:
+                                  const AssetImage("assets/images/avatar.jpeg"),
+                              image: NetworkImage(
+                                  AppConstant.imagesBaseURLForMentors +
+                                      metingDetails.profileImg,
                                   scale: 1),
                             )
                           : Image.asset(
@@ -60,8 +63,11 @@ class ClientInfoView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                         child: metingDetails.countryFlag != ""
                             ? FadeInImage(
-                                placeholder: const AssetImage("assets/images/avatar.jpeg"),
-                                image: NetworkImage(AppConstant.imagesBaseURLForCountries + metingDetails.countryFlag,
+                                placeholder: const AssetImage(
+                                    "assets/images/avatar.jpeg"),
+                                image: NetworkImage(
+                                    AppConstant.imagesBaseURLForCountries +
+                                        metingDetails.countryFlag,
                                     scale: 1),
                               )
                             : Image.asset(
@@ -80,7 +86,8 @@ class ClientInfoView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    title: "${metingDetails.firstName} ${metingDetails.lastName}",
+                    title:
+                        "${metingDetails.firstName} ${metingDetails.lastName}",
                     textColor: const Color(0xff444444),
                     fontSize: 14,
                     textAlign: TextAlign.center,
@@ -89,10 +96,16 @@ class ClientInfoView extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Row(
-                    children: [Text("${AppLocalizations.of(context)!.gender}: "), Text(metingDetails.gender)],
+                    children: [
+                      Text("${AppLocalizations.of(context)!.gender}: "),
+                      Text(metingDetails.gender)
+                    ],
                   ),
                   Row(
-                    children: [Text("${AppLocalizations.of(context)!.dateofbirth}: "), Text(metingDetails.dateOfBirth)],
+                    children: [
+                      Text("${AppLocalizations.of(context)!.dateofbirth}: "),
+                      Text(metingDetails.dateOfBirth)
+                    ],
                   ),
                 ],
               ),

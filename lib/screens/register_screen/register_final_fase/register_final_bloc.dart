@@ -9,20 +9,17 @@ import 'package:mentor_app/utils/mixins.dart';
 import 'package:mentor_app/utils/version.dart';
 
 class RegisterFinalBloc extends Bloc<RegisterService> {
-  ValueNotifier<LoadingStatus> loadingStatus = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<LoadingStatus> loadingStatus =
+      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   final box = Hive.box(DatabaseBoxConstant.userInfo);
 
   Future<void> handleCreatingTheProfile(BuildContext context) async {
     String? version = await Version().getApplicationVersion();
     int gender = 0;
     if (context.mounted) {
-      gender = GenderFormat().convertStringToIndex(context, box.get(TempFieldToRegistrtConstant.gender));
+      gender = GenderFormat().convertStringToIndex(
+          context, box.get(TempFieldToRegistrtConstant.gender));
     }
-
-    //HERE
-    // var attach1 = box.get(TempFieldToRegistrtConstant.certificates3);
-    // print("attach1");
-    // print(attach1);
 
     final model = Register(
       appVersion: version,
@@ -39,7 +36,8 @@ class RegisterFinalBloc extends Bloc<RegisterService> {
       email: box.get(TempFieldToRegistrtConstant.email) ?? "",
       mobileNumber: box.get(TempFieldToRegistrtConstant.phoneNumber) ?? "",
       referalCode: box.get(TempFieldToRegistrtConstant.referalCode) ?? "",
-      speakingLanguage: box.get(TempFieldToRegistrtConstant.speakingLanguages) ?? [],
+      speakingLanguage:
+          box.get(TempFieldToRegistrtConstant.speakingLanguages) ?? [],
       profileImg: box.get(TempFieldToRegistrtConstant.profileImage),
       cv: box.get(TempFieldToRegistrtConstant.cv),
       idImg: box.get(TempFieldToRegistrtConstant.idImage),
@@ -47,14 +45,18 @@ class RegisterFinalBloc extends Bloc<RegisterService> {
       cert2: box.get(TempFieldToRegistrtConstant.certificates2),
       cert3: box.get(TempFieldToRegistrtConstant.certificates3),
       pushToken: box.get(DatabaseFieldConstant.pushNotificationToken) ?? "",
-      workingHoursSaturday: box.get(TempFieldToRegistrtConstant.saturdayWH) ?? [],
+      workingHoursSaturday:
+          box.get(TempFieldToRegistrtConstant.saturdayWH) ?? [],
       workingHoursSunday: box.get(TempFieldToRegistrtConstant.sundayWH) ?? [],
       workingHoursMonday: box.get(TempFieldToRegistrtConstant.mondayWH) ?? [],
       workingHoursTuesday: box.get(TempFieldToRegistrtConstant.tuesdayWH) ?? [],
-      workingHoursWednesday: box.get(TempFieldToRegistrtConstant.wednesdayWH) ?? [],
-      workingHoursThursday: box.get(TempFieldToRegistrtConstant.thursdayWH) ?? [],
+      workingHoursWednesday:
+          box.get(TempFieldToRegistrtConstant.wednesdayWH) ?? [],
+      workingHoursThursday:
+          box.get(TempFieldToRegistrtConstant.thursdayWH) ?? [],
       workingHoursFriday: box.get(TempFieldToRegistrtConstant.fridayWH) ?? [],
-      experienceSince: box.get(TempFieldToRegistrtConstant.experianceSince) ?? "",
+      experienceSince:
+          box.get(TempFieldToRegistrtConstant.experianceSince) ?? "",
       majors: box.get(TempFieldToRegistrtConstant.majors) ?? [],
     );
 

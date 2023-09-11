@@ -53,7 +53,9 @@ class AccountInfoData {
     gender = json['gender'];
     speakingLanguage = json['speaking_language'].cast<String>();
     countryId = json['country_id'];
-    dBCountries = json['DB_Countries'] != null ? DBCountries.fromJson(json['DB_Countries']) : null;
+    dBCountries = json['DB_Countries'] != null
+        ? DBCountries.fromJson(json['DB_Countries'])
+        : null;
     referalCode = json['referal_code'];
     idImg = json['id_img'];
     bio = json['bio'];

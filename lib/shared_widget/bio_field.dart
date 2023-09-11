@@ -4,7 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class BioField extends StatelessWidget {
   final TextEditingController bioController;
   final Function(String) onChanged;
-  const BioField({super.key, required this.bioController, required this.onChanged});
+  const BioField(
+      {super.key, required this.bioController, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {

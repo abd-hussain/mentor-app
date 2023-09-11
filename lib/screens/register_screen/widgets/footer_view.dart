@@ -59,7 +59,10 @@ class RegistrationFooterView extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                     const SizedBox(height: 8),
-                    CustomText(title: "${AppLocalizations.of(context)!.next}: $nextPageTitle", fontSize: 12)
+                    CustomText(
+                        title:
+                            "${AppLocalizations.of(context)!.next}: $nextPageTitle",
+                        fontSize: 12)
                   ],
                 )),
                 CustomButton(
@@ -73,7 +76,8 @@ class RegistrationFooterView extends StatelessWidget {
           Container(height: 1, color: const Color(0xff444444)),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: CustomText(title: AppLocalizations.of(context)!.slogen, fontSize: 12),
+            child: CustomText(
+                title: AppLocalizations.of(context)!.slogen, fontSize: 12),
           ),
         ],
       ),

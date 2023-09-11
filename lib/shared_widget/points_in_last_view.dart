@@ -7,7 +7,10 @@ class PointsInLastViewBooking extends StatelessWidget {
   final Color textColor;
 
   const PointsInLastViewBooking(
-      {required this.number, required this.text, super.key, this.textColor = const Color(0xff444444)});
+      {required this.number,
+      required this.text,
+      super.key,
+      this.textColor = const Color(0xff444444)});
 
   @override
   Widget build(BuildContext context) {

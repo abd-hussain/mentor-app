@@ -30,7 +30,8 @@ class _VersioningScreenState extends State<VersioningScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: AppLocalizations.of(context)!.version_details),
+      appBar:
+          customAppBar(title: AppLocalizations.of(context)!.version_details),
       body: RefreshIndicator(
         onRefresh: _bloc.pullRefresh,
         child: VersionsList(versionsListNotifier: _bloc.versionsListNotifier),

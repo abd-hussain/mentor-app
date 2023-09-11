@@ -9,13 +9,18 @@ import 'package:mentor_app/utils/mixins.dart';
 class CallBloc extends Bloc<AccountService> {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
 
-  CalenderMeetings? checkIfThereIsAnyMeetingTodayAndReturnTheNearOne(List<CalenderMeetings> listOfData) {
+  CalenderMeetings? checkIfThereIsAnyMeetingTodayAndReturnTheNearOne(
+      List<CalenderMeetings> listOfData) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day, now.hour, now.minute);
     List<CalenderMeetings> newList = [];
     for (CalenderMeetings appointment in listOfData) {
-      Duration diffrent = today.difference(DateTime(appointment.fromTime.year, appointment.fromTime.month,
-          appointment.fromTime.day, appointment.fromTime.hour, appointment.fromTime.minute));
+      Duration diffrent = today.difference(DateTime(
+          appointment.fromTime.year,
+          appointment.fromTime.month,
+          appointment.fromTime.day,
+          appointment.fromTime.hour,
+          appointment.fromTime.minute));
       if (diffrent.inHours >= -24 && diffrent.inHours <= 24) {
         if (appointment.state == AppointmentsState.active) {
           newList.add(appointment);

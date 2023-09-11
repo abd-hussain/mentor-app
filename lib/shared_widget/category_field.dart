@@ -37,7 +37,8 @@ class CategoryField extends StatelessWidget {
         InkWell(
           onTap: isEnable
               ? () async {
-                  await categoryBottomSheet(context, listOfCategory, (categorySelected) {
+                  await categoryBottomSheet(context, listOfCategory,
+                      (categorySelected) {
                     controller.text = categorySelected.name!;
                     selectedCategory(categorySelected);
                   });
@@ -55,7 +56,8 @@ class CategoryField extends StatelessWidget {
     );
   }
 
-  Future categoryBottomSheet(BuildContext context, List<Category> listOfCategory, Function(Category) selectedCategory) {
+  Future categoryBottomSheet(BuildContext context,
+      List<Category> listOfCategory, Function(Category) selectedCategory) {
     return showModalBottomSheet(
       isScrollControlled: true,
       backgroundColor: Colors.white,

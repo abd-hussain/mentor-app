@@ -48,8 +48,10 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
                 enableNextButton: snapshot,
                 nextPressed: () async {
                   final navigator = Navigator.of(context);
-                  await bloc.box.put(TempFieldToRegistrtConstant.ratePerHour, bloc.ratePerHourController.text);
-                  await bloc.box.put(DatabaseFieldConstant.registrationStep, "6");
+                  await bloc.box.put(TempFieldToRegistrtConstant.ratePerHour,
+                      bloc.ratePerHourController.text);
+                  await bloc.box
+                      .put(DatabaseFieldConstant.registrationStep, "6");
                   navigator.pushNamed(RoutesConstants.registerfaze6Screen);
                 },
               );
@@ -125,8 +127,10 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
                           flex: 2,
                           child: CustomTextField(
                             controller: bloc.ratePerHourController,
-                            hintText: AppLocalizations.of(context)!.rateperhourtitle,
-                            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                            hintText:
+                                AppLocalizations.of(context)!.rateperhourtitle,
+                            keyboardType: const TextInputType.numberWithOptions(
+                                decimal: true),
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(4),
                             ],

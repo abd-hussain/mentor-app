@@ -5,7 +5,8 @@ class WorkingHours {
   WorkingHours({this.data, this.message});
 
   WorkingHours.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? WorkingHoursData.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? WorkingHoursData.fromJson(json['data']) : null;
     message = json['message'];
   }
 }

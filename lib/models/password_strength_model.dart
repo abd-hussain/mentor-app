@@ -6,5 +6,9 @@ class PasswordStrengthModel {
   bool? oneSpicialChar;
 
   PasswordStrengthModel(
-      {this.min8max30Cchar, this.oneUpperCase, this.oneNumber, this.oneSpicialChar, this.oneLowerCase});
+      {this.min8max30Cchar,
+      this.oneUpperCase,
+      this.oneNumber,
+      this.oneSpicialChar,
+      this.oneLowerCase});
 }

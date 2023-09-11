@@ -57,7 +57,8 @@ class RoutesConstants {
   static const String paymentsScreen = 'paymentsScreen';
   static const String forgotPasswordScreen = 'forgotPasswordScreen';
   static const String eventDetailsScreen = 'eventDetailsScreen';
-  static const String forgotPasswordConfirmationScreen = 'forgotPasswordConfirmationScreen';
+  static const String forgotPasswordConfirmationScreen =
+      'forgotPasswordConfirmationScreen';
   static const String versioningScreen = 'versioningScreen';
   static const String insideCallScreen = 'InsideCallScreen';
 }
@@ -90,5 +91,6 @@ final Map<String, Widget> routes = {
   RoutesConstants.ratePerHourScreen: const RatePerHourScreen(),
   RoutesConstants.paymentsScreen: const PaymentsScreen(),
   RoutesConstants.forgotPasswordScreen: const ForgotPasswordScreen(),
-  RoutesConstants.forgotPasswordConfirmationScreen: const ForgotPasswordConfirmationScreen(),
+  RoutesConstants.forgotPasswordConfirmationScreen:
+      const ForgotPasswordConfirmationScreen(),
 };

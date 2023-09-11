@@ -21,7 +21,8 @@ class _ReportScreenState extends State<ReportScreen> {
 
   @override
   void didChangeDependencies() {
-    bloc.handleReadingArguments(arguments: ModalRoute.of(context)!.settings.arguments);
+    bloc.handleReadingArguments(
+        arguments: ModalRoute.of(context)!.settings.arguments);
 
     bloc.textController.addListener(() {
       bloc.validationFields();
@@ -62,7 +63,8 @@ class _ReportScreenState extends State<ReportScreen> {
                             child: TextField(
                               controller: bloc.textController,
                               decoration: InputDecoration(
-                                hintText: AppLocalizations.of(context)!.feedbackmessage,
+                                hintText: AppLocalizations.of(context)!
+                                    .feedbackmessage,
                                 hintMaxLines: 2,
                                 hintStyle: const TextStyle(fontSize: 15),
                                 enabledBorder: InputBorder.none,
@@ -87,7 +89,8 @@ class _ReportScreenState extends State<ReportScreen> {
                               onTap: () {
                                 final navigator = Navigator.of(context);
                                 bloc.callRequest(context).then((value) async {
-                                  bloc.loadingStatus.value = LoadingStatus.finish;
+                                  bloc.loadingStatus.value =
+                                      LoadingStatus.finish;
                                   navigator.pop();
                                 });
                               },

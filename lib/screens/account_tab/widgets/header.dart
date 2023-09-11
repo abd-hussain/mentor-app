@@ -8,7 +8,8 @@ import 'package:mentor_app/utils/routes.dart';
 class ProfileHeader extends StatelessWidget {
   final String firstName;
 
-  const ProfileHeader({this.firstName = "Anonymous", Key? key}) : super(key: key);
+  const ProfileHeader({this.firstName = "Anonymous", Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,10 @@ class ProfileHeader extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            Image.asset(locator<DayTime>().gettheCorrentImageDependOnCurrentTime(), width: 32, height: 32),
+            Image.asset(
+                locator<DayTime>().gettheCorrentImageDependOnCurrentTime(),
+                width: 32,
+                height: 32),
             const SizedBox(width: 8),
             Expanded(
               child: Column(
@@ -41,8 +45,8 @@ class ProfileHeader extends StatelessWidget {
               ),
             ),
             IconButton(
-                onPressed: () =>
-                    Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.notificationsScreen),
+                onPressed: () => Navigator.of(context, rootNavigator: true)
+                    .pushNamed(RoutesConstants.notificationsScreen),
                 icon: const Icon(
                   Icons.notifications_none,
                   color: Colors.white,

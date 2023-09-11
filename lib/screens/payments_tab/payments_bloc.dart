@@ -7,7 +7,8 @@ import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/mixins.dart';
 
 class PaymentsBloc extends Bloc<PaymentService> {
-  final ValueNotifier<List<PaymentResponseData>> paymentListNotifier = ValueNotifier<List<PaymentResponseData>>([]);
+  final ValueNotifier<List<PaymentResponseData>> paymentListNotifier =
+      ValueNotifier<List<PaymentResponseData>>([]);
   double pendingTotalAmount = 0;
   double rejectedTotalAmount = 0;
   double recivedTotalAmount = 0;
@@ -21,13 +22,16 @@ class PaymentsBloc extends Bloc<PaymentService> {
 
         for (PaymentResponseData item in value.data!) {
           if (item.dBMentorPayments!.status == 1) {
-            pendingTotalAmount = pendingTotalAmount + item.dBMentorPayments!.amount!;
+            pendingTotalAmount =
+                pendingTotalAmount + item.dBMentorPayments!.amount!;
           }
           if (item.dBMentorPayments!.status == 2) {
-            recivedTotalAmount = recivedTotalAmount + item.dBMentorPayments!.amount!;
+            recivedTotalAmount =
+                recivedTotalAmount + item.dBMentorPayments!.amount!;
           }
           if (item.dBMentorPayments!.status == 3) {
-            rejectedTotalAmount = rejectedTotalAmount + item.dBMentorPayments!.amount!;
+            rejectedTotalAmount =
+                rejectedTotalAmount + item.dBMentorPayments!.amount!;
           }
 
           currency = item.dBMentorPayments!.currencyEnglish ?? "";
@@ -41,7 +45,8 @@ class PaymentsBloc extends Bloc<PaymentService> {
   }
 
   Future<dynamic> reportPayment(int id, String message) async {
-    PaymentReportRequest data = PaymentReportRequest(message: message, paymentId: id);
+    PaymentReportRequest data =
+        PaymentReportRequest(message: message, paymentId: id);
     return service.reportPayment(data);
   }
 

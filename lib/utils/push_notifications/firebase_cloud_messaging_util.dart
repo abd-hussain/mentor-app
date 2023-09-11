@@ -21,14 +21,16 @@ class FirebaseCloudMessagingUtil {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
       if (notification != null) {
-        NotificationManager.handleNotificationMsg({message.notification!.title: message.notification!.body});
+        NotificationManager.handleNotificationMsg(
+            {message.notification!.title: message.notification!.body});
       }
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
       if (notification != null) {
-        NotificationManager.handleNotificationMsg(message.data as Map<String?, String?>);
+        NotificationManager.handleNotificationMsg(
+            message.data as Map<String?, String?>);
       }
     });
   }

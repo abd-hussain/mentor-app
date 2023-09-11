@@ -34,7 +34,8 @@ class AppointmentsService with Service {
     return response;
   }
 
-  Future<void> addCommentToAppointment({required AddCommentToAppointment body}) async {
+  Future<void> addCommentToAppointment(
+      {required AddCommentToAppointment body}) async {
     final response = await repository.callRequest(
       requestType: RequestType.post,
       methodName: MethodNameConstant.commentAppointment,

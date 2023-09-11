@@ -10,7 +10,10 @@ class CountryField extends StatelessWidget {
   final List<Country> listOfCountries;
   final Function(Country) selectedCountry;
   const CountryField(
-      {required this.controller, required this.listOfCountries, required this.selectedCountry, super.key});
+      {required this.controller,
+      required this.listOfCountries,
+      required this.selectedCountry,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,8 @@ class CountryField extends StatelessWidget {
         ),
         InkWell(
           onTap: () async {
-            await BottomSheetsUtil().countryBottomSheet(context, listOfCountries, (countrySelected) {
+            await BottomSheetsUtil().countryBottomSheet(
+                context, listOfCountries, (countrySelected) {
               controller.text = countrySelected.name!;
               selectedCountry(countrySelected);
             });

@@ -41,11 +41,13 @@ class _SetupScreenState extends State<SetupScreen> {
                 builder: (context, snapshot, child) {
                   return ChangeLanguageWidget(
                     selectionIndex: snapshot,
-                    segmentChange: (index) async => await _bloc.setLanguageInStorage(context, index),
+                    segmentChange: (index) async =>
+                        await _bloc.setLanguageInStorage(context, index),
                   );
                 }),
             const TitleTableWidget(),
-            ListOfCountriesWidget(countriesListNotifier: _bloc.countriesListNotifier),
+            ListOfCountriesWidget(
+                countriesListNotifier: _bloc.countriesListNotifier),
           ],
         ),
       ),

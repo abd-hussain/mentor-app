@@ -14,7 +14,8 @@ class MentorPropertiesService with Service {
     return WorkingHours.fromJson(response);
   }
 
-  Future<dynamic> updateWorkingHours({required WorkingHoursRequest data}) async {
+  Future<dynamic> updateWorkingHours(
+      {required WorkingHoursRequest data}) async {
     final response = await repository.callRequest(
       requestType: RequestType.put,
       methodName: MethodNameConstant.mentorWorkingHours,

@@ -31,7 +31,8 @@ class _RegisterFinalScreenState extends State<RegisterFinalScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Lottie.asset('assets/lottie/animation_lm3q2kl2.zip', width: MediaQuery.of(context).size.width - 16),
+            Lottie.asset('assets/lottie/animation_lm3q2kl2.zip',
+                width: MediaQuery.of(context).size.width - 16),
             CustomText(
               title: AppLocalizations.of(context)!.createprofile,
               fontSize: 22,

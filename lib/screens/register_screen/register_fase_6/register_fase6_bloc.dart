@@ -10,11 +10,15 @@ class Register6Bloc {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
-  ValueNotifier<bool> showHidePasswordClearNotifier = ValueNotifier<bool>(false);
-  ValueNotifier<bool> showHideConfirmPasswordClearNotifier = ValueNotifier<bool>(false);
+  ValueNotifier<bool> showHidePasswordClearNotifier =
+      ValueNotifier<bool>(false);
+  ValueNotifier<bool> showHideConfirmPasswordClearNotifier =
+      ValueNotifier<bool>(false);
 
-  ValueNotifier<bool> passwordEquilConfirmPasswordNotifier = ValueNotifier<bool>(false);
-  ValueNotifier<bool> passwordMoreThan8CharNotifier = ValueNotifier<bool>(false);
+  ValueNotifier<bool> passwordEquilConfirmPasswordNotifier =
+      ValueNotifier<bool>(false);
+  ValueNotifier<bool> passwordMoreThan8CharNotifier =
+      ValueNotifier<bool>(false);
   ValueNotifier<bool> passwordHaveNumberNotifier = ValueNotifier<bool>(false);
 
   TextEditingController emailController = TextEditingController();
@@ -31,12 +35,15 @@ class Register6Bloc {
   }
 
   void _confirmPasswordListen() {
-    showHideConfirmPasswordClearNotifier.value = confirmPasswordController.text.isNotEmpty;
+    showHideConfirmPasswordClearNotifier.value =
+        confirmPasswordController.text.isNotEmpty;
     validateFieldsForFaze6();
   }
 
   bool _validateEmail(String email) {
-    return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
+    return RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(email);
   }
 
   validateFieldsForFaze6() {
@@ -44,12 +51,16 @@ class Register6Bloc {
 
     //TODO : validate if email already exsist in our app
 
-    if (passwordController.text.isNotEmpty && confirmPasswordController.text.isNotEmpty) {
-      passwordEquilConfirmPasswordNotifier.value = (passwordController.text == confirmPasswordController.text);
+    if (passwordController.text.isNotEmpty &&
+        confirmPasswordController.text.isNotEmpty) {
+      passwordEquilConfirmPasswordNotifier.value =
+          (passwordController.text == confirmPasswordController.text);
       passwordMoreThan8CharNotifier.value =
-          (passwordController.text.length >= 8 || confirmPasswordController.text.length >= 8);
-      passwordHaveNumberNotifier.value = (passwordController.text.contains(RegExp(r'[0-9]')) ||
-          confirmPasswordController.text.contains(RegExp(r'[0-9]')));
+          (passwordController.text.length >= 8 ||
+              confirmPasswordController.text.length >= 8);
+      passwordHaveNumberNotifier.value =
+          (passwordController.text.contains(RegExp(r'[0-9]')) ||
+              confirmPasswordController.text.contains(RegExp(r'[0-9]')));
 
       enableNextBtn.value = passwordEquilConfirmPasswordNotifier.value &&
           passwordMoreThan8CharNotifier.value &&

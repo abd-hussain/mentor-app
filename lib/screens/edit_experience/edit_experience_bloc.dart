@@ -15,8 +15,10 @@ import 'package:mentor_app/utils/mixins.dart';
 class EditExperienceBloc extends Bloc<AccountService> {
   ValueNotifier<bool> enableSaveButton = ValueNotifier<bool>(false);
   final box = Hive.box(DatabaseBoxConstant.userInfo);
-  ValueNotifier<List<CheckBox>> listOfMajorsNotifier = ValueNotifier<List<CheckBox>>([]);
-  ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<List<CheckBox>> listOfMajorsNotifier =
+      ValueNotifier<List<CheckBox>>([]);
+  ValueNotifier<LoadingStatus> loadingStatusNotifier =
+      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
 
   TextEditingController categoryController = TextEditingController();
   TextEditingController experianceSinceController = TextEditingController();
@@ -95,7 +97,8 @@ class EditExperienceBloc extends Bloc<AccountService> {
     int counter = 0;
 
     for (var mainItem in listOfAllMajors) {
-      list.add(CheckBox(value: mainItem.name!, isEnable: false, id: mainItem.id!));
+      list.add(
+          CheckBox(value: mainItem.name!, isEnable: false, id: mainItem.id!));
 
       for (var item in majors) {
         if (mainItem.id == item) {
@@ -123,7 +126,9 @@ class EditExperienceBloc extends Bloc<AccountService> {
   validateFields() {
     enableSaveButton.value = false;
 
-    if (experianceSinceController.text.isNotEmpty && listOfMajorsNotifier.value.isNotEmpty && cv != null) {
+    if (experianceSinceController.text.isNotEmpty &&
+        listOfMajorsNotifier.value.isNotEmpty &&
+        cv != null) {
       enableSaveButton.value = true;
     }
   }

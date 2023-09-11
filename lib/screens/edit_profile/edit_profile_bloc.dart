@@ -16,10 +16,13 @@ import 'package:mentor_app/utils/mixins.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditProfileBloc extends Bloc<AccountService> {
-  ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<LoadingStatus> loadingStatusNotifier =
+      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   ValueNotifier<bool> enableSaveButtonNotifier = ValueNotifier<bool>(false);
-  ValueNotifier<List<Country>> listOfCountriesNotifier = ValueNotifier<List<Country>>([]);
-  ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier = ValueNotifier<List<CheckBox>>([]);
+  ValueNotifier<List<Country>> listOfCountriesNotifier =
+      ValueNotifier<List<Country>>([]);
+  ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier =
+      ValueNotifier<List<CheckBox>>([]);
   List<String> listOfSpeakingLanguage = [];
   String? selectedDate;
 
@@ -36,7 +39,8 @@ class EditProfileBloc extends Bloc<AccountService> {
   TextEditingController referalCodeController = TextEditingController();
   TextEditingController idController = TextEditingController();
   TextEditingController cityController = TextEditingController();
-  ValueNotifier<List<SuffixData>> listOfSuffix = ValueNotifier<List<SuffixData>>([]);
+  ValueNotifier<List<SuffixData>> listOfSuffix =
+      ValueNotifier<List<SuffixData>>([]);
 
   String profileImageUrl = "";
   File? profileImage;
@@ -111,9 +115,10 @@ class EditProfileBloc extends Bloc<AccountService> {
             dialCode: value.data!.dBCountries!.dialCode!,
           );
 
-          countryController.text = box.get(DatabaseFieldConstant.language) == "en"
-              ? value.data!.dBCountries!.nameEnglish!
-              : value.data!.dBCountries!.nameArabic!;
+          countryController.text =
+              box.get(DatabaseFieldConstant.language) == "en"
+                  ? value.data!.dBCountries!.nameEnglish!
+                  : value.data!.dBCountries!.nameArabic!;
         }
 
         if (value.data!.gender != null) {
@@ -127,7 +132,8 @@ class EditProfileBloc extends Bloc<AccountService> {
         }
 
         if (value.data!.speakingLanguage != null) {
-          listOfSpeakingLanguageNotifier.value = _prepareList(value.data!.speakingLanguage!);
+          listOfSpeakingLanguageNotifier.value =
+              _prepareList(value.data!.speakingLanguage!);
         }
       }
 
@@ -137,7 +143,8 @@ class EditProfileBloc extends Bloc<AccountService> {
 
   void getListOfCountries(BuildContext context) {
     locator<FilterService>().countries().then((value) async {
-      listOfCountriesNotifier.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
+      listOfCountriesNotifier.value = value.data!
+        ..sort((a, b) => a.id!.compareTo(b.id!));
       loadingStatusNotifier.value = LoadingStatus.finish;
     });
   }
@@ -207,7 +214,8 @@ class EditProfileBloc extends Bloc<AccountService> {
       mobileNumber: mobileNumberController.text,
       dateOfBirth: selectedDate!,
       speackingLanguage: speackingLanguage.toString(),
-      gender: GenderFormat().convertStringToIndex(context, genderController.text),
+      gender:
+          GenderFormat().convertStringToIndex(context, genderController.text),
     );
     return service.updateProfileInfo(account: account);
   }

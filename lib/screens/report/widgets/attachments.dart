@@ -9,7 +9,11 @@ class ReportAttatchment extends StatelessWidget {
   final Function(File?) attach2;
   final Function(File?) attach3;
 
-  const ReportAttatchment({required this.attach1, required this.attach2, required this.attach3, Key? key})
+  const ReportAttatchment(
+      {required this.attach1,
+      required this.attach2,
+      required this.attach3,
+      Key? key})
       : super(key: key);
 
   Future<File> pickImage(ImageSource source) async {

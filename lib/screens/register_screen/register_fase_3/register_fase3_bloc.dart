@@ -26,10 +26,14 @@ class Register3Bloc {
   Category? selectedCategory;
 
   ValueNotifier<bool> enableNextBtn = ValueNotifier<bool>(false);
-  ValueNotifier<List<Category>> listOfCategories = ValueNotifier<List<Category>>([]);
-  StreamController<LoadingStatus> loadingStatusController = StreamController<LoadingStatus>();
-  ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier = ValueNotifier<List<CheckBox>>([]);
-  ValueNotifier<List<CheckBox>> listOfMajorsNotifier = ValueNotifier<List<CheckBox>>([]);
+  ValueNotifier<List<Category>> listOfCategories =
+      ValueNotifier<List<Category>>([]);
+  StreamController<LoadingStatus> loadingStatusController =
+      StreamController<LoadingStatus>();
+  ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier =
+      ValueNotifier<List<CheckBox>>([]);
+  ValueNotifier<List<CheckBox>> listOfMajorsNotifier =
+      ValueNotifier<List<CheckBox>>([]);
 
   validateFieldsForFaze3() {
     enableNextBtn.value = false;
@@ -48,7 +52,8 @@ class Register3Bloc {
     loadingStatusController.sink.add(LoadingStatus.inprogress);
 
     locator<FilterService>().categories().then((value) {
-      listOfCategories.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
+      listOfCategories.value = value.data!
+        ..sort((a, b) => a.id!.compareTo(b.id!));
       listOfSpeakingLanguageNotifier.value = _prepareList();
       loadingStatusController.sink.add(LoadingStatus.finish);
     });
@@ -58,7 +63,8 @@ class Register3Bloc {
     locator<FilterService>().getMajors().then((value) {
       List<SuffixData> listOfAllMajors = value!;
       for (var mainItem in listOfAllMajors) {
-        listOfMajorsNotifier.value.add(CheckBox(value: mainItem.name!, isEnable: false, id: mainItem.id!));
+        listOfMajorsNotifier.value.add(
+            CheckBox(value: mainItem.name!, isEnable: false, id: mainItem.id!));
       }
     });
   }

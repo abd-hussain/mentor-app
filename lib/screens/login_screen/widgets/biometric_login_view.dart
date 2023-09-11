@@ -6,7 +6,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class BiometrincLoginView extends StatelessWidget {
   final BiometricType? biometricType;
   final Function onPress;
-  const BiometrincLoginView({super.key, this.biometricType, required this.onPress});
+  const BiometrincLoginView(
+      {super.key, this.biometricType, required this.onPress});
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +78,9 @@ class BiometrincLoginView extends StatelessWidget {
                     ),
                   ),
                   Image.asset(
-                    (biometricType == BiometricType.face) ? 'assets/images/face_id.png' : 'assets/images/touch_id.png',
+                    (biometricType == BiometricType.face)
+                        ? 'assets/images/face_id.png'
+                        : 'assets/images/touch_id.png',
                     height: 30,
                     color: const Color(0xff191C1F),
                     alignment: Alignment.center,

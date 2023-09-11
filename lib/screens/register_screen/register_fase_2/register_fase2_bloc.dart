@@ -34,9 +34,12 @@ class Register2Bloc {
 
   ValueNotifier<bool?> validateReferalCode = ValueNotifier<bool?>(null);
 
-  ValueNotifier<List<Country>> listOfCountries = ValueNotifier<List<Country>>([]);
-  ValueNotifier<List<SuffixData>> listOfSuffix = ValueNotifier<List<SuffixData>>([]);
-  StreamController<LoadingStatus> loadingStatusController = StreamController<LoadingStatus>();
+  ValueNotifier<List<Country>> listOfCountries =
+      ValueNotifier<List<Country>>([]);
+  ValueNotifier<List<SuffixData>> listOfSuffix =
+      ValueNotifier<List<SuffixData>>([]);
+  StreamController<LoadingStatus> loadingStatusController =
+      StreamController<LoadingStatus>();
 
   String countryCode = "";
   String mobileController = "";
@@ -68,8 +71,10 @@ class Register2Bloc {
       name: box.get(DatabaseFieldConstant.selectedCountryName),
       currency: box.get(DatabaseFieldConstant.selectedCountryCurrency),
       dialCode: box.get(DatabaseFieldConstant.selectedCountryDialCode),
-      maxLength: int.parse(box.get(DatabaseFieldConstant.selectedCountryMaxLenght)),
-      minLength: int.parse(box.get(DatabaseFieldConstant.selectedCountryMinLenght)),
+      maxLength:
+          int.parse(box.get(DatabaseFieldConstant.selectedCountryMaxLenght)),
+      minLength:
+          int.parse(box.get(DatabaseFieldConstant.selectedCountryMinLenght)),
     );
   }
 
@@ -84,7 +89,8 @@ class Register2Bloc {
   void getlistOfCountries() {
     loadingStatusController.sink.add(LoadingStatus.inprogress);
     locator<FilterService>().countries().then((value) {
-      listOfCountries.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
+      listOfCountries.value = value.data!
+        ..sort((a, b) => a.id!.compareTo(b.id!));
       loadingStatusController.sink.add(LoadingStatus.finish);
     });
   }

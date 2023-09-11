@@ -7,7 +7,8 @@ import 'package:mentor_app/utils/mixins.dart';
 
 class HomeBloc extends Bloc<HomeService> {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
-  final ValueNotifier<List<MainBanner>?> bannerListNotifier = ValueNotifier<List<MainBanner>?>(null);
+  final ValueNotifier<List<MainBanner>?> bannerListNotifier =
+      ValueNotifier<List<MainBanner>?>(null);
 
   Future<void> pullRefresh() async {
     return Future.delayed(

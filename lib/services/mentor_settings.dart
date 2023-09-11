@@ -31,7 +31,8 @@ class MentorSettingsService with Service {
     return response;
   }
 
-  Future<dynamic> changePassword({required UpdatePasswordRequest account}) async {
+  Future<dynamic> changePassword(
+      {required UpdatePasswordRequest account}) async {
     final response = await repository.callRequest(
       requestType: RequestType.put,
       methodName: MethodNameConstant.changePassword,

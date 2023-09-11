@@ -8,7 +8,10 @@ class PriceView extends StatelessWidget {
   final double priceBeforeDiscount;
   final double priceAfterDiscount;
 
-  const PriceView({super.key, required this.priceBeforeDiscount, required this.priceAfterDiscount});
+  const PriceView(
+      {super.key,
+      required this.priceBeforeDiscount,
+      required this.priceAfterDiscount});
 
   @override
   Widget build(BuildContext context) {

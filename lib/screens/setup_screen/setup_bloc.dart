@@ -8,7 +8,8 @@ import 'package:mentor_app/utils/mixins.dart';
 
 class SetupBloc extends Bloc<FilterService> {
   final ValueNotifier<int> selectedLanguageNotifier = ValueNotifier<int>(0);
-  final ValueNotifier<List<Country>> countriesListNotifier = ValueNotifier<List<Country>>([]);
+  final ValueNotifier<List<Country>> countriesListNotifier =
+      ValueNotifier<List<Country>>([]);
   final box = Hive.box(DatabaseBoxConstant.userInfo);
 
   Future<void> getSystemLanguage(BuildContext context) async {
@@ -17,7 +18,8 @@ class SetupBloc extends Bloc<FilterService> {
     if (savedLanguage == null) {
       _setLanguageFromTheSystem(context: context);
     } else {
-      _setLanguageFromTheSavedData(context: context, savedLanguage: savedLanguage);
+      _setLanguageFromTheSavedData(
+          context: context, savedLanguage: savedLanguage);
     }
   }
 
@@ -32,7 +34,8 @@ class SetupBloc extends Bloc<FilterService> {
     }
   }
 
-  void _setLanguageFromTheSavedData({required BuildContext context, required String savedLanguage}) {
+  void _setLanguageFromTheSavedData(
+      {required BuildContext context, required String savedLanguage}) {
     if (savedLanguage == "ar") {
       selectedLanguageNotifier.value = 1;
       _setLanguageToArabic(context);
@@ -44,7 +47,8 @@ class SetupBloc extends Bloc<FilterService> {
 
   void listOfCountries() {
     service.countries().then((value) {
-      countriesListNotifier.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
+      countriesListNotifier.value = value.data!
+        ..sort((a, b) => a.id!.compareTo(b.id!));
     });
   }
 

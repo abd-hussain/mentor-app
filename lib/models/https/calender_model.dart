@@ -1,4 +1,11 @@
-enum AppointmentsState { active, mentorCancel, clientCancel, clientMiss, mentorMiss, completed }
+enum AppointmentsState {
+  active,
+  mentorCancel,
+  clientCancel,
+  clientMiss,
+  mentorMiss,
+  completed
+}
 
 class CalenderMeetings {
   final String firstName;

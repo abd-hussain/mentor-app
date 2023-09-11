@@ -36,7 +36,8 @@ Future<void> setupLocator() async {
   locator.registerFactory<HomeService>(() => HomeService());
   locator.registerFactory<NotificationsService>(() => NotificationsService());
   locator.registerFactory<AppointmentsService>(() => AppointmentsService());
-  locator.registerFactory<MentorPropertiesService>(() => MentorPropertiesService());
+  locator.registerFactory<MentorPropertiesService>(
+      () => MentorPropertiesService());
   locator.registerFactory<PaymentService>(() => PaymentService());
   locator.registerFactory<MentorSettingsService>(() => MentorSettingsService());
   locator.registerFactory<RegisterService>(() => RegisterService());

@@ -7,7 +7,11 @@ class DateOfBirthField extends StatelessWidget {
   final Function(String) dateSelected;
 
   final String language;
-  const DateOfBirthField({required this.selectedDate, required this.language, required this.dateSelected, super.key});
+  const DateOfBirthField(
+      {required this.selectedDate,
+      required this.language,
+      required this.dateSelected,
+      super.key});
 
   @override
   Widget build(BuildContext context) {

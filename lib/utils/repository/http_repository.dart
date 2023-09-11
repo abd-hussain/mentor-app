@@ -68,7 +68,8 @@ class HttpRepository {
 
       return response.data;
     } else {
-      throw ConnectionException(message: "Please check your internet connection");
+      throw ConnectionException(
+          message: "Please check your internet connection");
     }
   }
 }

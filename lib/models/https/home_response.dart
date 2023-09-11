@@ -5,7 +5,8 @@ class HomeResponse {
   HomeResponse({this.data, this.message});
 
   HomeResponse.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? HomeResponseData.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? HomeResponseData.fromJson(json['data']) : null;
     message = json['message'];
   }
 }

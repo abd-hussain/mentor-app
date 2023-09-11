@@ -12,11 +12,13 @@ class NetworkInfoService {
     try {
       result = await Connectivity().checkConnectivity();
     } on PlatformException catch (e) {
-      ConnectionException(message: 'Couldn\'t check connectivity status error: $e');
+      ConnectionException(
+          message: 'Couldn\'t check connectivity status error: $e');
       return false;
     }
 
-    if (result == ConnectivityResult.wifi || result == ConnectivityResult.mobile) {
+    if (result == ConnectivityResult.wifi ||
+        result == ConnectivityResult.mobile) {
       networkStateConnection.value = true;
       return true;
     } else {

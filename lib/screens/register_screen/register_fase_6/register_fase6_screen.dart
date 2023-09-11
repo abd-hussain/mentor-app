@@ -56,9 +56,12 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                 enableNextButton: snapshot,
                 nextPressed: () async {
                   final navigator = Navigator.of(context);
-                  await bloc.box.put(TempFieldToRegistrtConstant.email, bloc.emailController.text);
-                  await bloc.box.put(TempFieldToRegistrtConstant.password, bloc.passwordController.text);
-                  await bloc.box.put(DatabaseFieldConstant.registrationStep, "7");
+                  await bloc.box.put(TempFieldToRegistrtConstant.email,
+                      bloc.emailController.text);
+                  await bloc.box.put(TempFieldToRegistrtConstant.password,
+                      bloc.passwordController.text);
+                  await bloc.box
+                      .put(DatabaseFieldConstant.registrationStep, "7");
                   navigator.pushNamed(RoutesConstants.registerfinalfazeScreen);
                 },
               );
@@ -88,11 +91,14 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                         return Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 20, right: 20),
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
                               child: CustomText(
                                 title: snapshot
-                                    ? AppLocalizations.of(context)!.emailformatvalid
-                                    : AppLocalizations.of(context)!.emailformatnotvalid,
+                                    ? AppLocalizations.of(context)!
+                                        .emailformatvalid
+                                    : AppLocalizations.of(context)!
+                                        .emailformatnotvalid,
                                 fontSize: 12,
                                 textColor: snapshot ? Colors.green : Colors.red,
                               ),
@@ -104,7 +110,8 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                 const SizedBox(height: 30),
                 PasswordField(
                   controller: bloc.passwordController,
-                  showHidePasswordClearNotifier: bloc.showHidePasswordClearNotifier,
+                  showHidePasswordClearNotifier:
+                      bloc.showHidePasswordClearNotifier,
                   onClear: () {
                     bloc.passwordController.clear();
                     bloc.showHidePasswordClearNotifier.value = false;
@@ -115,7 +122,8 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                 PasswordField(
                   controller: bloc.confirmPasswordController,
                   hintText: AppLocalizations.of(context)!.confirmpassword,
-                  showHidePasswordClearNotifier: bloc.showHideConfirmPasswordClearNotifier,
+                  showHidePasswordClearNotifier:
+                      bloc.showHideConfirmPasswordClearNotifier,
                   onClear: () {
                     bloc.confirmPasswordController.clear();
                     bloc.showHideConfirmPasswordClearNotifier.value = false;
@@ -124,9 +132,11 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                 ),
                 const SizedBox(height: 20),
                 PasswordComplexity(
-                  passwordEquilConfirmPasswordNotifier: bloc.passwordEquilConfirmPasswordNotifier,
+                  passwordEquilConfirmPasswordNotifier:
+                      bloc.passwordEquilConfirmPasswordNotifier,
                   passwordHaveNumberNotifier: bloc.passwordHaveNumberNotifier,
-                  passwordMoreThan8CharNotifier: bloc.passwordMoreThan8CharNotifier,
+                  passwordMoreThan8CharNotifier:
+                      bloc.passwordMoreThan8CharNotifier,
                 )
               ],
             ),

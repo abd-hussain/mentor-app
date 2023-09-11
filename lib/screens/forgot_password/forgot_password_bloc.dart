@@ -13,7 +13,8 @@ class ForgotPasswordBloc extends Bloc<AuthService> {
   ValueNotifier<String> errorMessage = ValueNotifier<String>("");
   BuildContext? maincontext;
   ValueNotifier<bool> showHideEmailClearNotifier = ValueNotifier<bool>(false);
-  ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<LoadingStatus> loadingStatusNotifier =
+      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
 
   handleListeners() {
     emailFieldController.addListener(_emailListen);
@@ -30,7 +31,8 @@ class ForgotPasswordBloc extends Bloc<AuthService> {
         errorMessage.value = "";
         fieldsValidations.value = true;
       } else {
-        errorMessage.value = AppLocalizations.of(maincontext!)!.emailformatnotvalid;
+        errorMessage.value =
+            AppLocalizations.of(maincontext!)!.emailformatnotvalid;
       }
     }
   }
@@ -44,7 +46,8 @@ class ForgotPasswordBloc extends Bloc<AuthService> {
 
   void doForgotPasswordCall() async {
     loadingStatusNotifier.value = LoadingStatus.inprogress;
-    final ForgotPasswordRequest data = ForgotPasswordRequest(email: emailFieldController.text);
+    final ForgotPasswordRequest data =
+        ForgotPasswordRequest(email: emailFieldController.text);
 
     try {
       await service.forgotPassword(data: data);

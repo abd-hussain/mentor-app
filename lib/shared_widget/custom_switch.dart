@@ -18,7 +18,8 @@ class CustomSwitch extends StatefulWidget {
   State<CustomSwitch> createState() => _CustomSwitchState();
 }
 
-class _CustomSwitchState extends State<CustomSwitch> with SingleTickerProviderStateMixin {
+class _CustomSwitchState extends State<CustomSwitch>
+    with SingleTickerProviderStateMixin {
   Animation? circleAnimation;
   AnimationController? _animationController;
   Color? backgroundColorOfSelection;
@@ -26,11 +27,13 @@ class _CustomSwitchState extends State<CustomSwitch> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 60));
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 60));
     circleAnimation = AlignmentTween(
             begin: widget.value! ? Alignment.centerRight : Alignment.centerLeft,
             end: widget.value! ? Alignment.centerLeft : Alignment.centerRight)
-        .animate(CurvedAnimation(parent: _animationController!, curve: Curves.linear));
+        .animate(CurvedAnimation(
+            parent: _animationController!, curve: Curves.linear));
   }
 
   @override
@@ -45,24 +48,33 @@ class _CustomSwitchState extends State<CustomSwitch> with SingleTickerProviderSt
             } else {
               _animationController?.forward();
             }
-            widget.value == false ? widget.onChanged!(true) : widget.onChanged!(false);
+            widget.value == false
+                ? widget.onChanged!(true)
+                : widget.onChanged!(false);
           },
           child: Container(
             width: 40,
             height: 25,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24.0),
-                color: !widget.value! ? const Color(0xffDFE1E3) : widget.backgroundColorOfSelection),
+                color: !widget.value!
+                    ? const Color(0xffDFE1E3)
+                    : widget.backgroundColorOfSelection),
             child: Padding(
               padding: const EdgeInsets.all(3),
               child: Container(
                 alignment: widget.language == "en"
-                    ? (!widget.value! ? Alignment.centerLeft : Alignment.centerRight)
-                    : (!widget.value! ? Alignment.centerRight : Alignment.centerLeft),
+                    ? (!widget.value!
+                        ? Alignment.centerLeft
+                        : Alignment.centerRight)
+                    : (!widget.value!
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft),
                 child: Container(
                   width: 20.0,
                   height: 20.0,
-                  decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xffFFFFFF)),
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: Color(0xffFFFFFF)),
                 ),
               ),
             ),

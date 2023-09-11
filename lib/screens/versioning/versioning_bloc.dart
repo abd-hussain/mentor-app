@@ -4,7 +4,8 @@ import 'package:mentor_app/services/settings_service.dart';
 import 'package:mentor_app/utils/mixins.dart';
 
 class VersioningBloc extends Bloc<SettingService> {
-  final ValueNotifier<List<VersioningData>?> versionsListNotifier = ValueNotifier<List<VersioningData>?>(null);
+  final ValueNotifier<List<VersioningData>?> versionsListNotifier =
+      ValueNotifier<List<VersioningData>?>(null);
 
   Future<void> pullRefresh() async {
     return Future.delayed(

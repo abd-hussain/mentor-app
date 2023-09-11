@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 class MyCameraView extends StatelessWidget {
   final RtcEngine rtcEngine;
   final ValueNotifier<bool> localUserJoinedStatus;
-  const MyCameraView({super.key, required this.rtcEngine, required this.localUserJoinedStatus});
+  const MyCameraView(
+      {super.key,
+      required this.rtcEngine,
+      required this.localUserJoinedStatus});
 
   @override
   Widget build(BuildContext context) {

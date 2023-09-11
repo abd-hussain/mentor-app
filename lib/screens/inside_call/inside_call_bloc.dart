@@ -11,7 +11,8 @@ class InsideCallBloc {
   ValueNotifier<int?> remoteUidStatus = ValueNotifier<int?>(null);
   final infoStrings = <String>[];
 
-  void handleReadingArguments(BuildContext context, {required Object? arguments}) {
+  void handleReadingArguments(BuildContext context,
+      {required Object? arguments}) {
     if (arguments != null) {
       final newArguments = arguments as Map<String, dynamic>;
       channelName = newArguments["channelName"] as String;
@@ -24,7 +25,8 @@ class InsideCallBloc {
     _addAgoraEventHandlers();
 
     VideoEncoderConfiguration encoderConfiguration =
-        const VideoEncoderConfiguration(dimensions: VideoDimensions(width: 1920, height: 1080));
+        const VideoEncoderConfiguration(
+            dimensions: VideoDimensions(width: 1920, height: 1080));
     await engine.setVideoEncoderConfiguration(encoderConfiguration);
     await engine.joinChannel(
       token: tempToken,
@@ -61,12 +63,14 @@ class InsideCallBloc {
           debugPrint("remote user $remoteUid joined");
           remoteUidStatus.value = remoteUid;
         },
-        onUserOffline: (RtcConnection connection, int remoteUid, UserOfflineReasonType reason) {
+        onUserOffline: (RtcConnection connection, int remoteUid,
+            UserOfflineReasonType reason) {
           debugPrint("remote user $remoteUid left channel");
           remoteUidStatus.value = null;
         },
         onTokenPrivilegeWillExpire: (RtcConnection connection, String token) {
-          debugPrint('[onTokenPrivilegeWillExpire] connection: ${connection.toJson()}, token: $token');
+          debugPrint(
+              '[onTokenPrivilegeWillExpire] connection: ${connection.toJson()}, token: $token');
         },
       ),
     );

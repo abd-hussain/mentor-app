@@ -32,7 +32,9 @@ class PasswordField extends StatelessWidget {
           builder: (context, showHidePasswordSnapshot, child) {
             return CustomTextField(
               controller: controller,
-              hintText: hintText == "" ? AppLocalizations.of(context)!.password : hintText,
+              hintText: hintText == ""
+                  ? AppLocalizations.of(context)!.password
+                  : hintText,
               obscureText: showHidePasswordSnapshot,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(45),
@@ -61,7 +63,9 @@ class PasswordField extends StatelessWidget {
                         showHidePassword();
                       },
                       icon: Icon(
-                        showHidePasswordSnapshot ? Icons.visibility : Icons.visibility_off,
+                        showHidePasswordSnapshot
+                            ? Icons.visibility
+                            : Icons.visibility_off,
                         size: 20,
                         color: Colors.grey[500],
                       ),

@@ -6,7 +6,10 @@ class MentorCameraView extends StatelessWidget {
   final String channelName;
   final ValueNotifier<int?> remoteUidStatus;
   const MentorCameraView(
-      {super.key, required this.remoteUidStatus, required this.rtcEngine, required this.channelName});
+      {super.key,
+      required this.remoteUidStatus,
+      required this.rtcEngine,
+      required this.channelName});
 
   @override
   Widget build(BuildContext context) {

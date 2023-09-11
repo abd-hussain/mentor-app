@@ -33,7 +33,11 @@ class EditWorkingHoursView extends StatefulWidget {
   final String dayName;
   final List<CheckBox> listOfWorkingHour;
   final Function(List<int>) onSave;
-  const EditWorkingHoursView({super.key, required this.dayName, required this.listOfWorkingHour, required this.onSave});
+  const EditWorkingHoursView(
+      {super.key,
+      required this.dayName,
+      required this.listOfWorkingHour,
+      required this.onSave});
 
   @override
   State<EditWorkingHoursView> createState() => _EditWorkingHoursViewState();
@@ -81,7 +85,8 @@ class _EditWorkingHoursViewState extends State<EditWorkingHoursView> {
 
                     for (CheckBox item in widget.listOfWorkingHour) {
                       if (item.isEnable) {
-                        listOfSelectedHour.add(convertHourStringToInt(item.value));
+                        listOfSelectedHour
+                            .add(convertHourStringToInt(item.value));
                       }
                     }
 
@@ -114,7 +119,8 @@ class _EditWorkingHoursViewState extends State<EditWorkingHoursView> {
                       Checkbox(
                           value: widget.listOfWorkingHour[index].isEnable,
                           onChanged: (va) {
-                            widget.listOfWorkingHour[index].isEnable = !widget.listOfWorkingHour[index].isEnable;
+                            widget.listOfWorkingHour[index].isEnable =
+                                !widget.listOfWorkingHour[index].isEnable;
                             setState(() {});
                           }),
                     ],

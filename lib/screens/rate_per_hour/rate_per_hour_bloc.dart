@@ -4,7 +4,8 @@ import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/mixins.dart';
 
 class RatePerHourBloc extends Bloc<MentorSettingsService> {
-  ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<LoadingStatus> loadingStatusNotifier =
+      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   ValueNotifier<bool> enableSaveButton = ValueNotifier<bool>(false);
 
   TextEditingController ratePerHourController = TextEditingController();

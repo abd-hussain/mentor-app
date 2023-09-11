@@ -38,11 +38,13 @@ class _CertificateViewState extends State<CertificateView> {
                   file: snapshot,
                   onAddFile: (file) {
                     certificate1.value = file;
-                    widget.onChange(certificate1.value, certificate2.value, certificate3.value);
+                    widget.onChange(certificate1.value, certificate2.value,
+                        certificate3.value);
                   },
                   onRemove: () {
                     certificate1.value = null;
-                    widget.onChange(certificate1.value, certificate2.value, certificate3.value);
+                    widget.onChange(certificate1.value, certificate2.value,
+                        certificate3.value);
                   });
             }),
         ValueListenableBuilder<File?>(
@@ -55,11 +57,13 @@ class _CertificateViewState extends State<CertificateView> {
                   file: snapshot,
                   onAddFile: (file) {
                     certificate2.value = file;
-                    widget.onChange(certificate1.value, certificate2.value, certificate3.value);
+                    widget.onChange(certificate1.value, certificate2.value,
+                        certificate3.value);
                   },
                   onRemove: () {
                     certificate2.value = null;
-                    widget.onChange(certificate1.value, certificate2.value, certificate3.value);
+                    widget.onChange(certificate1.value, certificate2.value,
+                        certificate3.value);
                   });
             }),
         ValueListenableBuilder<File?>(
@@ -72,11 +76,13 @@ class _CertificateViewState extends State<CertificateView> {
                   file: snapshot,
                   onAddFile: (file) {
                     certificate3.value = file;
-                    widget.onChange(certificate1.value, certificate2.value, certificate3.value);
+                    widget.onChange(certificate1.value, certificate2.value,
+                        certificate3.value);
                   },
                   onRemove: () {
                     certificate3.value = null;
-                    widget.onChange(certificate1.value, certificate2.value, certificate3.value);
+                    widget.onChange(certificate1.value, certificate2.value,
+                        certificate3.value);
                   });
             }),
       ],

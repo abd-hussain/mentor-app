@@ -6,7 +6,8 @@ import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/mixins.dart';
 
 class WorkingHoursBloc extends Bloc<MentorPropertiesService> {
-  ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<LoadingStatus> loadingStatusNotifier =
+      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
 
   List<CheckBox> _prepareList(List<int> theList) {
     List<CheckBox> list = [];
@@ -39,7 +40,8 @@ class WorkingHoursBloc extends Bloc<MentorPropertiesService> {
     return list;
   }
 
-  ValueNotifier<List<WorkingHourModel>> listOfWorkingHourNotifier = ValueNotifier<List<WorkingHourModel>>([]);
+  ValueNotifier<List<WorkingHourModel>> listOfWorkingHourNotifier =
+      ValueNotifier<List<WorkingHourModel>>([]);
 
   void getWorkingHours() {
     loadingStatusNotifier.value = LoadingStatus.inprogress;
@@ -49,25 +51,39 @@ class WorkingHoursBloc extends Bloc<MentorPropertiesService> {
       if (value.data != null) {
         List<WorkingHourModel> theList = [];
         if (value.data!.workingHoursSaturday != null) {
-          theList.add(WorkingHourModel(list: _prepareList(value.data!.workingHoursSaturday!), dayName: "Saturday"));
+          theList.add(WorkingHourModel(
+              list: _prepareList(value.data!.workingHoursSaturday!),
+              dayName: "Saturday"));
         }
         if (value.data!.workingHoursSunday != null) {
-          theList.add(WorkingHourModel(list: _prepareList(value.data!.workingHoursSunday!), dayName: "Sunday"));
+          theList.add(WorkingHourModel(
+              list: _prepareList(value.data!.workingHoursSunday!),
+              dayName: "Sunday"));
         }
         if (value.data!.workingHoursMonday != null) {
-          theList.add(WorkingHourModel(list: _prepareList(value.data!.workingHoursMonday!), dayName: "Monday"));
+          theList.add(WorkingHourModel(
+              list: _prepareList(value.data!.workingHoursMonday!),
+              dayName: "Monday"));
         }
         if (value.data!.workingHoursTuesday != null) {
-          theList.add(WorkingHourModel(list: _prepareList(value.data!.workingHoursTuesday!), dayName: "Tuesday"));
+          theList.add(WorkingHourModel(
+              list: _prepareList(value.data!.workingHoursTuesday!),
+              dayName: "Tuesday"));
         }
         if (value.data!.workingHoursWednesday != null) {
-          theList.add(WorkingHourModel(list: _prepareList(value.data!.workingHoursWednesday!), dayName: "Wednesday"));
+          theList.add(WorkingHourModel(
+              list: _prepareList(value.data!.workingHoursWednesday!),
+              dayName: "Wednesday"));
         }
         if (value.data!.workingHoursThursday != null) {
-          theList.add(WorkingHourModel(list: _prepareList(value.data!.workingHoursThursday!), dayName: "Thursday"));
+          theList.add(WorkingHourModel(
+              list: _prepareList(value.data!.workingHoursThursday!),
+              dayName: "Thursday"));
         }
         if (value.data!.workingHoursFriday != null) {
-          theList.add(WorkingHourModel(list: _prepareList(value.data!.workingHoursFriday!), dayName: "Friday"));
+          theList.add(WorkingHourModel(
+              list: _prepareList(value.data!.workingHoursFriday!),
+              dayName: "Friday"));
         }
 
         listOfWorkingHourNotifier.value = theList;

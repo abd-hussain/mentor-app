@@ -16,7 +16,9 @@ class CallReadyView extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 20),
-        Lottie.network("https://assets8.lottiefiles.com/packages/lf20_WZQ5gTEaXA.json", height: 200),
+        Lottie.network(
+            "https://assets8.lottiefiles.com/packages/lf20_WZQ5gTEaXA.json",
+            height: 200),
         const SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.all(8),
@@ -61,12 +63,17 @@ class CallReadyView extends StatelessWidget {
                   buttonTitle: AppLocalizations.of(context)!.joinnow,
                   enableButton: true,
                   onTap: () async {
-                    PermissionHandler().handlePermission(Permission.camera).whenComplete(() {
-                      PermissionHandler().handlePermission(Permission.microphone).whenComplete(() {
-                        Navigator.of(context, rootNavigator: true)
-                            .pushNamed(RoutesConstants.insideCallScreen, arguments: {
-                          "channelName": channelId,
-                        });
+                    PermissionHandler()
+                        .handlePermission(Permission.camera)
+                        .whenComplete(() {
+                      PermissionHandler()
+                          .handlePermission(Permission.microphone)
+                          .whenComplete(() {
+                        Navigator.of(context, rootNavigator: true).pushNamed(
+                            RoutesConstants.insideCallScreen,
+                            arguments: {
+                              "channelName": channelId,
+                            });
                       });
                     });
                   }),

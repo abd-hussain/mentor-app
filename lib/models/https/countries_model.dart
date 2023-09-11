@@ -26,7 +26,14 @@ class Country {
   int? minLength;
   int? maxLength;
 
-  Country({this.id, this.flagImage, this.name, this.currency, this.dialCode, this.maxLength, this.minLength});
+  Country(
+      {this.id,
+      this.flagImage,
+      this.name,
+      this.currency,
+      this.dialCode,
+      this.maxLength,
+      this.minLength});
 
   Country.fromJson(Map<String, dynamic> json) {
     id = json['id'];

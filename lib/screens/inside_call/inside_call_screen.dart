@@ -16,7 +16,8 @@ class _InsideCallScreenState extends State<InsideCallScreen> {
 
   @override
   void didChangeDependencies() {
-    bloc.handleReadingArguments(context, arguments: ModalRoute.of(context)!.settings.arguments);
+    bloc.handleReadingArguments(context,
+        arguments: ModalRoute.of(context)!.settings.arguments);
     bloc.initializeCall();
     super.didChangeDependencies();
   }
@@ -39,7 +40,9 @@ class _InsideCallScreenState extends State<InsideCallScreen> {
               remoteUidStatus: bloc.remoteUidStatus,
               channelName: bloc.channelName,
             ),
-            MyCameraView(rtcEngine: bloc.engine, localUserJoinedStatus: bloc.localUserJoinedStatus),
+            MyCameraView(
+                rtcEngine: bloc.engine,
+                localUserJoinedStatus: bloc.localUserJoinedStatus),
             CallToolBarView(engine: bloc.engine),
           ],
         ),

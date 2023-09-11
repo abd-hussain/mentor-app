@@ -16,7 +16,8 @@ class RegisterInfoBottomSheetsUtil {
     required this.context,
   });
 
-  Future infoBottomSheet({required int step, required Function() openNext}) async {
+  Future infoBottomSheet(
+      {required int step, required Function() openNext}) async {
     return await showModalBottomSheet(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
@@ -31,7 +32,8 @@ class RegisterInfoBottomSheetsUtil {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (context) {
         return Padding(
-          padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
+          padding:
+              const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
           child: Wrap(
             children: [
               Row(
@@ -139,7 +141,9 @@ class RegisterInfoBottomSheetsUtil {
     );
   }
 
-  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {Factory(() => EagerGestureRecognizer())};
+  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {
+    Factory(() => EagerGestureRecognizer())
+  };
 
   Future termsBottomSheet({required Function() openNext}) async {
     return await showModalBottomSheet(
@@ -156,7 +160,8 @@ class RegisterInfoBottomSheetsUtil {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         builder: (context) {
           return Padding(
-            padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
+            padding:
+                const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
             child: Wrap(
               children: [
                 Row(
@@ -194,7 +199,8 @@ class RegisterInfoBottomSheetsUtil {
                   height: 300,
                   margin: const EdgeInsets.all(15.0),
                   padding: const EdgeInsets.all(3.0),
-                  decoration: BoxDecoration(border: Border.all(color: const Color(0xff444444))),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: const Color(0xff444444))),
                   child: WebView(
                     initialUrl: AppConstant.termsLink,
                     gestureRecognizers: gestureRecognizers,

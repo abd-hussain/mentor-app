@@ -4,7 +4,8 @@ import 'package:mentor_app/services/noticitions_services.dart';
 import 'package:mentor_app/utils/mixins.dart';
 
 class NotificationsBloc extends Bloc<NotificationsService> {
-  final ValueNotifier<List<NotificationsResponseData>?> notificationsListNotifier =
+  final ValueNotifier<List<NotificationsResponseData>?>
+      notificationsListNotifier =
       ValueNotifier<List<NotificationsResponseData>?>(null);
 
   Future<void> pullRefresh() async {

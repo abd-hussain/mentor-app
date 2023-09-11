@@ -8,13 +8,19 @@ import 'package:mentor_app/utils/mixins.dart';
 
 class HttpInterceptor extends InterceptorsWrapper {
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     var box = Hive.box(DatabaseBoxConstant.userInfo);
-    if (box.get(DatabaseFieldConstant.token) != null || box.get(DatabaseFieldConstant.token) != "") {
+    if (box.get(DatabaseFieldConstant.token) != null ||
+        box.get(DatabaseFieldConstant.token) != "") {
       String bearerToken = "Bearer ${box.get(DatabaseFieldConstant.token)}";
-      options.headers = {"Authorization": bearerToken, "lang": box.get(DatabaseFieldConstant.language)};
+      options.headers = {
+        "Authorization": bearerToken,
+        "lang": box.get(DatabaseFieldConstant.language)
+      };
     } else {
-      options.headers.putIfAbsent("lang", () => box.get(DatabaseFieldConstant.language));
+      options.headers
+          .putIfAbsent("lang", () => box.get(DatabaseFieldConstant.language));
     }
     return handler.next(options);
   }
@@ -36,7 +42,8 @@ class HttpInterceptor extends InterceptorsWrapper {
   }
 
   Future<bool> validateResponse<T extends Model, TR>(Response response) async {
-    logger.wtf("request name ${response.requestOptions.path} -- status code ${response.statusCode}");
+    logger.wtf(
+        "request name ${response.requestOptions.path} -- status code ${response.statusCode}");
     switch (response.statusCode) {
       case 200:
         return true;
@@ -45,7 +52,10 @@ class HttpInterceptor extends InterceptorsWrapper {
       case 403:
         logger.wtf("response.data ${response.data.toString()}");
         throw DioError(
-            error: HttpException(status: response.statusCode!, message: response.data["detail"], requestId: ""),
+            error: HttpException(
+                status: response.statusCode!,
+                message: response.data["detail"],
+                requestId: ""),
             requestOptions: response.requestOptions);
       default:
         logger.wtf("response.data ${response.data.toString()}");

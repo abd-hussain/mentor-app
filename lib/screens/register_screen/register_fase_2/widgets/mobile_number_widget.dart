@@ -25,7 +25,8 @@ class MobileNumberField extends StatefulWidget {
 }
 
 class _MobileNumberFieldState extends State<MobileNumberField> {
-  final ValueNotifier<Country> selectedPhoneCountryNotifier = ValueNotifier<Country>(Country());
+  final ValueNotifier<Country> selectedPhoneCountryNotifier =
+      ValueNotifier<Country>(Country());
   final TextEditingController controller = TextEditingController();
 
   @override
@@ -38,10 +39,13 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
 
   controllerLisiner() {
     controller.addListener(() {
-      if (selectedPhoneCountryNotifier.value.minLength! <= controller.text.length &&
-          controller.text.length <= selectedPhoneCountryNotifier.value.maxLength!) {
+      if (selectedPhoneCountryNotifier.value.minLength! <=
+              controller.text.length &&
+          controller.text.length <=
+              selectedPhoneCountryNotifier.value.maxLength!) {
         widget.enteredPhoneNumber(controller.text);
-        widget.selectedCountryCode(selectedPhoneCountryNotifier.value.dialCode!);
+        widget
+            .selectedCountryCode(selectedPhoneCountryNotifier.value.dialCode!);
       } else {
         widget.enteredPhoneNumber("");
         widget.selectedCountryCode("");
@@ -68,11 +72,13 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
                     },
                     controller: controller,
                     enableSuggestions: false,
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
                     autocorrect: false,
                     keyboardType: TextInputType.number,
                     inputFormatters: [
-                      LengthLimitingTextInputFormatter(selectedPhoneCountryData.maxLength!),
+                      LengthLimitingTextInputFormatter(
+                          selectedPhoneCountryData.maxLength!),
                       FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                     ],
                     decoration: InputDecoration(
@@ -98,7 +104,8 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
                         width: 100,
                         child: IconButton(
                           onPressed: () async {
-                            await BottomSheetsUtil().countryBottomSheet(context, widget.countryList, (value) async {
+                            await BottomSheetsUtil().countryBottomSheet(
+                                context, widget.countryList, (value) async {
                               selectedPhoneCountryNotifier.value = value;
                               controller.clear();
                             });
@@ -110,15 +117,19 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
                                 width: 20,
                                 height: 20,
                                 child: FadeInImage(
-                                  placeholder: const AssetImage("assets/images/flagPlaceHolderImg.png"),
-                                  image: NetworkImage(selectedPhoneCountryData.flagImage!, scale: 1),
+                                  placeholder: const AssetImage(
+                                      "assets/images/flagPlaceHolderImg.png"),
+                                  image: NetworkImage(
+                                      selectedPhoneCountryData.flagImage!,
+                                      scale: 1),
                                 ),
                               ),
                               const SizedBox(
                                 width: 5,
                               ),
                               CustomText(
-                                title: selectedPhoneCountryData.dialCode!.replaceAll("00", "+"),
+                                title: selectedPhoneCountryData.dialCode!
+                                    .replaceAll("00", "+"),
                                 textColor: const Color(0xff191C1F),
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,

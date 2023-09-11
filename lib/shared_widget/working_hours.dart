@@ -49,7 +49,8 @@ class WorkingHoursWidget extends StatelessWidget {
                   height: 320,
                   child: GridView.builder(
                     itemCount: workingHours.length,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       childAspectRatio: 3,
                       mainAxisSpacing: 4,
@@ -60,15 +61,21 @@ class WorkingHoursWidget extends StatelessWidget {
                       return Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: workingHours[index].isEnable ? const Color(0xff4CB6EA) : Colors.grey[400],
+                          color: workingHours[index].isEnable
+                              ? const Color(0xff4CB6EA)
+                              : Colors.grey[400],
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: Center(
                           child: CustomText(
                             title: workingHours[index].value,
                             fontSize: 13,
-                            textColor: workingHours[index].isEnable ? const Color(0xff444444) : const Color(0xffffffff),
-                            fontWeight: workingHours[index].isEnable ? FontWeight.bold : FontWeight.normal,
+                            textColor: workingHours[index].isEnable
+                                ? const Color(0xff444444)
+                                : const Color(0xffffffff),
+                            fontWeight: workingHours[index].isEnable
+                                ? FontWeight.bold
+                                : FontWeight.normal,
                           ),
                         ),
                       );

@@ -8,7 +8,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class GenderField extends StatelessWidget {
   final TextEditingController controller;
   final Function(String) onChange;
-  const GenderField({required this.controller, super.key, required this.onChange});
+  const GenderField(
+      {required this.controller, super.key, required this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,8 @@ class GenderField extends StatelessWidget {
         ),
         InkWell(
           onTap: () async {
-            await BottomSheetsUtil().genderBottomSheet(context, genderList(context), (selectedGender) {
+            await BottomSheetsUtil().genderBottomSheet(
+                context, genderList(context), (selectedGender) {
               controller.text = selectedGender.name;
             });
           },
@@ -55,7 +57,8 @@ class GenderField extends StatelessWidget {
       ),
       Gender(
           name: AppLocalizations.of(context)!.genderother,
-          icon: const Icon(Icons.align_horizontal_center, color: Color(0xff444444)))
+          icon: const Icon(Icons.align_horizontal_center,
+              color: Color(0xff444444)))
     ];
   }
 }

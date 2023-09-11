@@ -15,7 +15,7 @@ class EmailHeader extends StatelessWidget {
           child: CustomText(
             title: AppLocalizations.of(context)!.pleaseenteryourrmailaddress,
             fontSize: 14,
-            textColor:const Color(0xff444444),
+            textColor: const Color(0xff444444),
           ),
         ),
         const SizedBox(height: 5),

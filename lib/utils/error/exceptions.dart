@@ -3,7 +3,8 @@ class HttpException implements Exception {
   final int status;
   final String requestId;
 
-  HttpException({required this.status, required this.message, required this.requestId});
+  HttpException(
+      {required this.status, required this.message, required this.requestId});
 }
 
 class ConnectionException implements Exception {

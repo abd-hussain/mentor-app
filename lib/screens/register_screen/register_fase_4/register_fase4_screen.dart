@@ -46,20 +46,34 @@ class _RegisterFaze4ScreenState extends State<RegisterFaze4Screen> {
               nextPressed: () async {
                 final navigator = Navigator.of(context);
 
-                await bloc.box.put(TempFieldToRegistrtConstant.saturdayWH,
-                    bloc.filterListOfTiming(dayName: AppLocalizations.of(context)!.saturday));
-                await bloc.box.put(TempFieldToRegistrtConstant.sundayWH,
-                    bloc.filterListOfTiming(dayName: AppLocalizations.of(context)!.sunday));
-                await bloc.box.put(TempFieldToRegistrtConstant.mondayWH,
-                    bloc.filterListOfTiming(dayName: AppLocalizations.of(context)!.monday));
-                await bloc.box.put(TempFieldToRegistrtConstant.tuesdayWH,
-                    bloc.filterListOfTiming(dayName: AppLocalizations.of(context)!.tuesday));
-                await bloc.box.put(TempFieldToRegistrtConstant.wednesdayWH,
-                    bloc.filterListOfTiming(dayName: AppLocalizations.of(context)!.wednesday));
-                await bloc.box.put(TempFieldToRegistrtConstant.thursdayWH,
-                    bloc.filterListOfTiming(dayName: AppLocalizations.of(context)!.thursday));
-                await bloc.box.put(TempFieldToRegistrtConstant.fridayWH,
-                    bloc.filterListOfTiming(dayName: AppLocalizations.of(context)!.friday));
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.saturdayWH,
+                    bloc.filterListOfTiming(
+                        dayName: AppLocalizations.of(context)!.saturday));
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.sundayWH,
+                    bloc.filterListOfTiming(
+                        dayName: AppLocalizations.of(context)!.sunday));
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.mondayWH,
+                    bloc.filterListOfTiming(
+                        dayName: AppLocalizations.of(context)!.monday));
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.tuesdayWH,
+                    bloc.filterListOfTiming(
+                        dayName: AppLocalizations.of(context)!.tuesday));
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.wednesdayWH,
+                    bloc.filterListOfTiming(
+                        dayName: AppLocalizations.of(context)!.wednesday));
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.thursdayWH,
+                    bloc.filterListOfTiming(
+                        dayName: AppLocalizations.of(context)!.thursday));
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.fridayWH,
+                    bloc.filterListOfTiming(
+                        dayName: AppLocalizations.of(context)!.friday));
 
                 await bloc.box.put(DatabaseFieldConstant.registrationStep, "5");
                 navigator.pushNamed(RoutesConstants.registerfaze5Screen);
@@ -78,17 +92,23 @@ class _RegisterFaze4ScreenState extends State<RegisterFaze4Screen> {
                   itemCount: bloc.listOfWorkingHourNotifier.value.length,
                   itemBuilder: (context, index) {
                     return WorkingHoursWidget(
-                      workingHours: bloc.listOfWorkingHourNotifier.value[index].list,
-                      dayName: bloc.listOfWorkingHourNotifier.value[index].dayName,
+                      workingHours:
+                          bloc.listOfWorkingHourNotifier.value[index].list,
+                      dayName:
+                          bloc.listOfWorkingHourNotifier.value[index].dayName,
                       onSave: () {
                         EditWorkingHourBottomSheetsUtil().workingHour(
                           context: context,
-                          dayname: bloc.listOfWorkingHourNotifier.value[index].dayName,
-                          listOfWorkingHour: bloc.listOfWorkingHourNotifier.value[index].list,
+                          dayname: bloc
+                              .listOfWorkingHourNotifier.value[index].dayName,
+                          listOfWorkingHour:
+                              bloc.listOfWorkingHourNotifier.value[index].list,
                           onSave: (newList) {
-                            bloc.listOfWorkingHourNotifier.value[index] = WorkingHourModel(
-                                list: bloc.prepareList(context, newList),
-                                dayName: bloc.listOfWorkingHourNotifier.value[index].dayName);
+                            bloc.listOfWorkingHourNotifier.value[index] =
+                                WorkingHourModel(
+                                    list: bloc.prepareList(context, newList),
+                                    dayName: bloc.listOfWorkingHourNotifier
+                                        .value[index].dayName);
 
                             bloc.validateFieldsForFaze4();
                             setState(() {});

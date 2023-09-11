@@ -4,7 +4,8 @@ import '../../models/password_strength_model.dart';
 
 class PasswordsStrength {
   bool checkerOfThePasswordStrength(
-      {required ValueNotifier<PasswordStrengthModel> passwordStrengthValidationNotifier}) {
+      {required ValueNotifier<PasswordStrengthModel>
+          passwordStrengthValidationNotifier}) {
     return passwordStrengthValidationNotifier.value.min8max30Cchar! &&
         passwordStrengthValidationNotifier.value.oneLowerCase! &&
         passwordStrengthValidationNotifier.value.oneNumber! &&
@@ -14,11 +15,13 @@ class PasswordsStrength {
 
   validatePasswordStrength(
       {required TextEditingController passwordFieldController,
-      required ValueNotifier<PasswordStrengthModel> passwordStrengthValidationNotifier}) {
+      required ValueNotifier<PasswordStrengthModel>
+          passwordStrengthValidationNotifier}) {
     var passwordStrength = PasswordStrengthModel();
 
     if (passwordFieldController.text.isNotEmpty) {
-      if (passwordFieldController.text.length >= 8 && passwordFieldController.text.length <= 30) {
+      if (passwordFieldController.text.length >= 8 &&
+          passwordFieldController.text.length <= 30) {
         passwordStrength.min8max30Cchar = true;
       } else {
         passwordStrength.min8max30Cchar = false;
@@ -38,7 +41,8 @@ class PasswordsStrength {
       } else {
         passwordStrength.oneNumber = false;
       }
-      if (passwordFieldController.text.contains(RegExp(r'[!?@#\$^%;+:&%*~=£€¥/÷×\,.")}{(_-]'))) {
+      if (passwordFieldController.text
+          .contains(RegExp(r'[!?@#\$^%;+:&%*~=£€¥/÷×\,.")}{(_-]'))) {
         passwordStrength.oneSpicialChar = true;
       } else {
         passwordStrength.oneSpicialChar = false;
