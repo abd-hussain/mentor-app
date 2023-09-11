@@ -8,7 +8,7 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 class MobileNumberField extends StatefulWidget {
   final Country initialCountry;
   final List<Country> countryList;
-  final Function(String) selectedCountryCode;
+  final Function(Country?) selectedCountryCode;
   final Function(String) enteredPhoneNumber;
   final Function(bool) validatePhoneNumber;
 
@@ -32,7 +32,7 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
   @override
   void initState() {
     selectedPhoneCountryNotifier.value = widget.initialCountry;
-    widget.selectedCountryCode(widget.initialCountry.dialCode!);
+    widget.selectedCountryCode(widget.initialCountry);
     controllerLisiner();
     super.initState();
   }
@@ -44,11 +44,10 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
           controller.text.length <=
               selectedPhoneCountryNotifier.value.maxLength!) {
         widget.enteredPhoneNumber(controller.text);
-        widget
-            .selectedCountryCode(selectedPhoneCountryNotifier.value.dialCode!);
+        widget.selectedCountryCode(selectedPhoneCountryNotifier.value);
       } else {
         widget.enteredPhoneNumber("");
-        widget.selectedCountryCode("");
+        widget.selectedCountryCode(null);
       }
     });
   }

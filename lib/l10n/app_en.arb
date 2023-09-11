@@ -256,7 +256,8 @@
     "addeditnote": "Add / Edit Note",
     "joinnow" : "Join Now",
     "createprofile" : "Creating Profile ...",
-    "createprofiledesc" : "This may take some time to be finished"
+    "createprofiledesc" : "This may take some time to be finished",
+    "mobilenumberalreadyinuse" : "Mobile Number already used"
 
 
 

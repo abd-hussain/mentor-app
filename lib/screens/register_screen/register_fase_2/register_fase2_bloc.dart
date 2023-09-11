@@ -40,8 +40,11 @@ class Register2Bloc {
       ValueNotifier<List<SuffixData>>([]);
   StreamController<LoadingStatus> loadingStatusController =
       StreamController<LoadingStatus>();
+  ValueNotifier<bool> mobileNumberErrorMessage = ValueNotifier<bool>(false);
 
   String countryCode = "";
+  Country? country;
+
   String mobileController = "";
   bool validatePhoneNumber = false;
 
@@ -56,6 +59,7 @@ class Register2Bloc {
         genderController.text.isNotEmpty &&
         countryController.text.isNotEmpty &&
         validatePhoneNumber &&
+        mobileNumberErrorMessage.value == false &&
         mobileController.isNotEmpty &&
         profileImage != null &&
         iDImage != null) {
@@ -63,9 +67,23 @@ class Register2Bloc {
     }
   }
 
+  validateMobileNumber(String fullMobileNumber) {
+    print("fullMobileNumber");
+    print(fullMobileNumber);
+
+    // loadingStatusController.sink.add(LoadingStatus.inprogress);
+    locator<FilterService>()
+        .validateMobileNumber(fullMobileNumber)
+        .then((value) {
+      mobileNumberErrorMessage.value = value;
+      validateFieldsForFaze2();
+      loadingStatusController.sink.add(LoadingStatus.finish);
+    });
+  }
+
   Country returnSelectedCountryFromDatabase() {
-    countryCode = box.get(DatabaseFieldConstant.selectedCountryName);
-    return Country(
+    countryCode = box.get(DatabaseFieldConstant.selectedCountryDialCode);
+    country = Country(
       id: int.parse(box.get(DatabaseFieldConstant.selectedCountryId)),
       flagImage: box.get(DatabaseFieldConstant.selectedCountryFlag),
       name: box.get(DatabaseFieldConstant.selectedCountryName),
@@ -76,6 +94,7 @@ class Register2Bloc {
       minLength:
           int.parse(box.get(DatabaseFieldConstant.selectedCountryMinLenght)),
     );
+    return country!;
   }
 
   void getlistOfSuffix() {

@@ -250,17 +250,39 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                                           .returnSelectedCountryFromDatabase(),
                                       countryList: snapshot,
                                       selectedCountryCode: (selectedCode) {
-                                        bloc.countryCode = selectedCode;
+                                        if (selectedCode != null) {
+                                          bloc.country = selectedCode;
+                                          bloc.countryCode =
+                                              selectedCode.dialCode!;
+                                        }
                                         bloc.validateFieldsForFaze2();
                                       },
                                       enteredPhoneNumber: (mobileNumber) {
-                                        bloc.mobileController = mobileNumber;
-                                        bloc.validateFieldsForFaze2();
+                                        if (bloc.country!.maxLength ==
+                                            mobileNumber.length) {
+                                          print("enteredPhoneNumber");
+                                          bloc.mobileController = mobileNumber;
+                                          bloc.validateMobileNumber(
+                                              bloc.country!.dialCode! +
+                                                  bloc.mobileController);
+                                        }
                                       },
                                       validatePhoneNumber: (value) {
                                         bloc.validatePhoneNumber = value;
                                         bloc.validateFieldsForFaze2();
                                       });
+                                }),
+                            ValueListenableBuilder<bool>(
+                                valueListenable: bloc.mobileNumberErrorMessage,
+                                builder: (context, snapshot, child) {
+                                  return CustomText(
+                                    title: snapshot
+                                        ? AppLocalizations.of(context)!
+                                            .mobilenumberalreadyinuse
+                                        : "",
+                                    fontSize: 14,
+                                    textColor: Colors.red,
+                                  );
                                 }),
                             const SizedBox(height: 16),
                             Container(

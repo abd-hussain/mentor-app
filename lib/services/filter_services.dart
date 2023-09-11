@@ -42,6 +42,24 @@ class FilterService with Service {
     return response["data"];
   }
 
+  Future<bool> validateMobileNumber(String mobile) async {
+    final response = await repository.callRequest(
+      requestType: RequestType.post,
+      methodName: MethodNameConstant.checkMobile,
+      queryParam: {"mobile": mobile},
+    );
+    return response["data"];
+  }
+
+  Future<bool> validateEmailAddress(String email) async {
+    final response = await repository.callRequest(
+      requestType: RequestType.post,
+      methodName: MethodNameConstant.checkEmail,
+      queryParam: {"email": email},
+    );
+    return response["data"];
+  }
+
   Future<List<SuffixData>?> getMajors() async {
     final response = await repository.callRequest(
       requestType: RequestType.get,
