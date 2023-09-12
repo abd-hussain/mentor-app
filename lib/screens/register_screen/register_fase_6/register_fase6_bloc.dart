@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mentor_app/services/filter_services.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
+import 'package:mentor_app/utils/mixins.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class Register6Bloc {
+class Register6Bloc extends Bloc<FilterService> {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
 
   ValueNotifier<bool> enableNextBtn = ValueNotifier<bool>(false);
@@ -22,7 +25,7 @@ class Register6Bloc {
   ValueNotifier<bool> passwordHaveNumberNotifier = ValueNotifier<bool>(false);
 
   TextEditingController emailController = TextEditingController();
-  ValueNotifier<bool?> validateEmail = ValueNotifier<bool?>(null);
+  ValueNotifier<String> validateEmail = ValueNotifier<String>("");
 
   handleListeners() {
     passwordController.addListener(_passwordListen);
@@ -40,17 +43,29 @@ class Register6Bloc {
     validateFieldsForFaze6();
   }
 
-  bool _validateEmail(String email) {
-    return RegExp(
+  validateEmailMethod(BuildContext context) {
+    if (RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(email);
+        .hasMatch(emailController.text)) {
+      validateEmail.value = "";
+      validateEmailAPI(context);
+    } else {
+      validateEmail.value = AppLocalizations.of(context)!.emailformatnotvalid;
+    }
+  }
+
+  validateEmailAPI(BuildContext context) {
+    service.validateMobileNumber(emailController.text).then((value) {
+      if (value) {
+        validateEmail.value = AppLocalizations.of(context)!.emailalreadyinuse;
+      } else {
+        validateEmail.value = "";
+      }
+      validateFieldsForFaze6();
+    });
   }
 
   validateFieldsForFaze6() {
-    validateEmail.value = _validateEmail(emailController.text);
-
-    //TODO : validate if email already exsist in our app
-
     if (passwordController.text.isNotEmpty &&
         confirmPasswordController.text.isNotEmpty) {
       passwordEquilConfirmPasswordNotifier.value =
@@ -65,7 +80,10 @@ class Register6Bloc {
       enableNextBtn.value = passwordEquilConfirmPasswordNotifier.value &&
           passwordMoreThan8CharNotifier.value &&
           passwordHaveNumberNotifier.value &&
-          (validateEmail.value ?? false);
+          (validateEmail.value == "");
     }
   }
+
+  @override
+  onDispose() {}
 }

@@ -39,9 +39,9 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
         if (bloc.emailController.text.isEmpty) {
-          bloc.validateEmail.value = null;
+          bloc.validateEmail.value = "";
         } else {
-          bloc.validateFieldsForFaze6();
+          bloc.validateEmailMethod(context);
         }
       },
       child: Scaffold(
@@ -82,10 +82,10 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                     bloc.validateFieldsForFaze6();
                   },
                 ),
-                ValueListenableBuilder<bool?>(
+                ValueListenableBuilder<String>(
                     valueListenable: bloc.validateEmail,
                     builder: (context, snapshot, child) {
-                      if (snapshot == null) {
+                      if (snapshot == "") {
                         return Container();
                       } else {
                         return Row(
@@ -94,13 +94,13 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                               padding:
                                   const EdgeInsets.only(left: 20, right: 20),
                               child: CustomText(
-                                title: snapshot
+                                title: snapshot == ""
                                     ? AppLocalizations.of(context)!
                                         .emailformatvalid
-                                    : AppLocalizations.of(context)!
-                                        .emailformatnotvalid,
+                                    : snapshot,
                                 fontSize: 12,
-                                textColor: snapshot ? Colors.green : Colors.red,
+                                textColor:
+                                    snapshot == "" ? Colors.green : Colors.red,
                               ),
                             ),
                           ],

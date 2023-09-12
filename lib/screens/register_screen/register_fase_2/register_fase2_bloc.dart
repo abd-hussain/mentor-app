@@ -3,14 +3,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:mentor_app/locator.dart';
 import 'package:mentor_app/models/https/countries_model.dart';
 import 'package:mentor_app/models/https/suffix_model.dart';
 import 'package:mentor_app/services/filter_services.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
+import 'package:mentor_app/utils/mixins.dart';
 
-class Register2Bloc {
+class Register2Bloc extends Bloc<FilterService> {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
 
   TextEditingController suffixNameController = TextEditingController();
@@ -68,16 +68,9 @@ class Register2Bloc {
   }
 
   validateMobileNumber(String fullMobileNumber) {
-    print("fullMobileNumber");
-    print(fullMobileNumber);
-
-    // loadingStatusController.sink.add(LoadingStatus.inprogress);
-    locator<FilterService>()
-        .validateMobileNumber(fullMobileNumber)
-        .then((value) {
+    service.validateMobileNumber(fullMobileNumber).then((value) {
       mobileNumberErrorMessage.value = value;
       validateFieldsForFaze2();
-      loadingStatusController.sink.add(LoadingStatus.finish);
     });
   }
 
@@ -99,7 +92,7 @@ class Register2Bloc {
 
   void getlistOfSuffix() {
     loadingStatusController.sink.add(LoadingStatus.inprogress);
-    locator<FilterService>().suffix().then((value) {
+    service.suffix().then((value) {
       listOfSuffix.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
       loadingStatusController.sink.add(LoadingStatus.finish);
     });
@@ -107,7 +100,7 @@ class Register2Bloc {
 
   void getlistOfCountries() {
     loadingStatusController.sink.add(LoadingStatus.inprogress);
-    locator<FilterService>().countries().then((value) {
+    service.countries().then((value) {
       listOfCountries.value = value.data!
         ..sort((a, b) => a.id!.compareTo(b.id!));
       loadingStatusController.sink.add(LoadingStatus.finish);
@@ -115,8 +108,11 @@ class Register2Bloc {
   }
 
   void validateReferal(String code) {
-    locator<FilterService>().validateReferalCode(code).then((value) {
+    service.validateReferalCode(code).then((value) {
       validateReferalCode.value = value;
     });
   }
+
+  @override
+  onDispose() {}
 }

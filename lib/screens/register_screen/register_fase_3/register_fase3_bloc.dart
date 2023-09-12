@@ -3,15 +3,15 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:mentor_app/locator.dart';
 import 'package:mentor_app/models/https/categories_model.dart';
 import 'package:mentor_app/models/https/suffix_model.dart';
 import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/services/filter_services.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
+import 'package:mentor_app/utils/mixins.dart';
 
-class Register3Bloc {
+class Register3Bloc extends Bloc<FilterService> {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
 
   TextEditingController bioController = TextEditingController();
@@ -51,7 +51,7 @@ class Register3Bloc {
   void getlistOfCategories() {
     loadingStatusController.sink.add(LoadingStatus.inprogress);
 
-    locator<FilterService>().categories().then((value) {
+    service.categories().then((value) {
       listOfCategories.value = value.data!
         ..sort((a, b) => a.id!.compareTo(b.id!));
       listOfSpeakingLanguageNotifier.value = _prepareList();
@@ -60,7 +60,7 @@ class Register3Bloc {
   }
 
   getListOfMajors() {
-    locator<FilterService>().getMajors().then((value) {
+    service.getMajors().then((value) {
       List<SuffixData> listOfAllMajors = value!;
       for (var mainItem in listOfAllMajors) {
         listOfMajorsNotifier.value.add(
@@ -102,4 +102,7 @@ class Register3Bloc {
 
     return list;
   }
+
+  @override
+  onDispose() {}
 }
