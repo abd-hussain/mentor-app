@@ -23,8 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     logDebugMessage(message: 'Home init Called ...');
-    bloc.getHome();
-
     super.didChangeDependencies();
   }
 
@@ -46,13 +44,14 @@ class _HomeScreenState extends State<HomeScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  ValueListenableBuilder<List<MainBanner>?>(
-                      valueListenable: bloc.bannerListNotifier,
-                      builder: (context, snapshot, child) {
-                        if (snapshot != null && snapshot.isNotEmpty) {
-                          return MainBannerHomePage(bannerList: snapshot);
-                        } else {
+                  FutureBuilder<List<MainBanner>?>(
+                      initialData: const [],
+                      future: bloc.getHome(),
+                      builder: (context, snapshot) {
+                        if (snapshot.data == null && snapshot.hasData) {
                           return const SizedBox(height: 250, child: LoadingView());
+                        } else {
+                          return MainBannerHomePage(bannerList: snapshot.data ?? []);
                         }
                       }),
                   const AddMobBanner(),
