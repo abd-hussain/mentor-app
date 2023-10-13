@@ -12,6 +12,9 @@ import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/error/exceptions.dart';
 import 'package:mentor_app/utils/logger.dart';
 
+//TODO DONE (5alaas review)
+//HOME PAGE
+
 void main() {
   runZonedGuarded(() async {
     logDebugMessage(message: 'Application Started ...');
