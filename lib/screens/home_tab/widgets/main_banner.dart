@@ -6,13 +6,12 @@ import 'package:mentor_app/utils/constants/constant.dart';
 class MainBannerHomePage extends StatelessWidget {
   final List<MainBanner> bannerList;
 
-  const MainBannerHomePage({required this.bannerList, Key? key})
-      : super(key: key);
+  const MainBannerHomePage({required this.bannerList, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BannerCarousel(
-      height: MediaQuery.of(context).size.height - 330,
+      height: 250,
       customizedBanners: _listOfBanners(bannerList),
       activeColor: const Color(0xff4CB6EA),
     );

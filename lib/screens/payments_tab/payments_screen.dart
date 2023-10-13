@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/models/https/payments_response.dart';
 import 'package:mentor_app/screens/home_tab/widgets/header.dart';
-import 'package:mentor_app/screens/notifications/widgets/shimmer_notifications.dart';
+import 'package:mentor_app/screens/home_tab/widgets/shimmer_notifications.dart';
 import 'package:mentor_app/screens/payments_tab/payments_bloc.dart';
 import 'package:mentor_app/screens/payments_tab/widgets/bottom_payment.dart';
 import 'package:mentor_app/screens/payments_tab/widgets/payment_list_view.dart';
@@ -16,8 +16,7 @@ class PaymentsScreen extends StatefulWidget {
   State<PaymentsScreen> createState() => _PaymentsScreenState();
 }
 
-class _PaymentsScreenState extends State<PaymentsScreen>
-    with TickerProviderStateMixin {
+class _PaymentsScreenState extends State<PaymentsScreen> with TickerProviderStateMixin {
   final bloc = PaymentsBloc();
 
   @override
@@ -55,8 +54,7 @@ class _PaymentsScreenState extends State<PaymentsScreen>
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: CustomText(
-                                  title: AppLocalizations.of(context)!
-                                      .detailspayments,
+                                  title: AppLocalizations.of(context)!.detailspayments,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   textColor: const Color(0xff444444),
@@ -76,8 +74,7 @@ class _PaymentsScreenState extends State<PaymentsScreen>
                             child: PaymentListView(
                               list: snapshot,
                               onReportPressed: (item) {
-                                _displayReportDialog(
-                                    context, item.dBMentorPayments!.id!);
+                                _displayReportDialog(context, item.dBMentorPayments!.id!);
                               },
                             ),
                           ),
@@ -104,8 +101,7 @@ class _PaymentsScreenState extends State<PaymentsScreen>
             ),
             content: TextField(
               controller: controller,
-              decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.describeyourproblem),
+              decoration: InputDecoration(hintText: AppLocalizations.of(context)!.describeyourproblem),
             ),
             actions: <Widget>[
               ElevatedButton(
@@ -120,9 +116,7 @@ class _PaymentsScreenState extends State<PaymentsScreen>
                 child: Text(AppLocalizations.of(context)!.submit),
                 onPressed: () {
                   setState(() {
-                    bloc
-                        .reportPayment(itemId, controller.text)
-                        .whenComplete(() {
+                    bloc.reportPayment(itemId, controller.text).whenComplete(() {
                       Navigator.pop(context);
                       bloc.getListOfPayments();
                     });

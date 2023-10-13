@@ -11,21 +11,4 @@ class NotificationsService with Service {
     );
     return NotificationsResponse.fromJson(response);
   }
-
-  Future<bool> markAllNotificationsReaded() async {
-    await repository.callRequest(
-      requestType: RequestType.put,
-      methodName: MethodNameConstant.notifications,
-    );
-    return true;
-  }
-
-  Future<bool> deleteNotification(int id) async {
-    await repository.callRequest(
-      requestType: RequestType.delete,
-      methodName: MethodNameConstant.notifications,
-      queryParam: {"id": id},
-    );
-    return true;
-  }
 }

@@ -12,7 +12,6 @@ import 'package:mentor_app/screens/inside_call/inside_call_screen.dart';
 import 'package:mentor_app/screens/invite_friends/invite_friends_screen.dart';
 import 'package:mentor_app/screens/login_screen/login_screen.dart';
 import 'package:mentor_app/screens/main_contaner/main_container.dart';
-import 'package:mentor_app/screens/notifications/notifications_screen.dart';
 import 'package:mentor_app/screens/payments_tab/payments_screen.dart';
 import 'package:mentor_app/screens/rate_per_hour/rate_per_hour_screen.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_2/register_fase2_screen.dart';
@@ -44,7 +43,6 @@ class RoutesConstants {
   static const String registerfaze6Screen = 'registerfaze6Screen';
   static const String registerfinalfazeScreen = 'registerfinalfazeScreen';
 
-  static const String notificationsScreen = 'notificationsScreen';
   static const String webViewScreen = 'webViewScreen';
   static const String inviteFriendScreen = 'inviteFriendScreen';
   static const String tutorialsScreen = 'tutorialsScreen';
@@ -57,8 +55,7 @@ class RoutesConstants {
   static const String paymentsScreen = 'paymentsScreen';
   static const String forgotPasswordScreen = 'forgotPasswordScreen';
   static const String eventDetailsScreen = 'eventDetailsScreen';
-  static const String forgotPasswordConfirmationScreen =
-      'forgotPasswordConfirmationScreen';
+  static const String forgotPasswordConfirmationScreen = 'forgotPasswordConfirmationScreen';
   static const String versioningScreen = 'versioningScreen';
   static const String insideCallScreen = 'InsideCallScreen';
 }
@@ -79,7 +76,6 @@ final Map<String, Widget> routes = {
   RoutesConstants.registerfaze5Screen: const RegisterFaze5Screen(),
   RoutesConstants.registerfaze6Screen: const RegisterFaze6Screen(),
   RoutesConstants.registerfinalfazeScreen: const RegisterFinalScreen(),
-  RoutesConstants.notificationsScreen: const NotificationsScreen(),
   RoutesConstants.webViewScreen: const WebViewScreen(),
   RoutesConstants.inviteFriendScreen: const InviteFriendsScreen(),
   RoutesConstants.reportScreen: const ReportScreen(),
@@ -91,6 +87,5 @@ final Map<String, Widget> routes = {
   RoutesConstants.ratePerHourScreen: const RatePerHourScreen(),
   RoutesConstants.paymentsScreen: const PaymentsScreen(),
   RoutesConstants.forgotPasswordScreen: const ForgotPasswordScreen(),
-  RoutesConstants.forgotPasswordConfirmationScreen:
-      const ForgotPasswordConfirmationScreen(),
+  RoutesConstants.forgotPasswordConfirmationScreen: const ForgotPasswordConfirmationScreen(),
 };

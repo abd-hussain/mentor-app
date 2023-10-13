@@ -258,7 +258,8 @@
     "createprofile" : "Creating Profile ...",
     "createprofiledesc" : "This may take some time to be finished",
     "mobilenumberalreadyinuse" : "Mobile Number already used",
-    "emailalreadyinuse" : "Email already used"
+    "emailalreadyinuse" : "Email already used",
+    "announcements" : "Announcements"
 
 
 
