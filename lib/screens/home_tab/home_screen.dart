@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       initialData: null,
                       future: bloc.listOfNotifications(),
                       builder: (context, snapshot) {
-                        if (snapshot.hasData) {
+                        if (snapshot.data == null && snapshot.hasData) {
                           return const SizedBox(height: 300, child: ShimmerNotificationsView());
                         } else {
                           return SizedBox(
