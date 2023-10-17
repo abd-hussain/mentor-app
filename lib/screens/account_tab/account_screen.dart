@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/screens/account_tab/account_bloc.dart';
+import 'package:mentor_app/screens/account_tab/widgets/collection_list_option.dart';
+import 'package:mentor_app/screens/account_tab/widgets/footer.dart';
 import 'package:mentor_app/screens/account_tab/widgets/header.dart';
-import 'package:mentor_app/screens/account_tab/widgets/list_of_options.dart';
-import 'package:mentor_app/utils/constants/database_constant.dart';
-import 'package:mentor_app/utils/enums/loading_status.dart';
+import 'package:mentor_app/screens/account_tab/widgets/title_view.dart';
+import 'package:mentor_app/shared_widget/admob_banner.dart';
 import 'package:mentor_app/utils/logger.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -33,19 +35,28 @@ class _AccountScreenState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ProfileHeader(
-          firstName: bloc.box.get(DatabaseFieldConstant.userFirstName) ?? "",
-        ),
-        ValueListenableBuilder<LoadingStatus>(
-            valueListenable: bloc.loadingStatus,
-            builder: (context, snapshot, child) {
-              return ListOfOptions(
-                listOfSettingsOptions: bloc.listOfSettingsOptions(context),
-                listOfReachOutUsOptions: bloc.listOfReachOutUsOptions(context),
-                listOfSupportOptions: bloc.listOfSupportOptions(context),
-                listOfAccountOptions: bloc.listOfAccountOptions(context),
-              );
-            }),
+        const ProfileHeader(),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TitleView(title: AppLocalizations.of(context)!.accountsettings),
+                CollectionListOptionView(listOfOptions: bloc.listOfAccountOptions(context), containerHight: 540),
+                TitleView(title: AppLocalizations.of(context)!.generalsettings),
+                CollectionListOptionView(listOfOptions: bloc.listOfSettingsOptions(context), containerHight: 125),
+                TitleView(title: AppLocalizations.of(context)!.reachouttous),
+                CollectionListOptionView(listOfOptions: bloc.listOfReachOutUsOptions(context), containerHight: 125),
+                TitleView(title: AppLocalizations.of(context)!.support),
+                CollectionListOptionView(listOfOptions: bloc.listOfSupportOptions(context), containerHight: 190),
+                const SizedBox(height: 8),
+                const AddMobBanner(),
+                const FooterView(),
+                const SizedBox(height: 8),
+              ],
+            ),
+          ),
+        )
       ],
     );
   }

@@ -8,7 +8,6 @@ class DatabaseFieldConstant {
   static const String language = "language";
   static const String userid = "userid";
   static const String isUserLoggedIn = "isUserLoggedIn";
-  static const String userFirstName = "userFirstName";
   static const String registrationStep = "registrationStep";
 
   static const String biometricU = "biometricU";

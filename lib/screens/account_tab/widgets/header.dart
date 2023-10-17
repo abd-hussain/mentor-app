@@ -5,17 +5,14 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/utils/day_time.dart';
 
 class ProfileHeader extends StatelessWidget {
-  final String firstName;
-
-  const ProfileHeader({this.firstName = "Anonymous", Key? key}) : super(key: key);
+  const ProfileHeader({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 75,
       color: const Color(0xff034061),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
         child: Row(
           children: [
             Image.asset(locator<DayTime>().gettheCorrentImageDependOnCurrentTime(), width: 32, height: 32),
@@ -26,15 +23,9 @@ class ProfileHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    title: "${AppLocalizations.of(context)!.hello} $firstName",
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  const SizedBox(height: 2),
-                  CustomText(
                     title: AppLocalizations.of(context)!.welcomeback,
-                    fontSize: 12,
-                    textOverflow: TextOverflow.fade,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
                 ],
               ),
