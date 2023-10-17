@@ -9,15 +9,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class PaymentListView extends StatelessWidget {
   final List<PaymentResponseData> list;
   final Function(PaymentResponseData) onReportPressed;
-  const PaymentListView(
-      {required this.list, super.key, required this.onReportPressed});
+  const PaymentListView({required this.list, super.key, required this.onReportPressed});
 
   @override
   Widget build(BuildContext context) {
     return list.isNotEmpty
         ? Padding(
-            padding:
-                const EdgeInsets.only(top: 0, right: 8, left: 8, bottom: 0),
+            padding: const EdgeInsets.only(top: 0, right: 8, left: 8, bottom: 16),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.grey[200],
@@ -33,8 +31,7 @@ class PaymentListView extends StatelessWidget {
                 ],
               ),
               child: ListView.separated(
-                separatorBuilder: (BuildContext context, int index) =>
-                    const Divider(),
+                separatorBuilder: (BuildContext context, int index) => const Divider(),
                 padding: const EdgeInsets.all(8),
                 itemCount: list.length,
                 itemBuilder: (context, index) {
@@ -54,20 +51,19 @@ class PaymentListView extends StatelessWidget {
           );
   }
 
-  Widget _buildExpandableTile(BuildContext context, PaymentResponseData item,
-      Function(PaymentResponseData) onReportPressed) {
+  Widget _buildExpandableTile(
+      BuildContext context, PaymentResponseData item, Function(PaymentResponseData) onReportPressed) {
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
-    final DateTime parsedDate =
-        DateTime.parse(item.dBMentorPayments!.createdAt!);
+    final DateTime parsedDate = DateTime.parse(item.createdAt!);
 
     return ExpansionTile(
       title: Row(
         children: [
           Icon(
             Ionicons.receipt_outline,
-            color: item.dBMentorPayments!.status! == 1
+            color: item.status! == 1
                 ? Colors.orange
-                : item.dBMentorPayments!.status! == 2
+                : item.status! == 2
                     ? Colors.green
                     : Colors.red,
           ),
@@ -76,7 +72,7 @@ class PaymentListView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomText(
-                title: "ID : ${item.dBMentorPayments!.id!}",
+                title: "ID : ${item.id!}",
                 fontSize: 12,
                 textColor: const Color(0xff444444),
               ),
@@ -89,7 +85,7 @@ class PaymentListView extends StatelessWidget {
           ),
           Expanded(child: Container()),
           CustomText(
-            title: "\$${item.dBMentorPayments!.amount!}",
+            title: "\$${item.amount!}",
             fontSize: 16,
             fontWeight: FontWeight.bold,
             textColor: const Color(0xff444444),
@@ -98,28 +94,21 @@ class PaymentListView extends StatelessWidget {
       ),
       children: <Widget>[
         AppointmentDetailsView(
-          title: AppLocalizations.of(context)!.type,
-          desc: item.dBMentorPayments!.type == 1
-              ? AppLocalizations.of(context)!.debit
-              : AppLocalizations.of(context)!.credit,
+          title: AppLocalizations.of(context)!.eventdesc,
+          desc: item.descriptions!,
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.meetingduration,
-          desc:
-              "${item.dBMentorPayments!.durations!} ${AppLocalizations.of(context)!.min}",
-        ),
-        AppointmentDetailsView(
-          title: AppLocalizations.of(context)!.eventdesc,
-          desc: item.dBMentorPayments!.descriptions!,
+          desc: "${item.durations!} ${AppLocalizations.of(context)!.min}",
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.note,
-          desc: item.dBMentorPayments!.notes ?? "",
+          desc: item.notes ?? AppLocalizations.of(context)!.nodatatoshow,
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            width: 200,
+            width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               color: Colors.grey[300],
               borderRadius: BorderRadius.circular(10),
@@ -128,14 +117,27 @@ class PaymentListView extends StatelessWidget {
                 ? Center(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: CustomText(
-                        title:
-                            AppLocalizations.of(context)!.alreadyreportpayment,
-                        fontSize: 10,
-                        textAlign: TextAlign.center,
-                        maxLins: 2,
-                        fontWeight: FontWeight.bold,
-                        textColor: const Color(0xff444444),
+                      child: Column(
+                        children: [
+                          CustomText(
+                            title:
+                                "${AppLocalizations.of(context)!.alreadyreportpayment} ${AppLocalizations.of(context)!.witha}",
+                            fontSize: 10,
+                            textAlign: TextAlign.center,
+                            maxLins: 2,
+                            fontWeight: FontWeight.bold,
+                            textColor: const Color(0xff444444),
+                          ),
+                          const SizedBox(height: 5),
+                          CustomText(
+                            title: item.reportMessage!,
+                            fontSize: 10,
+                            textAlign: TextAlign.center,
+                            maxLins: 2,
+                            fontWeight: FontWeight.bold,
+                            textColor: const Color(0xff444444),
+                          ),
+                        ],
                       ),
                     ),
                   )

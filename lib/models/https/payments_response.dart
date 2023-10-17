@@ -17,57 +17,46 @@ class PaymentResponse {
   }
 }
 
-class PaymentResponseData {
-  DBMentorPayments? dBMentorPayments;
-  String? reportMessage;
-
-  PaymentResponseData({this.dBMentorPayments, this.reportMessage});
-
-  PaymentResponseData.fromJson(Map<String, dynamic> json) {
-    dBMentorPayments = json['DB_Mentor_Payments'] != null
-        ? DBMentorPayments.fromJson(json['DB_Mentor_Payments'])
-        : null;
-    reportMessage = json['report_message'];
-  }
-}
-
-class DBMentorPayments with ModelChecker {
+class PaymentResponseData with ModelChecker {
+  int? id;
   int? mentorId;
   int? status;
+  double? amount;
   int? durations;
+  String? currencyArabic;
   String? currencyEnglish;
   String? notes;
-  String? createdAt;
-  int? id;
-  double? amount;
-  String? currencyArabic;
-  String? descriptions;
   int? type;
+  String? descriptions;
+  String? createdAt;
+  String? reportMessage;
 
-  DBMentorPayments(
-      {this.mentorId,
+  PaymentResponseData(
+      {this.id,
+      this.mentorId,
       this.status,
+      this.amount,
       this.durations,
+      this.currencyArabic,
       this.currencyEnglish,
       this.notes,
-      this.createdAt,
-      this.id,
-      this.amount,
-      this.currencyArabic,
+      this.type,
       this.descriptions,
-      this.type});
+      this.createdAt,
+      this.reportMessage});
 
-  DBMentorPayments.fromJson(Map<String, dynamic> json) {
+  PaymentResponseData.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     mentorId = json['mentor_id'];
     status = json['status'];
+    amount = convertToDouble(json['amount']);
     durations = json['durations'];
+    currencyArabic = json['currency_arabic'];
     currencyEnglish = json['currency_english'];
     notes = json['notes'];
-    createdAt = json['created_at'];
-    id = json['id'];
-    amount = json['amount'];
-    currencyArabic = json['currency_arabic'];
-    descriptions = json['descriptions'];
     type = json['type'];
+    descriptions = json['descriptions'];
+    createdAt = json['created_at'];
+    reportMessage = json['report_message'];
   }
 }

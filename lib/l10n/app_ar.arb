@@ -189,7 +189,7 @@
     "selectSuffix" : "اختر الكنيه",
     "totalpayments" : "مجموع المدفوعات",
     "detailspayments" : "تفاصيل المدفوعات",
-    "alreadyreportpayment" : "لقد أبلغت عن هذه الدفعة ، وسوف يكون الرد خلال الرسائل",
+    "alreadyreportpayment" : "لقد أبلغت عن هذه الدفعة",
     "type" : "نوع المعاملة",
     "note" : "ملاحظه",
     "debit" : "دائن",

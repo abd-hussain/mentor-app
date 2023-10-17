@@ -31,14 +31,11 @@ class ListOfOptions extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            titleOptionCollection(
-                title: AppLocalizations.of(context)!.accountsettings),
+            titleOptionCollection(title: AppLocalizations.of(context)!.accountsettings),
             optionCollectionItem(listOfAccountOptions, containerHight: 405),
-            titleOptionCollection(
-                title: AppLocalizations.of(context)!.generalsettings),
+            titleOptionCollection(title: AppLocalizations.of(context)!.generalsettings),
             optionCollectionItem(listOfSettingsOptions, containerHight: 125),
-            titleOptionCollection(
-                title: AppLocalizations.of(context)!.reachouttous),
+            titleOptionCollection(title: AppLocalizations.of(context)!.reachouttous),
             optionCollectionItem(listOfReachOutUsOptions, containerHight: 125),
             titleOptionCollection(title: AppLocalizations.of(context)!.support),
             optionCollectionItem(listOfSupportOptions, containerHight: 190),
@@ -64,8 +61,7 @@ class ListOfOptions extends StatelessWidget {
     );
   }
 
-  Widget optionCollectionItem(List<ProfileOptions> listOfOptions,
-      {required double containerHight}) {
+  Widget optionCollectionItem(List<ProfileOptions> listOfOptions, {required double containerHight}) {
     return Container(
       height: containerHight,
       decoration: BoxDecoration(
@@ -139,23 +135,6 @@ class ListOfOptions extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextButton(
-                onPressed: () => Navigator.of(context, rootNavigator: true)
-                    .pushNamed(RoutesConstants.webViewScreen, arguments: {
-                  AppConstant.webViewPageUrl: AppConstant.facebookLink,
-                  AppConstant.pageTitle: AppLocalizations.of(context)!.facebook
-                }),
-                child: const Icon(
-                  Icons.facebook,
-                  color: Color(0xff444444),
-                ),
-              ),
-              const CustomText(
-                title: "|",
-                fontSize: 16,
-                textColor: Color(0xff444444),
-                fontWeight: FontWeight.bold,
-              ),
-              TextButton(
                 onPressed: () => _launchWhatsapp(context),
                 child: const Icon(
                   Ionicons.logo_whatsapp,
@@ -169,11 +148,11 @@ class ListOfOptions extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
               TextButton(
-                onPressed: () => Navigator.of(context, rootNavigator: true)
-                    .pushNamed(RoutesConstants.webViewScreen, arguments: {
-                  AppConstant.webViewPageUrl: AppConstant.linkedinLink,
-                  AppConstant.pageTitle: AppLocalizations.of(context)!.linkedin
-                }),
+                onPressed: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.webViewScreen,
+                    arguments: {
+                      AppConstant.webViewPageUrl: AppConstant.linkedinLink,
+                      AppConstant.pageTitle: AppLocalizations.of(context)!.linkedin
+                    }),
                 child: Image.asset(
                   "assets/images/linkedinLogo.png",
                 ),
@@ -189,23 +168,20 @@ class ListOfOptions extends StatelessWidget {
             child: _footerTextWidget(AppLocalizations.of(context)!.rateapp),
           ),
           TextButton(
-            onPressed: () => Navigator.of(context, rootNavigator: true)
-                .pushNamed(RoutesConstants.webViewScreen, arguments: {
+            onPressed: () =>
+                Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.webViewScreen, arguments: {
               AppConstant.webViewPageUrl: AppConstant.termsLink,
-              AppConstant.pageTitle:
-                  AppLocalizations.of(context)!.termsandconditions
+              AppConstant.pageTitle: AppLocalizations.of(context)!.termsandconditions
             }),
-            child: _footerTextWidget(
-                AppLocalizations.of(context)!.termsandconditions),
+            child: _footerTextWidget(AppLocalizations.of(context)!.termsandconditions),
           ),
           TextButton(
-            onPressed: () => Navigator.of(context, rootNavigator: true)
-                .pushNamed(RoutesConstants.webViewScreen, arguments: {
+            onPressed: () =>
+                Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.webViewScreen, arguments: {
               AppConstant.webViewPageUrl: AppConstant.privacypolicyLink,
               AppConstant.pageTitle: AppLocalizations.of(context)!.privacypolicy
             }),
-            child:
-                _footerTextWidget(AppLocalizations.of(context)!.privacypolicy),
+            child: _footerTextWidget(AppLocalizations.of(context)!.privacypolicy),
           ),
           const SizedBox(height: 16),
           FutureBuilder<String>(
@@ -213,8 +189,7 @@ class ListOfOptions extends StatelessWidget {
               future: Version().getApplicationVersion(),
               builder: (context, snapshot) {
                 return CustomText(
-                  title:
-                      "${AppLocalizations.of(context)!.version} ${snapshot.data}",
+                  title: "${AppLocalizations.of(context)!.version} ${snapshot.data}",
                   fontSize: 12,
                   textColor: const Color(0xffBFBFBF),
                 );
@@ -254,8 +229,7 @@ class ListOfOptions extends StatelessWidget {
     final scaffoldMessenger = ScaffoldMessenger.of(context);
 
     var whatsapp = AppConstant.whatsappNumber;
-    var whatsappAndroid =
-        Uri.parse("whatsapp://send?phone=$whatsapp&text=hello");
+    var whatsappAndroid = Uri.parse("whatsapp://send?phone=$whatsapp&text=hello");
     if (await canLaunchUrl(whatsappAndroid)) {
       await launchUrl(whatsappAndroid);
     } else {

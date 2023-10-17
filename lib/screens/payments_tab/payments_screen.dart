@@ -46,7 +46,6 @@ class _PaymentsScreenState extends State<PaymentsScreen> with TickerProviderStat
                           PaymentHeaderView(
                             pendingAmount: bloc.pendingTotalAmount,
                             recivedAmount: bloc.recivedTotalAmount,
-                            rejectedAmount: bloc.rejectedTotalAmount,
                             currency: bloc.currency,
                           ),
                           Row(
@@ -74,7 +73,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> with TickerProviderStat
                             child: PaymentListView(
                               list: snapshot,
                               onReportPressed: (item) {
-                                _displayReportDialog(context, item.dBMentorPayments!.id!);
+                                _displayReportDialog(context, item.id!);
                               },
                             ),
                           ),

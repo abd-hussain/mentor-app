@@ -3,17 +3,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 
 class PaymentHeaderView extends StatelessWidget {
-  final double rejectedAmount;
   final double pendingAmount;
   final double recivedAmount;
   final String currency;
 
-  const PaymentHeaderView(
-      {super.key,
-      required this.rejectedAmount,
-      required this.pendingAmount,
-      required this.recivedAmount,
-      required this.currency});
+  const PaymentHeaderView({
+    super.key,
+    required this.pendingAmount,
+    required this.recivedAmount,
+    required this.currency,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +22,9 @@ class PaymentHeaderView extends StatelessWidget {
         height: 70,
         child: Row(
           children: [
-            item(AppLocalizations.of(context)!.rejected, rejectedAmount,
-                Colors.red),
+            item(AppLocalizations.of(context)!.pending, pendingAmount, Colors.orange),
             const SizedBox(width: 16),
-            item(AppLocalizations.of(context)!.pending, pendingAmount,
-                Colors.orange),
-            const SizedBox(width: 16),
-            item(AppLocalizations.of(context)!.recived, recivedAmount,
-                Colors.green),
+            item(AppLocalizations.of(context)!.recived, recivedAmount, Colors.green),
           ],
         ),
       ),

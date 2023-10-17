@@ -189,7 +189,7 @@
     "selectSuffix" : "Select Suffix",
     "totalpayments" : "Total Of Payments",
     "detailspayments" : "Payments Details",
-    "alreadyreportpayment" : "You Already Report This, will respond in the messages",
+    "alreadyreportpayment" : "You Already Report This",
     "type" : "Transaction Type",
     "note" : "Note",
     "debit" : "Debit",

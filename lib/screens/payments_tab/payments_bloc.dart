@@ -7,10 +7,8 @@ import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/mixins.dart';
 
 class PaymentsBloc extends Bloc<PaymentService> {
-  final ValueNotifier<List<PaymentResponseData>> paymentListNotifier =
-      ValueNotifier<List<PaymentResponseData>>([]);
+  final ValueNotifier<List<PaymentResponseData>> paymentListNotifier = ValueNotifier<List<PaymentResponseData>>([]);
   double pendingTotalAmount = 0;
-  double rejectedTotalAmount = 0;
   double recivedTotalAmount = 0;
   String currency = "";
   var box = Hive.box(DatabaseBoxConstant.userInfo);
@@ -21,23 +19,16 @@ class PaymentsBloc extends Bloc<PaymentService> {
         paymentListNotifier.value = value.data!;
 
         for (PaymentResponseData item in value.data!) {
-          if (item.dBMentorPayments!.status == 1) {
-            pendingTotalAmount =
-                pendingTotalAmount + item.dBMentorPayments!.amount!;
-          }
-          if (item.dBMentorPayments!.status == 2) {
-            recivedTotalAmount =
-                recivedTotalAmount + item.dBMentorPayments!.amount!;
-          }
-          if (item.dBMentorPayments!.status == 3) {
-            rejectedTotalAmount =
-                rejectedTotalAmount + item.dBMentorPayments!.amount!;
+          if (item.status == 1) {
+            pendingTotalAmount = pendingTotalAmount + item.amount!;
+          } else {
+            recivedTotalAmount = recivedTotalAmount + item.amount!;
           }
 
-          currency = item.dBMentorPayments!.currencyEnglish ?? "";
+          currency = item.currencyEnglish ?? "";
 
           if (box.get(DatabaseFieldConstant.language) != "en") {
-            currency = item.dBMentorPayments!.currencyArabic ?? "";
+            currency = item.currencyArabic ?? "";
           }
         }
       }
@@ -45,8 +36,7 @@ class PaymentsBloc extends Bloc<PaymentService> {
   }
 
   Future<dynamic> reportPayment(int id, String message) async {
-    PaymentReportRequest data =
-        PaymentReportRequest(message: message, paymentId: id);
+    PaymentReportRequest data = PaymentReportRequest(message: message, paymentId: id);
     return service.reportPayment(data);
   }
 
