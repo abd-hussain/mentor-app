@@ -25,8 +25,6 @@ class PaymentResponseData with ModelChecker {
   int? durations;
   String? currencyArabic;
   String? currencyEnglish;
-  String? notes;
-  int? type;
   String? descriptions;
   String? createdAt;
   String? reportMessage;
@@ -39,8 +37,6 @@ class PaymentResponseData with ModelChecker {
       this.durations,
       this.currencyArabic,
       this.currencyEnglish,
-      this.notes,
-      this.type,
       this.descriptions,
       this.createdAt,
       this.reportMessage});
@@ -53,8 +49,6 @@ class PaymentResponseData with ModelChecker {
     durations = json['durations'];
     currencyArabic = json['currency_arabic'];
     currencyEnglish = json['currency_english'];
-    notes = json['notes'];
-    type = json['type'];
     descriptions = json['descriptions'];
     createdAt = json['created_at'];
     reportMessage = json['report_message'];

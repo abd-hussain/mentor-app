@@ -16,8 +16,8 @@ class PaymentsBloc extends Bloc<PaymentService> {
   getListOfPayments() {
     service.listOfPayments().then((value) {
       if (value.data != null) {
-        paymentListNotifier.value = value.data!;
-
+        pendingTotalAmount = 0;
+        recivedTotalAmount = 0;
         for (PaymentResponseData item in value.data!) {
           if (item.status == 1) {
             pendingTotalAmount = pendingTotalAmount + item.amount!;
@@ -31,6 +31,8 @@ class PaymentsBloc extends Bloc<PaymentService> {
             currency = item.currencyArabic ?? "";
           }
         }
+
+        paymentListNotifier.value = value.data!;
       }
     });
   }

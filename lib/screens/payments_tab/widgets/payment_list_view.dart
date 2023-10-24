@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:mentor_app/models/https/payments_response.dart';
 import 'package:mentor_app/shared_widget/appointment_details_view.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mentor_app/utils/constants/database_constant.dart';
 
 class PaymentListView extends StatelessWidget {
   final List<PaymentResponseData> list;
@@ -55,6 +57,9 @@ class PaymentListView extends StatelessWidget {
       BuildContext context, PaymentResponseData item, Function(PaymentResponseData) onReportPressed) {
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
     final DateTime parsedDate = DateTime.parse(item.createdAt!);
+    final box = Hive.box(DatabaseBoxConstant.userInfo);
+
+    final String currentLang = box.get(DatabaseFieldConstant.language);
 
     return ExpansionTile(
       title: Row(
@@ -85,7 +90,7 @@ class PaymentListView extends StatelessWidget {
           ),
           Expanded(child: Container()),
           CustomText(
-            title: "\$${item.amount!}",
+            title: "${item.amount!} ${currentLang == "en" ? item.currencyEnglish : item.currencyArabic}",
             fontSize: 16,
             fontWeight: FontWeight.bold,
             textColor: const Color(0xff444444),
@@ -100,10 +105,6 @@ class PaymentListView extends StatelessWidget {
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.meetingduration,
           desc: "${item.durations!} ${AppLocalizations.of(context)!.min}",
-        ),
-        AppointmentDetailsView(
-          title: AppLocalizations.of(context)!.note,
-          desc: item.notes ?? AppLocalizations.of(context)!.nodatatoshow,
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),

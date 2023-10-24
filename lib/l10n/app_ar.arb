@@ -259,7 +259,9 @@
     "createprofiledesc" : "قد يستغرق هذا بعض الوقت حتى يتم الانتهاء",
     "mobilenumberalreadyinuse" : "رقم الهاتف مستخدم بالفعل",
     "emailalreadyinuse" : "البريد الالكتروني مستخدم بالفعل",
-    "announcements" : "اعلانات"
+    "announcements" : "اعلانات",
+    "meetingwith" : "اجتماع مع"
+
 
 
 

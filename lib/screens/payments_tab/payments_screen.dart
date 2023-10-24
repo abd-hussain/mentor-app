@@ -98,9 +98,13 @@ class _PaymentsScreenState extends State<PaymentsScreen> with TickerProviderStat
               fontWeight: FontWeight.bold,
               textColor: const Color(0xff444444),
             ),
-            content: TextField(
-              controller: controller,
-              decoration: InputDecoration(hintText: AppLocalizations.of(context)!.describeyourproblem),
+            content: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: TextField(
+                controller: controller,
+                maxLines: 3,
+                decoration: InputDecoration(hintText: AppLocalizations.of(context)!.describeyourproblem),
+              ),
             ),
             actions: <Widget>[
               ElevatedButton(
