@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/screens/edit_experience/edit_experience_bloc.dart';
@@ -42,8 +44,7 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
       child: Scaffold(
         backgroundColor: const Color(0xffF3F4F5),
         resizeToAvoidBottomInset: false,
-        appBar: customAppBar(
-            title: AppLocalizations.of(context)!.editprofileeinexperiances),
+        appBar: customAppBar(title: AppLocalizations.of(context)!.editprofileeinexperiances),
         body: SafeArea(
           child: SingleChildScrollView(
             child: ValueListenableBuilder<LoadingStatus>(
@@ -71,8 +72,7 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(16),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       CategoryField(
                                         controller: bloc.categoryController,
@@ -83,8 +83,7 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                                       ),
                                       const SizedBox(height: 16),
                                       ExperianceSinceField(
-                                        controller:
-                                            bloc.experianceSinceController,
+                                        controller: bloc.experianceSinceController,
                                         padding: const EdgeInsets.all(0),
                                         onSelected: () {
                                           bloc.validateFields();
@@ -95,22 +94,19 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                                         children: [
                                           const SizedBox(width: 16),
                                           CustomText(
-                                            title: AppLocalizations.of(context)!
-                                                .majors,
+                                            title: AppLocalizations.of(context)!.majors,
                                             fontSize: 11,
                                             textColor: const Color(0xff191C1F),
                                           ),
                                         ],
                                       ),
                                       ValueListenableBuilder<List<CheckBox>>(
-                                          valueListenable:
-                                              bloc.listOfMajorsNotifier,
+                                          valueListenable: bloc.listOfMajorsNotifier,
                                           builder: (context, snapshot, child) {
                                             return MajorsView(
                                               listOfMajors: snapshot,
                                               selectedMajors: (major) {
-                                                bloc.listOfMajorsNotifier
-                                                    .value = major;
+                                                bloc.listOfMajorsNotifier.value = major;
                                                 bloc.validateFields();
                                               },
                                             );
@@ -118,9 +114,8 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                                       const SizedBox(height: 8),
                                       FileHolderField(
                                         title: AppLocalizations.of(context)!.cv,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        currentFile: bloc.cert1,
+                                        width: MediaQuery.of(context).size.width,
+                                        currentFile: bloc.cvFileUrl.isNotEmpty ? File("") : null,
                                         onAddFile: (file) {
                                           bloc.cv = file;
                                           bloc.validateFields();
@@ -136,13 +131,9 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                                         child: Column(
                                           children: [
                                             FileHolderField(
-                                              title:
-                                                  "${AppLocalizations.of(context)!.certificate} 1",
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  2,
-                                              currentFile: bloc.cert1,
+                                              title: "${AppLocalizations.of(context)!.certificate} 1",
+                                              width: MediaQuery.of(context).size.width / 2,
+                                              currentFile: bloc.cert1FileUrl.isNotEmpty ? File("") : null,
                                               onAddFile: (file) {
                                                 bloc.cv = file;
                                                 bloc.validateFields();
@@ -155,13 +146,9 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                                             ),
                                             const SizedBox(height: 8),
                                             FileHolderField(
-                                              title:
-                                                  "${AppLocalizations.of(context)!.certificate} 2",
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  2,
-                                              currentFile: bloc.cert1,
+                                              title: "${AppLocalizations.of(context)!.certificate} 2",
+                                              width: MediaQuery.of(context).size.width / 2,
+                                              currentFile: bloc.cert2FileUrl.isNotEmpty ? File("") : null,
                                               onAddFile: (file) {
                                                 bloc.cv = file;
                                                 bloc.validateFields();
@@ -174,13 +161,9 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                                             ),
                                             const SizedBox(height: 8),
                                             FileHolderField(
-                                              title:
-                                                  "${AppLocalizations.of(context)!.certificate} 3",
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  2,
-                                              currentFile: bloc.cert1,
+                                              title: "${AppLocalizations.of(context)!.certificate} 3",
+                                              width: MediaQuery.of(context).size.width / 2,
+                                              currentFile: bloc.cert3FileUrl.isNotEmpty ? File("") : null,
                                               onAddFile: (file) {
                                                 bloc.cv = file;
                                                 bloc.validateFields();
@@ -205,9 +188,7 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                                   return CustomButton(
                                       enableButton: snapshot,
                                       onTap: () {
-                                        bloc
-                                            .updateProfileExperiance()
-                                            .whenComplete(() {
+                                        bloc.updateProfileExperiance().whenComplete(() {
                                           Navigator.of(context).pop();
                                         });
                                       });

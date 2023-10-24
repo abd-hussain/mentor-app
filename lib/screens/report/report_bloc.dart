@@ -11,11 +11,12 @@ import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/mixins.dart';
 
 class ReportBloc extends Bloc<ReportService> {
+  var box = Hive.box(DatabaseBoxConstant.userInfo);
+
   TextEditingController textController = TextEditingController();
   ReportPageType? pageType;
   ValueNotifier<bool> enableSubmitBtn = ValueNotifier<bool>(false);
-  ValueNotifier<LoadingStatus> loadingStatus =
-      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<LoadingStatus> loadingStatus = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   File? attach1;
   File? attach2;
   File? attach3;
@@ -36,9 +37,6 @@ class ReportBloc extends Bloc<ReportService> {
   }
 
   Future<bool> callRequest(BuildContext context) async {
-    loadingStatus.value = LoadingStatus.inprogress;
-    var box = Hive.box(DatabaseBoxConstant.userInfo);
-
     final model = ReportRequest(
       content: textController.text,
       userId: box.get(DatabaseFieldConstant.userid),

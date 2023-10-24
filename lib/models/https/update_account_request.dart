@@ -1,16 +1,16 @@
 import 'dart:io';
 
 class UpdateAccountRequest {
-  String? suffix;
-  String? firstName;
-  String? lastName;
-  int? gender;
+  String suffix;
+  String firstName;
+  String lastName;
+  int gender;
   int countryId;
-  String? speackingLanguage;
+  List<String> speackingLanguage;
   File? profileImage;
   File? iDImage;
   String dateOfBirth;
-  String? mobileNumber;
+  String bio;
 
   UpdateAccountRequest({
     required this.suffix,
@@ -18,11 +18,11 @@ class UpdateAccountRequest {
     required this.lastName,
     required this.gender,
     required this.countryId,
-    this.speackingLanguage,
+    required this.speackingLanguage,
     required this.profileImage,
     required this.iDImage,
     required this.dateOfBirth,
-    this.mobileNumber,
+    required this.bio,
   });
 }
 

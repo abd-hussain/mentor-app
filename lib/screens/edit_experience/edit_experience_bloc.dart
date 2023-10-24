@@ -15,18 +15,24 @@ import 'package:mentor_app/utils/mixins.dart';
 class EditExperienceBloc extends Bloc<AccountService> {
   ValueNotifier<bool> enableSaveButton = ValueNotifier<bool>(false);
   final box = Hive.box(DatabaseBoxConstant.userInfo);
-  ValueNotifier<List<CheckBox>> listOfMajorsNotifier =
-      ValueNotifier<List<CheckBox>>([]);
-  ValueNotifier<LoadingStatus> loadingStatusNotifier =
-      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<List<CheckBox>> listOfMajorsNotifier = ValueNotifier<List<CheckBox>>([]);
+  ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
 
   TextEditingController categoryController = TextEditingController();
   TextEditingController experianceSinceController = TextEditingController();
 
   File? cv;
+  String cvFileUrl = "";
+
   File? cert1;
+  String cert1FileUrl = "";
+
   File? cert2;
+  String cert2FileUrl = "";
+
   File? cert3;
+  String cert3FileUrl = "";
+
   List<SuffixData> listOfAllMajors = [];
 
   getListOfMajors() {
@@ -39,39 +45,20 @@ class EditExperienceBloc extends Bloc<AccountService> {
     getListOfMajors();
     loadingStatusNotifier.value = LoadingStatus.inprogress;
     service.getProfileExperiance().then((value) {
-      if (value.data != null) {
-        if (value.data!.categoryName != null) {
-          categoryController.text = value.data!.categoryName!;
-        }
-        if (value.data!.experienceSince != null) {
-          experianceSinceController.text = value.data!.experienceSince!;
-        }
-        if (value.data!.majors != null) {
-          listOfMajorsNotifier.value = prepareListOfMajors(value.data!.majors!);
-        }
-        if (value.data!.cv != null) {
-          if (value.data!.cv!.isNotEmpty) {
-            cv = File("");
-          }
+      final data = value.data;
+
+      if (data != null) {
+        categoryController.text = data.categoryName ?? "";
+        experianceSinceController.text = data.experienceSince ?? "";
+
+        if (data.majors != null) {
+          listOfMajorsNotifier.value = prepareListOfMajors(data.majors!);
         }
 
-        if (value.data!.cert1 != null) {
-          if (value.data!.cert1!.isNotEmpty) {
-            cert1 = File("");
-          }
-        }
-
-        if (value.data!.cert2 != null) {
-          if (value.data!.cert2!.isNotEmpty) {
-            cert2 = File("");
-          }
-        }
-
-        if (value.data!.cert3 != null) {
-          if (value.data!.cert3!.isNotEmpty) {
-            cert3 = File("");
-          }
-        }
+        cvFileUrl = data.cv ?? "";
+        cert1FileUrl = data.cert1 ?? "";
+        cert2FileUrl = data.cert2 ?? "";
+        cert3FileUrl = data.cert3 ?? "";
       }
       loadingStatusNotifier.value = LoadingStatus.finish;
     });
@@ -93,20 +80,10 @@ class EditExperienceBloc extends Bloc<AccountService> {
   }
 
   List<CheckBox> prepareListOfMajors(List<int> majors) {
-    List<CheckBox> list = [];
-    int counter = 0;
-
-    for (var mainItem in listOfAllMajors) {
-      list.add(
-          CheckBox(value: mainItem.name!, isEnable: false, id: mainItem.id!));
-
-      for (var item in majors) {
-        if (mainItem.id == item) {
-          list[counter].isEnable = true;
-        }
-      }
-      counter = counter + 1;
-    }
+    final List<CheckBox> list = listOfAllMajors.map((mainItem) {
+      final isEnable = majors.contains(mainItem.id);
+      return CheckBox(value: mainItem.name!, isEnable: isEnable, id: mainItem.id!);
+    }).toList();
 
     return list;
   }
@@ -128,7 +105,10 @@ class EditExperienceBloc extends Bloc<AccountService> {
 
     if (experianceSinceController.text.isNotEmpty &&
         listOfMajorsNotifier.value.isNotEmpty &&
-        cv != null) {
+        (cv != null || cvFileUrl.isNotEmpty) &&
+        (cert1 != null || cert1FileUrl.isNotEmpty) &&
+        (cert2 != null || cert2FileUrl.isNotEmpty) &&
+        (cert3 != null || cert3FileUrl.isNotEmpty)) {
       enableSaveButton.value = true;
     }
   }

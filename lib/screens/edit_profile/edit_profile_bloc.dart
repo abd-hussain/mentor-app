@@ -16,13 +16,10 @@ import 'package:mentor_app/utils/mixins.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditProfileBloc extends Bloc<AccountService> {
-  ValueNotifier<LoadingStatus> loadingStatusNotifier =
-      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   ValueNotifier<bool> enableSaveButtonNotifier = ValueNotifier<bool>(false);
-  ValueNotifier<List<Country>> listOfCountriesNotifier =
-      ValueNotifier<List<Country>>([]);
-  ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier =
-      ValueNotifier<List<CheckBox>>([]);
+  ValueNotifier<List<Country>> listOfCountriesNotifier = ValueNotifier<List<Country>>([]);
+  ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier = ValueNotifier<List<CheckBox>>([]);
   List<String> listOfSpeakingLanguage = [];
   String? selectedDate;
 
@@ -39,8 +36,7 @@ class EditProfileBloc extends Bloc<AccountService> {
   TextEditingController referalCodeController = TextEditingController();
   TextEditingController idController = TextEditingController();
   TextEditingController cityController = TextEditingController();
-  ValueNotifier<List<SuffixData>> listOfSuffix =
-      ValueNotifier<List<SuffixData>>([]);
+  ValueNotifier<List<SuffixData>> listOfSuffix = ValueNotifier<List<SuffixData>>([]);
 
   String profileImageUrl = "";
   File? profileImage;
@@ -52,14 +48,20 @@ class EditProfileBloc extends Bloc<AccountService> {
 
   validateFields() {
     enableSaveButtonNotifier.value = false;
-    if (suffixNameController.text.isNotEmpty &&
+
+    bool areAllFieldsValid = suffixNameController.text.isNotEmpty &&
         firstNameController.text.isNotEmpty &&
         lastNameController.text.isNotEmpty &&
         (profileImageUrl != "" || profileImage != null) &&
+        (iDImageUrl != "" || iDImage != null) &&
         selectedCountry != null &&
         genderController.text != "" &&
         mobileNumberController.text.isNotEmpty &&
-        bioController.text.isNotEmpty) {
+        bioController.text.isNotEmpty;
+
+    bool hasValidLanguage = listOfSpeakingLanguageNotifier.value.any((item) => item.isEnable);
+
+    if (areAllFieldsValid && hasValidLanguage) {
       enableSaveButtonNotifier.value = true;
     }
   }
@@ -67,73 +69,54 @@ class EditProfileBloc extends Bloc<AccountService> {
   void getProfileInformations(BuildContext context) async {
     loadingStatusNotifier.value = LoadingStatus.inprogress;
     service.getProfileInfo().then((value) {
-      if (value.data != null) {
-        if (value.data!.suffixeName != null) {
-          suffixNameController.text = value.data!.suffixeName!;
-        }
-        if (value.data!.firstName != null) {
-          firstNameController.text = value.data!.firstName!;
-        }
-        if (value.data!.lastName != null) {
-          lastNameController.text = value.data!.lastName!;
-        }
-        if (value.data!.email != null) {
-          emailController.text = value.data!.email!;
-        }
-        if (value.data!.mobileNumber != null) {
-          mobileNumberController.text = value.data!.mobileNumber!;
-        }
-        if (value.data!.referalCode != null) {
-          referalCodeController.text = value.data!.referalCode!;
-        }
-        if (value.data!.bio != null) {
-          bioController.text = value.data!.bio!;
-        }
+      final data = value.data;
 
-        if (value.data!.profileImg != null) {
-          profileImageUrl = value.data!.profileImg!;
-        }
+      if (data != null) {
+        suffixNameController.text = data.suffixeName ?? "";
+        firstNameController.text = data.firstName ?? "";
+        lastNameController.text = data.lastName ?? "";
+        emailController.text = data.email ?? "";
+        mobileNumberController.text = data.mobileNumber ?? "";
+        referalCodeController.text = data.referalCode ?? "";
+        bioController.text = data.bio ?? "";
+        profileImageUrl = data.profileImg ?? "";
 
-        if (value.data!.idImg != null) {
-          iDImageUrl = value.data!.idImg!;
-        }
+        iDImageUrl = data.idImg ?? "";
 
-        if (value.data!.dateOfBirth != null) {
-          selectedDate = value.data!.dateOfBirth!;
-        }
+        selectedDate = data.dateOfBirth ?? "";
 
-        if (value.data!.dBCountries != null) {
+        if (data.dBCountries != null) {
+          final dbCountries = data.dBCountries!;
+
           selectedCountry = Country(
-            id: value.data!.dBCountries!.id ?? 0,
-            flagImage: value.data!.dBCountries!.flagImage ?? "",
+            id: dbCountries.id ?? 0,
+            flagImage: dbCountries.flagImage ?? "",
             name: box.get(DatabaseFieldConstant.language) == "en"
-                ? value.data!.dBCountries!.nameEnglish ?? ""
-                : value.data!.dBCountries!.nameArabic ?? "",
+                ? dbCountries.nameEnglish ?? ""
+                : dbCountries.nameArabic ?? "",
             currency: box.get(DatabaseFieldConstant.language) == "en"
-                ? value.data!.dBCountries!.currencyEnglish ?? ""
-                : value.data!.dBCountries!.currencyArabic ?? "",
-            dialCode: value.data!.dBCountries!.dialCode!,
+                ? dbCountries.currencyEnglish ?? ""
+                : dbCountries.currencyArabic ?? "",
+            dialCode: dbCountries.dialCode ?? "",
           );
 
-          countryController.text =
-              box.get(DatabaseFieldConstant.language) == "en"
-                  ? value.data!.dBCountries!.nameEnglish!
-                  : value.data!.dBCountries!.nameArabic!;
+          countryController.text = box.get(DatabaseFieldConstant.language) == "en"
+              ? dbCountries.nameEnglish ?? ""
+              : dbCountries.nameArabic ?? "";
         }
 
-        if (value.data!.gender != null) {
-          if (value.data!.gender! == 0) {
+        if (data.gender != null) {
+          if (data.gender == 0) {
             genderController.text = AppLocalizations.of(context)!.gendermale;
-          } else if (value.data!.gender! == 1) {
+          } else if (data.gender == 1) {
             genderController.text = AppLocalizations.of(context)!.genderfemale;
           } else {
             genderController.text = AppLocalizations.of(context)!.genderother;
           }
         }
 
-        if (value.data!.speakingLanguage != null) {
-          listOfSpeakingLanguageNotifier.value =
-              _prepareList(value.data!.speakingLanguage!);
+        if (data.speakingLanguage != null) {
+          listOfSpeakingLanguageNotifier.value = _prepareList(data.speakingLanguage!);
         }
       }
 
@@ -143,8 +126,7 @@ class EditProfileBloc extends Bloc<AccountService> {
 
   void getListOfCountries(BuildContext context) {
     locator<FilterService>().countries().then((value) async {
-      listOfCountriesNotifier.value = value.data!
-        ..sort((a, b) => a.id!.compareTo(b.id!));
+      listOfCountriesNotifier.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
       loadingStatusNotifier.value = LoadingStatus.finish;
     });
   }
@@ -158,51 +140,17 @@ class EditProfileBloc extends Bloc<AccountService> {
   List<CheckBox> _prepareList(List<String> theList) {
     List<CheckBox> list = [];
 
-    bool en = false;
-    bool ar = false;
-    bool fr = false;
-    bool es = false;
-    bool tu = false;
-
-    for (var item in theList) {
-      if (item.contains("English")) {
-        en = true;
-      }
-      if (item.contains("العربية")) {
-        ar = true;
-      }
-      if (item.contains("Français")) {
-        fr = true;
-      }
-      if (item.contains("Español")) {
-        es = true;
-      }
-      if (item.contains("Türkçe")) {
-        tu = true;
-      }
+    final languagesToCheck = ["English", "العربية", "Français", "Español", "Türkçe"];
+    for (var language in languagesToCheck) {
+      final isEnable = theList.any((item) => item.contains(language));
+      list.add(CheckBox(value: language, isEnable: isEnable));
     }
-
-    list.add(CheckBox(value: "English", isEnable: en));
-    list.add(CheckBox(value: "العربية", isEnable: ar));
-    list.add(CheckBox(value: "Français", isEnable: fr));
-    list.add(CheckBox(value: "Español", isEnable: es));
-    list.add(CheckBox(value: "Türkçe", isEnable: tu));
-
     return list;
   }
 
   Future updateProfileInfo(BuildContext context) async {
-    String speackingLanguage = "";
-
-    for (CheckBox item in listOfSpeakingLanguageNotifier.value) {
-      if (item.isEnable) {
-        if (speackingLanguage.isEmpty) {
-          speackingLanguage = item.value;
-        } else {
-          speackingLanguage = "$speackingLanguage, ${item.value}";
-        }
-      }
-    }
+    final speackingLanguage =
+        listOfSpeakingLanguageNotifier.value.where((item) => item.isEnable).map((item) => item.value).toList();
 
     UpdateAccountRequest account = UpdateAccountRequest(
       suffix: suffixNameController.text,
@@ -211,11 +159,10 @@ class EditProfileBloc extends Bloc<AccountService> {
       profileImage: profileImage,
       iDImage: iDImage,
       countryId: selectedCountry!.id!,
-      mobileNumber: mobileNumberController.text,
       dateOfBirth: selectedDate!,
-      speackingLanguage: speackingLanguage.toString(),
-      gender:
-          GenderFormat().convertStringToIndex(context, genderController.text),
+      speackingLanguage: speackingLanguage,
+      bio: bioController.text,
+      gender: GenderFormat().convertStringToIndex(context, genderController.text),
     );
     return service.updateProfileInfo(account: account);
   }

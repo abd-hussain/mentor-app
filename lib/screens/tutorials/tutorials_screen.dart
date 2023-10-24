@@ -19,10 +19,7 @@ class _TutorialsScreenState extends State<TutorialsScreen> {
     super.dispose();
   }
 
-  //TODO: handle showing tutorial first time you open the app
-  //TODO: handle dismiss to where
   //TODO: put prober images
-  //TODO: check the text
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +31,7 @@ class _TutorialsScreenState extends State<TutorialsScreen> {
             children: [
               TutView(
                 title: AppLocalizations.of(context)!.tutorial1,
-                image: "assets/images/tutorials/tutorials.png",
+                image: "assets/images/tutorials/tutorials1.jpg",
               ),
               TutView(
                 title: AppLocalizations.of(context)!.tutorial2,
@@ -50,7 +47,7 @@ class _TutorialsScreenState extends State<TutorialsScreen> {
               ),
               TutView(
                 title: AppLocalizations.of(context)!.tutorial5,
-                image: "assets/images/login_4.png",
+                image: "assets/images/tutorials/tutorials.png",
               ),
             ],
           ),

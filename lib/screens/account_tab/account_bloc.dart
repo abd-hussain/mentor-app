@@ -144,20 +144,7 @@ class AccountBloc extends Bloc<AccountService> {
               message: AppLocalizations.of(context)!.accountInformationwillbedeleted,
               sure: () async {
                 locator<MentorSettingsService>().removeAccount().whenComplete(() async {
-                  final box = await Hive.openBox(DatabaseBoxConstant.userInfo);
-                  box.deleteAll([
-                    DatabaseFieldConstant.apikey,
-                    DatabaseFieldConstant.token,
-                    DatabaseFieldConstant.language,
-                    DatabaseFieldConstant.userid,
-                    DatabaseFieldConstant.selectedCountryId,
-                    DatabaseFieldConstant.selectedCountryFlag,
-                    DatabaseFieldConstant.isUserLoggedIn,
-                    DatabaseFieldConstant.registrationStep,
-                    DatabaseFieldConstant.biometricU,
-                    DatabaseFieldConstant.biometricP,
-                    DatabaseFieldConstant.biometricStatus,
-                  ]);
+                  await _deleteAllUserData();
 
                   await nav.pushNamedAndRemoveUntil(RoutesConstants.initialRoute, (Route<dynamic> route) => true);
                 });
@@ -171,17 +158,7 @@ class AccountBloc extends Bloc<AccountService> {
         context: context,
         message: AppLocalizations.of(context)!.areyousurelogout,
         sure: () async {
-          final box = await Hive.openBox(DatabaseBoxConstant.userInfo);
-          box.deleteAll([
-            DatabaseFieldConstant.apikey,
-            DatabaseFieldConstant.token,
-            DatabaseFieldConstant.language,
-            DatabaseFieldConstant.userid,
-            DatabaseFieldConstant.selectedCountryId,
-            DatabaseFieldConstant.selectedCountryFlag,
-            DatabaseFieldConstant.isUserLoggedIn,
-          ]);
-
+          await _deleteAllUserData();
           await nav.pushNamedAndRemoveUntil(RoutesConstants.initialRoute, (Route<dynamic> route) => true);
         });
   }
@@ -191,6 +168,30 @@ class AccountBloc extends Bloc<AccountService> {
       AppConstant.webViewPageUrl: AppConstant.aboutusLink,
       AppConstant.pageTitle: AppLocalizations.of(context)!.aboutus
     });
+  }
+
+  Future<void> _deleteAllUserData() {
+    return box.deleteAll([
+      DatabaseFieldConstant.apikey,
+      DatabaseFieldConstant.token,
+      DatabaseFieldConstant.language,
+      DatabaseFieldConstant.userid,
+      DatabaseFieldConstant.selectedCountryId,
+      DatabaseFieldConstant.selectedCountryFlag,
+      DatabaseFieldConstant.isUserLoggedIn,
+      DatabaseFieldConstant.registrationStep,
+      DatabaseFieldConstant.biometricU,
+      DatabaseFieldConstant.biometricP,
+      DatabaseFieldConstant.biometricStatus,
+      DatabaseFieldConstant.selectedCountryId,
+      DatabaseFieldConstant.selectedCountryFlag,
+      DatabaseFieldConstant.selectedCountryName,
+      DatabaseFieldConstant.selectedCountryCurrency,
+      DatabaseFieldConstant.selectedCountryDialCode,
+      DatabaseFieldConstant.selectedCountryMinLenght,
+      DatabaseFieldConstant.selectedCountryMaxLenght,
+      DatabaseFieldConstant.pushNotificationToken,
+    ]);
   }
 
   void _openInviteFriends(BuildContext context) {
