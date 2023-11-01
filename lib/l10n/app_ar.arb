@@ -260,13 +260,8 @@
     "mobilenumberalreadyinuse" : "رقم الهاتف مستخدم بالفعل",
     "emailalreadyinuse" : "البريد الالكتروني مستخدم بالفعل",
     "announcements" : "اعلانات",
-    "meetingwith" : "اجتماع مع"
-
-
-
-
-
-
-
+    "meetingwith" : "اجتماع مع",
+    "pleasewaitforclient" : "يرجى الانتظار حتى ينضم العميل إلى المكالمة",
+    "readytogo" : "You will be ready to go"
 
 }

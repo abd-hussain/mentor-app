@@ -260,10 +260,9 @@
     "mobilenumberalreadyinuse" : "Mobile Number already used",
     "emailalreadyinuse" : "Email already used",
     "announcements" : "Announcements",
-    "meetingwith" : "Meeting With"
-
-
-
+    "meetingwith" : "Meeting With",
+    "pleasewaitforclient" : "Please wait for Client to join the call",
+    "readytogo" : "You will be ready to go"
 
 
 

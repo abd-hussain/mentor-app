@@ -59,7 +59,8 @@ class CalenderBottomSheetsUtil {
                     decoration: InputDecoration(
                       labelText: AppLocalizations.of(context)!.note,
                       prefixIcon: const Icon(Icons.message),
-                      border: const OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),
+                      border: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.teal)),
                     ),
                     onEditingComplete: () {
                       FocusScope.of(context).unfocus();
@@ -102,7 +103,8 @@ class CalenderBottomSheetsUtil {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         builder: (context) {
           return Padding(
-            padding: const EdgeInsets.only(top: 20, left: 16, right: 16, bottom: 20),
+            padding:
+                const EdgeInsets.only(top: 20, left: 16, right: 16, bottom: 20),
             child: Wrap(
               children: [
                 Row(
@@ -135,8 +137,9 @@ class CalenderBottomSheetsUtil {
                   },
                 ),
                 CustomButton(
-                  enableButton: DateTime.now().isBefore(metingDetails.fromTime) &&
-                      metingDetails.state == AppointmentsState.active,
+                  enableButton:
+                      DateTime.now().isBefore(metingDetails.fromTime) &&
+                          metingDetails.state == AppointmentsState.active,
                   padding: const EdgeInsets.all(8.0),
                   buttonColor: const Color(0xffda1100),
                   buttonTitle: AppLocalizations.of(context)!.cancelappointment,
@@ -152,14 +155,16 @@ class CalenderBottomSheetsUtil {
   }
 
   Widget meetingView() {
-    final difference = metingDetails.toTime.difference(metingDetails.fromTime).inMinutes;
+    final difference =
+        metingDetails.toTime.difference(metingDetails.fromTime).inMinutes;
 
     return Column(
       children: [
         ClientInfoView(metingDetails: metingDetails),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.eventdate,
-          desc: "${metingDetails.fromTime.year}/${metingDetails.fromTime.month}/${metingDetails.fromTime.day}",
+          desc:
+              "${metingDetails.fromTime.year}/${metingDetails.fromTime.month}/${metingDetails.fromTime.day}",
           padding: const EdgeInsets.all(8),
         ),
         AppointmentDetailsView(
@@ -178,7 +183,8 @@ class CalenderBottomSheetsUtil {
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.meetingtime,
-          desc: DayTime().convertingTimingWithMinToRealTime(metingDetails.fromTime.hour, metingDetails.fromTime.minute),
+          desc: DayTime().convertingTimingWithMinToRealTime(
+              metingDetails.fromTime.hour, metingDetails.fromTime.minute),
           padding: const EdgeInsets.all(8),
         ),
         AppointmentDetailsView(
@@ -189,18 +195,26 @@ class CalenderBottomSheetsUtil {
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.meetingstatus,
           desc: _sessionStatusString(metingDetails.state),
-          descColor: metingDetails.state == AppointmentsState.active ? Colors.green : Colors.red,
+          descColor: metingDetails.state == AppointmentsState.active
+              ? Colors.green
+              : Colors.red,
           padding: const EdgeInsets.all(8),
         ),
-        PriceView(priceBeforeDiscount: metingDetails.priceBefore, priceAfterDiscount: metingDetails.priceAfter),
+        PriceView(
+            priceBeforeDiscount: metingDetails.priceBefore,
+            priceAfterDiscount: metingDetails.priceAfter),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.clientnote,
-          desc: metingDetails.clientnote == "" ? AppLocalizations.of(context)!.noitem : metingDetails.clientnote,
+          desc: metingDetails.clientnote == ""
+              ? AppLocalizations.of(context)!.noitem
+              : metingDetails.clientnote,
           padding: const EdgeInsets.all(8),
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.mentornote,
-          desc: metingDetails.mentornote == "" ? AppLocalizations.of(context)!.noitem : metingDetails.mentornote,
+          desc: metingDetails.mentornote == ""
+              ? AppLocalizations.of(context)!.noitem
+              : metingDetails.mentornote,
           padding: const EdgeInsets.all(8),
         ),
         Container(height: 1, color: const Color(0xff444444)),

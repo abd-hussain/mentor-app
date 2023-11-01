@@ -11,8 +11,10 @@ import 'package:mentor_app/utils/routes.dart';
 enum SelectedTab { home, payment, call, calender, account }
 
 class MainContainerBloc extends Bloc<AppointmentsService> {
-  final ValueNotifier<SelectedTab> currentTabIndexNotifier = ValueNotifier<SelectedTab>(SelectedTab.home);
-  final ValueNotifier<List<CalenderMeetings>> meetingsListNotifier = ValueNotifier<List<CalenderMeetings>>([]);
+  final ValueNotifier<SelectedTab> currentTabIndexNotifier =
+      ValueNotifier<SelectedTab>(SelectedTab.home);
+  final ValueNotifier<List<CalenderMeetings>> meetingsListNotifier =
+      ValueNotifier<List<CalenderMeetings>>([]);
 
   GlobalKey<ConvexAppBarState> appBarKey = GlobalKey<ConvexAppBarState>();
 

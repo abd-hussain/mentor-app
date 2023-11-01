@@ -87,17 +87,17 @@ class DayTime {
     }
   }
 
-  int getMinFromTimeString(String time) {
-    if (time.contains("a.m")) {
-      String result = time.replaceAll(" a.m", "");
-      var parts = result.split(':');
-      return int.parse(parts.sublist(1).join(':').trim());
-    } else {
-      String result = time.replaceAll(" p.m", "");
-      var parts = result.split(':');
-      return int.parse(parts.sublist(1).join(':').trim());
-    }
-  }
+  // int getMinFromTimeString(String time) {
+  //   if (time.contains("a.m")) {
+  //     String result = time.replaceAll(" a.m", "");
+  //     var parts = result.split(':');
+  //     return int.parse(parts.sublist(1).join(':').trim());
+  //   } else {
+  //     String result = time.replaceAll(" p.m", "");
+  //     var parts = result.split(':');
+  //     return int.parse(parts.sublist(1).join(':').trim());
+  //   }
+  // }
 
   String convertDayToArabic(String dayName) {
     switch (dayName) {

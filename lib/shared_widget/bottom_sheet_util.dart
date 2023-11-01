@@ -404,9 +404,9 @@ class BottomSheetsUtil {
                         onSave(listOfLanguage);
                         Navigator.pop(context);
                       },
-                      child: const CustomText(
-                        title: "Save",
-                        textColor: Color(0xff444444),
+                      child: CustomText(
+                        title: AppLocalizations.of(context)!.save,
+                        textColor: const Color(0xff444444),
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
                       ),

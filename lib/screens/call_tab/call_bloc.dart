@@ -21,7 +21,7 @@ class CallBloc extends Bloc<AccountService> {
           appointment.fromTime.day,
           appointment.fromTime.hour,
           appointment.fromTime.minute));
-      if (diffrent.inHours >= -24 && diffrent.inHours <= 24) {
+      if (diffrent.inHours <= 24) {
         if (appointment.state == AppointmentsState.active) {
           newList.add(appointment);
         }

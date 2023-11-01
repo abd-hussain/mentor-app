@@ -42,13 +42,21 @@ class _AccountScreenState extends State<AccountScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TitleView(title: AppLocalizations.of(context)!.accountsettings),
-                CollectionListOptionView(listOfOptions: bloc.listOfAccountOptions(context), containerHight: 540),
+                CollectionListOptionView(
+                    listOfOptions: bloc.listOfAccountOptions(context),
+                    containerHight: 540),
                 TitleView(title: AppLocalizations.of(context)!.generalsettings),
-                CollectionListOptionView(listOfOptions: bloc.listOfSettingsOptions(context), containerHight: 125),
+                CollectionListOptionView(
+                    listOfOptions: bloc.listOfSettingsOptions(context),
+                    containerHight: 125),
                 TitleView(title: AppLocalizations.of(context)!.reachouttous),
-                CollectionListOptionView(listOfOptions: bloc.listOfReachOutUsOptions(context), containerHight: 125),
+                CollectionListOptionView(
+                    listOfOptions: bloc.listOfReachOutUsOptions(context),
+                    containerHight: 125),
                 TitleView(title: AppLocalizations.of(context)!.support),
-                CollectionListOptionView(listOfOptions: bloc.listOfSupportOptions(context), containerHight: 190),
+                CollectionListOptionView(
+                    listOfOptions: bloc.listOfSupportOptions(context),
+                    containerHight: 190),
                 const SizedBox(height: 8),
                 const AddMobBanner(),
                 const FooterView(),

@@ -21,17 +21,20 @@ class WaitingCallView extends StatefulWidget {
   final CalenderMeetings metingDetails;
 
   final Function() cancelMeetingTapped;
+  final Function() timesup;
 
-  const WaitingCallView(
-      {super.key,
-      required this.timerStartNumberHour,
-      required this.timerStartNumberMin,
-      required this.timerStartNumberSec,
-      required this.cancelMeetingTapped,
-      required this.meetingduration,
-      required this.meetingtime,
-      required this.meetingday,
-      required this.metingDetails});
+  const WaitingCallView({
+    super.key,
+    required this.timerStartNumberHour,
+    required this.timerStartNumberMin,
+    required this.timerStartNumberSec,
+    required this.cancelMeetingTapped,
+    required this.meetingduration,
+    required this.meetingtime,
+    required this.meetingday,
+    required this.metingDetails,
+    required this.timesup,
+  });
 
   @override
   State<WaitingCallView> createState() => _WaitingCallViewState();
@@ -140,9 +143,8 @@ class _WaitingCallViewState extends State<WaitingCallView> {
         if (timerStartNumberHour == 0 &&
             timerStartNumberMin == 0 &&
             timerStartNumberSec == 0) {
-          setState(() {
-            timer.cancel();
-          });
+          timer.cancel();
+          widget.timesup();
         } else {
           setState(() {
             if (timerStartNumberSec > 0) {

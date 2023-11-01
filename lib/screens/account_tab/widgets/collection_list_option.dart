@@ -5,7 +5,8 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 class CollectionListOptionView extends StatelessWidget {
   final double containerHight;
   final List<ProfileOptions> listOfOptions;
-  const CollectionListOptionView({super.key, required this.containerHight, required this.listOfOptions});
+  const CollectionListOptionView(
+      {super.key, required this.containerHight, required this.listOfOptions});
 
   @override
   Widget build(BuildContext context) {

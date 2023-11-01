@@ -49,9 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       future: bloc.getHome(),
                       builder: (context, snapshot) {
                         if (snapshot.data == null && snapshot.hasData) {
-                          return const SizedBox(height: 250, child: LoadingView());
+                          return const SizedBox(
+                              height: 250, child: LoadingView());
                         } else {
-                          return MainBannerHomePage(bannerList: snapshot.data ?? []);
+                          return MainBannerHomePage(
+                              bannerList: snapshot.data ?? []);
                         }
                       }),
                   const AddMobBanner(),
@@ -60,11 +62,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       future: bloc.listOfNotifications(),
                       builder: (context, snapshot) {
                         if (snapshot.data == null && snapshot.hasData) {
-                          return const SizedBox(height: 300, child: ShimmerNotificationsView());
+                          return const SizedBox(
+                              height: 300, child: ShimmerNotificationsView());
                         } else {
                           return SizedBox(
                             height: double.maxFinite,
-                            child: AnnouncementsView(notificationsList: snapshot.data ?? []),
+                            child: AnnouncementsView(
+                                notificationsList: snapshot.data ?? []),
                           );
                         }
                       }),

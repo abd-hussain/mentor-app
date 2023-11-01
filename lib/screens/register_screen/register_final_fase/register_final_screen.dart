@@ -50,7 +50,7 @@ class _RegisterFinalScreenState extends State<RegisterFinalScreen> {
               onPressed: () {
                 bloc.handleCreatingTheProfile(context);
               },
-              child: Text("Submit Profile"),
+              child: Text(AppLocalizations.of(context)!.submit),
             )
           ],
         ),

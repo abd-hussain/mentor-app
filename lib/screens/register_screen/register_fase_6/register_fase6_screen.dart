@@ -52,7 +52,7 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
               return RegistrationFooterView(
                 pageCount: 6,
                 pageTitle: AppLocalizations.of(context)!.setuppassword,
-                nextPageTitle: "You will be ready to go",
+                nextPageTitle: AppLocalizations.of(context)!.readytogo,
                 enableNextButton: snapshot,
                 nextPressed: () async {
                   final navigator = Navigator.of(context);

@@ -85,9 +85,17 @@ class _CallScreenState extends State<CallScreen> {
                                 .getMentorAppointments(context);
                           });
                         },
+                        timesup: () {
+                          setState(() {});
+                        },
                       );
                     } else {
-                      return CallReadyView(channelId: appointment.channelID);
+                      if (chechIfMentorNotExiedTheTimeAllowedToEnter(
+                          appointmentFromDate: appointment.fromTime)) {
+                        return CallReadyView(channelId: appointment.channelID);
+                      } else {
+                        return noCallView();
+                      }
                     }
                   } else {
                     return noCallView();
@@ -99,6 +107,13 @@ class _CallScreenState extends State<CallScreen> {
         ],
       ),
     );
+  }
+
+  bool chechIfMentorNotExiedTheTimeAllowedToEnter(
+      {required DateTime appointmentFromDate}) {
+    final currentDate = DateTime.now();
+    final difference = currentDate.difference(appointmentFromDate).inMinutes;
+    return difference < 10;
   }
 
   Widget noCallView() {

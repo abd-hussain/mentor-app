@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
+import 'package:mentor_app/utils/constants/constant.dart';
 
 PreferredSizeWidget customAppBar(
     {required String title, List<Widget>? actions}) {
@@ -9,7 +10,7 @@ PreferredSizeWidget customAppBar(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const CustomText(
-          title: "HelpEra",
+          title: AppConstant.appName,
           fontSize: 30,
           textColor: Colors.white,
         ),

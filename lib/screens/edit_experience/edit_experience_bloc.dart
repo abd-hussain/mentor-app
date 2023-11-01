@@ -15,8 +15,10 @@ import 'package:mentor_app/utils/mixins.dart';
 class EditExperienceBloc extends Bloc<AccountService> {
   ValueNotifier<bool> enableSaveButton = ValueNotifier<bool>(false);
   final box = Hive.box(DatabaseBoxConstant.userInfo);
-  ValueNotifier<List<CheckBox>> listOfMajorsNotifier = ValueNotifier<List<CheckBox>>([]);
-  ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<List<CheckBox>> listOfMajorsNotifier =
+      ValueNotifier<List<CheckBox>>([]);
+  ValueNotifier<LoadingStatus> loadingStatusNotifier =
+      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
 
   TextEditingController categoryController = TextEditingController();
   TextEditingController experianceSinceController = TextEditingController();
@@ -82,7 +84,8 @@ class EditExperienceBloc extends Bloc<AccountService> {
   List<CheckBox> prepareListOfMajors(List<int> majors) {
     final List<CheckBox> list = listOfAllMajors.map((mainItem) {
       final isEnable = majors.contains(mainItem.id);
-      return CheckBox(value: mainItem.name!, isEnable: isEnable, id: mainItem.id!);
+      return CheckBox(
+          value: mainItem.name!, isEnable: isEnable, id: mainItem.id!);
     }).toList();
 
     return list;

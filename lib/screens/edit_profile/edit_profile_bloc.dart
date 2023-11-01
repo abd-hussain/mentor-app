@@ -16,10 +16,13 @@ import 'package:mentor_app/utils/mixins.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditProfileBloc extends Bloc<AccountService> {
-  ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<LoadingStatus> loadingStatusNotifier =
+      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   ValueNotifier<bool> enableSaveButtonNotifier = ValueNotifier<bool>(false);
-  ValueNotifier<List<Country>> listOfCountriesNotifier = ValueNotifier<List<Country>>([]);
-  ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier = ValueNotifier<List<CheckBox>>([]);
+  ValueNotifier<List<Country>> listOfCountriesNotifier =
+      ValueNotifier<List<Country>>([]);
+  ValueNotifier<List<CheckBox>> listOfSpeakingLanguageNotifier =
+      ValueNotifier<List<CheckBox>>([]);
   List<String> listOfSpeakingLanguage = [];
   String? selectedDate;
 
@@ -36,7 +39,8 @@ class EditProfileBloc extends Bloc<AccountService> {
   TextEditingController referalCodeController = TextEditingController();
   TextEditingController idController = TextEditingController();
   TextEditingController cityController = TextEditingController();
-  ValueNotifier<List<SuffixData>> listOfSuffix = ValueNotifier<List<SuffixData>>([]);
+  ValueNotifier<List<SuffixData>> listOfSuffix =
+      ValueNotifier<List<SuffixData>>([]);
 
   String profileImageUrl = "";
   File? profileImage;
@@ -59,7 +63,8 @@ class EditProfileBloc extends Bloc<AccountService> {
         mobileNumberController.text.isNotEmpty &&
         bioController.text.isNotEmpty;
 
-    bool hasValidLanguage = listOfSpeakingLanguageNotifier.value.any((item) => item.isEnable);
+    bool hasValidLanguage =
+        listOfSpeakingLanguageNotifier.value.any((item) => item.isEnable);
 
     if (areAllFieldsValid && hasValidLanguage) {
       enableSaveButtonNotifier.value = true;
@@ -100,9 +105,10 @@ class EditProfileBloc extends Bloc<AccountService> {
             dialCode: dbCountries.dialCode ?? "",
           );
 
-          countryController.text = box.get(DatabaseFieldConstant.language) == "en"
-              ? dbCountries.nameEnglish ?? ""
-              : dbCountries.nameArabic ?? "";
+          countryController.text =
+              box.get(DatabaseFieldConstant.language) == "en"
+                  ? dbCountries.nameEnglish ?? ""
+                  : dbCountries.nameArabic ?? "";
         }
 
         if (data.gender != null) {
@@ -116,7 +122,8 @@ class EditProfileBloc extends Bloc<AccountService> {
         }
 
         if (data.speakingLanguage != null) {
-          listOfSpeakingLanguageNotifier.value = _prepareList(data.speakingLanguage!);
+          listOfSpeakingLanguageNotifier.value =
+              _prepareList(data.speakingLanguage!);
         }
       }
 
@@ -126,7 +133,8 @@ class EditProfileBloc extends Bloc<AccountService> {
 
   void getListOfCountries(BuildContext context) {
     locator<FilterService>().countries().then((value) async {
-      listOfCountriesNotifier.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
+      listOfCountriesNotifier.value = value.data!
+        ..sort((a, b) => a.id!.compareTo(b.id!));
       loadingStatusNotifier.value = LoadingStatus.finish;
     });
   }
@@ -140,7 +148,13 @@ class EditProfileBloc extends Bloc<AccountService> {
   List<CheckBox> _prepareList(List<String> theList) {
     List<CheckBox> list = [];
 
-    final languagesToCheck = ["English", "العربية", "Français", "Español", "Türkçe"];
+    final languagesToCheck = [
+      "English",
+      "العربية",
+      "Français",
+      "Español",
+      "Türkçe"
+    ];
     for (var language in languagesToCheck) {
       final isEnable = theList.any((item) => item.contains(language));
       list.add(CheckBox(value: language, isEnable: isEnable));
@@ -149,8 +163,10 @@ class EditProfileBloc extends Bloc<AccountService> {
   }
 
   Future updateProfileInfo(BuildContext context) async {
-    final speackingLanguage =
-        listOfSpeakingLanguageNotifier.value.where((item) => item.isEnable).map((item) => item.value).toList();
+    final speackingLanguage = listOfSpeakingLanguageNotifier.value
+        .where((item) => item.isEnable)
+        .map((item) => item.value)
+        .toList();
 
     UpdateAccountRequest account = UpdateAccountRequest(
       suffix: suffixNameController.text,
@@ -162,7 +178,8 @@ class EditProfileBloc extends Bloc<AccountService> {
       dateOfBirth: selectedDate!,
       speackingLanguage: speackingLanguage,
       bio: bioController.text,
-      gender: GenderFormat().convertStringToIndex(context, genderController.text),
+      gender:
+          GenderFormat().convertStringToIndex(context, genderController.text),
     );
     return service.updateProfileInfo(account: account);
   }
