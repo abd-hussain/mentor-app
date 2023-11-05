@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:mentor_app/models/https/account_exp_model.dart';
 import 'package:mentor_app/models/https/account_info_model.dart';
@@ -17,8 +16,7 @@ class AccountService with Service {
     return AccountInfo.fromJson(response);
   }
 
-  Future<AccountInfo> updateProfileInfo(
-      {required UpdateAccountRequest account}) async {
+  Future<AccountInfo> updateProfileInfo({required UpdateAccountRequest account}) async {
     FormData formData = FormData();
     formData.fields.add(MapEntry("suffixe_name", account.suffix));
     formData.fields.add(MapEntry("first_name", account.firstName));
@@ -73,8 +71,7 @@ class AccountService with Service {
     return AccountExperiance.fromJson(response);
   }
 
-  Future<dynamic> updateProfileExperiance(
-      {required UpdateAccountExperianceRequest account}) async {
+  Future<dynamic> updateProfileExperiance({required UpdateAccountExperianceRequest account}) async {
     String cvFileName = "";
     String cert1FileName = "";
     String cert2FileName = "";
@@ -97,19 +94,15 @@ class AccountService with Service {
           ? await MultipartFile.fromFile(account.cv!.path, filename: cvFileName)
           : MultipartFile.fromString(""),
       "cert1": account.cert1 != null && account.cert1 != File("")
-          ? await MultipartFile.fromFile(account.cert1!.path,
-              filename: cert1FileName)
+          ? await MultipartFile.fromFile(account.cert1!.path, filename: cert1FileName)
           : MultipartFile.fromString(""),
       "cert2": account.cert2 != null && account.cert2 != File("")
-          ? await MultipartFile.fromFile(account.cert2!.path,
-              filename: cert2FileName)
+          ? await MultipartFile.fromFile(account.cert2!.path, filename: cert2FileName)
           : MultipartFile.fromString(""),
       "cert3": account.cert3 != null && account.cert3 != File("")
-          ? await MultipartFile.fromFile(account.cert3!.path,
-              filename: cert3FileName)
+          ? await MultipartFile.fromFile(account.cert3!.path, filename: cert3FileName)
           : MultipartFile.fromString(""),
-      "experience_since":
-          MultipartFile.fromString(account.experienceSince ?? ""),
+      "experience_since": MultipartFile.fromString(account.experienceSince ?? ""),
       "majors": account.majors!,
     });
 
