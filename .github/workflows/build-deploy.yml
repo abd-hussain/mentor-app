@@ -54,8 +54,8 @@ jobs:
     #     grep -rl "'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '10.11.0'" ./ | xargs sed -i '' "s#'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '10.11.0'#'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '$latest_tag'#g"
     #     cd ..
 
-    # - name: Install Fastlane
-    #   run: gem install fastlane
+    - name: Install Fastlane
+      run: gem install fastlane
 
     # - name: Update Fastlane
     #   run: gem update fastlane
