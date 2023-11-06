@@ -39,10 +39,11 @@ jobs:
       with:
         java-version: 11
 
-    - name: Install Flutter
-      uses: subosito/flutter-action@v8
-      with:
-        flutter-version: 2.15.0
+    - name: ⚙️ Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
 
     # - name: Install SSH Key
     #   uses: webfactory/ssh-agent@v0.4
