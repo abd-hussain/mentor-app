@@ -1,0 +1,119 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+
+jobs:
+  build:
+    runs-on: macos-12
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Download Key Store
+      uses: actions/download-artifact@v2
+      with:
+        name: Development_Key_Store_File
+
+    - name: Download GoogleService
+      uses: actions/download-artifact@v2
+      with:
+        name: GoogleService-Info.plist
+
+    - name: Checking Keys
+      run: |
+        cd android
+        echo -e "storePassword=${{ secrets.KeyStorePassword }}\nkeyPassword=${{ secrets.KeyStorePassword }}\nkeyAlias=key0\nstoreFile=$GITHUB_WORKSPACE/Development_Key_Store_File" >> key.properties
+        cat key.properties
+      env:
+        KeyStorePassword: ${{ secrets.Development_Key_Store_File_Password }}
+
+    - name: Setup JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: 11
+
+    - name: Install Flutter
+      uses: subosito/flutter-action@v8
+      with:
+        flutter-version: 2.15.0
+
+    - name: Install SSH Key
+      uses: webfactory/ssh-agent@v0.4
+      with:
+        known_hosts: |
+          ssh.dev.azure.com,40.74.28.27 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Changing firebase version
+      run: |
+        cd ios
+        latest_tag=$(curl -s https://api.github.com/repos/invertase/firestore-ios-sdk-frameworks/tags | grep -o 'name": "[^"]*' | awk -F': ' '{print $2}' | head -1)
+        grep -rl "'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '10.11.0'" ./ | xargs sed -i '' "s#'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '10.11.0'#'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '$latest_tag'#g"
+        cd ..
+
+    - name: Install Fastlane
+      run: gem install fastlane
+
+    - name: Update Fastlane
+      run: gem update fastlane
+
+    - name: Fastlane Doctor
+      run: |
+        cd ios
+        export BUILD_NUMBER=$GITHUB_RUN_NUMBER
+        export MATCH_PASSWORD=$GITHUB_TOKEN
+        export Match_File_Key_ID=$KeyId
+        export Match_File_Issuer_ID=$IssuerId
+        export FASTLANE_PASSWORD=$FastlanePassword
+        fastlane beta --verbose
+      env:
+        MatchPassword: ${{ secrets.MATCH_PASSWORD }}
+        KeyId: ${{ secrets.Match_File_Key_ID }}
+        IssuerId: ${{ secrets.Match_File_Issuer_ID }}
+        FastlanePassword: ${{ secrets.FASTLANE_PASSWORD }}
+
+    - name: Update local build number
+      run: |
+        sed -i'' -e "s/releaseGeneratedBuildNumber = 000/releaseGeneratedBuildNumber=${GITHUB_RUN_NUMBER}/g" $(grep -rl "releaseGeneratedBuildNumber = 000" ./)
+
+    - name: Build iOS IPA
+      run: $(flutter sdk-path)/flutter build ipa --release --build-name=2.1.0 --build-number=$GITHUB_RUN_NUMBER --export-options-plist=ios/ExportOptions.plist
+
+    - name: Handle FirebaseCrashlytics
+      run: $(flutter sdk-path)/flutter pub get
+      run: $(flutter sdk-path)/flutter pub run build_runner build --delete-conflicting-outputs
+      run: $(flutter sdk-path)/flutter build ios --release
+      run: $(flutter sdk-path)/flutter build ipa --release
+      run: $(flutter sdk-path)/flutter build ios --release --build-name=2.1.0 --build-number=$GITHUB_RUN_NUMBER
+      run: $(flutter sdk-path)/flutter build ipa --release --build-name=2.1.0 --build-number=$GITHUB_RUN_NUMBER
+      run: $(flutter sdk-path)/flutter build ipa --release --build-name=2.1.0 --build-number=$GITHUB_RUN_NUMBER
+      run: $(flutter sdk-path)/flutter build ipa --release --build-name=2.1.0 --build-number=$GITHUB_RUN_NUMBER
+
+    - name: Build Android AAB
+      run: $(flutter sdk-path)/flutter build aab --release --build-name=2.1.0 --build-number=$GITHUB_RUN_NUMBER
+
+    - name: Build Android APK
+      run: $(flutter sdk-path)/flutter build apk --release --build-name=2.1.0 --build-number=$GITHUB_RUN_NUMBER
+
+    - name: Extract iOS Build IPA
+      run: mv build/ios/iphoneos/Runner.ipa $GITHUB_WORKSPACE/Runner.ipa
+
+    - name: Extract Android Build AAB
+      run: mv build/app/outputs/bundle/release/app-release.aab $GITHUB_WORKSPACE/app-release.aab
+
+    - name: Extract Android Build APK
+      run: mv build/app/outputs/flutter-apk/app-release.apk $GITHUB_WORKSPACE/app-release.apk
+
+    - name: Publish Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-artifacts
+        path: |
+          Runner.ipa
+          app-release.aab
+          app-release.apk

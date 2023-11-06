@@ -1,4 +1,4 @@
-package com.example.mentor_app
+package com.HelpEra.mentor_dev
 
 import io.flutter.embedding.android.FlutterActivity
 

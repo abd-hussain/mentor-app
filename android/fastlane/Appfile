@@ -1,0 +1,2 @@
+json_key_file("/Users/abdelrahman/My Docs/The academy/mentor_app/helpera-bf6de6efa5c6.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+package_name("com.HelpEra.mentor_dev") # e.g. com.krausefx.app
