@@ -25,6 +25,7 @@ jobs:
         fileName: "serviceAccount.json"
         encodedString: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
 
+    # //TODO
     # - name: Checking Keys
     #   run: |
     #     cd android
