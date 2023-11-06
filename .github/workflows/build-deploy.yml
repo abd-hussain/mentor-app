@@ -11,9 +11,15 @@ jobs:
     runs-on: macos-12
 
     steps:
-    - name: Checkout Code
+    - name: pulling git repo
       uses: actions/checkout@v2
 
+    - name: Decode Service Account Key JSON File
+      uses: timheuer/base64-to-file@v1
+      id: service_account_json_file
+      with:
+        fileName: "serviceAccount.json"
+        encodedString: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
     # - name: Download Key Store
     #   uses: actions/download-artifact@v2
     #   with:
