@@ -40,10 +40,10 @@ jobs:
         java-version: 11
 
     - name: ⚙️ Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          cache: true
+      uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+        cache: true
 
     # - name: Install SSH Key
     #   uses: webfactory/ssh-agent@v0.4
