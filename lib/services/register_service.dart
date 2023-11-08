@@ -105,7 +105,6 @@ class RegisterService with Service {
     //     ),
     //   );
     // }
-    print("formData.length");
     // print(formData.length);
     // print(data.cv);
     // print(data.cv!.split('/').last);
