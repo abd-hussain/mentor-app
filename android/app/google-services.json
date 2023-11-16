@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "200690587482",
+    "project_id": "helpera",
+    "storage_bucket": "helpera.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200690587482:android:6e539b09f00ca2546d4563",
+        "android_client_info": {
+          "package_name": "com.helpera.mentor_app_dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaUmDSDdBp9-z_U8IN8tSPz9oRpvHWew8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

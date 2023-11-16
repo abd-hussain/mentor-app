@@ -1,3 +1,10 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "com.google.gms.google-services"
+}
+
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -21,9 +28,6 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 def keystoreProperties = new Properties()
@@ -34,16 +38,6 @@ def keystoreProperties = new Properties()
 
 android {
     compileSdkVersion 33
-    ndkVersion flutter.ndkVersion
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -61,7 +55,6 @@ android {
     }
 
     signingConfigs {
-    
        release {
             if (keystorePropertiesFile.exists()) {
                 keyAlias keystoreProperties['keyAlias']
@@ -104,7 +97,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test:runner:1.4.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation platform('com.google.firebase:firebase-bom:31.2.0')
+    implementation platform('com.google.firebase:firebase-bom:32.4.0')
     implementation 'com.google.android.gms:play-services-basement:18.1.0'
     implementation 'com.google.firebase:firebase-messaging:23.0.6'
     implementation "androidx.activity:activity-ktx:1.6.0-alpha05"

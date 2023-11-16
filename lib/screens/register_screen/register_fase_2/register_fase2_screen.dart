@@ -59,20 +59,30 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
               enableNextButton: snapshot.data!,
               nextPressed: () async {
                 final navigator = Navigator.of(context);
-                await bloc.box.put(TempFieldToRegistrtConstant.suffix, bloc.suffixNameController.text);
-                await bloc.box.put(TempFieldToRegistrtConstant.firstName, bloc.firstNameController.text);
-                await bloc.box.put(TempFieldToRegistrtConstant.lastName, bloc.lastNameController.text);
-                await bloc.box.put(TempFieldToRegistrtConstant.country, bloc.selectedCountry!.id.toString());
-                await bloc.box.put(TempFieldToRegistrtConstant.gender, bloc.genderController.text);
+                await bloc.box.put(TempFieldToRegistrtConstant.suffix,
+                    bloc.suffixNameController.text);
+                await bloc.box.put(TempFieldToRegistrtConstant.firstName,
+                    bloc.firstNameController.text);
+                await bloc.box.put(TempFieldToRegistrtConstant.lastName,
+                    bloc.lastNameController.text);
+                await bloc.box.put(TempFieldToRegistrtConstant.country,
+                    bloc.selectedCountry!.id.toString());
+                await bloc.box.put(TempFieldToRegistrtConstant.gender,
+                    bloc.genderController.text);
                 await bloc.box.put(TempFieldToRegistrtConstant.profileImage,
                     bloc.profileImage != null ? bloc.profileImage!.path : null);
-                await bloc.box
-                    .put(TempFieldToRegistrtConstant.idImage, bloc.iDImage != null ? bloc.iDImage!.path : null);
-                await bloc.box.put(TempFieldToRegistrtConstant.dateOfBirth, bloc.selectedDate);
-                await bloc.box.put(TempFieldToRegistrtConstant.phoneNumber, bloc.countryCode + bloc.mobileController);
+                await bloc.box.put(TempFieldToRegistrtConstant.idImage,
+                    bloc.iDImage != null ? bloc.iDImage!.path : null);
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.dateOfBirth, bloc.selectedDate);
+                await bloc.box.put(TempFieldToRegistrtConstant.phoneNumber,
+                    bloc.countryCode + bloc.mobileController);
 
-                await bloc.box.put(TempFieldToRegistrtConstant.referalCode,
-                    bloc.validateReferalCode.value == true ? bloc.referalCodeController.text : "");
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.referalCode,
+                    bloc.validateReferalCode.value == true
+                        ? bloc.referalCodeController.text
+                        : "");
                 await bloc.box.put(DatabaseFieldConstant.registrationStep, "3");
                 navigator.pushNamed(RoutesConstants.registerfaze3Screen);
               },
@@ -100,14 +110,18 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                           children: [
                             const SizedBox(height: 20),
                             Padding(
-                              padding: bloc.box.get(DatabaseFieldConstant.language) == "ar"
+                              padding: bloc.box.get(
+                                          DatabaseFieldConstant.language) ==
+                                      "ar"
                                   ? const EdgeInsets.only(right: 16)
                                   : const EdgeInsets.only(left: 16),
                               child: Row(
                                 children: [
                                   ImageHolderField(
                                       isFromNetwork: bloc.profileImageUrl != "",
-                                      urlImage: bloc.profileImageUrl == "" ? null : bloc.profileImageUrl,
+                                      urlImage: bloc.profileImageUrl == ""
+                                          ? null
+                                          : bloc.profileImageUrl,
                                       onAddImage: (file) {
                                         bloc.profileImage = file;
                                         bloc.validateFieldsForFaze2();
@@ -122,10 +136,13 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                                       children: [
                                         ValueListenableBuilder<Object>(
                                             valueListenable: bloc.listOfSuffix,
-                                            builder: (context, snapshot, child) {
+                                            builder:
+                                                (context, snapshot, child) {
                                               return SuffixField(
-                                                controller: bloc.suffixNameController,
-                                                listOfSuffix: bloc.listOfSuffix.value,
+                                                controller:
+                                                    bloc.suffixNameController,
+                                                listOfSuffix:
+                                                    bloc.listOfSuffix.value,
                                                 selectedSuffix: (p0) {
                                                   bloc.selectedSuffix = p0;
                                                   bloc.validateFieldsForFaze2();
@@ -135,18 +152,28 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                                         const SizedBox(height: 10),
                                         CustomTextField(
                                           controller: bloc.firstNameController,
-                                          hintText: AppLocalizations.of(context)!.firstnameprofile,
+                                          hintText:
+                                              AppLocalizations.of(context)!
+                                                  .firstnameprofile,
                                           keyboardType: TextInputType.name,
-                                          inputFormatters: [LengthLimitingTextInputFormatter(45)],
-                                          onChange: (text) => bloc.validateFieldsForFaze2(),
+                                          inputFormatters: [
+                                            LengthLimitingTextInputFormatter(45)
+                                          ],
+                                          onChange: (text) =>
+                                              bloc.validateFieldsForFaze2(),
                                         ),
                                         const SizedBox(height: 10),
                                         CustomTextField(
                                           controller: bloc.lastNameController,
-                                          hintText: AppLocalizations.of(context)!.lastnameprofile,
+                                          hintText:
+                                              AppLocalizations.of(context)!
+                                                  .lastnameprofile,
                                           keyboardType: TextInputType.name,
-                                          inputFormatters: [LengthLimitingTextInputFormatter(45)],
-                                          onChange: (text) => bloc.validateFieldsForFaze2(),
+                                          inputFormatters: [
+                                            LengthLimitingTextInputFormatter(45)
+                                          ],
+                                          onChange: (text) =>
+                                              bloc.validateFieldsForFaze2(),
                                         ),
                                       ],
                                     ),
@@ -155,17 +182,22 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                               ),
                             ),
                             const SizedBox(height: 16),
-                            Container(height: 1, color: const Color(0xffE8E8E8)),
+                            Container(
+                                height: 1, color: const Color(0xffE8E8E8)),
                             const SizedBox(height: 16),
                             Padding(
-                              padding: bloc.box.get(DatabaseFieldConstant.language) == "ar"
+                              padding: bloc.box.get(
+                                          DatabaseFieldConstant.language) ==
+                                      "ar"
                                   ? const EdgeInsets.only(right: 16)
                                   : const EdgeInsets.only(left: 16),
                               child: Row(
                                 children: [
                                   CustomAttachTextField(
                                       isFromNetwork: bloc.iDImageUrl != "",
-                                      urlImage: bloc.iDImageUrl == "" ? null : bloc.iDImageUrl,
+                                      urlImage: bloc.iDImageUrl == ""
+                                          ? null
+                                          : bloc.iDImageUrl,
                                       onAddImage: (file) {
                                         bloc.iDImage = file;
                                         bloc.validateFieldsForFaze2();
@@ -179,10 +211,13 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                                     child: Column(
                                       children: [
                                         ValueListenableBuilder<List<Country>>(
-                                            valueListenable: bloc.listOfCountries,
-                                            builder: (context, snapshot, child) {
+                                            valueListenable:
+                                                bloc.listOfCountries,
+                                            builder:
+                                                (context, snapshot, child) {
                                               return CountryField(
-                                                controller: bloc.countryController,
+                                                controller:
+                                                    bloc.countryController,
                                                 listOfCountries: snapshot,
                                                 selectedCountry: (p0) {
                                                   bloc.selectedCountry = p0;
@@ -193,7 +228,8 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                                         const SizedBox(height: 10),
                                         GenderField(
                                           controller: bloc.genderController,
-                                          onChange: (p0) => bloc.validateFieldsForFaze2(),
+                                          onChange: (p0) =>
+                                              bloc.validateFieldsForFaze2(),
                                         ),
                                       ],
                                     ),
@@ -202,26 +238,32 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                               ),
                             ),
                             const SizedBox(height: 16),
-                            Container(height: 1, color: const Color(0xffE8E8E8)),
+                            Container(
+                                height: 1, color: const Color(0xffE8E8E8)),
                             const SizedBox(height: 16),
                             const MobileHeader(),
                             ValueListenableBuilder<List<Country>>(
                                 valueListenable: bloc.listOfCountries,
                                 builder: (context, snapshot, child) {
                                   return MobileNumberField(
-                                      initialCountry: bloc.returnSelectedCountryFromDatabase(),
+                                      initialCountry: bloc
+                                          .returnSelectedCountryFromDatabase(),
                                       countryList: snapshot,
                                       selectedCountryCode: (selectedCode) {
                                         if (selectedCode != null) {
                                           bloc.country = selectedCode;
-                                          bloc.countryCode = selectedCode.dialCode!;
+                                          bloc.countryCode =
+                                              selectedCode.dialCode!;
                                         }
                                         bloc.validateFieldsForFaze2();
                                       },
                                       enteredPhoneNumber: (mobileNumber) {
-                                        if (bloc.country!.maxLength == mobileNumber.length) {
+                                        if (bloc.country!.maxLength ==
+                                            mobileNumber.length) {
                                           bloc.mobileController = mobileNumber;
-                                          bloc.validateMobileNumber(bloc.country!.dialCode! + bloc.mobileController);
+                                          bloc.validateMobileNumber(
+                                              bloc.country!.dialCode! +
+                                                  bloc.mobileController);
                                         }
                                       },
                                       validatePhoneNumber: (value) {
@@ -233,16 +275,21 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                                 valueListenable: bloc.mobileNumberErrorMessage,
                                 builder: (context, snapshot, child) {
                                   return CustomText(
-                                    title: snapshot ? AppLocalizations.of(context)!.mobilenumberalreadyinuse : "",
+                                    title: snapshot
+                                        ? AppLocalizations.of(context)!
+                                            .mobilenumberalreadyinuse
+                                        : "",
                                     fontSize: 14,
                                     textColor: Colors.red,
                                   );
                                 }),
                             const SizedBox(height: 16),
-                            Container(height: 1, color: const Color(0xffE8E8E8)),
+                            Container(
+                                height: 1, color: const Color(0xffE8E8E8)),
                             const SizedBox(height: 16),
                             Padding(
-                              padding: const EdgeInsets.only(left: 16, right: 16),
+                              padding:
+                                  const EdgeInsets.only(left: 16, right: 16),
                               child: CustomText(
                                 title: AppLocalizations.of(context)!.dbprofile,
                                 textAlign: TextAlign.start,
@@ -253,17 +300,20 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                             const SizedBox(height: 10),
                             DateOfBirthField(
                               selectedDate: bloc.selectedDate,
-                              language: bloc.box.get(DatabaseFieldConstant.language),
+                              language:
+                                  bloc.box.get(DatabaseFieldConstant.language),
                               dateSelected: (p0) {
                                 bloc.selectedDate = p0;
                                 bloc.validateFieldsForFaze2();
                               },
                             ),
                             const SizedBox(height: 16),
-                            Container(color: const Color(0xffE8E8E8), height: 1),
+                            Container(
+                                color: const Color(0xffE8E8E8), height: 1),
                             const SizedBox(height: 16),
                             Padding(
-                              padding: const EdgeInsets.only(left: 16, right: 16),
+                              padding:
+                                  const EdgeInsets.only(left: 16, right: 16),
                               child: CustomText(
                                 title: AppLocalizations.of(context)!.optional,
                                 textAlign: TextAlign.start,
@@ -274,9 +324,12 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                             const SizedBox(height: 10),
                             CustomTextField(
                               controller: bloc.referalCodeController,
-                              hintText: AppLocalizations.of(context)!.referalcodeprofile,
+                              hintText: AppLocalizations.of(context)!
+                                  .referalcodeprofile,
                               keyboardType: TextInputType.number,
-                              inputFormatters: [LengthLimitingTextInputFormatter(6)],
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(6)
+                              ],
                               onChange: (text) {
                                 bloc.validateFieldsForFaze2();
                               },
@@ -290,13 +343,18 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                                     return Row(
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 20, right: 20),
+                                          padding: const EdgeInsets.only(
+                                              left: 20, right: 20),
                                           child: CustomText(
                                             title: snapshot
-                                                ? AppLocalizations.of(context)!.codevalid
-                                                : AppLocalizations.of(context)!.codenotvalid,
+                                                ? AppLocalizations.of(context)!
+                                                    .codevalid
+                                                : AppLocalizations.of(context)!
+                                                    .codenotvalid,
                                             fontSize: 12,
-                                            textColor: snapshot ? Colors.green : Colors.red,
+                                            textColor: snapshot
+                                                ? Colors.green
+                                                : Colors.red,
                                           ),
                                         ),
                                       ],
