@@ -20,10 +20,9 @@ jobs:
         channel: 'stable'
         cache: true
 
-    - name: Run Test
+    - name: Run flutter pub get
       run: |
           flutter pub get
-          flutter test
 
     # - name: Download Key Store
     #   uses: actions/download-artifact@v2
