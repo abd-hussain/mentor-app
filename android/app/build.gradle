@@ -49,10 +49,8 @@ android {
             if (keystorePropertiesFile.exists()) {
                 keyAlias keystoreProperties['keyAlias']
                 keyPassword keystoreProperties['keyPassword']
-                storeFile file(keystoreProperties['storeFile'])
+                storeFile file('../key.jks')
                 storePassword keystoreProperties['storePassword']
-                v1SigningEnabled true
-                v2SigningEnabled true
             }   
        }
    }
