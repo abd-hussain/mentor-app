@@ -14,11 +14,20 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v2
 
+    - name: Set up key.properties
+      run: |
+        echo "keyPassword=${{ secrets.KEY_PASSWORD }}" > android/key.properties
+        echo "storePassword=${{ secrets.STORE_PASSWORD }}" >> android/key.properties
+        echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
+        echo "${{ secrets.KEY_STORE }}" | base64 --decode > android/key.jks
+
     - name: Setup Flutter Env
       uses: subosito/flutter-action@v2
       with:
         channel: 'stable'
         cache: true
+
+    
 
     - name: Run flutter pub get
       run: |
