@@ -44,37 +44,9 @@ jobs:
     - name: Build and Deploy
       run: |
         flutter pub get
-        make deploy-android
-
-
-
-    # - name: Download Key Store
-    #   uses: actions/download-artifact@v2
-    #   with:
-    #     name: Development_Key_Store_File
-
-    # //TODO
-    # - name: Decode Service Account Key JSON File
-    #   uses: timheuer/base64-to-file@v1
-    #   id: service_account_json_file
-    #   with:
-    #     fileName: "serviceAccount.json"
-    #     encodedString: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
-
-    # //TODO
-    # - name: Checking Keys
-    #   run: |
-    #     cd android
-    #     echo -e "storePassword=${{ secrets.KeyStorePassword }}\nkeyPassword=${{ secrets.KeyStorePassword }}\nkeyAlias=key0\nstoreFile=$GITHUB_WORKSPACE/Development_Key_Store_File" >> key.properties
-    #     cat key.properties
-    #   env:
-    #     KeyStorePassword: ${{ secrets.Development_Key_Store_File_Password }}
-
-    # - name: ⚙️ Setup Flutter
-    #   uses: subosito/flutter-action@v2
-    #   with:
-    #     channel: 'stable'
-    #     cache: true
+        @echo "╠ Sending Android Build to Closed Testing..."
+        cd android && bundle install
+        cd android/fastlane && bundle exec fastlane deploy
 
     # - name: Install SSH Key
     #   uses: webfactory/ssh-agent@v0.4
@@ -92,9 +64,6 @@ jobs:
 
     # - name: Install Fastlane
     #   run: gem install fastlane
-
-    # - name: Update Fastlane
-    #   run: gem update fastlane
 
     # - name: Fastlane Doctor
     #   run: |
@@ -165,3 +134,10 @@ jobs:
           with:
             channel: stable
             cache: true
+
+  web:
+      runs-on: ubuntu-latest
+          
+      steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
