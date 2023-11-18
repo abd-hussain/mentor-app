@@ -7,23 +7,36 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: macos-12
+  test:
+    runs-on: ubuntu-latest
 
     steps:
-    - name: pulling git repo
+    - name: Checkout Code
       uses: actions/checkout@v2
+
+    - name: Setup Flutter Env
+      uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+        cache: true
+
+    - name: Run Test
+      run: |
+          flutter pub get
+          flutter test
 
     # - name: Download Key Store
     #   uses: actions/download-artifact@v2
     #   with:
     #     name: Development_Key_Store_File
-    - name: Decode Service Account Key JSON File
-      uses: timheuer/base64-to-file@v1
-      id: service_account_json_file
-      with:
-        fileName: "serviceAccount.json"
-        encodedString: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
+
+    # //TODO
+    # - name: Decode Service Account Key JSON File
+    #   uses: timheuer/base64-to-file@v1
+    #   id: service_account_json_file
+    #   with:
+    #     fileName: "serviceAccount.json"
+    #     encodedString: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
 
     # //TODO
     # - name: Checking Keys
@@ -34,11 +47,11 @@ jobs:
     #   env:
     #     KeyStorePassword: ${{ secrets.Development_Key_Store_File_Password }}
 
-    - name: ⚙️ Setup Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        channel: 'stable'
-        cache: true
+    # - name: ⚙️ Setup Flutter
+    #   uses: subosito/flutter-action@v2
+    #   with:
+    #     channel: 'stable'
+    #     cache: true
 
     # - name: Install SSH Key
     #   uses: webfactory/ssh-agent@v0.4
@@ -54,11 +67,11 @@ jobs:
     #     grep -rl "'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '10.11.0'" ./ | xargs sed -i '' "s#'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '10.11.0'#'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '$latest_tag'#g"
     #     cd ..
 
-    - name: Install Fastlane
-      run: gem install fastlane
+    # - name: Install Fastlane
+    #   run: gem install fastlane
 
-    - name: Update Fastlane
-      run: gem update fastlane
+    # - name: Update Fastlane
+    #   run: gem update fastlane
 
     # - name: Fastlane Doctor
     #   run: |

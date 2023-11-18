@@ -1,5 +1,6 @@
 default_platform(:android)
 platform :android do
+
   desc "Set Gradle Version and Build Number"
   lane :set_full_version do 
         version = flutter_version()
@@ -12,6 +13,8 @@ platform :android do
   desc "Deploy a new version to the Google Play"
   lane :deploy do
     begin
+      set_full_version()
+
       gradle(task: "clean bundle")
       gradle(
         task: "bundle",
@@ -24,7 +27,6 @@ platform :android do
         skip_upload_images: true,
         skip_upload_screenshots: true,
         release_status: "draft",
-        version_code: flutter_version()["version_code"],
       )
     end
   end
