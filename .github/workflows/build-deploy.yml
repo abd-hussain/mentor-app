@@ -44,9 +44,7 @@ jobs:
     - name: Build and Deploy
       run: |
         flutter pub get
-        @echo "╠ Sending Android Build to Closed Testing..."
-        cd android && bundle install
-        cd android/fastlane && bundle exec fastlane deploy
+        make deploy-android
 
     # - name: Install SSH Key
     #   uses: webfactory/ssh-agent@v0.4
