@@ -137,11 +137,11 @@ jobs:
         #   run: |
         #       echo "${{ secrets.APP_STORE_CONNECT }}" | base64 --decode > ios/app_store_connect.json
       
-        - name: Setup Fastlane
-          uses: ruby/setup-ruby@v1
-          with:
-              ruby-version: 2.6
-              rubygems: latest
+        # - name: Setup Fastlane
+        #   uses: ruby/setup-ruby@v1
+        #   with:
+        #       ruby-version: 2.6
+        #       rubygems: latest
       
         # - name: Build and Deploy
         #   run: |
