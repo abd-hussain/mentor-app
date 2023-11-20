@@ -2,10 +2,10 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
-import 'package:flutter_sms/flutter_sms.dart';
+// import 'package:flutter_sms/flutter_sms.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
-import 'package:mentor_app/utils/constants/constant.dart';
+// import 'package:mentor_app/utils/constants/constant.dart';
 
 class ListOfContactsWidget extends StatefulWidget {
   final List<Contact> contacts;
@@ -64,12 +64,12 @@ class _ListOfContactsWidgetState extends State<ListOfContactsWidget> {
                 }
               }
 
-              if (await canSendSMS()) {
-                if (context.mounted) {
-                  String message = "${AppLocalizations.of(context)!.smsmessage} ${AppConstant.appLink}";
-                  await sendSMS(message: message, recipients: recipents, sendDirect: false);
-                }
-              }
+              // if (await canSendSMS()) {
+              //   if (context.mounted) {
+              //     String message = "${AppLocalizations.of(context)!.smsmessage} ${AppConstant.appLink}";
+              //     await sendSMS(message: message, recipients: recipents, sendDirect: false);
+              //   }
+              // }
             },
           ),
           const SizedBox(height: 20)
