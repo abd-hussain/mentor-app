@@ -46,18 +46,18 @@ jobs:
         flutter pub get
         make deploy-android
 
-  # ios:
-  #     runs-on: macos-latest
+  ios:
+      runs-on: macos-latest
 
-  #     steps:
-  #       - name: Checkout Code
-  #         uses: actions/checkout@v3
+      steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
     
-  #       - name: Setup Flutter
-  #         uses: subosito/flutter-action@v2
-  #         with:
-  #           channel: stable
-  #           cache: true
+        - name: Setup Flutter
+          uses: subosito/flutter-action@v2
+          with:
+            channel: stable
+            cache: true
 
         # - name: Set up App Store Connect
         #   run: |
@@ -77,18 +77,18 @@ jobs:
         #       MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         #       MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.GIT_BASIC_AUTHORIZATION }}
 
-  # web:
-  #     runs-on: ubuntu-latest
+  web:
+      runs-on: ubuntu-latest
           
-  #     steps:
-  #       - name: Checkout Code
-  #         uses: actions/checkout@v3
+      steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
   
-  #       - name: Setup Flutter
-  #         uses: subosito/flutter-action@v2
-  #         with:
-  #           channel: 'stable'
-  #           cache: true
+        - name: Setup Flutter
+          uses: subosito/flutter-action@v2
+          with:
+            channel: 'stable'
+            cache: true
   
   #       - name: Make Web Build
   #         run: |
@@ -103,25 +103,25 @@ jobs:
         #     channelId: live
         #     projectId: checklist-6a64e
       
-  # tag:
-  #     runs-on: ubuntu-latest
-  #     needs: [android, ios, web]
+  tag:
+      runs-on: ubuntu-latest
+      needs: [android, ios, web]
           
-  #     steps:
-  #       - name: Checkout Code
-  #         uses: actions/checkout@v3
+      steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
           
-  #       - name: Get Flutter Version
-  #         run: |
-  #           versionName=`cat pubspec.yaml | grep -o 'version:[^:]*' | cut -f2 -d":" | xargs`
-  #           echo "VERSION_NAME=v$versionName" >> $GITHUB_ENV
+        - name: Get Flutter Version
+          run: |
+            versionName=`cat pubspec.yaml | grep -o 'version:[^:]*' | cut -f2 -d":" | xargs`
+            echo "VERSION_NAME=v$versionName" >> $GITHUB_ENV
           
-        # - name: Create Tag and Release
-        #   uses: "marvinpinto/action-automatic-releases@latest"
-        #   with:
-        #     repo_token: ${{ secrets.GITHUB_TOKEN }}
-        #     title: ${{ env.VERSION_NAME }}
-        #     automatic_release_tag: ${{ env.VERSION_NAME }}
-        #     draft: false
-        #     prerelease: false
+        - name: Create Tag and Release
+          uses: "marvinpinto/action-automatic-releases@latest"
+          with:
+            repo_token: ${{ secrets.GITHUB_TOKEN }}
+            # title: ${{ env.VERSION_NAME }}
+            # automatic_release_tag: ${{ env.VERSION_NAME }}
+            draft: false
+            prerelease: false
     
