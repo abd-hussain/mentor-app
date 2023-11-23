@@ -1,43 +1,26 @@
 {
   "project_info": {
-    "project_number": "929349489874",
-    "project_id": "helpera-9bef4",
-    "storage_bucket": "helpera-9bef4.appspot.com"
+    "project_number": "200690587482",
+    "project_id": "helpera",
+    "storage_bucket": "helpera.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:929349489874:android:2138a84dec8746cc2fc90b",
+        "mobilesdk_app_id": "1:200690587482:android:6e539b09f00ca2546d4563",
         "android_client_info": {
-          "package_name": "com.example.client_app_dev"
+          "package_name": "com.helpera.mentor_app_dev"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "929349489874-su9tk72nlleji78tqgnfsbm2gqeq14ap.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBZivrxQbf9T67eF2nAwwTK6c9Uqd5oUkI"
+          "current_key": "AIzaSyDaUmDSDdBp9-z_U8IN8tSPz9oRpvHWew8"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "929349489874-su9tk72nlleji78tqgnfsbm2gqeq14ap.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "929349489874-6sps58evdpl3amevs9asscp2pphevgb8.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.clientApp"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

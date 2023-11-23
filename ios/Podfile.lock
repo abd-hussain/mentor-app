@@ -628,40 +628,40 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
-  - agora_rtc_engine (6.2.2):
-    - AgoraIrisRTC_iOS (= 4.2.2-build.1)
-    - AgoraRtcEngine_iOS (= 4.2.2)
+  - agora_rtc_engine (6.2.6):
+    - AgoraIrisRTC_iOS (= 4.2.6-build.3)
+    - AgoraRtcEngine_iOS (= 4.2.6)
     - Flutter
-  - AgoraIrisRTC_iOS (4.2.2-build.1)
-  - AgoraRtcEngine_iOS (4.2.2):
-    - AgoraRtcEngine_iOS/AIAEC (= 4.2.2)
-    - AgoraRtcEngine_iOS/AINS (= 4.2.2)
-    - AgoraRtcEngine_iOS/AudioBeauty (= 4.2.2)
-    - AgoraRtcEngine_iOS/ClearVision (= 4.2.2)
-    - AgoraRtcEngine_iOS/ContentInspect (= 4.2.2)
-    - AgoraRtcEngine_iOS/DRM (= 4.2.2)
-    - AgoraRtcEngine_iOS/FaceDetection (= 4.2.2)
-    - AgoraRtcEngine_iOS/ReplayKit (= 4.2.2)
-    - AgoraRtcEngine_iOS/RtcBasic (= 4.2.2)
-    - AgoraRtcEngine_iOS/SpatialAudio (= 4.2.2)
-    - AgoraRtcEngine_iOS/VideoCodecDec (= 4.2.2)
-    - AgoraRtcEngine_iOS/VideoCodecEnc (= 4.2.2)
-    - AgoraRtcEngine_iOS/VirtualBackground (= 4.2.2)
-    - AgoraRtcEngine_iOS/VQA (= 4.2.2)
-  - AgoraRtcEngine_iOS/AIAEC (4.2.2)
-  - AgoraRtcEngine_iOS/AINS (4.2.2)
-  - AgoraRtcEngine_iOS/AudioBeauty (4.2.2)
-  - AgoraRtcEngine_iOS/ClearVision (4.2.2)
-  - AgoraRtcEngine_iOS/ContentInspect (4.2.2)
-  - AgoraRtcEngine_iOS/DRM (4.2.2)
-  - AgoraRtcEngine_iOS/FaceDetection (4.2.2)
-  - AgoraRtcEngine_iOS/ReplayKit (4.2.2)
-  - AgoraRtcEngine_iOS/RtcBasic (4.2.2)
-  - AgoraRtcEngine_iOS/SpatialAudio (4.2.2)
-  - AgoraRtcEngine_iOS/VideoCodecDec (4.2.2)
-  - AgoraRtcEngine_iOS/VideoCodecEnc (4.2.2)
-  - AgoraRtcEngine_iOS/VirtualBackground (4.2.2)
-  - AgoraRtcEngine_iOS/VQA (4.2.2)
+  - AgoraIrisRTC_iOS (4.2.6-build.3)
+  - AgoraRtcEngine_iOS (4.2.6):
+    - AgoraRtcEngine_iOS/AIAEC (= 4.2.6)
+    - AgoraRtcEngine_iOS/AINS (= 4.2.6)
+    - AgoraRtcEngine_iOS/AudioBeauty (= 4.2.6)
+    - AgoraRtcEngine_iOS/ClearVision (= 4.2.6)
+    - AgoraRtcEngine_iOS/ContentInspect (= 4.2.6)
+    - AgoraRtcEngine_iOS/DRM (= 4.2.6)
+    - AgoraRtcEngine_iOS/FaceDetection (= 4.2.6)
+    - AgoraRtcEngine_iOS/ReplayKit (= 4.2.6)
+    - AgoraRtcEngine_iOS/RtcBasic (= 4.2.6)
+    - AgoraRtcEngine_iOS/SpatialAudio (= 4.2.6)
+    - AgoraRtcEngine_iOS/VideoCodecDec (= 4.2.6)
+    - AgoraRtcEngine_iOS/VideoCodecEnc (= 4.2.6)
+    - AgoraRtcEngine_iOS/VirtualBackground (= 4.2.6)
+    - AgoraRtcEngine_iOS/VQA (= 4.2.6)
+  - AgoraRtcEngine_iOS/AIAEC (4.2.6)
+  - AgoraRtcEngine_iOS/AINS (4.2.6)
+  - AgoraRtcEngine_iOS/AudioBeauty (4.2.6)
+  - AgoraRtcEngine_iOS/ClearVision (4.2.6)
+  - AgoraRtcEngine_iOS/ContentInspect (4.2.6)
+  - AgoraRtcEngine_iOS/DRM (4.2.6)
+  - AgoraRtcEngine_iOS/FaceDetection (4.2.6)
+  - AgoraRtcEngine_iOS/ReplayKit (4.2.6)
+  - AgoraRtcEngine_iOS/RtcBasic (4.2.6)
+  - AgoraRtcEngine_iOS/SpatialAudio (4.2.6)
+  - AgoraRtcEngine_iOS/VideoCodecDec (4.2.6)
+  - AgoraRtcEngine_iOS/VideoCodecEnc (4.2.6)
+  - AgoraRtcEngine_iOS/VirtualBackground (4.2.6)
+  - AgoraRtcEngine_iOS/VQA (4.2.6)
   - BoringSSL-GRPC (0.0.24):
     - BoringSSL-GRPC/Implementation (= 0.0.24)
     - BoringSSL-GRPC/Interface (= 0.0.24)
@@ -988,7 +988,7 @@ PODS:
   - PromisesObjC (2.3.1)
   - PromisesSwift (2.3.1):
     - PromisesObjC (= 2.3.1)
-  - rate_my_app (1.1.4):
+  - rate_my_app (2.0.0):
     - Flutter
   - ReachabilitySwift (5.0.0)
   - SDWebImage (5.18.5):
@@ -1002,7 +1002,8 @@ PODS:
     - Flutter
   - video_player_avfoundation (0.0.1):
     - Flutter
-  - wakelock (0.0.1):
+    - FlutterMacOS
+  - wakelock_plus (0.0.1):
     - Flutter
   - webview_flutter_wkwebview (0.0.1):
     - Flutter
@@ -1030,8 +1031,8 @@ DEPENDENCIES:
   - rate_my_app (from `.symlinks/plugins/rate_my_app/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
-  - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/ios`)
-  - wakelock (from `.symlinks/plugins/wakelock/ios`)
+  - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/darwin`)
+  - wakelock_plus (from `.symlinks/plugins/wakelock_plus/ios`)
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
 SPEC REPOS:
@@ -1119,23 +1120,23 @@ EXTERNAL SOURCES:
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
   video_player_avfoundation:
-    :path: ".symlinks/plugins/video_player_avfoundation/ios"
-  wakelock:
-    :path: ".symlinks/plugins/wakelock/ios"
+    :path: ".symlinks/plugins/video_player_avfoundation/darwin"
+  wakelock_plus:
+    :path: ".symlinks/plugins/wakelock_plus/ios"
   webview_flutter_wkwebview:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
   abseil: 926fb7a82dc6d2b8e1f2ed7f3a718bce691d1e46
-  agora_rtc_engine: 667a7de14f35858a31b0c64cd54042a2158ef198
-  AgoraIrisRTC_iOS: 7e71322c06db6c29ceaf89a964fb8b2700a75001
-  AgoraRtcEngine_iOS: c510de329cd905daff3f01fa4c872ea6d5eaee23
+  agora_rtc_engine: 5b2a7c221e1f3dfb8dee0fb0659f269be24fa81b
+  AgoraIrisRTC_iOS: 8346499b82968a4967e3d0bec2cf14bf7c0c3f76
+  AgoraRtcEngine_iOS: ac647332ad8f86d79cf810601c9e62b28c3a4de0
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
   cloud_firestore: c0e21891b99d3ac3d91abfe476ac88830a7c9939
-  connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
+  connectivity_plus: bf0076dd84a130856aa636df1c71ccaff908fa1d
   DKImagePickerController: b512c28220a2b8ac7419f21c491fc8534b7601ac
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
-  file_picker: ce3938a0df3cc1ef404671531facef740d03f920
+  file_picker: 15fd9539e4eb735dc54bae8c0534a7a9511a03de
   Firebase: f4ac0b02927af9253ae094d23deecf0890da7374
   firebase_analytics: d6f520c1030d2c1215851f6e332d39a489a30bd2
   firebase_core: efc9455611b8769fa90fbdae5da182600bd6901c
@@ -1173,19 +1174,19 @@ SPEC CHECKSUMS:
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
   local_auth_ios: c6cf091ded637a88f24f86a8875d8b0f526e2605
   nanopb: d4d75c12cd1316f4a64e3c6963f879ecd4b5e0d5
-  package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
+  package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
   permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   PromisesSwift: 28dca69a9c40779916ac2d6985a0192a5cb4a265
-  rate_my_app: e249ec0751c276811746ff89558c23dc0da39f0c
+  rate_my_app: 80fba94c4885cd31738231b7b1f51c1ad726f5c7
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SDWebImage: 7ac2b7ddc5e8484c79aa90fc4e30b149d6a2c88f
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
   SwiftyGif: 93a1cc87bf3a51916001cf8f3d63835fb64c819f
-  url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
-  video_player_avfoundation: 81e49bb3d9fb63dccf9fa0f6d877dc3ddbeac126
-  wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f
+  url_launcher_ios: bf5ce03e0e2088bad9cc378ea97fa0ed5b49673b
+  video_player_avfoundation: e9e6f9cae7d7a6d9b43519b0aab382bca60fcfd1
+  wakelock_plus: 8b09852c8876491e4b6d179e17dfe2a0b5f60d47
   webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
 
 PODFILE CHECKSUM: 81ce04a9b04edbd7c0d6342795e99acbf42c4696
