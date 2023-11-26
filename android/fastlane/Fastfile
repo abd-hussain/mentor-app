@@ -31,6 +31,7 @@ platform :android do
     upload_to_play_store(
       aab: "../build/app/outputs/bundle/release/app-release.aab",
       track: "alpha"
+      skip_upload_metadata: false
     )
   end
 end
