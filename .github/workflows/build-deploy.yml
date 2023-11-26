@@ -90,10 +90,10 @@ jobs:
             channel: 'stable'
             cache: true
   
-  #       - name: Make Web Build
-  #         run: |
-  #           flutter pub get
-  #           flutter build web
+        - name: Make Web Build
+          run: |
+            flutter pub get
+            flutter build web
   
         # - name: Deploy Web Build
         #   uses: FirebaseExtended/action-hosting-deploy@v0
@@ -120,8 +120,8 @@ jobs:
           uses: "marvinpinto/action-automatic-releases@latest"
           with:
             repo_token: ${{ secrets.GITHUB_TOKEN }}
-            # title: ${{ env.VERSION_NAME }}
-            # automatic_release_tag: ${{ env.VERSION_NAME }}
+            title: ${{ vars.VERSION_NAME }}
+            automatic_release_tag: ${{ vars.VERSION_NAME }}
             draft: false
             prerelease: false
     
