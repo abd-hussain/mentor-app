@@ -3,7 +3,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mentor_app/utils/adds_helper.dart';
 
 class AddMobBanner extends StatefulWidget {
-  const AddMobBanner({Key? key}) : super(key: key);
+  const AddMobBanner({super.key});
 
   @override
   State<AddMobBanner> createState() => _AddMobBannerState();
@@ -15,8 +15,8 @@ class _AddMobBannerState extends State<AddMobBanner> {
 
   @override
   void didChangeDependencies() {
-    MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
-        testDeviceIds: ['33BE2250B43518CCDA7DE426D04EE231']));
+    MobileAds.instance
+        .updateRequestConfiguration(RequestConfiguration(testDeviceIds: ['33BE2250B43518CCDA7DE426D04EE231']));
 
     _bannerAd = BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,

@@ -13,7 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/shared_widget/loading_view.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
-import 'package:mentor_app/utils/push_notifications/firebase_cloud_messaging_util.dart';
+// import 'package:mentor_app/utils/push_notifications/firebase_cloud_messaging_util.dart';
 import 'package:mentor_app/utils/push_notifications/notification_manager.dart';
 import 'package:mentor_app/utils/routes.dart';
 
@@ -35,9 +35,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
     NotificationManager.init(context: context);
 
-    Future.delayed(const Duration(seconds: 2), () {
-      FirebaseCloudMessagingUtil.initConfigure();
-    });
+    // Future.delayed(const Duration(seconds: 2), () {
+    //   FirebaseCloudMessagingUtil.initConfigure();
+    // });
     super.didChangeDependencies();
   }
 
@@ -89,26 +89,22 @@ class _LoginScreenState extends State<LoginScreen> {
                                     controller: bloc.emailController,
                                     onClear: () {
                                       bloc.emailController.clear();
-                                      bloc.showHideEmailClearNotifier.value =
-                                          false;
+                                      bloc.showHideEmailClearNotifier.value = false;
                                       bloc.fieldsValidations.value = false;
                                     },
                                     onchange: () => bloc.fieldValidation(),
-                                    showHideEmailClearNotifier:
-                                        bloc.showHideEmailClearNotifier,
+                                    showHideEmailClearNotifier: bloc.showHideEmailClearNotifier,
                                   ),
                                   const SizedBox(height: 20),
                                   PasswordField(
                                     controller: bloc.passwordController,
                                     onClear: () {
                                       bloc.passwordController.clear();
-                                      bloc.showHidePasswordClearNotifier.value =
-                                          false;
+                                      bloc.showHidePasswordClearNotifier.value = false;
                                       bloc.fieldsValidations.value = false;
                                     },
                                     onchange: () => bloc.fieldValidation(),
-                                    showHidePasswordClearNotifier:
-                                        bloc.showHidePasswordClearNotifier,
+                                    showHidePasswordClearNotifier: bloc.showHidePasswordClearNotifier,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(16),
@@ -129,49 +125,32 @@ class _LoginScreenState extends State<LoginScreen> {
                                       valueListenable: bloc.fieldsValidations,
                                       builder: (context, snapshot, child) {
                                         return CustomButton(
-                                          padding: const EdgeInsets.only(
-                                              left: 16, right: 16),
-                                          buttonTitle:
-                                              AppLocalizations.of(context)!
-                                                  .login,
+                                          padding: const EdgeInsets.only(left: 16, right: 16),
+                                          buttonTitle: AppLocalizations.of(context)!.login,
                                           enableButton: snapshot,
                                           onTap: () {
-                                            FocusScope.of(context)
-                                                .requestFocus(FocusNode());
+                                            FocusScope.of(context).requestFocus(FocusNode());
                                             bloc.doLoginCall(
                                               context: context,
-                                              userName: bloc
-                                                  .emailController.text
-                                                  .trim(),
-                                              password:
-                                                  bloc.passwordController.text,
+                                              userName: bloc.emailController.text.trim(),
+                                              password: bloc.passwordController.text,
                                             );
                                           },
                                         );
                                       }),
-                                  ValueListenableBuilder<
-                                          AuthenticationBiometricType>(
-                                      valueListenable:
-                                          bloc.biometricResultNotifier,
+                                  ValueListenableBuilder<AuthenticationBiometricType>(
+                                      valueListenable: bloc.biometricResultNotifier,
                                       builder: (context, snapshot, child) {
-                                        return (snapshot.isAvailable &&
-                                                bloc.biometricStatus)
+                                        return (snapshot.isAvailable && bloc.biometricStatus)
                                             ? BiometrincLoginView(
                                                 biometricType: snapshot.type,
                                                 onPress: () async {
-                                                  if (!bloc
-                                                      .isBiometricAppeared) {
+                                                  if (!bloc.isBiometricAppeared) {
                                                     if (context.mounted) {
-                                                      await bloc.box.get(
-                                                                  DatabaseFieldConstant
-                                                                      .biometricStatus) ==
+                                                      await bloc.box.get(DatabaseFieldConstant.biometricStatus) ==
                                                               'true'
-                                                          ? await bloc
-                                                              .tryToAuthintecateUserByBiometric(
-                                                                  context)
-                                                          : ScaffoldMessenger
-                                                                  .of(context)
-                                                              .showSnackBar(
+                                                          ? await bloc.tryToAuthintecateUserByBiometric(context)
+                                                          : ScaffoldMessenger.of(context).showSnackBar(
                                                               const SnackBar(
                                                                 content: Text(
                                                                     "Login_BiometricMssage_BiometricLoginIsDisabled"),
@@ -192,8 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: const EdgeInsets.fromLTRB(50, 16, 50, 5),
                               child: CustomText(
                                 textAlign: TextAlign.center,
-                                title: AppLocalizations.of(context)!
-                                    .dontHaveAccount,
+                                title: AppLocalizations.of(context)!.dontHaveAccount,
                                 textColor: const Color(0xff212C34),
                                 fontSize: 14,
                               ),
@@ -202,66 +180,43 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: const EdgeInsets.fromLTRB(50, 0, 50, 16),
                               child: InkWell(
                                 onTap: () {
-                                  final String step = bloc.box.get(
-                                          DatabaseFieldConstant
-                                              .registrationStep) ??
-                                      "0";
+                                  final String step = bloc.box.get(DatabaseFieldConstant.registrationStep) ?? "0";
                                   final int stepNum = int.parse(step);
 
-                                  final bottomsheet =
-                                      RegisterInfoBottomSheetsUtil(
-                                          context: context);
+                                  final bottomsheet = RegisterInfoBottomSheetsUtil(context: context);
                                   bottomsheet.infoBottomSheet(
                                       step: stepNum,
                                       openNext: () {
                                         switch (stepNum) {
                                           case 2:
-                                            Navigator.of(context,
-                                                    rootNavigator: true)
-                                                .pushNamed(RoutesConstants
-                                                    .registerfaze2Screen);
+                                            Navigator.of(context, rootNavigator: true)
+                                                .pushNamed(RoutesConstants.registerfaze2Screen);
                                             break;
                                           case 3:
-                                            Navigator.of(context,
-                                                    rootNavigator: true)
-                                                .pushNamed(RoutesConstants
-                                                    .registerfaze3Screen);
+                                            Navigator.of(context, rootNavigator: true)
+                                                .pushNamed(RoutesConstants.registerfaze3Screen);
                                             break;
                                           case 4:
-                                            Navigator.of(context,
-                                                    rootNavigator: true)
-                                                .pushNamed(RoutesConstants
-                                                    .registerfaze4Screen);
+                                            Navigator.of(context, rootNavigator: true)
+                                                .pushNamed(RoutesConstants.registerfaze4Screen);
                                             break;
                                           case 5:
-                                            Navigator.of(context,
-                                                    rootNavigator: true)
-                                                .pushNamed(RoutesConstants
-                                                    .registerfaze5Screen);
+                                            Navigator.of(context, rootNavigator: true)
+                                                .pushNamed(RoutesConstants.registerfaze5Screen);
                                             break;
                                           case 6:
-                                            Navigator.of(context,
-                                                    rootNavigator: true)
-                                                .pushNamed(RoutesConstants
-                                                    .registerfaze6Screen);
+                                            Navigator.of(context, rootNavigator: true)
+                                                .pushNamed(RoutesConstants.registerfaze6Screen);
                                             break;
                                           case 7:
-                                            Navigator.of(context,
-                                                    rootNavigator: true)
-                                                .pushNamed(RoutesConstants
-                                                    .registerfinalfazeScreen);
+                                            Navigator.of(context, rootNavigator: true)
+                                                .pushNamed(RoutesConstants.registerfinalfazeScreen);
                                             break;
                                           default:
-                                            bottomsheet.termsBottomSheet(
-                                                openNext: () {
-                                              bloc.box.put(
-                                                  DatabaseFieldConstant
-                                                      .registrationStep,
-                                                  "2");
-                                              Navigator.of(context,
-                                                      rootNavigator: true)
-                                                  .pushNamed(RoutesConstants
-                                                      .registerfaze2Screen);
+                                            bottomsheet.termsBottomSheet(openNext: () {
+                                              bloc.box.put(DatabaseFieldConstant.registrationStep, "2");
+                                              Navigator.of(context, rootNavigator: true)
+                                                  .pushNamed(RoutesConstants.registerfaze2Screen);
                                             });
                                             break;
                                         }
@@ -271,8 +226,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   textAlign: TextAlign.center,
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
-                                  title: AppLocalizations.of(context)!
-                                      .registerAccount,
+                                  title: AppLocalizations.of(context)!.registerAccount,
                                   textColor: const Color(0xff0059FF),
                                 ),
                               ),

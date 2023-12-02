@@ -21,13 +21,13 @@ dependencies:
     sdk: flutter
 
   # [UNKNOWN PLATFORMS]
-  firebase_core: ^2.17.0
-  firebase_analytics: ^10.0.3
-  firebase_crashlytics: ^3.0.3
-  firebase_messaging: ^14.7.4
-  cloud_firestore: ^4.13.1
-  firebase_remote_config: ^4.3.4
-  firebase_performance: ^0.9.0+11
+  # firebase_core: ^2.17.0
+  # firebase_analytics: ^10.0.3
+  # firebase_crashlytics: ^3.0.3
+  # firebase_messaging: ^14.7.4
+  # cloud_firestore: ^4.13.1
+  # firebase_remote_config: ^4.3.4
+  # firebase_performance: ^0.9.0+11
   
   chewie: ^1.7.1
   video_player: ^2.8.1
