@@ -3,7 +3,6 @@ name: CI/CD Deploy
 on:
   push:
     branches:
-      - dev
       - main
 
 jobs:
@@ -90,10 +89,10 @@ jobs:
             channel: 'stable'
             cache: true
   
-        - name: Make Web Build
-          run: |
-            flutter pub get
-            flutter build web
+        # - name: Make Web Build
+        #   run: |
+        #     flutter pub get
+        #     flutter build web
   
         # - name: Deploy Web Build
         #   uses: FirebaseExtended/action-hosting-deploy@v0
@@ -105,7 +104,7 @@ jobs:
       
   tag:
       runs-on: ubuntu-latest
-      needs: [android, ios, web]
+      needs: [android] # needs: [android, ios, web]
           
       steps:
         - name: Checkout Code
