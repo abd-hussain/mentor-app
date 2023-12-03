@@ -2,11 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mentor_app/screens/register_screen/widgets/points_view.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mentor_app/shared_widget/points_in_last_view.dart';
 import 'package:mentor_app/utils/constants/constant.dart';
+import 'package:mentor_app/utils/routes.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class RegisterInfoBottomSheetsUtil {
@@ -16,8 +17,7 @@ class RegisterInfoBottomSheetsUtil {
     required this.context,
   });
 
-  Future infoBottomSheet(
-      {required int step, required Function() openNext}) async {
+  Future infoBottomSheet({required int step, required Function() openNext}) async {
     return await showModalBottomSheet(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
@@ -32,15 +32,12 @@ class RegisterInfoBottomSheetsUtil {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (context) {
         return Padding(
-          padding:
-              const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
+          padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
           child: Wrap(
             children: [
               Row(
                 children: [
-                  const SizedBox(
-                    width: 50,
-                  ),
+                  const SizedBox(width: 50),
                   const Expanded(child: SizedBox()),
                   CustomText(
                     title: AppLocalizations.of(context)!.registernow,
@@ -57,7 +54,6 @@ class RegisterInfoBottomSheetsUtil {
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
               Center(
                 child: SizedBox(
                   height: 150,
@@ -85,46 +81,69 @@ class RegisterInfoBottomSheetsUtil {
                 ),
               ),
               const SizedBox(height: 20),
-              PointsInLastViewBooking(
+              PointsViewBooking(
                 number: step >= 1 ? "*" : "1",
                 text: AppLocalizations.of(context)!.registerstep1,
                 textColor: step >= 1 ? Colors.green : const Color(0xff444444),
+                onPress: () {
+                  final bottomsheet = RegisterInfoBottomSheetsUtil(context: context);
+
+                  bottomsheet.termsBottomSheet(openNext: () {});
+                },
               ),
               const SizedBox(height: 20),
-              PointsInLastViewBooking(
+              PointsViewBooking(
                 number: step >= 2 ? "*" : "2",
                 text: AppLocalizations.of(context)!.registerstep2,
                 textColor: step >= 2 ? Colors.green : const Color(0xff444444),
+                onPress: () {
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfaze2Screen);
+                },
               ),
               const SizedBox(height: 20),
-              PointsInLastViewBooking(
+              PointsViewBooking(
                 number: step >= 3 ? "*" : "3",
                 text: AppLocalizations.of(context)!.registerstep3,
                 textColor: step >= 3 ? Colors.green : const Color(0xff444444),
+                onPress: () {
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfaze3Screen);
+                },
               ),
               const SizedBox(height: 20),
-              PointsInLastViewBooking(
+              PointsViewBooking(
                 number: step >= 4 ? "*" : "4",
                 text: AppLocalizations.of(context)!.registerstep4,
                 textColor: step >= 4 ? Colors.green : const Color(0xff444444),
+                onPress: () {
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfaze4Screen);
+                },
               ),
               const SizedBox(height: 20),
-              PointsInLastViewBooking(
+              PointsViewBooking(
                 number: step >= 5 ? "*" : "5",
                 text: AppLocalizations.of(context)!.registerstep5,
                 textColor: step >= 5 ? Colors.green : const Color(0xff444444),
+                onPress: () {
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfaze5Screen);
+                },
               ),
               const SizedBox(height: 20),
-              PointsInLastViewBooking(
+              PointsViewBooking(
                 number: step >= 6 ? "*" : "6",
                 text: AppLocalizations.of(context)!.registerstep6,
                 textColor: step >= 6 ? Colors.green : const Color(0xff444444),
+                onPress: () {
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfaze6Screen);
+                },
               ),
               const SizedBox(height: 20),
-              PointsInLastViewBooking(
+              PointsViewBooking(
                 number: step >= 7 ? "*" : "7",
                 text: AppLocalizations.of(context)!.registerstep7,
                 textColor: step >= 7 ? Colors.green : const Color(0xff444444),
+                onPress: () {
+                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfinalfazeScreen);
+                },
               ),
               CustomButton(
                 enableButton: true,
@@ -141,9 +160,7 @@ class RegisterInfoBottomSheetsUtil {
     );
   }
 
-  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {
-    Factory(() => EagerGestureRecognizer())
-  };
+  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {Factory(() => EagerGestureRecognizer())};
 
   Future termsBottomSheet({required Function() openNext}) async {
     return await showModalBottomSheet(
@@ -160,8 +177,7 @@ class RegisterInfoBottomSheetsUtil {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         builder: (context) {
           return Padding(
-            padding:
-                const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
+            padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
             child: Wrap(
               children: [
                 Row(
@@ -199,8 +215,7 @@ class RegisterInfoBottomSheetsUtil {
                   height: 300,
                   margin: const EdgeInsets.all(15.0),
                   padding: const EdgeInsets.all(3.0),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: const Color(0xff444444))),
+                  decoration: BoxDecoration(border: Border.all(color: const Color(0xff444444))),
                   child: WebView(
                     initialUrl: AppConstant.termsLink,
                     gestureRecognizers: gestureRecognizers,
