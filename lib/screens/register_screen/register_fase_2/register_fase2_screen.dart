@@ -62,10 +62,9 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                 await bloc.box.put(TempFieldToRegistrtConstant.lastName, bloc.lastNameController.text);
                 await bloc.box.put(TempFieldToRegistrtConstant.country, bloc.selectedCountry!.id.toString());
                 await bloc.box.put(TempFieldToRegistrtConstant.gender, bloc.genderController.text);
-                await bloc.box.put(TempFieldToRegistrtConstant.profileImage,
-                    bloc.profileImage != null ? bloc.profileImage!.path : null);
-                await bloc.box
-                    .put(TempFieldToRegistrtConstant.idImage, bloc.iDImage != null ? bloc.iDImage!.path : null);
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.profileImage, bloc.profileImage != null ? bloc.profileImage!.path : "");
+                await bloc.box.put(TempFieldToRegistrtConstant.idImage, bloc.iDImage != null ? bloc.iDImage!.path : "");
                 await bloc.box.put(TempFieldToRegistrtConstant.dateOfBirth, bloc.selectedDate);
                 await bloc.box.put(TempFieldToRegistrtConstant.phoneNumber, bloc.countryCode + bloc.mobileController);
 
@@ -137,6 +136,7 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                                           keyboardType: TextInputType.name,
                                           inputFormatters: [LengthLimitingTextInputFormatter(45)],
                                           onChange: (text) => bloc.validateFieldsForFaze2(),
+                                          onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
                                         ),
                                         const SizedBox(height: 10),
                                         CustomTextField(
@@ -145,6 +145,7 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                                           keyboardType: TextInputType.name,
                                           inputFormatters: [LengthLimitingTextInputFormatter(45)],
                                           onChange: (text) => bloc.validateFieldsForFaze2(),
+                                          onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
                                         ),
                                       ],
                                     ),
@@ -275,9 +276,8 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                               hintText: AppLocalizations.of(context)!.referalcodeprofile,
                               keyboardType: TextInputType.number,
                               inputFormatters: [LengthLimitingTextInputFormatter(6)],
-                              onChange: (text) {
-                                bloc.validateFieldsForFaze2();
-                              },
+                              onChange: (text) => bloc.validateFieldsForFaze2(),
+                              onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
                             ),
                             ValueListenableBuilder<bool?>(
                                 valueListenable: bloc.validateReferalCode,
@@ -301,7 +301,7 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                                     );
                                   }
                                 }),
-                            const SizedBox(height: 25),
+                            const SizedBox(height: 30),
                           ],
                         ),
                       ),
