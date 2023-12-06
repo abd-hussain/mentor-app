@@ -226,23 +226,24 @@ class RegisterInfoBottomSheetsUtil {
                   ),
                 ),
                 Container(
-                    height: 300,
-                    margin: const EdgeInsets.all(15.0),
-                    padding: const EdgeInsets.all(3.0),
-                    decoration: BoxDecoration(border: Border.all(color: const Color(0xff444444))),
-                    child: HtmlElementView(viewType: 'terms-html')
-                    // WebView(
-                    //   initialUrl: AppConstant.termsLink,
-                    //   gestureRecognizers: gestureRecognizers,
-                    //   navigationDelegate: (NavigationRequest request) {
-                    //     return NavigationDecision.navigate;
-                    //   },
-                    //   onWebViewCreated: (WebViewController webViewController) {
-                    //     webViewController = webViewController;
-                    //     webViewController.loadUrl(AppConstant.termsLink);
-                    //   },
-                    // ),
-                    ),
+                  height: 300,
+                  margin: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(3.0),
+                  decoration: BoxDecoration(border: Border.all(color: const Color(0xff444444))),
+                  child: kIsWeb
+                      ? const HtmlElementView(viewType: 'terms-html')
+                      : WebView(
+                          initialUrl: AppConstant.termsLink,
+                          gestureRecognizers: gestureRecognizers,
+                          navigationDelegate: (NavigationRequest request) {
+                            return NavigationDecision.navigate;
+                          },
+                          onWebViewCreated: (WebViewController webViewController) {
+                            webViewController = webViewController;
+                            webViewController.loadUrl(AppConstant.termsLink);
+                          },
+                        ),
+                ),
                 CustomButton(
                   enableButton: true,
                   buttonTitle: AppLocalizations.of(context)!.acceptandcontinue,
