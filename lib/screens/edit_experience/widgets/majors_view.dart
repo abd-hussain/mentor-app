@@ -9,8 +9,7 @@ class MajorsView extends StatefulWidget {
   final List<CheckBox> listOfMajors;
   final Function(List<CheckBox>) selectedMajors;
 
-  const MajorsView(
-      {super.key, required this.listOfMajors, required this.selectedMajors});
+  const MajorsView({super.key, required this.listOfMajors, required this.selectedMajors});
 
   @override
   State<MajorsView> createState() => _MajorsViewState();
@@ -87,9 +86,7 @@ class _MajorsViewState extends State<MajorsView> {
 }
 
 Future majorsBottomSheet(
-    {required BuildContext context,
-    required List<CheckBox> listOfMajors,
-    required Function(List<CheckBox>) onSave}) {
+    {required BuildContext context, required List<CheckBox> listOfMajors, required Function(List<CheckBox>) onSave}) {
   StreamController<bool> valueListenable = StreamController<bool>.broadcast();
 
   return showModalBottomSheet(
@@ -152,8 +149,7 @@ Future majorsBottomSheet(
                   itemBuilder: ((context, index) {
                     return Row(
                       children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 1.5,
+                        Expanded(
                           child: CustomText(
                             title: listOfMajors[index].value,
                             textColor: Colors.black,
@@ -168,8 +164,7 @@ Future majorsBottomSheet(
                               return Checkbox(
                                   value: listOfMajors[index].isEnable,
                                   onChanged: (va) {
-                                    listOfMajors[index].isEnable =
-                                        !listOfMajors[index].isEnable;
+                                    listOfMajors[index].isEnable = !listOfMajors[index].isEnable;
                                     valueListenable.sink.add(true);
                                   });
                             }),

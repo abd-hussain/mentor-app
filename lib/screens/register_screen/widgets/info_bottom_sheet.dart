@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/utils/constants/constant.dart';
 import 'package:mentor_app/utils/routes.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'dart:ui' as ui;
 
 class RegisterInfoBottomSheetsUtil {
   final BuildContext context;
@@ -163,6 +166,17 @@ class RegisterInfoBottomSheetsUtil {
   final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {Factory(() => EagerGestureRecognizer())};
 
   Future termsBottomSheet({required Function() openNext}) async {
+    if (kIsWeb) {
+      // ignore: undefined_prefixed_name
+      ui.platformViewRegistry.registerViewFactory(
+          'terms-html',
+          (int viewId) => IFrameElement()
+            ..width = '640'
+            ..height = '360'
+            ..src = AppConstant.termsLink
+            ..style.border = 'none');
+    }
+
     return await showModalBottomSheet(
         isScrollControlled: true,
         shape: const RoundedRectangleBorder(
@@ -212,22 +226,23 @@ class RegisterInfoBottomSheetsUtil {
                   ),
                 ),
                 Container(
-                  height: 300,
-                  margin: const EdgeInsets.all(15.0),
-                  padding: const EdgeInsets.all(3.0),
-                  decoration: BoxDecoration(border: Border.all(color: const Color(0xff444444))),
-                  child: WebView(
-                    initialUrl: AppConstant.termsLink,
-                    gestureRecognizers: gestureRecognizers,
-                    navigationDelegate: (NavigationRequest request) {
-                      return NavigationDecision.navigate;
-                    },
-                    onWebViewCreated: (WebViewController webViewController) {
-                      webViewController = webViewController;
-                      webViewController.loadUrl(AppConstant.termsLink);
-                    },
-                  ),
-                ),
+                    height: 300,
+                    margin: const EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(3.0),
+                    decoration: BoxDecoration(border: Border.all(color: const Color(0xff444444))),
+                    child: HtmlElementView(viewType: 'terms-html')
+                    // WebView(
+                    //   initialUrl: AppConstant.termsLink,
+                    //   gestureRecognizers: gestureRecognizers,
+                    //   navigationDelegate: (NavigationRequest request) {
+                    //     return NavigationDecision.navigate;
+                    //   },
+                    //   onWebViewCreated: (WebViewController webViewController) {
+                    //     webViewController = webViewController;
+                    //     webViewController.loadUrl(AppConstant.termsLink);
+                    //   },
+                    // ),
+                    ),
                 CustomButton(
                   enableButton: true,
                   buttonTitle: AppLocalizations.of(context)!.acceptandcontinue,

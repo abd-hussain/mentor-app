@@ -1,6 +1,7 @@
 import 'dart:async';
 
 // import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -20,7 +21,9 @@ void main() {
     await setupLocator();
 
     await Hive.initFlutter();
-    await MobileAds.instance.initialize();
+    if (!kIsWeb) {
+      await MobileAds.instance.initialize();
+    }
     await Hive.openBox(DatabaseBoxConstant.userInfo);
 
     // await Firebase.initializeApp();
