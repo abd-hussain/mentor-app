@@ -8,9 +8,9 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/utils/constants/constant.dart';
 import 'package:mentor_app/utils/routes.dart';
-import 'package:universal_html/html.dart';
+// import 'package:universal_html/html.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'dart:ui' as ui;
+// import 'dart:ui' as ui;
 
 class RegisterInfoBottomSheetsUtil {
   final BuildContext context;
@@ -166,14 +166,15 @@ class RegisterInfoBottomSheetsUtil {
 
   Future termsBottomSheet({required Function() openNext}) async {
     if (kIsWeb) {
-      // ignore: undefined_prefixed_name
-      ui.platformViewRegistry.registerViewFactory(
-          'terms-html',
-          (int viewId) => IFrameElement()
-            ..width = '640'
-            ..height = '360'
-            ..src = AppConstant.termsLink
-            ..style.border = 'none');
+      //TODO
+      //   // ignore: undefined_prefixed_name
+      //   ui.platformViewRegistry.registerViewFactory(
+      //       'terms-html',
+      //       (int viewId) => IFrameElement()
+      //         ..width = '640'
+      //         ..height = '360'
+      //         ..src = AppConstant.termsLink
+      //         ..style.border = 'none');
     }
 
     return await showModalBottomSheet(
