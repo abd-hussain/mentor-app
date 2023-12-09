@@ -1,4 +1,4 @@
-git_url("git@github.com:abd-hussain/certificate.git")
+git_url("https://github.com/abd-hussain/certificate")
 
 storage_mode("git")
 
