@@ -58,23 +58,23 @@ jobs:
             channel: stable
             cache: true
 
-        # - name: Set up App Store Connect
-        #   run: |
-        #       echo "${{ secrets.APP_STORE_CONNECT }}" | base64 --decode > ios/app_store_connect.json
+        - name: Set up App Store Connect
+          run: |
+              echo "${{ secrets.APP_STORE_CONNECT }}" | base64 --decode > ios/app_store_connect.json
       
-        # - name: Setup Fastlane
-        #   uses: ruby/setup-ruby@v1
-        #   with:
-        #       ruby-version: 2.6
-        #       rubygems: latest
+        - name: Setup Fastlane
+          uses: ruby/setup-ruby@v1
+          with:
+              ruby-version: 2.6
+              rubygems: latest
       
-        # - name: Build and Deploy
-        #   run: |
-        #       flutter pub get
-        #       make deploy-ios
-        #   env:
-        #       MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-        #       MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.GIT_BASIC_AUTHORIZATION }}
+        - name: Build and Deploy
+          run: |
+              flutter pub get
+              make deploy-ios
+          env:
+              MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+              MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.GIT_BASIC_AUTHORIZATION }}
 
   web:
       runs-on: ubuntu-latest
@@ -89,22 +89,22 @@ jobs:
             channel: 'stable'
             cache: true
   
-        # - name: Make Web Build
-        #   run: |
-        #     flutter pub get
-        #     flutter build web
+        - name: Make Web Build
+          run: |
+            flutter pub get
+            flutter build web
   
         # - name: Deploy Web Build
         #   uses: FirebaseExtended/action-hosting-deploy@v0
         #   with:
         #     repoToken: '${{ secrets.GITHUB_TOKEN }}'
         #     firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CHECKLIST_6A64E }}'
-        #     channelId: live
-        #     projectId: checklist-6a64e
+        # #     channelId: live
+        # #     projectId: checklist-6a64e
       
   tag:
       runs-on: ubuntu-latest
-      needs: [android] # needs: [android, ios, web]
+      needs: [android, ios] # needs: [android, ios, web]
           
       steps:
         - name: Checkout Code
