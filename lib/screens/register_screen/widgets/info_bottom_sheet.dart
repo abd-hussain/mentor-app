@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +8,7 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/utils/constants/constant.dart';
 import 'package:mentor_app/utils/routes.dart';
+import 'package:universal_html/html.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:ui' as ui;
 
