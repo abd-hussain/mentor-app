@@ -262,10 +262,6 @@
     "announcements" : "Announcements",
     "meetingwith" : "Meeting With",
     "pleasewaitforclient" : "Please wait for Client to join the call",
-    "readytogo" : "You will be ready to go"
-
-
-
-
-
+    "readytogo" : "You will be ready to go",
+    "ibaninfo" : "Your Bank IBAN informations"
 }

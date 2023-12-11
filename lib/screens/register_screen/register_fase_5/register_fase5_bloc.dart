@@ -8,6 +8,9 @@ class Register5Bloc {
   ValueNotifier<bool> enableNextBtn = ValueNotifier<bool>(false);
 
   TextEditingController ratePerHourController = TextEditingController();
+  TextEditingController ibanController = TextEditingController();
+
+  String ibanRes = "";
 
   validateFieldsForFaze5() {
     if (ratePerHourController.text.isNotEmpty) {

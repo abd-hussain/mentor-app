@@ -262,6 +262,8 @@
     "announcements" : "اعلانات",
     "meetingwith" : "اجتماع مع",
     "pleasewaitforclient" : "يرجى الانتظار حتى ينضم العميل إلى المكالمة",
-    "readytogo" : "You will be ready to go"
+    "readytogo" : "سوف تكون على استعداد للذهاب",
+    "ibaninfo" : "معلومات رقم الحساب المصرفي الدولي (IBAN) الخاص بنا"
+
 
 }

@@ -55,6 +55,8 @@ class TempFieldToRegistrtConstant {
   static const String fridayWH = "fridayWH";
 
   static const String ratePerHour = "ratePerHour";
+  static const String iban = "iban";
+
   static const String phoneNumber = "phoneNumber";
   static const String email = "email";
   static const String password = "password";

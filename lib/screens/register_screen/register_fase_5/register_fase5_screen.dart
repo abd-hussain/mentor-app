@@ -48,10 +48,10 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
                 enableNextButton: snapshot,
                 nextPressed: () async {
                   final navigator = Navigator.of(context);
-                  await bloc.box.put(TempFieldToRegistrtConstant.ratePerHour,
-                      bloc.ratePerHourController.text);
-                  await bloc.box
-                      .put(DatabaseFieldConstant.registrationStep, "6");
+                  await bloc.box.put(TempFieldToRegistrtConstant.ratePerHour, bloc.ratePerHourController.text);
+                  await bloc.box.put(TempFieldToRegistrtConstant.iban, bloc.ibanController.text);
+
+                  await bloc.box.put(DatabaseFieldConstant.registrationStep, "6");
                   navigator.pushNamed(RoutesConstants.registerfaze6Screen);
                 },
               );
@@ -127,13 +127,9 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
                           flex: 2,
                           child: CustomTextField(
                             controller: bloc.ratePerHourController,
-                            hintText:
-                                AppLocalizations.of(context)!.rateperhourtitle,
-                            keyboardType: const TextInputType.numberWithOptions(
-                                decimal: true),
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(4),
-                            ],
+                            hintText: AppLocalizations.of(context)!.rateperhourtitle,
+                            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                            inputFormatters: [LengthLimitingTextInputFormatter(4)],
                             fontSize: 18,
                             textAlign: TextAlign.center,
                             padding: const EdgeInsets.all(0),
@@ -152,6 +148,27 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
                       ],
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CustomText(
+                      title: AppLocalizations.of(context)!.ibaninfo,
+                      fontSize: 14,
+                      textAlign: TextAlign.center,
+                      textColor: const Color(0xff444444),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  CustomTextField(
+                    controller: bloc.ibanController,
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    hintText: "",
+                    fontSize: 20,
+                    keyboardType: TextInputType.name,
+                    inputFormatters: [LengthLimitingTextInputFormatter(30)],
+                    onChange: (text) => bloc.validateFieldsForFaze5(),
+                    onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
+                  ),
+                  const SizedBox(height: 10),
                 ],
               ),
             ),
