@@ -9,13 +9,14 @@ import 'package:mentor_app/utils/repository/http_interceptor.dart';
 enum RequestType { get, post, delete, put }
 
 class HttpRepository {
-  Future<dynamic> callRequest(
-      {required RequestType requestType,
-      required String methodName,
-      Map<String, dynamic> queryParam = const {},
-      Model? postBody,
-      FormData? formData,
-      String contentType = Headers.jsonContentType}) async {
+  Future<dynamic> callRequest({
+    required RequestType requestType,
+    required String methodName,
+    Map<String, dynamic> queryParam = const {},
+    Model? postBody,
+    FormData? formData,
+    String contentType = Headers.jsonContentType,
+  }) async {
     Response response;
 
     const baseUrl = AppConstant.applicationMainURL;

@@ -9,7 +9,8 @@ import 'package:mentor_app/shared_widget/custom_button.dart';
 
 class ListOfContactsWidget extends StatefulWidget {
   final List<Contact> contacts;
-  const ListOfContactsWidget({Key? key, required this.contacts}) : super(key: key);
+  const ListOfContactsWidget({Key? key, required this.contacts})
+      : super(key: key);
 
   @override
   State<ListOfContactsWidget> createState() => _ListOfContactsWidgetState();
@@ -20,7 +21,8 @@ class _ListOfContactsWidgetState extends State<ListOfContactsWidget> {
 
   @override
   void initState() {
-    listOfCheckboxInContact = List<bool>.generate(widget.contacts.length, (i) => false);
+    listOfCheckboxInContact =
+        List<bool>.generate(widget.contacts.length, (i) => false);
     super.initState();
   }
 
@@ -34,18 +36,21 @@ class _ListOfContactsWidgetState extends State<ListOfContactsWidget> {
                 itemCount: widget.contacts.length,
                 itemBuilder: (BuildContext context, int index) {
                   Uint8List? image = widget.contacts[index].photo;
-                  String num =
-                      (widget.contacts[index].phones.isNotEmpty) ? (widget.contacts[index].phones.first.number) : "--";
+                  String num = (widget.contacts[index].phones.isNotEmpty)
+                      ? (widget.contacts[index].phones.first.number)
+                      : "--";
                   return ListTile(
                       leading: (widget.contacts[index].photo == null)
                           ? const CircleAvatar(child: Icon(Icons.person))
                           : CircleAvatar(backgroundImage: MemoryImage(image!)),
-                      title: Text("${widget.contacts[index].name.first} ${widget.contacts[index].name.last}"),
+                      title: Text(
+                          "${widget.contacts[index].name.first} ${widget.contacts[index].name.last}"),
                       subtitle: Text(num),
                       trailing: Checkbox(
                         value: listOfCheckboxInContact[index],
                         onChanged: (value) {
-                          listOfCheckboxInContact[index] = !listOfCheckboxInContact[index];
+                          listOfCheckboxInContact[index] =
+                              !listOfCheckboxInContact[index];
                           setState(() {});
                         },
                       ),

@@ -7,7 +7,7 @@ class Register {
   final int gender;
   final String dateOfBirth;
   final String bio;
-  final List<String> majors;
+  final List<int> majors;
   final String categoryId;
   final List<String> speakingLanguage;
   final String? referalCode;
@@ -20,6 +20,7 @@ class Register {
   final List<int>? workingHoursThursday;
   final List<int>? workingHoursFriday;
   final String hourRate;
+  final String iban;
   final String password;
   final String appVersion;
   final String pushToken;
@@ -53,6 +54,7 @@ class Register {
       this.workingHoursThursday,
       this.workingHoursFriday,
       required this.hourRate,
+      required this.iban,
       required this.password,
       required this.appVersion,
       required this.pushToken,

@@ -25,14 +25,17 @@ class CustomButton extends StatelessWidget {
       padding: padding,
       child: ElevatedButton(
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(enableButton ? buttonColor : const Color(0xffB1B1B1))),
+            backgroundColor: MaterialStateProperty.all(
+                enableButton ? buttonColor : const Color(0xffB1B1B1))),
         onPressed: () => enableButton ? onTap() : null,
         child: SizedBox(
           height: 45,
           width: width,
           child: Center(
             child: Text(
-              buttonTitle == "Submit" ? AppLocalizations.of(context)!.submit : buttonTitle,
+              buttonTitle == "Submit"
+                  ? AppLocalizations.of(context)!.submit
+                  : buttonTitle,
               style: const TextStyle(color: Colors.black),
             ),
           ),

@@ -9,7 +9,11 @@ class SuffixField extends StatelessWidget {
   final TextEditingController controller;
   final List<SuffixData> listOfSuffix;
   final Function(SuffixData) selectedSuffix;
-  const SuffixField({required this.controller, required this.listOfSuffix, required this.selectedSuffix, super.key});
+  const SuffixField(
+      {required this.controller,
+      required this.listOfSuffix,
+      required this.selectedSuffix,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,8 @@ class SuffixField extends StatelessWidget {
         ),
         InkWell(
           onTap: () async {
-            await BottomSheetsUtil().suffixBottomSheet(context, listOfSuffix, (suffixSelected) {
+            await BottomSheetsUtil().suffixBottomSheet(context, listOfSuffix,
+                (suffixSelected) {
               controller.text = suffixSelected.name!;
               selectedSuffix(suffixSelected);
             });

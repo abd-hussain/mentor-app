@@ -196,7 +196,7 @@ class LoginBloc extends Bloc<AuthService> {
           userName: userName, password: password, token: info["data"]);
       loadingStatusNotifier.value = LoadingStatus.finish;
       _openMainScreen(maincontext!);
-    } on DioError {
+    } on DioException {
       errorMessage.value =
           AppLocalizations.of(maincontext!)!.wrongemailorpassword;
       loadingStatusNotifier.value = LoadingStatus.finish;

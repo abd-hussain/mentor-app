@@ -13,7 +13,7 @@ class RegisterFinalBloc extends Bloc<RegisterService> {
       ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   final box = Hive.box(DatabaseBoxConstant.userInfo);
 
-  Future<void> handleCreatingTheProfile(BuildContext context) async {
+  Future<dynamic> handleCreatingTheProfile(BuildContext context) async {
     String? version = await Version().getApplicationVersion();
     int gender = 0;
     if (context.mounted) {
@@ -29,6 +29,7 @@ class RegisterFinalBloc extends Bloc<RegisterService> {
       lastName: box.get(TempFieldToRegistrtConstant.lastName) ?? "",
       dateOfBirth: box.get(TempFieldToRegistrtConstant.dateOfBirth) ?? "",
       hourRate: box.get(TempFieldToRegistrtConstant.ratePerHour) ?? "",
+      iban: box.get(TempFieldToRegistrtConstant.iban) ?? "",
       password: box.get(TempFieldToRegistrtConstant.password) ?? "",
       bio: box.get(TempFieldToRegistrtConstant.bio) ?? "",
       categoryId: box.get(TempFieldToRegistrtConstant.category) ?? "",
@@ -60,7 +61,42 @@ class RegisterFinalBloc extends Bloc<RegisterService> {
       majors: box.get(TempFieldToRegistrtConstant.majors) ?? [],
     );
 
-    await service.callRegister(data: model);
+    return await service.callRegister(data: model);
+  }
+
+  Future<void> clearRegistrationData() async {
+    await box.deleteAll([
+      TempFieldToRegistrtConstant.gender,
+      TempFieldToRegistrtConstant.suffix,
+      TempFieldToRegistrtConstant.firstName,
+      TempFieldToRegistrtConstant.lastName,
+      TempFieldToRegistrtConstant.dateOfBirth,
+      TempFieldToRegistrtConstant.ratePerHour,
+      TempFieldToRegistrtConstant.iban,
+      TempFieldToRegistrtConstant.password,
+      TempFieldToRegistrtConstant.bio,
+      TempFieldToRegistrtConstant.category,
+      TempFieldToRegistrtConstant.country,
+      TempFieldToRegistrtConstant.email,
+      TempFieldToRegistrtConstant.phoneNumber,
+      TempFieldToRegistrtConstant.referalCode,
+      TempFieldToRegistrtConstant.speakingLanguages,
+      TempFieldToRegistrtConstant.profileImage,
+      TempFieldToRegistrtConstant.cv,
+      TempFieldToRegistrtConstant.idImage,
+      TempFieldToRegistrtConstant.certificates1,
+      TempFieldToRegistrtConstant.certificates2,
+      TempFieldToRegistrtConstant.certificates3,
+      TempFieldToRegistrtConstant.saturdayWH,
+      TempFieldToRegistrtConstant.sundayWH,
+      TempFieldToRegistrtConstant.mondayWH,
+      TempFieldToRegistrtConstant.tuesdayWH,
+      TempFieldToRegistrtConstant.wednesdayWH,
+      TempFieldToRegistrtConstant.thursdayWH,
+      TempFieldToRegistrtConstant.fridayWH,
+      TempFieldToRegistrtConstant.experianceSince,
+      TempFieldToRegistrtConstant.majors,
+    ]);
   }
 
   @override

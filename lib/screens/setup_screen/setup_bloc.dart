@@ -46,6 +46,7 @@ class SetupBloc extends Bloc<FilterService> {
   }
 
   void listOfCountries() {
+    print("soso");
     service.countries().then((value) {
       countriesListNotifier.value = value.data!
         ..sort((a, b) => a.id!.compareTo(b.id!));

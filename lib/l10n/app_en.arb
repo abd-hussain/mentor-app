@@ -255,7 +255,7 @@
     "waitingyoutojoindesc" : "Your Mentor waiting you to join, this call will be canceled if you late more than 7 min",
     "addeditnote": "Add / Edit Note",
     "joinnow" : "Join Now",
-    "createprofile" : "Creating Profile ...",
+    "createprofile" : "Create Profile ...",
     "createprofiledesc" : "This may take some time to be finished",
     "mobilenumberalreadyinuse" : "Mobile Number already used",
     "emailalreadyinuse" : "Email already used",
@@ -263,5 +263,6 @@
     "meetingwith" : "Meeting With",
     "pleasewaitforclient" : "Please wait for Client to join the call",
     "readytogo" : "You will be ready to go",
-    "ibaninfo" : "Your Bank IBAN informations"
+    "ibaninfo" : "Your Bank IBAN informations",
+    "accountcreatedsuccessfully" : "Your account Successfully created"
 }

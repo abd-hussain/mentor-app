@@ -32,12 +32,12 @@ class HttpInterceptor extends InterceptorsWrapper {
         return handler.next(response);
       }
     } catch (error) {
-      handler.reject(error as DioError);
+      handler.reject(error as DioException);
     }
   }
 
   @override
-  Future onError(DioError err, ErrorInterceptorHandler handler) async {
+  Future onError(DioException err, ErrorInterceptorHandler handler) async {
     return super.onError(err, handler);
   }
 
@@ -51,15 +51,15 @@ class HttpInterceptor extends InterceptorsWrapper {
         return true;
       case 403:
         logger.wtf("response.data ${response.data.toString()}");
-        throw DioError(
+        throw DioException(
             error: HttpException(
                 status: response.statusCode!,
-                message: response.data["detail"],
+                message: response.data["detail"] ?? response.data.toString(),
                 requestId: ""),
             requestOptions: response.requestOptions);
       default:
         logger.wtf("response.data ${response.data.toString()}");
-        throw DioError(
+        throw DioException(
             error: HttpException(
                 status: response.statusCode!,
                 message: response.data["detail"]["message"],

@@ -8,12 +8,15 @@ class PasswordField extends StatelessWidget {
   final ValueNotifier<bool> showHidePasswordClearNotifier;
   final String hintText;
   final Function() onchange;
+  final Function() onEditingComplete;
+
   final Function() onClear;
   const PasswordField(
       {super.key,
       required this.controller,
       required this.showHidePasswordClearNotifier,
       required this.onchange,
+      required this.onEditingComplete,
       this.hintText = "",
       required this.onClear});
 
@@ -74,6 +77,7 @@ class PasswordField extends StatelessWidget {
                 ),
               ),
               onChange: (text) => onchange(),
+              onEditingComplete: () => onEditingComplete(),
             );
           }),
     );

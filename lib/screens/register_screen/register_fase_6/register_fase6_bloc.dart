@@ -44,14 +44,22 @@ class Register6Bloc extends Bloc<FilterService> {
   }
 
   validateEmailMethod(BuildContext context) {
-    if (RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(emailController.text)) {
+    if (validateEmailRegix()) {
       validateEmail.value = "";
       validateEmailAPI(context);
     } else {
       validateEmail.value = AppLocalizations.of(context)!.emailformatnotvalid;
     }
+  }
+
+  validateEmailRegix() {
+    if (RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(emailController.text)) {
+      return true;
+    }
+
+    return false;
   }
 
   validateEmailAPI(BuildContext context) {
@@ -80,7 +88,7 @@ class Register6Bloc extends Bloc<FilterService> {
       enableNextBtn.value = passwordEquilConfirmPasswordNotifier.value &&
           passwordMoreThan8CharNotifier.value &&
           passwordHaveNumberNotifier.value &&
-          (validateEmail.value == "");
+          validateEmailRegix();
     }
   }
 

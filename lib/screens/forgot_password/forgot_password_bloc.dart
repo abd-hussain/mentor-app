@@ -53,7 +53,7 @@ class ForgotPasswordBloc extends Bloc<AuthService> {
       await service.forgotPassword(data: data);
       loadingStatusNotifier.value = LoadingStatus.finish;
       _openConfirmScreen(maincontext!);
-    } on DioError {
+    } on DioException {
       errorMessage.value = AppLocalizations.of(maincontext!)!.wrongemail;
       loadingStatusNotifier.value = LoadingStatus.finish;
     }

@@ -255,7 +255,7 @@
     "waitingyoutojoindesc" : "مرشدك في انتظارك للانضمام ، سيتم إلغاء هذه المكالمة إذا تأخرت أكثر من 7 دقائق",
     "addeditnote": "اضافة / تعديل ملاحظه",
     "joinnow" : "انضم الآن",
-    "createprofile" : "انشاء الحساب ...",
+    "createprofile" : "انشاء حساب ...",
     "createprofiledesc" : "قد يستغرق هذا بعض الوقت حتى يتم الانتهاء",
     "mobilenumberalreadyinuse" : "رقم الهاتف مستخدم بالفعل",
     "emailalreadyinuse" : "البريد الالكتروني مستخدم بالفعل",
@@ -263,7 +263,9 @@
     "meetingwith" : "اجتماع مع",
     "pleasewaitforclient" : "يرجى الانتظار حتى ينضم العميل إلى المكالمة",
     "readytogo" : "سوف تكون على استعداد للذهاب",
-    "ibaninfo" : "معلومات رقم الحساب المصرفي الدولي (IBAN) الخاص بنا"
+    "ibaninfo" : "معلومات رقم الحساب المصرفي الدولي (IBAN) الخاص بنا",
+    "accountcreatedsuccessfully" : "تم إنشاء حسابك بنجاح"
+
 
 
 }

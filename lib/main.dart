@@ -34,9 +34,11 @@ void main() {
     ]);
     runApp(const MyApp());
   }, (error, stackTrace) {
-    if (error is DioError) {
+    if (error is DioException) {
       final exception = error.error;
       if (exception is HttpException) {
+        Logger().wtf("MAIN");
+
         Logger().wtf(exception.status);
         Logger().wtf(exception.message);
         Logger().wtf(exception.requestId);

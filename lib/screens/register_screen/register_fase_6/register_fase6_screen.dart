@@ -81,6 +81,8 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                   onChange: (text) {
                     bloc.validateFieldsForFaze6();
                   },
+                  onEditingComplete: () =>
+                      FocusManager.instance.primaryFocus?.unfocus(),
                 ),
                 ValueListenableBuilder<String>(
                     valueListenable: bloc.validateEmail,
@@ -117,6 +119,8 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                     bloc.showHidePasswordClearNotifier.value = false;
                   },
                   onchange: () => bloc.validateFieldsForFaze6(),
+                  onEditingComplete: () =>
+                      FocusManager.instance.primaryFocus?.unfocus(),
                 ),
                 const SizedBox(height: 20),
                 PasswordField(
@@ -129,6 +133,8 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                     bloc.showHideConfirmPasswordClearNotifier.value = false;
                   },
                   onchange: () => bloc.validateFieldsForFaze6(),
+                  onEditingComplete: () =>
+                      FocusManager.instance.primaryFocus?.unfocus(),
                 ),
                 const SizedBox(height: 20),
                 PasswordComplexity(

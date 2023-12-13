@@ -22,6 +22,7 @@ class RegisterService with Service {
     formData.fields.add(MapEntry("app_version", data.appVersion));
     formData.fields.add(MapEntry("category_id", data.categoryId));
     formData.fields.add(MapEntry("hour_rate", data.hourRate));
+    formData.fields.add(MapEntry("iban", data.iban));
     formData.fields.add(MapEntry("experience_since", data.experienceSince));
     formData.fields.add(MapEntry("country_id", data.countryId));
     formData.fields.add(MapEntry("referal_code", data.referalCode ?? ""));
@@ -69,12 +70,14 @@ class RegisterService with Service {
     }
 
     if (data.profileImg != null) {
+      String fileName = data.profileImg!.split('/').last;
       formData.files.add(
         MapEntry(
           "profile_img",
           MultipartFile.fromFileSync(
             data.profileImg!,
-            filename: data.profileImg!.split('/').last,
+            filename: fileName,
+            contentType: MediaType('image', fileName.split('.').last),
           ),
         ),
       );
@@ -94,62 +97,60 @@ class RegisterService with Service {
       );
     }
 
-    // if (data.cv != null) {
-    //   formData.files.add(
-    //     MapEntry(
-    //       "cv",
-    //       MultipartFile.fromFileSync(
-    //         data.cv!,
-    //         filename: data.cv!.split('/').last,
-    //       ),
-    //     ),
-    //   );
-    // }
-    // print(formData.length);
-    // print(data.cv);
-    // print(data.cv!.split('/').last);
+    if (data.cv != null) {
+      String fileName = data.cv!.split('/').last;
+      formData.files.add(
+        MapEntry(
+          "cv",
+          MultipartFile.fromFileSync(
+            data.cv!,
+            filename: fileName,
+          ),
+        ),
+      );
+    }
 
-    // if (data.cert1 != null) {
-    //   formData.files.add(
-    //     MapEntry(
-    //       "cert1",
-    //       MultipartFile.fromFileSync(data.cert1!,
-    //           filename: data.cert1!.split('/').last, contentType: MediaType('image', 'jpeg')),
-    //     ),
-    //   );
-    // }
-    // print("formData.length");
-    // print(formData.length);
-    // print(data.cv!);
-    // if (data.cert2 != null) {
-    //   formData.files.add(
-    //     MapEntry(
-    //       "cert2",
-    //       MultipartFile.fromFileSync(
-    //         data.cert2!,
-    //         filename: data.cert2!.split('/').last,
-    //       ),
-    //     ),
-    //   );
-    // }
-    // print("formData.length");
-    // print(formData.length);
-    // print(data.cv!);
+    if (data.cert1 != null) {
+      String fileName = data.cert1!.split('/').last;
 
-    // if (data.cert3 != null) {
-    //   formData.files.add(
-    //     MapEntry(
-    //       "cert3",
-    //       MultipartFile.fromFileSync(
-    //         data.cert3!,
-    //         filename: data.cert3!.split('/').last,
-    //       ),
-    //     ),
-    //   );
-    // }
+      formData.files.add(
+        MapEntry(
+          "cert1",
+          MultipartFile.fromFileSync(
+            data.cert1!,
+            filename: fileName,
+          ),
+        ),
+      );
+    }
 
-    // print("formData.length");
-    // print(formData.length);
+    if (data.cert2 != null && data.cert2 != "") {
+      String fileName = data.cert2!.split('/').last;
+
+      formData.files.add(
+        MapEntry(
+          "cert2",
+          MultipartFile.fromFileSync(
+            data.cert2!,
+            filename: fileName,
+          ),
+        ),
+      );
+    }
+
+    if (data.cert3 != null && data.cert3 != "") {
+      String fileName = data.cert3!.split('/').last;
+
+      formData.files.add(
+        MapEntry(
+          "cert3",
+          MultipartFile.fromFileSync(
+            data.cert3!,
+            filename: fileName,
+          ),
+        ),
+      );
+    }
 
     return repository.callRequest(
       requestType: RequestType.post,
