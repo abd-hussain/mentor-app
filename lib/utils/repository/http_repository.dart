@@ -15,7 +15,6 @@ class HttpRepository {
     Map<String, dynamic> queryParam = const {},
     Model? postBody,
     FormData? formData,
-    String contentType = Headers.jsonContentType,
   }) async {
     Response response;
 
@@ -37,7 +36,7 @@ class HttpRepository {
           response = await dioClient.get(
             methodName,
             queryParameters: queryParam,
-            options: Options(contentType: contentType),
+            // options: Options(contentType: contentType),
           );
 
           break;
@@ -46,7 +45,7 @@ class HttpRepository {
             methodName,
             data: formData ?? postBody?.toJson(),
             queryParameters: queryParam,
-            options: Options(contentType: contentType),
+            // options: Options(contentType: contentType),
           );
           break;
         case RequestType.delete:
@@ -54,7 +53,7 @@ class HttpRepository {
             methodName,
             data: postBody?.toJson(),
             queryParameters: queryParam,
-            options: Options(contentType: contentType),
+            // options: Options(contentType: contentType),
           );
           break;
         case RequestType.put:
@@ -62,15 +61,14 @@ class HttpRepository {
             methodName,
             data: formData ?? postBody?.toJson(),
             queryParameters: queryParam,
-            options: Options(contentType: contentType),
+            // options: Options(contentType: contentType),
           );
           break;
       }
 
       return response.data;
     } else {
-      throw ConnectionException(
-          message: "Please check your internet connection");
+      throw ConnectionException(message: "Please check your internet connection");
     }
   }
 }

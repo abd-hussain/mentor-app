@@ -11,7 +11,7 @@ class LoginRequest implements Model {
 
   @override
   Map<String, dynamic> toJson() {
-    Map<String, dynamic> data = {};
+    Map<String, String> data = {};
     data['email'] = email;
     data['password'] = password;
     return data;
