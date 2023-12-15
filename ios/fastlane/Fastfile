@@ -41,12 +41,17 @@ platform :ios do
       archive_path: "../build/ios/Runner.xcarchive",
       output_directory: "../build/ios/Runner",
     )
-
-    upload_to_testflight(
-      api_key_path: "./app_store_connect.json",
-      ipa: '../build/ios/Runner/Runner.ipa',
-      skip_waiting_for_build_processing: true,
-      duration: 500,
-    )
+    require 'timeout'
+    begin
+      Timeout::timeout(900) { # 900 seconds = 15 Min
+        upload_to_testflight(
+          api_key_path: "./app_store_connect.json",
+          ipa: '../build/ios/Runner/Runner.ipa',
+          skip_waiting_for_build_processing: true,
+        )
+      }
+      rescue Timeout::Error
+        UI.message("Upload to TestFlight took too long and was aborted.")
+      end
   end
 end
