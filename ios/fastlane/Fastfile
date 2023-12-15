@@ -46,6 +46,7 @@ platform :ios do
       api_key_path: "./app_store_connect.json",
       ipa: '../build/ios/Runner/Runner.ipa',
       skip_waiting_for_build_processing: true,
+      duration: 500,
     )
   end
 end
