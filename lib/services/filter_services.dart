@@ -22,7 +22,6 @@ class FilterService with Service {
       queryParam: {"limit": 100},
       methodName: MethodNameConstant.countries,
     );
-    print("lolo");
     return CountriesModel.fromJson(response);
   }
 

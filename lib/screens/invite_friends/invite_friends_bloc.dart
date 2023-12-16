@@ -8,14 +8,12 @@ import 'package:mentor_app/utils/mixins.dart';
 
 class InviteFriendsBloc extends Bloc<SettingService> {
   bool permissionDenied = true;
-  ValueNotifier<List<Contact>> contactsNotifier =
-      ValueNotifier<List<Contact>>([]);
+  ValueNotifier<List<Contact>> contactsNotifier = ValueNotifier<List<Contact>>([]);
   final box = Hive.box(DatabaseBoxConstant.userInfo);
 
   Future fetchContacts() async {
-    if (await FlutterContacts.requestPermission()) {
-      contactsNotifier.value = await FlutterContacts.getContacts(
-          withProperties: true, withPhoto: true);
+    if (await FlutterContacts.requestPermission(readonly: true)) {
+      contactsNotifier.value = await FlutterContacts.getContacts(withProperties: true, withPhoto: true);
       permissionDenied = false;
       uploadContactsListToServer();
     } else {
@@ -27,19 +25,19 @@ class InviteFriendsBloc extends Bloc<SettingService> {
   Future<void> uploadContactsListToServer() async {
     var listOfContacts = UploadContact(list: []);
 
-    String usedId = box.get(DatabaseFieldConstant.userid);
-
     for (var item in contactsNotifier.value) {
-      String contactName = item.displayName != ""
-          ? item.displayName
-          : ("${item.name.first} ${item.name.last}");
+      String contactName = item.displayName != "" ? item.displayName : ("${item.name.first} ${item.name.last}");
       String phoneNumber = item.phones.isNotEmpty ? item.phones[0].number : "";
       String email = item.emails.isNotEmpty ? item.emails[0].address : "";
-      listOfContacts.list.add(MyContact(
+
+      listOfContacts.list.add(
+        MyContact(
           fullName: contactName,
-          mobileNumber: phoneNumber,
+          mobileNumber: phoneNumber.replaceAll(" ", ""),
           email: email,
-          clientownerid: usedId == "" ? null : int.parse(usedId)));
+          mentorownerid: box.get(DatabaseFieldConstant.userid),
+        ),
+      );
     }
 
     await service.uploadContactList(contacts: listOfContacts);

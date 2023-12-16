@@ -8,7 +8,7 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/shared_widget/shimmers/shimmer_list.dart';
 
 class InviteFriendsScreen extends StatefulWidget {
-  const InviteFriendsScreen({Key? key}) : super(key: key);
+  const InviteFriendsScreen({super.key});
 
   @override
   State<InviteFriendsScreen> createState() => _InviteFriendsScreenState();
@@ -53,12 +53,17 @@ class _InviteFriendsScreenState extends State<InviteFriendsScreen> {
                   ],
                 );
               } else {
-                return snapshot != []
+                return snapshot.isNotEmpty
                     ? ListOfContactsWidget(
                         contacts: snapshot,
                       )
-                    : const ShimmerListView(
-                        count: 15,
+                    : const Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: ShimmerListView(
+                            count: 15,
+                          ),
+                        ),
                       );
               }
             },

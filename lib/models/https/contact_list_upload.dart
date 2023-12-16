@@ -17,16 +17,16 @@ class MyContact {
   String? fullName;
   String? mobileNumber;
   String? email;
-  int? clientownerid;
+  int? mentorownerid;
 
-  MyContact({this.fullName, this.mobileNumber, this.email, this.clientownerid});
+  MyContact({this.fullName, this.mobileNumber, this.email, this.mentorownerid});
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {};
     data['full_name'] = fullName ?? "";
     data['mobile_number'] = mobileNumber ?? "";
     data['email'] = email ?? "";
-    data['client_owner_id'] = clientownerid ?? 0;
+    data['mentor_owner_id'] = mentorownerid ?? 0;
     return data;
   }
 }
