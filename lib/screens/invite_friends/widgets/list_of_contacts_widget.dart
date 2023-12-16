@@ -3,9 +3,9 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_sms/flutter_sms.dart';
+// import 'package:flutter_sms/flutter_sms.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
-import 'package:mentor_app/utils/constants/constant.dart';
+// import 'package:mentor_app/utils/constants/constant.dart';
 
 class ListOfContactsWidget extends StatefulWidget {
   final List<Contact> contacts;
@@ -56,15 +56,16 @@ class _ListOfContactsWidgetState extends State<ListOfContactsWidget> {
             buttonTitle: AppLocalizations.of(context)!.sendsmsmessage,
             enableButton: listOfCheckboxInContact.contains(true) ? true : false,
             onTap: () async {
-              String message =
-                  "${AppLocalizations.of(context)!.smsmessage} - iOS : ${AppConstant.appLinkIos} , android : ${AppConstant.appLinkAndroid}";
-              List<String> recipents = [];
+              //TODO : handle sending sms
+              // String message =
+              //     "${AppLocalizations.of(context)!.smsmessage} - iOS : ${AppConstant.appLinkIos} , android : ${AppConstant.appLinkAndroid}";
+              // List<String> recipents = [];
 
-              for (var i = 0; i <= listOfCheckboxInContact.length - 1; i++) {
-                recipents.add(widget.contacts[i].phones.first.number);
-              }
+              // for (var i = 0; i <= listOfCheckboxInContact.length - 1; i++) {
+              //   recipents.add(widget.contacts[i].phones.first.number);
+              // }
 
-              await sendSMS(message: message, recipients: recipents);
+              // await sendSMS(message: message, recipients: recipents);
             },
           ),
           const SizedBox(height: 20)
