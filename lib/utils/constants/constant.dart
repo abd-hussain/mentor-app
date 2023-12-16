@@ -18,8 +18,9 @@ class AppConstant {
 
   static const String linkedinLink = "https://www.linkedin.com/in/aboudmasoud/";
   static const String whatsappNumber = "+962795190663";
+  static const String appLinkAndroid = "https://play.google.com/apps/internaltest/4701396781860140433";
+  static const String appName = "HelpEra";
 
   //TODO: Review This Links
-  static const String appName = "HelpEra";
-  static const String appLink = "";
+  static const String appLinkIos = "";
 }

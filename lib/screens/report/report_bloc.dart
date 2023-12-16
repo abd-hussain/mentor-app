@@ -16,8 +16,7 @@ class ReportBloc extends Bloc<ReportService> {
   TextEditingController textController = TextEditingController();
   ReportPageType? pageType;
   ValueNotifier<bool> enableSubmitBtn = ValueNotifier<bool>(false);
-  ValueNotifier<LoadingStatus> loadingStatus =
-      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<LoadingStatus> loadingStatus = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   File? attach1;
   File? attach2;
   File? attach3;
@@ -37,24 +36,27 @@ class ReportBloc extends Bloc<ReportService> {
     }
   }
 
-  Future<bool> callRequest(BuildContext context) async {
+  Future<dynamic> callRequest(BuildContext context) {
     final model = ReportRequest(
       content: textController.text,
-      userId: box.get(DatabaseFieldConstant.userid),
+      userId: box.get(DatabaseFieldConstant.userid).toString(),
       image1: attach1,
       image2: attach2,
       image3: attach3,
     );
 
     if (pageType == ReportPageType.issue) {
-      return await service.addBugIssue(reportData: model);
+      return service.addBugIssue(reportData: model);
     } else {
-      return await service.addSuggestion(reportData: model);
+      return service.addSuggestion(reportData: model);
     }
   }
 
   @override
   onDispose() {
+    attach1 = null;
+    attach2 = null;
+    attach3 = null;
     textController.dispose();
     enableSubmitBtn.dispose();
     loadingStatus.dispose();

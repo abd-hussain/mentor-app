@@ -4,17 +4,26 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mentor_app/shared_widget/bottom_sheet_util.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ReportAttatchment extends StatelessWidget {
+class ReportAttatchment extends StatefulWidget {
   final Function(File?) attach1;
   final Function(File?) attach2;
   final Function(File?) attach3;
 
-  const ReportAttatchment(
-      {required this.attach1,
-      required this.attach2,
-      required this.attach3,
-      Key? key})
-      : super(key: key);
+  const ReportAttatchment({
+    super.key,
+    required this.attach1,
+    required this.attach2,
+    required this.attach3,
+  });
+
+  @override
+  State<ReportAttatchment> createState() => _ReportAttatchmentState();
+}
+
+class _ReportAttatchmentState extends State<ReportAttatchment> {
+  File? image1;
+  File? image2;
+  File? image3;
 
   Future<File> pickImage(ImageSource source) async {
     final image = await ImagePicker().pickImage(source: source);
@@ -23,10 +32,6 @@ class ReportAttatchment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ValueNotifier<File?> image1Controller = ValueNotifier<File?>(null);
-    ValueNotifier<File?> image2Controller = ValueNotifier<File?>(null);
-    ValueNotifier<File?> image3Controller = ValueNotifier<File?>(null);
-
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16),
       child: Row(
@@ -36,29 +41,30 @@ class ReportAttatchment extends StatelessWidget {
               onTap: () {
                 BottomSheetsUtil().addImageBottomSheet(
                   context,
-                  false,
+                  image1 != null,
                   AppLocalizations.of(context)!.profilephotosetting,
                   AppLocalizations.of(context)!.setprofilephoto,
                   deleteCallBack: () {
-                    image1Controller.value = null;
-                    attach1(null);
+                    widget.attach1(null);
+                    image1 = null;
+                    setState(() {});
                     Navigator.pop(context);
                   },
                   cameraCallBack: () async {
-                    File image = await pickImage(ImageSource.camera);
-                    if (image.path.isEmpty) {
+                    image1 = await pickImage(ImageSource.camera);
+                    if (image1 == null || image1!.path.isEmpty) {
                       return;
                     }
-                    image1Controller.value = image;
-                    attach1(image);
+                    widget.attach1(image1);
+                    setState(() {});
                   },
                   galleryCallBack: () async {
-                    File image = await pickImage(ImageSource.gallery);
-                    if (image.path.isEmpty) {
+                    image1 = await pickImage(ImageSource.gallery);
+                    if (image1 == null || image1!.path.isEmpty) {
                       return;
                     }
-                    image1Controller.value = image;
-                    attach1(image);
+                    widget.attach1(image1);
+                    setState(() {});
                   },
                 );
               },
@@ -69,24 +75,20 @@ class ReportAttatchment extends StatelessWidget {
                     width: 70,
                     height: 70,
                   ),
-                  ValueListenableBuilder<File?>(
-                      valueListenable: image1Controller,
-                      builder: (context, snapshot, child) {
-                        return snapshot != null
-                            ? Padding(
-                                padding: const EdgeInsets.all(5),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.file(
-                                    snapshot,
-                                    width: 60,
-                                    height: 60,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              )
-                            : Container();
-                      }),
+                  image1 != null
+                      ? Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.file(
+                              image1!,
+                              width: 60,
+                              height: 60,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        )
+                      : Container()
                 ],
               ),
             ),
@@ -96,30 +98,30 @@ class ReportAttatchment extends StatelessWidget {
               onTap: () {
                 BottomSheetsUtil().addImageBottomSheet(
                   context,
-                  false,
+                  image1 != null,
                   AppLocalizations.of(context)!.profilephotosetting,
                   AppLocalizations.of(context)!.setprofilephoto,
                   deleteCallBack: () {
-                    image2Controller.value = null;
-                    attach2(null);
-
+                    widget.attach2(null);
+                    image2 = null;
+                    setState(() {});
                     Navigator.pop(context);
                   },
                   cameraCallBack: () async {
-                    File image = await pickImage(ImageSource.camera);
-                    if (image.path.isEmpty) {
+                    image2 = await pickImage(ImageSource.camera);
+                    if (image2 == null || image2!.path.isEmpty) {
                       return;
                     }
-                    image2Controller.value = image;
-                    attach2(image);
+                    setState(() {});
+                    widget.attach2(image2);
                   },
                   galleryCallBack: () async {
-                    File image = await pickImage(ImageSource.gallery);
-                    if (image.path.isEmpty) {
+                    image2 = await pickImage(ImageSource.gallery);
+                    if (image2 == null || image2!.path.isEmpty) {
                       return;
                     }
-                    image2Controller.value = image;
-                    attach2(image);
+                    setState(() {});
+                    widget.attach2(image2);
                   },
                 );
               },
@@ -130,24 +132,20 @@ class ReportAttatchment extends StatelessWidget {
                     width: 70,
                     height: 70,
                   ),
-                  ValueListenableBuilder<File?>(
-                      valueListenable: image2Controller,
-                      builder: (context, snapshot, child) {
-                        return snapshot != null
-                            ? Padding(
-                                padding: const EdgeInsets.all(5),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.file(
-                                    snapshot,
-                                    width: 60,
-                                    height: 60,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              )
-                            : Container();
-                      }),
+                  image2 != null
+                      ? Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.file(
+                              image2!,
+                              width: 60,
+                              height: 60,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             ),
@@ -156,30 +154,30 @@ class ReportAttatchment extends StatelessWidget {
             onTap: () {
               BottomSheetsUtil().addImageBottomSheet(
                 context,
-                false,
+                image1 != null,
                 AppLocalizations.of(context)!.profilephotosetting,
                 AppLocalizations.of(context)!.setprofilephoto,
                 deleteCallBack: () {
-                  image3Controller.value = null;
-                  attach3(null);
-
+                  widget.attach3(null);
+                  image3 = null;
+                  setState(() {});
                   Navigator.pop(context);
                 },
                 cameraCallBack: () async {
-                  File image = await pickImage(ImageSource.camera);
-                  if (image.path.isEmpty) {
+                  image3 = await pickImage(ImageSource.camera);
+                  if (image3 == null || image3!.path.isEmpty) {
                     return;
                   }
-                  image3Controller.value = image;
-                  attach3(image);
+                  setState(() {});
+                  widget.attach3(image3);
                 },
                 galleryCallBack: () async {
-                  File image = await pickImage(ImageSource.gallery);
-                  if (image.path.isEmpty) {
+                  image3 = await pickImage(ImageSource.gallery);
+                  if (image3 == null || image3!.path.isEmpty) {
                     return;
                   }
-                  image3Controller.value = image;
-                  attach3(image);
+                  setState(() {});
+                  widget.attach3(image3);
                 },
               );
             },
@@ -190,24 +188,20 @@ class ReportAttatchment extends StatelessWidget {
                   width: 70,
                   height: 70,
                 ),
-                ValueListenableBuilder<File?>(
-                    valueListenable: image3Controller,
-                    builder: (context, snapshot, child) {
-                      return snapshot != null
-                          ? Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.file(
-                                  snapshot,
-                                  width: 60,
-                                  height: 60,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            )
-                          : Container();
-                    }),
+                image3 != null
+                    ? Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.file(
+                            image3!,
+                            width: 60,
+                            height: 60,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      )
+                    : Container(),
               ],
             ),
           ),

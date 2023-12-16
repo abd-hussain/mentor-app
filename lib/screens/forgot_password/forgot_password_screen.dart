@@ -49,16 +49,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       margin: const EdgeInsets.only(left: 8, right: 8, top: 8),
                       child: BackgroundContainer(
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 16, top: 35, right: 16, bottom: 25),
+                          padding: const EdgeInsets.only(left: 16, top: 35, right: 16, bottom: 25),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Center(
                                 child: CustomText(
                                   maxLins: 2,
-                                  title: AppLocalizations.of(context)!
-                                      .resetpasswordtitle,
+                                  title: AppLocalizations.of(context)!.resetpasswordtitle,
                                   fontSize: 14,
                                   textAlign: TextAlign.center,
                                   textColor: const Color(0xff191C1F),
@@ -73,8 +71,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                   bloc.fieldsValidations.value = false;
                                 },
                                 onchange: () => bloc.fieldValidation(),
-                                showHideEmailClearNotifier:
-                                    bloc.showHideEmailClearNotifier,
+                                onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
+                                showHideEmailClearNotifier: bloc.showHideEmailClearNotifier,
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(16),
@@ -95,12 +93,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                   valueListenable: bloc.fieldsValidations,
                                   builder: (context, snapshot, child) {
                                     return CustomButton(
-                                      padding: const EdgeInsets.only(
-                                          left: 16, right: 16),
+                                      padding: const EdgeInsets.only(left: 16, right: 16),
                                       enableButton: snapshot,
                                       onTap: () {
-                                        FocusScope.of(context)
-                                            .requestFocus(FocusNode());
+                                        FocusScope.of(context).requestFocus(FocusNode());
                                         bloc.doForgotPasswordCall();
                                       },
                                     );

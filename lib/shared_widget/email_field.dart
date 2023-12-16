@@ -8,13 +8,15 @@ class EmailFieldLogin extends StatelessWidget {
   final ValueNotifier<bool> showHideEmailClearNotifier;
   final Function() onchange;
   final Function() onClear;
+  final Function() onEditingComplete;
 
   const EmailFieldLogin(
       {super.key,
       required this.controller,
       required this.showHideEmailClearNotifier,
       required this.onchange,
-      required this.onClear});
+      required this.onClear,
+      required this.onEditingComplete});
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,7 @@ class EmailFieldLogin extends StatelessWidget {
                   : Container();
             }),
         onChange: (text) => onchange(),
+        onEditingComplete: () => onEditingComplete(),
       ),
     );
   }

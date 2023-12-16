@@ -17,9 +17,12 @@ class TutView extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: <Widget>[
+            Image.asset(
+              "assets/images/logo.png",
+              height: 150,
+            ),
             Padding(
-              padding: const EdgeInsets.only(
-                  top: 50, bottom: 50, left: 16, right: 16),
+              padding: const EdgeInsets.only(top: 8, left: 16, right: 16),
               child: CustomText(
                 title: title,
                 fontSize: 24,
@@ -29,10 +32,16 @@ class TutView extends StatelessWidget {
                 textColor: const Color(0xff444444),
               ),
             ),
-            Center(
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height - 300,
-                child: Image.asset(image),
+            Expanded(child: Container()),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 100),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular((MediaQuery.of(context).size.width - 16) / 2),
+                child: Image.asset(
+                  image,
+                  height: MediaQuery.of(context).size.width - 16,
+                  width: MediaQuery.of(context).size.width - 16,
+                ),
               ),
             ),
           ],

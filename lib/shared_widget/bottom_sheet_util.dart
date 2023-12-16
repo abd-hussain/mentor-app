@@ -9,8 +9,7 @@ import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 
 class BottomSheetsUtil {
-  Future addImageBottomSheet(
-      BuildContext context, bool? image, String title1, String title2,
+  Future addImageBottomSheet(BuildContext context, bool? image, String title1, String title2,
       {required VoidCallback galleryCallBack,
       required VoidCallback cameraCallBack,
       required VoidCallback deleteCallBack}) {
@@ -47,8 +46,7 @@ class BottomSheetsUtil {
                             ),
                             const SizedBox(width: 10),
                             CustomText(
-                              title: AppLocalizations.of(context)!
-                                  .pickimageremoveimage,
+                              title: AppLocalizations.of(context)!.pickimageremoveimage,
                               textColor: Colors.red,
                               fontSize: 16,
                             ),
@@ -91,8 +89,7 @@ class BottomSheetsUtil {
                                     const SizedBox(width: 8),
                                     Expanded(
                                       child: CustomText(
-                                        title: AppLocalizations.of(context)!
-                                            .pickimagefromstudio,
+                                        title: AppLocalizations.of(context)!.pickimagefromstudio,
                                         fontSize: 16,
                                         textColor: const Color(0xff444444),
                                       ),
@@ -124,8 +121,7 @@ class BottomSheetsUtil {
                                     const SizedBox(width: 8),
                                     Expanded(
                                       child: CustomText(
-                                        title: AppLocalizations.of(context)!
-                                            .pickimagefromcamera,
+                                        title: AppLocalizations.of(context)!.pickimagefromcamera,
                                         fontSize: 16,
                                         textColor: const Color(0xff444444),
                                       ),
@@ -148,8 +144,7 @@ class BottomSheetsUtil {
         });
   }
 
-  Future genderBottomSheet(BuildContext context, List<Gender> listOfGender,
-      Function(Gender) selectedGender) {
+  Future genderBottomSheet(BuildContext context, List<Gender> listOfGender, Function(Gender) selectedGender) {
     return showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.white,
@@ -187,10 +182,7 @@ class BottomSheetsUtil {
                           height: 50,
                           child: Row(
                             children: [
-                              SizedBox(
-                                  width: 40,
-                                  height: 40,
-                                  child: listOfGender[index].icon),
+                              SizedBox(width: 40, height: 40, child: listOfGender[index].icon),
                               const SizedBox(width: 8),
                               Expanded(
                                 child: CustomText(
@@ -217,8 +209,7 @@ class BottomSheetsUtil {
         });
   }
 
-  Future countryBottomSheet(BuildContext context, List<Country> listOfCountries,
-      Function(Country) selectedCountry) {
+  Future countryBottomSheet(BuildContext context, List<Country> listOfCountries, Function(Country) selectedCountry) {
     return showModalBottomSheet(
       isScrollControlled: true,
       backgroundColor: Colors.white,
@@ -260,11 +251,8 @@ class BottomSheetsUtil {
                                 width: 30,
                                 height: 30,
                                 child: FadeInImage(
-                                    placeholder: const AssetImage(
-                                        "assets/images/flagPlaceHolderImg.png"),
-                                    image: NetworkImage(
-                                        listOfCountries[index].flagImage!,
-                                        scale: 1))),
+                                    placeholder: const AssetImage("assets/images/flagPlaceHolderImg.png"),
+                                    image: NetworkImage(listOfCountries[index].flagImage!, scale: 1))),
                             const SizedBox(width: 8),
                             Expanded(
                               child: CustomText(
@@ -292,8 +280,7 @@ class BottomSheetsUtil {
     );
   }
 
-  Future suffixBottomSheet(BuildContext context, List<SuffixData> listOfSuffix,
-      Function(SuffixData) selectedSuffix) {
+  Future suffixBottomSheet(BuildContext context, List<SuffixData> listOfSuffix, Function(SuffixData) selectedSuffix) {
     return showModalBottomSheet(
       isScrollControlled: true,
       backgroundColor: Colors.white,
@@ -435,8 +422,7 @@ class BottomSheetsUtil {
                                 return Checkbox(
                                     value: listOfLanguage[index].isEnable,
                                     onChanged: (va) {
-                                      listOfLanguage[index].isEnable =
-                                          !listOfLanguage[index].isEnable;
+                                      listOfLanguage[index].isEnable = !listOfLanguage[index].isEnable;
                                       valueListenable.sink.add(true);
                                     });
                               }),
@@ -454,10 +440,7 @@ class BottomSheetsUtil {
     );
   }
 
-  Future areYouShoureButtomSheet(
-      {required BuildContext context,
-      required String message,
-      required VoidCallback sure}) {
+  Future areYouShoureButtomSheet({required BuildContext context, required String message, required VoidCallback sure}) {
     return showModalBottomSheet(
       enableDrag: false,
       useRootNavigator: true,

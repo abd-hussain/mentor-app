@@ -264,5 +264,10 @@
     "pleasewaitforclient" : "Please wait for Client to join the call",
     "readytogo" : "You will be ready to go",
     "ibaninfo" : "Your Bank IBAN informations",
-    "accountcreatedsuccessfully" : "Your account Successfully created"
+    "accountcreatedsuccessfully" : "Your account Successfully created",
+    "rateapponstore" : "Rate Application on Store",
+    "rateapponstoremessage" : "If you like this app, please take a little bit of your time to review it ! It really helps us and it shouldn't take you more than one minute.",
+    "mentorapp" : "Mentors App",
+    "later" : "Later",
+    "close" : "close"
 }

@@ -19,8 +19,6 @@ class _TutorialsScreenState extends State<TutorialsScreen> {
     super.dispose();
   }
 
-  //TODO: put prober images
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,23 +29,23 @@ class _TutorialsScreenState extends State<TutorialsScreen> {
             children: [
               TutView(
                 title: AppLocalizations.of(context)!.tutorial1,
-                image: "assets/images/tutorials/tutorials1.jpg",
+                image: "assets/images/tutorials/tutorials1.png",
               ),
               TutView(
                 title: AppLocalizations.of(context)!.tutorial2,
-                image: "assets/images/tutorials/tutorials.png",
+                image: "assets/images/tutorials/tutorials2.png",
               ),
               TutView(
                 title: AppLocalizations.of(context)!.tutorial3,
-                image: "assets/images/tutorials/tutorials.png",
+                image: "assets/images/tutorials/tutorials3.png",
               ),
               TutView(
                 title: AppLocalizations.of(context)!.tutorial4,
-                image: "assets/images/tutorials/tutorials.png",
+                image: "assets/images/tutorials/tutorials4.png",
               ),
               TutView(
                 title: AppLocalizations.of(context)!.tutorial5,
-                image: "assets/images/tutorials/tutorials.png",
+                image: "assets/images/tutorials/tutorials5.png",
               ),
             ],
           ),

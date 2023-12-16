@@ -24,32 +24,27 @@ class AccountBloc extends Bloc<AccountService> {
       ProfileOptions(
         icon: Icons.account_box,
         name: AppLocalizations.of(context)!.editprofileinformations,
-        onTap: () => Navigator.of(context, rootNavigator: true)
-            .pushNamed(RoutesConstants.editProfileScreen),
+        onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.editProfileScreen),
       ),
       ProfileOptions(
         icon: Icons.explore,
         name: AppLocalizations.of(context)!.editprofileeinexperiances,
-        onTap: () => Navigator.of(context, rootNavigator: true)
-            .pushNamed(RoutesConstants.editExperienceScreen),
+        onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.editExperienceScreen),
       ),
       ProfileOptions(
         icon: Icons.work_history_outlined,
         name: AppLocalizations.of(context)!.workinghour,
-        onTap: () => Navigator.of(context, rootNavigator: true)
-            .pushNamed(RoutesConstants.workingHoursScreen),
+        onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.workingHoursScreen),
       ),
       ProfileOptions(
         icon: Ionicons.cash_outline,
         name: AppLocalizations.of(context)!.rateperhour,
-        onTap: () => Navigator.of(context, rootNavigator: true)
-            .pushNamed(RoutesConstants.ratePerHourScreen),
+        onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.ratePerHourScreen),
       ),
       ProfileOptions(
         icon: Icons.password,
         name: AppLocalizations.of(context)!.editprofilepassword,
-        onTap: () => Navigator.of(context, rootNavigator: true)
-            .pushNamed(RoutesConstants.changePasswordScreen),
+        onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.changePasswordScreen),
       ),
       ProfileOptions(
           icon: Ionicons.finger_print,
@@ -60,12 +55,10 @@ class AccountBloc extends Bloc<AccountService> {
               return CustomSwitch(
                   value: toggleOfBiometrics.value,
                   language: box.get(DatabaseFieldConstant.language),
-                  backgroundColorOfSelection: toggleOfBiometrics.value
-                      ? const Color(0xff34C759)
-                      : const Color(0xffE74C4C),
+                  backgroundColorOfSelection:
+                      toggleOfBiometrics.value ? const Color(0xff34C759) : const Color(0xffE74C4C),
                   onChanged: (_) async {
-                    await box.put(DatabaseFieldConstant.biometricStatus,
-                        (!toggleOfBiometrics.value).toString());
+                    await box.put(DatabaseFieldConstant.biometricStatus, (!toggleOfBiometrics.value).toString());
                     toggleOfBiometrics.value = !toggleOfBiometrics.value;
                   });
             },
@@ -91,16 +84,13 @@ class AccountBloc extends Bloc<AccountService> {
       ProfileOptions(
         icon: Icons.translate,
         name: AppLocalizations.of(context)!.language,
-        selectedItem: box.get(DatabaseFieldConstant.language) == "en"
-            ? "English"
-            : "العربية",
+        selectedItem: box.get(DatabaseFieldConstant.language) == "en" ? "English" : "العربية",
         onTap: () => _changeLanguage(context),
       ),
       ProfileOptions(
         icon: Icons.menu_book_rounded,
         name: AppLocalizations.of(context)!.usertutorials,
-        onTap: () => Navigator.of(context, rootNavigator: true)
-            .pushNamed(RoutesConstants.tutorialsScreen),
+        onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.tutorialsScreen),
       ),
     ];
   }
@@ -110,16 +100,14 @@ class AccountBloc extends Bloc<AccountService> {
       ProfileOptions(
         icon: Icons.bug_report,
         name: AppLocalizations.of(context)!.reportproblem,
-        onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(
-            RoutesConstants.reportScreen,
-            arguments: {AppConstant.argument1: ReportPageType.issue}),
+        onTap: () => Navigator.of(context, rootNavigator: true)
+            .pushNamed(RoutesConstants.reportScreen, arguments: {AppConstant.argument1: ReportPageType.issue}),
       ),
       ProfileOptions(
         icon: Ionicons.balloon,
         name: AppLocalizations.of(context)!.reportsuggestion,
-        onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(
-            RoutesConstants.reportScreen,
-            arguments: {AppConstant.argument1: ReportPageType.suggestion}),
+        onTap: () => Navigator.of(context, rootNavigator: true)
+            .pushNamed(RoutesConstants.reportScreen, arguments: {AppConstant.argument1: ReportPageType.suggestion}),
       ),
     ];
   }
@@ -153,17 +141,12 @@ class AccountBloc extends Bloc<AccountService> {
         sure: () async {
           BottomSheetsUtil().areYouShoureButtomSheet(
               context: context,
-              message:
-                  AppLocalizations.of(context)!.accountInformationwillbedeleted,
+              message: AppLocalizations.of(context)!.accountInformationwillbedeleted,
               sure: () async {
-                locator<MentorSettingsService>()
-                    .removeAccount()
-                    .whenComplete(() async {
+                locator<MentorSettingsService>().removeAccount().whenComplete(() async {
                   await _deleteAllUserData();
 
-                  await nav.pushNamedAndRemoveUntil(
-                      RoutesConstants.initialRoute,
-                      (Route<dynamic> route) => true);
+                  await nav.pushNamedAndRemoveUntil(RoutesConstants.initialRoute, (Route<dynamic> route) => true);
                 });
               });
         });
@@ -176,14 +159,12 @@ class AccountBloc extends Bloc<AccountService> {
         message: AppLocalizations.of(context)!.areyousurelogout,
         sure: () async {
           await _deleteAllUserData();
-          await nav.pushNamedAndRemoveUntil(
-              RoutesConstants.initialRoute, (Route<dynamic> route) => true);
+          await nav.pushNamedAndRemoveUntil(RoutesConstants.initialRoute, (Route<dynamic> route) => true);
         });
   }
 
   void _openAboutUs(BuildContext context) {
-    Navigator.of(context, rootNavigator: true)
-        .pushNamed(RoutesConstants.webViewScreen, arguments: {
+    Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.webViewScreen, arguments: {
       AppConstant.webViewPageUrl: AppConstant.aboutusLink,
       AppConstant.pageTitle: AppLocalizations.of(context)!.aboutus
     });
@@ -214,13 +195,11 @@ class AccountBloc extends Bloc<AccountService> {
   }
 
   void _openInviteFriends(BuildContext context) {
-    Navigator.of(context, rootNavigator: true)
-        .pushNamed(RoutesConstants.inviteFriendScreen);
+    Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.inviteFriendScreen);
   }
 
   void _openVersionPage(BuildContext context) {
-    Navigator.of(context, rootNavigator: true)
-        .pushNamed(RoutesConstants.versioningScreen);
+    Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.versioningScreen);
   }
 
   void _changeLanguage(BuildContext context) async {
@@ -243,8 +222,7 @@ class AccountBloc extends Bloc<AccountService> {
   }
 
   readBiometricsInitValue() {
-    toggleOfBiometrics.value =
-        box.get(DatabaseFieldConstant.biometricStatus) == "true";
+    toggleOfBiometrics.value = box.get(DatabaseFieldConstant.biometricStatus) == "true";
   }
 
   @override
