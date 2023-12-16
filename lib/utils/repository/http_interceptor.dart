@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/error/exceptions.dart';
-import 'package:mentor_app/utils/logger.dart';
 import 'package:mentor_app/utils/mixins.dart';
 
 class HttpInterceptor extends InterceptorsWrapper {
@@ -44,14 +44,16 @@ class HttpInterceptor extends InterceptorsWrapper {
   }
 
   Future<bool> validateResponse<T extends Model, TR>(Response response) async {
-    logger.wtf("request name ${response.requestOptions.path} -- status code ${response.statusCode}");
+    debugPrint("request name ${response.requestOptions.path} -- status code ${response.statusCode}");
+
     switch (response.statusCode) {
       case 200:
         return true;
       case 201:
         return true;
       case 403:
-        logger.wtf("response.data ${response.data.toString()}");
+        debugPrint("response.data ${response.data.toString()}");
+
         throw DioException(
             error: HttpException(
                 status: response.statusCode!,
@@ -59,7 +61,8 @@ class HttpInterceptor extends InterceptorsWrapper {
                 requestId: ""),
             requestOptions: response.requestOptions);
       default:
-        logger.wtf("response.data ${response.data.toString()}");
+        debugPrint("response.data ${response.data.toString()}");
+
         throw DioException(
             error: HttpException(
                 status: response.statusCode!,

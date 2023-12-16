@@ -5,9 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PasswordStrengtView extends StatelessWidget {
   final ValueNotifier<PasswordStrengthModel> passwordStrengthValidationNotifier;
-  const PasswordStrengtView(
-      {Key? key, required this.passwordStrengthValidationNotifier})
-      : super(key: key);
+  const PasswordStrengtView({super.key, required this.passwordStrengthValidationNotifier});
 
   @override
   Widget build(BuildContext context) {

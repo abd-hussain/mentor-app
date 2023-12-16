@@ -60,24 +60,19 @@ class _RegisterFinalScreenState extends State<RegisterFinalScreen> {
                       CustomButton(
                           enableButton: true,
                           onTap: () async {
-                            final scaffoldMessenger =
-                                ScaffoldMessenger.of(context);
+                            final scaffoldMessenger = ScaffoldMessenger.of(context);
+                            final navigation = Navigator.of(context);
+                            final localization = AppLocalizations.of(context)!;
                             bloc.loadingStatus.value = LoadingStatus.inprogress;
 
                             try {
-                              await bloc
-                                  .handleCreatingTheProfile(context)
-                                  .then((value) async {
+                              await bloc.handleCreatingTheProfile(context).then((value) async {
                                 await bloc.clearRegistrationData();
                                 bloc.loadingStatus.value = LoadingStatus.finish;
                                 scaffoldMessenger.showSnackBar(
-                                  SnackBar(
-                                      content: Text(
-                                          AppLocalizations.of(context)!
-                                              .accountcreatedsuccessfully)),
+                                  SnackBar(content: Text(localization.accountcreatedsuccessfully)),
                                 );
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(builder: (ctx) {
+                                navigation.pushReplacement(MaterialPageRoute(builder: (ctx) {
                                   return const LoginScreen();
                                 }));
                               });
@@ -85,16 +80,13 @@ class _RegisterFinalScreenState extends State<RegisterFinalScreen> {
                               final error = e.error as HttpException;
                               bloc.loadingStatus.value = LoadingStatus.finish;
                               scaffoldMessenger.showSnackBar(
-                                SnackBar(
-                                    content: Text(error.message.toString())),
+                                SnackBar(content: Text(error.message.toString())),
                               );
                             }
                           }),
                     ],
                   ),
-                  snapshot == LoadingStatus.inprogress
-                      ? const LoadingView(fullScreen: true)
-                      : Container()
+                  snapshot == LoadingStatus.inprogress ? const LoadingView(fullScreen: true) : Container()
                 ],
               );
             }),

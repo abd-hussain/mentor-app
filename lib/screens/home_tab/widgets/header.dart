@@ -6,7 +6,7 @@ import 'package:mentor_app/utils/constants/constant.dart';
 
 class HeaderHomePage extends StatefulWidget {
   final bool showRefresh;
-  const HeaderHomePage({Key? key, this.showRefresh = false}) : super(key: key);
+  const HeaderHomePage({super.key, this.showRefresh = false});
 
   @override
   State<HeaderHomePage> createState() => _HeaderHomePageState();
@@ -29,8 +29,7 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
           Expanded(child: Container()),
           widget.showRefresh
               ? IconButton(
-                  onPressed: () => locator<MainContainerBloc>()
-                      .getMentorAppointments(context),
+                  onPressed: () => locator<MainContainerBloc>().getMentorAppointments(context),
                   icon: const Icon(
                     Icons.refresh,
                     color: Color(0xff034061),

@@ -40,6 +40,9 @@ jobs:
         ruby-version: 2.6
         rubygems: latest
 
+    - name: Update Fastlane
+      run: gem update fastlane
+
     - name: Build and Deploy
       run: |
         flutter pub get

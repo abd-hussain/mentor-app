@@ -5,7 +5,7 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/utils/day_time.dart';
 
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({Key? key}) : super(key: key);
+  const ProfileHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +15,7 @@ class ProfileHeader extends StatelessWidget {
         padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
         child: Row(
           children: [
-            Image.asset(
-                locator<DayTime>().gettheCorrentImageDependOnCurrentTime(),
-                width: 32,
-                height: 32),
+            Image.asset(locator<DayTime>().gettheCorrentImageDependOnCurrentTime(), width: 32, height: 32),
             const SizedBox(width: 8),
             Expanded(
               child: Column(

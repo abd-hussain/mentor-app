@@ -6,7 +6,7 @@ import 'package:mentor_app/screens/main_contaner/main_container_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MainContainer extends StatefulWidget {
-  const MainContainer({Key? key}) : super(key: key);
+  const MainContainer({super.key});
   @override
   State<MainContainer> createState() => _MainContainerState();
 }
@@ -51,22 +51,13 @@ class _MainContainerState extends State<MainContainer> {
         height: 50,
         style: TabStyle.fixedCircle,
         items: [
-          TabItem(
-              icon: Icons.home,
-              title: AppLocalizations.of(context)!.containerHomeIconTitle),
-          TabItem(
-              icon: Icons.payments_outlined,
-              title: AppLocalizations.of(context)!.payments),
+          TabItem(icon: Icons.home, title: AppLocalizations.of(context)!.containerHomeIconTitle),
+          TabItem(icon: Icons.payments_outlined, title: AppLocalizations.of(context)!.payments),
           const TabItem(icon: Icons.call),
-          TabItem(
-              icon: Icons.calendar_month,
-              title: AppLocalizations.of(context)!.containerCalenderIconTitle),
-          TabItem(
-              icon: Icons.person,
-              title: AppLocalizations.of(context)!.containerAccountIconTitle),
+          TabItem(icon: Icons.calendar_month, title: AppLocalizations.of(context)!.containerCalenderIconTitle),
+          TabItem(icon: Icons.person, title: AppLocalizations.of(context)!.containerAccountIconTitle),
         ],
-        onTap: (int index) => _bloc.currentTabIndexNotifier.value =
-            _bloc.returnSelectedtypeDependOnIndex(index),
+        onTap: (int index) => _bloc.currentTabIndexNotifier.value = _bloc.returnSelectedtypeDependOnIndex(index),
       ),
     );
   }

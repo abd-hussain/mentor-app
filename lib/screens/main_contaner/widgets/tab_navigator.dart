@@ -3,7 +3,7 @@ import 'package:mentor_app/utils/routes.dart';
 
 class TabNavigator extends StatelessWidget {
   final String initialRoute;
-  const TabNavigator({Key? key, required this.initialRoute}) : super(key: key);
+  const TabNavigator({super.key, required this.initialRoute});
   @override
   Widget build(BuildContext context) {
     return Navigator(

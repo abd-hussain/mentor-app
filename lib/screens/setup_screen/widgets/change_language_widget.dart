@@ -5,9 +5,7 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 class ChangeLanguageWidget extends StatelessWidget {
   final int selectionIndex;
   final Function(int) segmentChange;
-  const ChangeLanguageWidget(
-      {Key? key, required this.selectionIndex, required this.segmentChange})
-      : super(key: key);
+  const ChangeLanguageWidget({super.key, required this.selectionIndex, required this.segmentChange});
 
   @override
   Widget build(BuildContext context) {

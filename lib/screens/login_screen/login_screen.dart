@@ -147,12 +147,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                             ? BiometrincLoginView(
                                                 biometricType: snapshot.type,
                                                 onPress: () async {
+                                                  final contextScafold = ScaffoldMessenger.of(context);
+
                                                   if (!bloc.isBiometricAppeared) {
                                                     if (context.mounted) {
                                                       await bloc.box.get(DatabaseFieldConstant.biometricStatus) ==
                                                               'true'
                                                           ? await bloc.tryToAuthintecateUserByBiometric(context)
-                                                          : ScaffoldMessenger.of(context).showSnackBar(
+                                                          : contextScafold.showSnackBar(
                                                               const SnackBar(
                                                                 content: Text(
                                                                     "Login_BiometricMssage_BiometricLoginIsDisabled"),
