@@ -15,10 +15,8 @@ import 'package:mentor_app/utils/mixins.dart';
 class EditExperienceBloc extends Bloc<AccountService> {
   ValueNotifier<bool> enableSaveButton = ValueNotifier<bool>(false);
   final box = Hive.box(DatabaseBoxConstant.userInfo);
-  ValueNotifier<List<CheckBox>> listOfMajorsNotifier =
-      ValueNotifier<List<CheckBox>>([]);
-  ValueNotifier<LoadingStatus> loadingStatusNotifier =
-      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<List<CheckBox>> listOfMajorsNotifier = ValueNotifier<List<CheckBox>>([]);
+  ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
 
   TextEditingController categoryController = TextEditingController();
   TextEditingController experianceSinceController = TextEditingController();
@@ -66,10 +64,8 @@ class EditExperienceBloc extends Bloc<AccountService> {
     });
   }
 
-  Future<dynamic> updateProfileExperiance() {
-    // loadingStatusNotifier.value = LoadingStatus.inprogress;
-
-    return service.updateProfileExperiance(
+  Future<dynamic> updateProfileExperiance() async {
+    return await service.updateProfileExperiance(
       account: UpdateAccountExperianceRequest(
         experienceSince: experianceSinceController.text,
         majors: getIntegerListOfMajors(listOfMajorsNotifier.value),
@@ -84,8 +80,7 @@ class EditExperienceBloc extends Bloc<AccountService> {
   List<CheckBox> prepareListOfMajors(List<int> majors) {
     final List<CheckBox> list = listOfAllMajors.map((mainItem) {
       final isEnable = majors.contains(mainItem.id);
-      return CheckBox(
-          value: mainItem.name!, isEnable: isEnable, id: mainItem.id!);
+      return CheckBox(value: mainItem.name!, isEnable: isEnable, id: mainItem.id!);
     }).toList();
 
     return list;
@@ -109,9 +104,7 @@ class EditExperienceBloc extends Bloc<AccountService> {
     if (experianceSinceController.text.isNotEmpty &&
         listOfMajorsNotifier.value.isNotEmpty &&
         (cv != null || cvFileUrl.isNotEmpty) &&
-        (cert1 != null || cert1FileUrl.isNotEmpty) &&
-        (cert2 != null || cert2FileUrl.isNotEmpty) &&
-        (cert3 != null || cert3FileUrl.isNotEmpty)) {
+        (cert1 != null || cert1FileUrl.isNotEmpty)) {
       enableSaveButton.value = true;
     }
   }

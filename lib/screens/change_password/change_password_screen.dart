@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mentor_app/models/password_strength_model.dart';
-import 'package:mentor_app/password_strenght_logic.dart';
+import 'package:mentor_app/shared_widget/password_strenght_logic.dart';
 import 'package:mentor_app/screens/change_password/change_password_bloc.dart';
 import 'package:mentor_app/screens/change_password/widgets/password_strenght.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';

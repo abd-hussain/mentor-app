@@ -16,17 +16,22 @@ class RatePerHourBloc extends Bloc<MentorSettingsService> {
     loadingStatusNotifier.value = LoadingStatus.inprogress;
 
     service.getHourRate().then((value) {
-      ratePerHourController.text = "$value";
+      final hourRate = value.data!.hourRate ?? 0;
+      final iban = value.data!.iban;
+
+      ratePerHourController.text = "$hourRate";
+      ibanController.text = "$iban";
+
       loadingStatusNotifier.value = LoadingStatus.finish;
     });
   }
 
   Future<void> changeRateRequest() async {
-    return service.updateHourRate(newRate: ratePerHourController.text);
+    return service.updateHourRate(newRate: ratePerHourController.text, iban: ibanController.text);
   }
 
   validateFieldsForFaze5() {
-    if (ratePerHourController.text.isNotEmpty) {
+    if (ratePerHourController.text.isNotEmpty && ibanController.text.isNotEmpty) {
       double convertedText = double.tryParse(ratePerHourController.text) ?? 0.0;
       if (convertedText > 0) {
         enableSaveButton.value = true;
@@ -67,5 +72,8 @@ class RatePerHourBloc extends Bloc<MentorSettingsService> {
   }
 
   @override
-  onDispose() {}
+  onDispose() {
+    loadingStatusNotifier.dispose();
+    enableSaveButton.dispose();
+  }
 }

@@ -28,17 +28,14 @@ class LoginBloc extends Bloc<AuthService> {
   ValueNotifier<bool> fieldsValidations = ValueNotifier<bool>(false);
 
   ValueNotifier<bool> showHideEmailClearNotifier = ValueNotifier<bool>(false);
-  ValueNotifier<bool> showHidePasswordClearNotifier =
-      ValueNotifier<bool>(false);
-  ValueNotifier<LoadingStatus> loadingStatusNotifier =
-      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<bool> showHidePasswordClearNotifier = ValueNotifier<bool>(false);
+  ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   ValueNotifier<String> errorMessage = ValueNotifier<String>("");
 
   ValueNotifier<bool> buildNotifier = ValueNotifier<bool>(false);
 
   ValueNotifier<AuthenticationBiometricType> biometricResultNotifier =
-      ValueNotifier<AuthenticationBiometricType>(
-          AuthenticationBiometricType(isAvailable: false, type: null));
+      ValueNotifier<AuthenticationBiometricType>(AuthenticationBiometricType(isAvailable: false, type: null));
   bool isBiometricAppeared = false;
   bool biometricStatus = false;
   final authenticationService = locator<AuthenticationService>();
@@ -50,8 +47,7 @@ class LoginBloc extends Bloc<AuthService> {
         errorMessage.value = "";
         fieldsValidations.value = true;
       } else {
-        errorMessage.value =
-            AppLocalizations.of(maincontext!)!.emailformatnotvalid;
+        errorMessage.value = AppLocalizations.of(maincontext!)!.emailformatnotvalid;
       }
     }
   }
@@ -82,9 +78,7 @@ class LoginBloc extends Bloc<AuthService> {
     final String biometricP = box.get(DatabaseFieldConstant.biometricP) ?? "";
     isBiometricAppeared = true;
     biometricStatus =
-        box.get(DatabaseFieldConstant.biometricStatus) == 'true' &&
-            biometricP.isNotEmpty &&
-            biometricU.isNotEmpty;
+        box.get(DatabaseFieldConstant.biometricStatus) == 'true' && biometricP.isNotEmpty && biometricU.isNotEmpty;
 
     if (await _checkAuthentication(Theme.of(context).platform)) {
       SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -105,20 +99,16 @@ class LoginBloc extends Bloc<AuthService> {
   Future tryToAuthintecateUserByBiometric(BuildContext context) async {
     if (await authenticationService.isBiometricAvailable()) {
       if (context.mounted) {
-        if (await authenticationService
-            .shouldAllowBiometricAuthenticationToContinue(
-                Theme.of(context).platform)) {
+        if (await authenticationService.shouldAllowBiometricAuthenticationToContinue(Theme.of(context).platform)) {
           // continue with authentication
           isBiometricAppeared = true;
-          final authentication = await authenticationService
-              .authenticateUser("Please use your biometric signature");
+          final authentication = await authenticationService.authenticateUser("Please use your biometric signature");
           if (authentication.success) {
             final String biometricU = box.get(DatabaseFieldConstant.biometricU);
             final String biometricP = box.get(DatabaseFieldConstant.biometricP);
 
             if (!(await locator<NetworkInfoService>().isConnected())) {
-              throw ConnectionException(
-                  message: "Please check your internet connection");
+              throw ConnectionException(message: "Please check your internet connection");
             } else {
               if (context.mounted) {
                 doLoginCall(
@@ -142,8 +132,7 @@ class LoginBloc extends Bloc<AuthService> {
 
   Future<bool> _checkAuthentication(TargetPlatform platform) async {
     if (await authenticationService.isBiometricAvailable()) {
-      biometricResultNotifier.value =
-          await (authenticationService.getAvailableBiometricTypes(platform));
+      biometricResultNotifier.value = await (authenticationService.getAvailableBiometricTypes(platform));
       buildNotifier.value = true;
       return true;
     }
@@ -158,14 +147,11 @@ class LoginBloc extends Bloc<AuthService> {
   }
 
   void _openMainScreen(BuildContext context) {
-    Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
-        RoutesConstants.mainContainer, (Route<dynamic> route) => false);
+    Navigator.of(context, rootNavigator: true)
+        .pushNamedAndRemoveUntil(RoutesConstants.mainContainer, (Route<dynamic> route) => false);
   }
 
-  _saveValuesInMemory(
-      {required String userName,
-      required String password,
-      required String token}) async {
+  _saveValuesInMemory({required String userName, required String password, required String token}) async {
     await box.put(DatabaseFieldConstant.token, token);
     await box.put(DatabaseFieldConstant.biometricU, userName);
     await box.put(DatabaseFieldConstant.biometricP, password);
@@ -187,18 +173,15 @@ class LoginBloc extends Bloc<AuthService> {
       required String password,
       bool isBiometricLogin = false}) async {
     loadingStatusNotifier.value = LoadingStatus.inprogress;
-    final LoginRequest loginData =
-        LoginRequest(email: userName, password: password);
+    final LoginRequest loginData = LoginRequest(email: userName, password: password);
 
     try {
       final info = await service.login(loginData: loginData);
-      await _saveValuesInMemory(
-          userName: userName, password: password, token: info["data"]);
+      await _saveValuesInMemory(userName: userName, password: password, token: info["data"]);
       loadingStatusNotifier.value = LoadingStatus.finish;
       _openMainScreen(maincontext!);
     } on DioException {
-      errorMessage.value =
-          AppLocalizations.of(maincontext!)!.wrongemailorpassword;
+      errorMessage.value = AppLocalizations.of(maincontext!)!.wrongemailorpassword;
       loadingStatusNotifier.value = LoadingStatus.finish;
     }
   }

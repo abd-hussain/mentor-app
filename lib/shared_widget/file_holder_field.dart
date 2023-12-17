@@ -74,9 +74,7 @@ class _FileHolderFieldState extends State<FileHolderField> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: snapshot != null
-                        ? const Color(0xff034061)
-                        : const Color(0xffe0e0e0),
+                    color: snapshot != null ? const Color(0xff034061) : const Color(0xffe0e0e0),
                   ),
                 ),
                 child: Row(
