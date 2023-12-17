@@ -5,6 +5,7 @@ import 'package:mentor_app/models/password_strength_model.dart';
 import 'package:mentor_app/password_strenght_logic.dart';
 import 'package:mentor_app/services/mentor_settings.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
+import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -15,16 +16,13 @@ class ChangePasswordBloc extends Bloc<MentorSettingsService> {
   bool enableSaveButton = false;
   bool enableNewPasswordTextField = false;
   bool enableConfirmPasswordTextField = false;
+  ValueNotifier<LoadingStatus> loadingStatus = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
 
-  final TextEditingController currentPasswordFieldController =
-      TextEditingController();
-  final TextEditingController newPasswordFieldController =
-      TextEditingController();
-  final TextEditingController confirmPasswordFieldController =
-      TextEditingController();
+  final TextEditingController currentPasswordFieldController = TextEditingController();
+  final TextEditingController newPasswordFieldController = TextEditingController();
+  final TextEditingController confirmPasswordFieldController = TextEditingController();
 
-  final ValueNotifier<PasswordStrengthModel>
-      passwordStrengthValidationNotifier =
+  final ValueNotifier<PasswordStrengthModel> passwordStrengthValidationNotifier =
       ValueNotifier<PasswordStrengthModel>(PasswordStrengthModel());
 
   final ValueNotifier<String> infoNotifier = ValueNotifier<String>("");
@@ -50,8 +48,8 @@ class ChangePasswordBloc extends Bloc<MentorSettingsService> {
   }
 
   bool checkerOfThePasswordStrength() {
-    return PasswordsStrength().checkerOfThePasswordStrength(
-        passwordStrengthValidationNotifier: passwordStrengthValidationNotifier);
+    return PasswordsStrength()
+        .checkerOfThePasswordStrength(passwordStrengthValidationNotifier: passwordStrengthValidationNotifier);
   }
 
   Future<dynamic> changePasswordRequest() {
@@ -65,6 +63,7 @@ class ChangePasswordBloc extends Bloc<MentorSettingsService> {
   @override
   onDispose() {
     clearFields();
+    loadingStatus.dispose();
     currentPasswordFieldController.dispose();
     newPasswordFieldController.dispose();
     confirmPasswordFieldController.dispose();

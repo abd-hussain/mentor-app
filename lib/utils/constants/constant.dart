@@ -20,7 +20,5 @@ class AppConstant {
   static const String whatsappNumber = "+962795190663";
   static const String appLinkAndroid = "https://play.google.com/apps/internaltest/4701396781860140433";
   static const String appName = "HelpEra";
-
-  //TODO: Review This Links
-  static const String appLinkIos = "";
+  static const String appLinkIos = "https://apps.apple.com/us/app/helpera-mentor/id6474047303";
 }
