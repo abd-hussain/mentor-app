@@ -16,13 +16,18 @@ class ChangePasswordBloc extends Bloc<MentorSettingsService> {
   bool enableSaveButton = false;
   bool enableNewPasswordTextField = false;
   bool enableConfirmPasswordTextField = false;
-  ValueNotifier<LoadingStatus> loadingStatus = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<LoadingStatus> loadingStatus =
+      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
 
-  final TextEditingController currentPasswordFieldController = TextEditingController();
-  final TextEditingController newPasswordFieldController = TextEditingController();
-  final TextEditingController confirmPasswordFieldController = TextEditingController();
+  final TextEditingController currentPasswordFieldController =
+      TextEditingController();
+  final TextEditingController newPasswordFieldController =
+      TextEditingController();
+  final TextEditingController confirmPasswordFieldController =
+      TextEditingController();
 
-  final ValueNotifier<PasswordStrengthModel> passwordStrengthValidationNotifier =
+  final ValueNotifier<PasswordStrengthModel>
+      passwordStrengthValidationNotifier =
       ValueNotifier<PasswordStrengthModel>(PasswordStrengthModel());
 
   final ValueNotifier<String> infoNotifier = ValueNotifier<String>("");
@@ -48,8 +53,8 @@ class ChangePasswordBloc extends Bloc<MentorSettingsService> {
   }
 
   bool checkerOfThePasswordStrength() {
-    return PasswordsStrength()
-        .checkerOfThePasswordStrength(passwordStrengthValidationNotifier: passwordStrengthValidationNotifier);
+    return PasswordsStrength().checkerOfThePasswordStrength(
+        passwordStrengthValidationNotifier: passwordStrengthValidationNotifier);
   }
 
   Future<dynamic> changePasswordRequest() {

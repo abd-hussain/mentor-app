@@ -29,7 +29,8 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
           Expanded(child: Container()),
           widget.showRefresh
               ? IconButton(
-                  onPressed: () => locator<MainContainerBloc>().getMentorAppointments(context),
+                  onPressed: () => locator<MainContainerBloc>()
+                      .getMentorAppointments(context),
                   icon: const Icon(
                     Icons.refresh,
                     color: Color(0xff034061),

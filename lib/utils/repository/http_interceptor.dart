@@ -8,16 +8,19 @@ import 'package:mentor_app/utils/mixins.dart';
 
 class HttpInterceptor extends InterceptorsWrapper {
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     var box = Hive.box(DatabaseBoxConstant.userInfo);
-    if (box.get(DatabaseFieldConstant.token) != null || box.get(DatabaseFieldConstant.token) != "") {
+    if (box.get(DatabaseFieldConstant.token) != null ||
+        box.get(DatabaseFieldConstant.token) != "") {
       String bearerToken = "Bearer ${box.get(DatabaseFieldConstant.token)}";
       options.headers = {
         "Authorization": bearerToken,
         "lang": box.get(DatabaseFieldConstant.language),
       };
     } else {
-      options.headers.putIfAbsent("lang", () => box.get(DatabaseFieldConstant.language));
+      options.headers
+          .putIfAbsent("lang", () => box.get(DatabaseFieldConstant.language));
       // options.headers.putIfAbsent("Content-Type", () => "application/json");
       // options.headers.putIfAbsent("User-Agent", () => "PostmanRuntime/7.36.0");
       // options.headers.putIfAbsent("Accept", () => "*/*");
@@ -44,7 +47,8 @@ class HttpInterceptor extends InterceptorsWrapper {
   }
 
   Future<bool> validateResponse<T extends Model, TR>(Response response) async {
-    debugPrint("request name ${response.requestOptions.path} -- status code ${response.statusCode}");
+    debugPrint(
+        "request name ${response.requestOptions.path} -- status code ${response.statusCode}");
 
     switch (response.statusCode) {
       case 200:

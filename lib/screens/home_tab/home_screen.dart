@@ -7,8 +7,10 @@ import 'package:mentor_app/screens/home_tab/widgets/header.dart';
 import 'package:mentor_app/screens/home_tab/widgets/main_banner.dart';
 import 'package:mentor_app/screens/home_tab/widgets/shimmer_notifications.dart';
 import 'package:mentor_app/shared_widget/admob_banner.dart';
+import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/shared_widget/loading_view.dart';
 import 'package:mentor_app/utils/logger.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -41,39 +43,68 @@ class _HomeScreenState extends State<HomeScreen> {
           const HeaderHomePage(),
           const SizedBox(height: 8),
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  FutureBuilder<List<MainBanner>?>(
-                      initialData: const [],
-                      future: bloc.getHome(),
-                      builder: (context, snapshot) {
-                        if (snapshot.data == null && snapshot.hasData) {
-                          return const SizedBox(
-                              height: 250, child: LoadingView());
-                        } else {
-                          return MainBannerHomePage(
-                              bannerList: snapshot.data ?? []);
-                        }
-                      }),
-                  const AddMobBanner(),
-                  FutureBuilder<List<NotificationsResponseData>?>(
-                      initialData: null,
-                      future: bloc.listOfNotifications(),
-                      builder: (context, snapshot) {
-                        if (snapshot.data == null && snapshot.hasData) {
-                          return const SizedBox(
-                              height: 300, child: ShimmerNotificationsView());
-                        } else {
-                          return SizedBox(
-                            height: double.maxFinite,
-                            child: AnnouncementsView(
-                                notificationsList: snapshot.data ?? []),
-                          );
-                        }
-                      }),
-                ],
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FutureBuilder<List<MainBanner>?>(
+                    initialData: const [],
+                    future: bloc.getHome(),
+                    builder: (context, snapshot) {
+                      if (snapshot.data == null && snapshot.hasData) {
+                        return const SizedBox(
+                            height: 250, child: LoadingView());
+                      } else {
+                        return MainBannerHomePage(
+                            bannerList: snapshot.data ?? []);
+                      }
+                    }),
+                const AddMobBanner(),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: CustomText(
+                    title: AppLocalizations.of(context)!.notifications,
+                    fontSize: 18,
+                    textColor: const Color(0xff444444),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                FutureBuilder<List<NotificationsResponseData>?>(
+                    initialData: null,
+                    future: bloc.listOfNotifications(),
+                    builder: (context, snapshot) {
+                      print(snapshot.data);
+                      if (snapshot.data == null) {
+                        return const SizedBox(
+                          height: 300,
+                          child: ShimmerNotificationsView(),
+                        );
+                      } else {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 16, right: 16),
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height - 550,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                              ),
+                              child: snapshot.data!.isEmpty
+                                  ? Center(
+                                      child: CustomText(
+                                        title: AppLocalizations.of(context)!
+                                            .noitem,
+                                        fontSize: 18,
+                                        textColor: const Color(0xff444444),
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )
+                                  : AnnouncementsView(
+                                      notificationsList: snapshot.data ?? []),
+                            ),
+                          ),
+                        );
+                      }
+                    }),
+              ],
             ),
           ),
         ],

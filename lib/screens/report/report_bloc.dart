@@ -16,7 +16,8 @@ class ReportBloc extends Bloc<ReportService> {
   TextEditingController textController = TextEditingController();
   ReportPageType? pageType;
   ValueNotifier<bool> enableSubmitBtn = ValueNotifier<bool>(false);
-  ValueNotifier<LoadingStatus> loadingStatus = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<LoadingStatus> loadingStatus =
+      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   File? attach1;
   File? attach2;
   File? attach3;

@@ -45,7 +45,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       child: Scaffold(
         backgroundColor: const Color(0xffF3F4F5),
         resizeToAvoidBottomInset: false,
-        appBar: customAppBar(title: AppLocalizations.of(context)!.changepassword),
+        appBar:
+            customAppBar(title: AppLocalizations.of(context)!.changepassword),
         body: SafeArea(
           child: ValueListenableBuilder<LoadingStatus>(
               valueListenable: bloc.loadingStatus,
@@ -88,8 +89,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               SizedBox(
                                 height: 50,
                                 child: CustomTextField(
-                                  controller: bloc.currentPasswordFieldController,
-                                  hintText: AppLocalizations.of(context)!.oldpassword,
+                                  controller:
+                                      bloc.currentPasswordFieldController,
+                                  hintText:
+                                      AppLocalizations.of(context)!.oldpassword,
                                   keyboardType: TextInputType.text,
                                   obscureText: bloc.currentPassowrdObscureText,
                                   inputFormatters: [
@@ -100,20 +103,26 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                     child: IconButton(
                                         onPressed: () {
                                           setState(() {
-                                            bloc.currentPassowrdObscureText = !bloc.currentPassowrdObscureText;
+                                            bloc.currentPassowrdObscureText =
+                                                !bloc
+                                                    .currentPassowrdObscureText;
                                           });
                                         },
                                         icon: Icon(
-                                            bloc.currentPassowrdObscureText ? Icons.visibility : Icons.visibility_off)),
+                                            bloc.currentPassowrdObscureText
+                                                ? Icons.visibility
+                                                : Icons.visibility_off)),
                                   ),
                                   onChange: (text) {
                                     if (text.isNotEmpty) {
-                                      if (bloc.validateCurrentPassword(context, text)) {
+                                      if (bloc.validateCurrentPassword(
+                                          context, text)) {
                                         FocusScope.of(context).unfocus();
                                       }
                                     }
                                   },
-                                  onEditingComplete: () => FocusScope.of(context).unfocus(),
+                                  onEditingComplete: () =>
+                                      FocusScope.of(context).unfocus(),
                                 ),
                               ),
                               const SizedBox(height: 20),
@@ -122,7 +131,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 child: CustomTextField(
                                   controller: bloc.newPasswordFieldController,
                                   enabled: bloc.enableNewPasswordTextField,
-                                  hintText: AppLocalizations.of(context)!.newpassword,
+                                  hintText:
+                                      AppLocalizations.of(context)!.newpassword,
                                   keyboardType: TextInputType.text,
                                   obscureText: bloc.newPasswordObscureText,
                                   inputFormatters: [
@@ -133,48 +143,65 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                     child: IconButton(
                                       onPressed: () {
                                         setState(() {
-                                          bloc.newPasswordObscureText = !bloc.newPasswordObscureText;
+                                          bloc.newPasswordObscureText =
+                                              !bloc.newPasswordObscureText;
                                         });
                                       },
-                                      icon: Icon(bloc.newPasswordObscureText ? Icons.visibility : Icons.visibility_off),
+                                      icon: Icon(bloc.newPasswordObscureText
+                                          ? Icons.visibility
+                                          : Icons.visibility_off),
                                     ),
                                   ),
                                   onChange: (text) {
                                     if (text.isNotEmpty) {
                                       PasswordsStrength().validatePasswordStrength(
-                                          passwordFieldController: bloc.newPasswordFieldController,
-                                          passwordStrengthValidationNotifier: bloc.passwordStrengthValidationNotifier);
+                                          passwordFieldController:
+                                              bloc.newPasswordFieldController,
+                                          passwordStrengthValidationNotifier: bloc
+                                              .passwordStrengthValidationNotifier);
                                       setState(() {
-                                        if (PasswordsStrength().checkerOfThePasswordStrength(
-                                            passwordStrengthValidationNotifier:
-                                                bloc.passwordStrengthValidationNotifier)) {
-                                          bloc.enableConfirmPasswordTextField = true;
-                                          bloc.infoNotifier.value = AppLocalizations.of(context)!.fillconfirmpassword;
+                                        if (PasswordsStrength()
+                                            .checkerOfThePasswordStrength(
+                                                passwordStrengthValidationNotifier:
+                                                    bloc.passwordStrengthValidationNotifier)) {
+                                          bloc.enableConfirmPasswordTextField =
+                                              true;
+                                          bloc.infoNotifier.value =
+                                              AppLocalizations.of(context)!
+                                                  .fillconfirmpassword;
                                         } else {
-                                          bloc.enableConfirmPasswordTextField = false;
+                                          bloc.enableConfirmPasswordTextField =
+                                              false;
                                         }
-                                        if (bloc.newPasswordFieldController.text ==
-                                            bloc.confirmPasswordFieldController.text) {
+                                        if (bloc.newPasswordFieldController
+                                                .text ==
+                                            bloc.confirmPasswordFieldController
+                                                .text) {
                                           bloc.enableSaveButton = true;
                                         } else {
                                           bloc.enableSaveButton = false;
                                         }
                                       });
                                     } else {
-                                      bloc.passwordStrengthValidationNotifier.value = PasswordStrengthModel();
+                                      bloc.passwordStrengthValidationNotifier
+                                          .value = PasswordStrengthModel();
                                     }
                                   },
-                                  onEditingComplete: () => FocusScope.of(context).unfocus(),
+                                  onEditingComplete: () =>
+                                      FocusScope.of(context).unfocus(),
                                 ),
                               ),
                               PasswordStrengtView(
-                                passwordStrengthValidationNotifier: bloc.passwordStrengthValidationNotifier,
+                                passwordStrengthValidationNotifier:
+                                    bloc.passwordStrengthValidationNotifier,
                               ),
                               SizedBox(
                                 height: 50,
                                 child: CustomTextField(
-                                  controller: bloc.confirmPasswordFieldController,
-                                  hintText: AppLocalizations.of(context)!.newpasswordagain,
+                                  controller:
+                                      bloc.confirmPasswordFieldController,
+                                  hintText: AppLocalizations.of(context)!
+                                      .newpasswordagain,
                                   keyboardType: TextInputType.text,
                                   enabled: bloc.enableConfirmPasswordTextField,
                                   obscureText: bloc.confirmPasswordObscureText,
@@ -186,24 +213,29 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                     child: IconButton(
                                       onPressed: () {
                                         setState(() {
-                                          bloc.confirmPasswordObscureText = !bloc.confirmPasswordObscureText;
+                                          bloc.confirmPasswordObscureText =
+                                              !bloc.confirmPasswordObscureText;
                                         });
                                       },
-                                      icon: Icon(
-                                          bloc.confirmPasswordObscureText ? Icons.visibility : Icons.visibility_off),
+                                      icon: Icon(bloc.confirmPasswordObscureText
+                                          ? Icons.visibility
+                                          : Icons.visibility_off),
                                     ),
                                   ),
                                   onChange: (text) {
                                     setState(() {
-                                      if (bloc.newPasswordFieldController.text ==
-                                          bloc.confirmPasswordFieldController.text) {
+                                      if (bloc.newPasswordFieldController
+                                              .text ==
+                                          bloc.confirmPasswordFieldController
+                                              .text) {
                                         bloc.enableSaveButton = true;
                                       } else {
                                         bloc.enableSaveButton = false;
                                       }
                                     });
                                   },
-                                  onEditingComplete: () => FocusScope.of(context).unfocus(),
+                                  onEditingComplete: () =>
+                                      FocusScope.of(context).unfocus(),
                                 ),
                               ),
                               const SizedBox(height: 20),
@@ -215,20 +247,25 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           enableButton: bloc.enableSaveButton,
                           onTap: () async {
                             bloc.loadingStatus.value = LoadingStatus.inprogress;
-                            final scaffoldMessenger = ScaffoldMessenger.of(context);
+                            final scaffoldMessenger =
+                                ScaffoldMessenger.of(context);
                             final navigation = Navigator.of(context);
                             try {
-                              await bloc.changePasswordRequest().then((value) async {
+                              await bloc
+                                  .changePasswordRequest()
+                                  .then((value) async {
                                 bloc.loadingStatus.value = LoadingStatus.finish;
-                                await bloc.box
-                                    .put(DatabaseFieldConstant.biometricP, bloc.newPasswordFieldController.text);
+                                await bloc.box.put(
+                                    DatabaseFieldConstant.biometricP,
+                                    bloc.newPasswordFieldController.text);
                                 navigation.pop();
                               });
                             } on DioException catch (e) {
                               final error = e.error as HttpException;
                               bloc.loadingStatus.value = LoadingStatus.finish;
                               scaffoldMessenger.showSnackBar(
-                                SnackBar(content: Text(error.message.toString())),
+                                SnackBar(
+                                    content: Text(error.message.toString())),
                               );
                             }
                           }),

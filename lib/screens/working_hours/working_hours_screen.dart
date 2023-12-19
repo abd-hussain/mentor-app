@@ -59,26 +59,45 @@ class _WorkingHoursScreenState extends State<WorkingHoursScreen> {
                     valueListenable: bloc.listOfWorkingHourNotifier,
                     builder: (context, snapshot, child) {
                       return ListView.builder(
-                          itemCount: bloc.listOfWorkingHourNotifier.value.length,
+                          itemCount:
+                              bloc.listOfWorkingHourNotifier.value.length,
                           itemBuilder: (context, index) {
                             return WorkingHoursWidget(
-                              workingHours: bloc.listOfWorkingHourNotifier.value[index].list,
-                              dayName: bloc.box.get(DatabaseFieldConstant.language) != "ar"
-                                  ? bloc.listOfWorkingHourNotifier.value[index].dayName
-                                  : DayTime().convertDayToArabic(bloc.listOfWorkingHourNotifier.value[index].dayName),
+                              workingHours: bloc
+                                  .listOfWorkingHourNotifier.value[index].list,
+                              dayName: bloc.box.get(
+                                          DatabaseFieldConstant.language) !=
+                                      "ar"
+                                  ? bloc.listOfWorkingHourNotifier.value[index]
+                                      .dayName
+                                  : DayTime().convertDayToArabic(bloc
+                                      .listOfWorkingHourNotifier
+                                      .value[index]
+                                      .dayName),
                               onSave: () {
                                 EditWorkingHourBottomSheetsUtil().workingHour(
                                   context: context,
-                                  dayname: bloc.box.get(DatabaseFieldConstant.language) != "ar"
-                                      ? bloc.listOfWorkingHourNotifier.value[index].dayName
-                                      : DayTime()
-                                          .convertDayToArabic(bloc.listOfWorkingHourNotifier.value[index].dayName),
-                                  listOfWorkingHour: bloc.listOfWorkingHourNotifier.value[index].list,
+                                  dayname: bloc.box.get(
+                                              DatabaseFieldConstant.language) !=
+                                          "ar"
+                                      ? bloc.listOfWorkingHourNotifier
+                                          .value[index].dayName
+                                      : DayTime().convertDayToArabic(bloc
+                                          .listOfWorkingHourNotifier
+                                          .value[index]
+                                          .dayName),
+                                  listOfWorkingHour: bloc
+                                      .listOfWorkingHourNotifier
+                                      .value[index]
+                                      .list,
                                   onSave: (newList) async {
                                     bloc.updateWorkingHours(
                                         context: context,
                                         obj: WorkingHoursRequest(
-                                          dayName: bloc.listOfWorkingHourNotifier.value[index].dayName,
+                                          dayName: bloc
+                                              .listOfWorkingHourNotifier
+                                              .value[index]
+                                              .dayName,
                                           workingHours: newList,
                                         ));
                                   },

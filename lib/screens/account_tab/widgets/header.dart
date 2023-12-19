@@ -15,7 +15,10 @@ class ProfileHeader extends StatelessWidget {
         padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
         child: Row(
           children: [
-            Image.asset(locator<DayTime>().gettheCorrentImageDependOnCurrentTime(), width: 32, height: 32),
+            Image.asset(
+                locator<DayTime>().gettheCorrentImageDependOnCurrentTime(),
+                width: 32,
+                height: 32),
             const SizedBox(width: 8),
             Expanded(
               child: Column(

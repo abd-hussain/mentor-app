@@ -7,7 +7,9 @@ class HourRateResponse {
   HourRateResponse({this.data, this.message});
 
   HourRateResponse.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? HourRateResponseData.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? HourRateResponseData.fromJson(json['data'])
+        : null;
     message = json['message'];
   }
 
