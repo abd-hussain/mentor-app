@@ -11,6 +11,7 @@ import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/shared_widget/loading_view.dart';
+import 'package:mentor_app/utils/constants/constant.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/routes.dart';
@@ -54,11 +55,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Column(
                           children: [
                             const SizedBox(height: 20),
-                            Center(
+                            const Center(
                               child: CustomText(
-                                title: AppLocalizations.of(context)!.appTitle,
+                                title: AppConstant.appName,
                                 fontSize: 30,
-                                textColor: const Color(0xff444444),
+                                textColor: Color(0xff444444),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

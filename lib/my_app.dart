@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/locator.dart';
 import 'package:mentor_app/main_context.dart';
+import 'package:mentor_app/utils/constants/constant.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/routes.dart';
 
@@ -34,7 +35,7 @@ class MyAppState extends State<MyApp> {
 
     return MaterialApp(
       onGenerateTitle: (BuildContext context) {
-        return AppLocalizations.of(context)!.appTitle;
+        return AppConstant.appName;
       },
       locale: myBox.get(DatabaseFieldConstant.language) != null
           ? Locale(myBox.get(DatabaseFieldConstant.language))
