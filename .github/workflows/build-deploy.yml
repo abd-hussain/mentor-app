@@ -42,6 +42,7 @@ jobs:
 
     - name: Build and Deploy
       run: |
+        flutter pub get
         dart run update_version.dart  
         flutter pub get
         make deploy-android
@@ -71,6 +72,7 @@ jobs:
       
         - name: Build and Deploy
           run: |
+              flutter pub get
               dart run update_version.dart  
               flutter pub get
               make deploy-ios
