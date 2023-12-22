@@ -11,4 +11,13 @@ class NotificationsService with Service {
     );
     return NotificationsResponse.fromJson(response);
   }
+
+  Future<NotificationsResponse> registerToken(String token) async {
+    final response = await repository.callRequest(
+      requestType: RequestType.put,
+      methodName: MethodNameConstant.registerToken,
+      queryParam: {"token": token},
+    );
+    return NotificationsResponse.fromJson(response);
+  }
 }

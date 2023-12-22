@@ -38,12 +38,15 @@ class _CalenderScreenState extends State<CalenderScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const HeaderHomePage(showRefresh: true),
+        HeaderHomePage(
+          refreshCallBack: () {
+            locator<MainContainerBloc>().getMentorAppointments(context);
+          },
+        ),
         const SizedBox(height: 8),
         Expanded(
           child: ValueListenableBuilder<List<CalenderMeetings>>(
-              valueListenable:
-                  locator<MainContainerBloc>().meetingsListNotifier,
+              valueListenable: locator<MainContainerBloc>().meetingsListNotifier,
               builder: (context, snapshot, child) {
                 return SfCalendar(
                     view: CalendarView.month,
@@ -53,43 +56,32 @@ class _CalenderScreenState extends State<CalenderScreen> {
                     todayHighlightColor: const Color(0xff4CB6EA),
                     dataSource: MeetingDataSource(context, snapshot),
                     monthViewSettings: const MonthViewSettings(
-                      appointmentDisplayMode:
-                          MonthAppointmentDisplayMode.indicator,
+                      appointmentDisplayMode: MonthAppointmentDisplayMode.indicator,
                       showAgenda: true,
                       numberOfWeeksInView: 6,
                       appointmentDisplayCount: 10,
                       agendaStyle: AgendaStyle(
                         backgroundColor: Color(0xffE8E8E8),
-                        dayTextStyle:
-                            TextStyle(fontSize: 16, color: Colors.black),
-                        dateTextStyle:
-                            TextStyle(fontSize: 25, color: Colors.black),
-                        placeholderTextStyle:
-                            TextStyle(fontSize: 25, color: Colors.grey),
+                        dayTextStyle: TextStyle(fontSize: 16, color: Colors.black),
+                        dateTextStyle: TextStyle(fontSize: 25, color: Colors.black),
+                        placeholderTextStyle: TextStyle(fontSize: 25, color: Colors.grey),
                       ),
                     ),
                     onTap: (calendarTapDetails) {
                       if (calendarTapDetails.appointments != null &&
-                          calendarTapDetails.targetElement ==
-                              CalendarElement.appointment) {
-                        final item = calendarTapDetails.appointments![0]
-                            as CalenderMeetings;
+                          calendarTapDetails.targetElement == CalendarElement.appointment) {
+                        final item = calendarTapDetails.appointments![0] as CalenderMeetings;
 
                         CalenderBottomSheetsUtil(
                           context: context,
                           metingDetails: item,
-                          language:
-                              bloc.box.get(DatabaseFieldConstant.language),
+                          language: bloc.box.get(DatabaseFieldConstant.language),
                         ).bookMeetingBottomSheet(
                           cancel: () {
-                            CancelBookingBottomSheetsUtil(context: context)
-                                .bookMeetingBottomSheet(
+                            CancelBookingBottomSheetsUtil(context: context).bookMeetingBottomSheet(
                               confirm: () {
-                                bloc
-                                    .cancelMeeting(item.meetingId)
-                                    .whenComplete(() async {
-                                  locator<MainContainerBloc>()
-                                      .getMentorAppointments(context);
+                                bloc.cancelMeeting(item.meetingId).whenComplete(() async {
+                                  locator<MainContainerBloc>().getMentorAppointments(context);
                                   setState(() {});
                                 });
                               },
@@ -99,16 +91,13 @@ class _CalenderScreenState extends State<CalenderScreen> {
                             CalenderBottomSheetsUtil(
                               context: context,
                               metingDetails: item,
-                              language:
-                                  bloc.box.get(DatabaseFieldConstant.language),
+                              language: bloc.box.get(DatabaseFieldConstant.language),
                             ).showAddEditNoteDialog(
                                 note: item.mentornote,
                                 confirm: (note) {
-                                  var body = AddCommentToAppointment(
-                                      id: item.meetingId, comment: note);
+                                  var body = AddCommentToAppointment(id: item.meetingId, comment: note);
                                   bloc.addNote(body).whenComplete(() async {
-                                    locator<MainContainerBloc>()
-                                        .getMentorAppointments(context);
+                                    locator<MainContainerBloc>().getMentorAppointments(context);
                                     setState(() {});
                                   });
                                 });

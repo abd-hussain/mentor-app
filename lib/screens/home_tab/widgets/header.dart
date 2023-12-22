@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mentor_app/locator.dart';
-import 'package:mentor_app/screens/main_contaner/main_container_bloc.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/utils/constants/constant.dart';
 
 class HeaderHomePage extends StatefulWidget {
-  final bool showRefresh;
-  const HeaderHomePage({super.key, this.showRefresh = false});
+  final Function()? refreshCallBack;
+  const HeaderHomePage({super.key, this.refreshCallBack});
 
   @override
   State<HeaderHomePage> createState() => _HeaderHomePageState();
@@ -27,10 +25,9 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
             fontWeight: FontWeight.bold,
           ),
           Expanded(child: Container()),
-          widget.showRefresh
+          widget.refreshCallBack != null
               ? IconButton(
-                  onPressed: () => locator<MainContainerBloc>()
-                      .getMentorAppointments(context),
+                  onPressed: () => widget.refreshCallBack!(),
                   icon: const Icon(
                     Icons.refresh,
                     color: Color(0xff034061),

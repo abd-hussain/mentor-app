@@ -11,6 +11,8 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/shared_widget/loading_view.dart';
 import 'package:mentor_app/utils/logger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mentor_app/utils/push_notifications/firebase_cloud_messaging_util.dart';
+import 'package:mentor_app/utils/push_notifications/notification_manager.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,6 +27,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     logDebugMessage(message: 'Home init Called ...');
+    NotificationManager.init(context: context);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(seconds: 2), () {
+        FirebaseCloudMessagingUtil.initConfigure(context);
+      });
+    });
+
+    bloc.callRegisterTokenRequest();
     super.didChangeDependencies();
   }
 
@@ -40,7 +51,11 @@ class _HomeScreenState extends State<HomeScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Column(
         children: [
-          const HeaderHomePage(),
+          HeaderHomePage(
+            refreshCallBack: () {
+              bloc.listOfNotifications();
+            },
+          ),
           const SizedBox(height: 8),
           Expanded(
             child: Column(
@@ -51,11 +66,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     future: bloc.getHome(),
                     builder: (context, snapshot) {
                       if (snapshot.data == null && snapshot.hasData) {
-                        return const SizedBox(
-                            height: 250, child: LoadingView());
+                        return const SizedBox(height: 250, child: LoadingView());
                       } else {
-                        return MainBannerHomePage(
-                            bannerList: snapshot.data ?? []);
+                        return MainBannerHomePage(bannerList: snapshot.data ?? []);
                       }
                     }),
                 const AddMobBanner(),
@@ -72,7 +85,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     initialData: null,
                     future: bloc.listOfNotifications(),
                     builder: (context, snapshot) {
-                      print(snapshot.data);
                       if (snapshot.data == null) {
                         return const SizedBox(
                           height: 300,
@@ -90,15 +102,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: snapshot.data!.isEmpty
                                   ? Center(
                                       child: CustomText(
-                                        title: AppLocalizations.of(context)!
-                                            .noitem,
+                                        title: AppLocalizations.of(context)!.noitem,
                                         fontSize: 18,
                                         textColor: const Color(0xff444444),
                                         fontWeight: FontWeight.bold,
                                       ),
                                     )
-                                  : AnnouncementsView(
-                                      notificationsList: snapshot.data ?? []),
+                                  : AnnouncementsView(notificationsList: snapshot.data ?? []),
                             ),
                           ),
                         );

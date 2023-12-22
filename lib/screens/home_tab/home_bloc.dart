@@ -24,6 +24,11 @@ class HomeBloc extends Bloc<HomeService> {
     return value.data;
   }
 
+  void callRegisterTokenRequest() async {
+    final String token = box.get(DatabaseFieldConstant.pushNotificationToken);
+    await locator<NotificationsService>().registerToken(token);
+  }
+
   @override
   onDispose() {}
 }

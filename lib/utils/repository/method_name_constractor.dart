@@ -28,6 +28,7 @@ class MethodNameConstant {
   static const String loyalityPoints = "loyality/";
 
   static const String notifications = "notifications/mentor";
+  static const String registerToken = "notifications/mentor-register-token";
 
   static const String home = "mentor-home/";
 
