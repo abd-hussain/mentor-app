@@ -19,12 +19,6 @@ jobs:
         channel: 'stable'
         cache: true
 
-    - name: Setup Dart
-      uses: dart-lang/setup-dart@v1
-
-    - name: Run Version Update Script
-      run: dart run update_version.dart
-
     - name: Set up key.properties
       run: |
         echo "keyPassword=${{ secrets.KEY_PASSWORD }}" > android/key.properties
@@ -48,6 +42,7 @@ jobs:
 
     - name: Build and Deploy
       run: |
+        dart run update_version.dart  
         flutter pub get
         make deploy-android
 
@@ -64,12 +59,6 @@ jobs:
             channel: stable
             cache: true
 
-        - name: Setup Dart
-          uses: dart-lang/setup-dart@v1
-
-        - name: Run Version Update Script
-          run: dart run update_version.dart
-
         - name: Set up App Store Connect
           run: |
               echo "${{ secrets.APP_STORE_CONNECT }}" | base64 --decode > ios/app_store_connect.json
@@ -82,10 +71,10 @@ jobs:
       
         - name: Build and Deploy
           run: |
+              dart run update_version.dart  
               flutter pub get
               make deploy-ios
           env:
               MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
               MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.GIT_BASIC_AUTHORIZATION }}
           
- 
