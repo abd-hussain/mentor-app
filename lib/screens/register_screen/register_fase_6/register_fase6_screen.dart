@@ -9,6 +9,7 @@ import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/shared_widget/custom_textfield.dart';
 import 'package:mentor_app/shared_widget/password_field.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
+import 'package:mentor_app/utils/push_notifications/firebase_cloud_messaging_util.dart';
 import 'package:mentor_app/utils/routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -25,6 +26,13 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
   @override
   void didChangeDependencies() {
     bloc.handleListeners();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(seconds: 2), () {
+        FirebaseCloudMessagingUtil.initConfigure(context);
+      });
+    });
+
     super.didChangeDependencies();
   }
 

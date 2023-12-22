@@ -16,7 +16,8 @@ class PaymentsScreen extends StatefulWidget {
   State<PaymentsScreen> createState() => _PaymentsScreenState();
 }
 
-class _PaymentsScreenState extends State<PaymentsScreen> with TickerProviderStateMixin {
+class _PaymentsScreenState extends State<PaymentsScreen>
+    with TickerProviderStateMixin {
   final bloc = PaymentsBloc();
 
   @override
@@ -57,7 +58,8 @@ class _PaymentsScreenState extends State<PaymentsScreen> with TickerProviderStat
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: CustomText(
-                                  title: AppLocalizations.of(context)!.detailspayments,
+                                  title: AppLocalizations.of(context)!
+                                      .detailspayments,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   textColor: const Color(0xff444444),
@@ -107,7 +109,9 @@ class _PaymentsScreenState extends State<PaymentsScreen> with TickerProviderStat
               child: TextField(
                 controller: controller,
                 maxLines: 3,
-                decoration: InputDecoration(hintText: AppLocalizations.of(context)!.describeyourproblem),
+                decoration: InputDecoration(
+                    hintText:
+                        AppLocalizations.of(context)!.describeyourproblem),
               ),
             ),
             actions: <Widget>[
@@ -123,7 +127,9 @@ class _PaymentsScreenState extends State<PaymentsScreen> with TickerProviderStat
                 child: Text(AppLocalizations.of(context)!.submit),
                 onPressed: () {
                   setState(() {
-                    bloc.reportPayment(itemId, controller.text).whenComplete(() {
+                    bloc
+                        .reportPayment(itemId, controller.text)
+                        .whenComplete(() {
                       Navigator.pop(context);
                       bloc.getListOfPayments();
                     });

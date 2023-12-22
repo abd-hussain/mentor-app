@@ -5,6 +5,7 @@ import 'package:mentor_app/screens/account_tab/widgets/footer.dart';
 import 'package:mentor_app/screens/account_tab/widgets/header.dart';
 import 'package:mentor_app/screens/account_tab/widgets/title_view.dart';
 import 'package:mentor_app/shared_widget/admob_banner.dart';
+import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/logger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -59,7 +60,9 @@ class _AccountScreenState extends State<AccountScreen> {
                     containerHight: 200),
                 const SizedBox(height: 8),
                 const AddMobBanner(),
-                const FooterView(),
+                FooterView(
+                  language: bloc.box.get(DatabaseFieldConstant.language),
+                ),
                 const SizedBox(height: 8),
               ],
             ),

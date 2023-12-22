@@ -66,9 +66,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     future: bloc.getHome(),
                     builder: (context, snapshot) {
                       if (snapshot.data == null && snapshot.hasData) {
-                        return const SizedBox(height: 250, child: LoadingView());
+                        return const SizedBox(
+                            height: 250, child: LoadingView());
                       } else {
-                        return MainBannerHomePage(bannerList: snapshot.data ?? []);
+                        return MainBannerHomePage(
+                            bannerList: snapshot.data ?? []);
                       }
                     }),
                 const AddMobBanner(),
@@ -102,13 +104,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: snapshot.data!.isEmpty
                                   ? Center(
                                       child: CustomText(
-                                        title: AppLocalizations.of(context)!.noitem,
+                                        title: AppLocalizations.of(context)!
+                                            .noitem,
                                         fontSize: 18,
                                         textColor: const Color(0xff444444),
                                         fontWeight: FontWeight.bold,
                                       ),
                                     )
-                                  : AnnouncementsView(notificationsList: snapshot.data ?? []),
+                                  : AnnouncementsView(
+                                      notificationsList: snapshot.data ?? []),
                             ),
                           ),
                         );

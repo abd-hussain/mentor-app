@@ -9,6 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/shared_widget/loading_view.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/error/exceptions.dart';
+import 'package:mentor_app/utils/push_notifications/firebase_cloud_messaging_util.dart';
 
 class RegisterFinalScreen extends StatefulWidget {
   const RegisterFinalScreen({super.key});
@@ -22,6 +23,11 @@ class _RegisterFinalScreenState extends State<RegisterFinalScreen> {
 
   @override
   void didChangeDependencies() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(seconds: 2), () {
+        FirebaseCloudMessagingUtil.initConfigure(context);
+      });
+    });
     super.didChangeDependencies();
   }
 

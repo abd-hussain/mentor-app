@@ -6,6 +6,7 @@ import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/shared_widget/custom_textfield.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
+import 'package:mentor_app/utils/push_notifications/firebase_cloud_messaging_util.dart';
 import 'package:mentor_app/utils/routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -21,6 +22,11 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
 
   @override
   void didChangeDependencies() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(seconds: 2), () {
+        FirebaseCloudMessagingUtil.initConfigure(context);
+      });
+    });
     super.didChangeDependencies();
   }
 

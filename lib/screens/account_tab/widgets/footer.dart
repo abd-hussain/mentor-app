@@ -9,7 +9,8 @@ import 'package:rate_my_app/rate_my_app.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FooterView extends StatelessWidget {
-  const FooterView({super.key});
+  final String language;
+  const FooterView({super.key, required this.language});
 
   @override
   Widget build(BuildContext context) {
@@ -62,12 +63,16 @@ class FooterView extends StatelessWidget {
             child: _footerTextWidget(AppLocalizations.of(context)!.rateapp),
           ),
           TextButton(
-            onPressed: () => Navigator.of(context, rootNavigator: true)
-                .pushNamed(RoutesConstants.webViewScreen, arguments: {
-              AppConstant.webViewPageUrl: AppConstant.termsLink,
-              AppConstant.pageTitle:
-                  AppLocalizations.of(context)!.termsandconditions
-            }),
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true)
+                  .pushNamed(RoutesConstants.webViewScreen, arguments: {
+                AppConstant.webViewPageUrl: language == "en"
+                    ? AppConstant.termsLink
+                    : AppConstant.termsLinkAR,
+                AppConstant.pageTitle:
+                    AppLocalizations.of(context)!.termsandconditions
+              });
+            },
             child: _footerTextWidget(
                 AppLocalizations.of(context)!.termsandconditions),
           ),

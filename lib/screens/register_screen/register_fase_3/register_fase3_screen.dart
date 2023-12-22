@@ -61,22 +61,30 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
               enableNextButton: snapshot,
               nextPressed: () async {
                 final navigator = Navigator.of(context);
-                await bloc.box.put(TempFieldToRegistrtConstant.bio, bloc.bioController.text);
-                await bloc.box.put(TempFieldToRegistrtConstant.category, bloc.selectedCategory!.id.toString());
-                await bloc.box.put(TempFieldToRegistrtConstant.experianceSince, bloc.experianceSinceController.text);
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.bio, bloc.bioController.text);
+                await bloc.box.put(TempFieldToRegistrtConstant.category,
+                    bloc.selectedCategory!.id.toString());
+                await bloc.box.put(TempFieldToRegistrtConstant.experianceSince,
+                    bloc.experianceSinceController.text);
 
-                await bloc.box.put(TempFieldToRegistrtConstant.cv, bloc.cv != null ? bloc.cv!.path : "");
+                await bloc.box.put(TempFieldToRegistrtConstant.cv,
+                    bloc.cv != null ? bloc.cv!.path : "");
 
-                await bloc.box
-                    .put(TempFieldToRegistrtConstant.certificates1, bloc.cert1 != null ? bloc.cert1!.path : "");
-                await bloc.box
-                    .put(TempFieldToRegistrtConstant.certificates2, bloc.cert2 != null ? bloc.cert2!.path : "");
-                await bloc.box
-                    .put(TempFieldToRegistrtConstant.certificates3, bloc.cert3 != null ? bloc.cert3!.path : "");
-                await bloc.box.put(TempFieldToRegistrtConstant.speakingLanguages,
-                    bloc.filterListOfSelectedLanguage(bloc.listOfSpeakingLanguageNotifier.value));
-                await bloc.box.put(TempFieldToRegistrtConstant.majors,
-                    bloc.filterListOfSelectedMajors(bloc.listOfMajorsNotifier.value));
+                await bloc.box.put(TempFieldToRegistrtConstant.certificates1,
+                    bloc.cert1 != null ? bloc.cert1!.path : "");
+                await bloc.box.put(TempFieldToRegistrtConstant.certificates2,
+                    bloc.cert2 != null ? bloc.cert2!.path : "");
+                await bloc.box.put(TempFieldToRegistrtConstant.certificates3,
+                    bloc.cert3 != null ? bloc.cert3!.path : "");
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.speakingLanguages,
+                    bloc.filterListOfSelectedLanguage(
+                        bloc.listOfSpeakingLanguageNotifier.value));
+                await bloc.box.put(
+                    TempFieldToRegistrtConstant.majors,
+                    bloc.filterListOfSelectedMajors(
+                        bloc.listOfMajorsNotifier.value));
 
                 await bloc.box.put(DatabaseFieldConstant.registrationStep, "4");
                 navigator.pushNamed(RoutesConstants.registerfaze4Screen);
@@ -112,7 +120,8 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                                   );
                                 }),
                             Padding(
-                              padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+                              padding: const EdgeInsets.only(
+                                  left: 16, right: 16, top: 8, bottom: 8),
                               child: ExperianceSinceField(
                                 controller: bloc.experianceSinceController,
                                 padding: const EdgeInsets.all(0),
@@ -122,26 +131,32 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 8.0, right: 8),
+                              padding:
+                                  const EdgeInsets.only(left: 8.0, right: 8),
                               child: BioField(
                                 bioController: bloc.bioController,
-                                onChanged: (text) => bloc.validateFieldsForFaze3(),
+                                onChanged: (text) =>
+                                    bloc.validateFieldsForFaze3(),
                               ),
                             ),
                             CustomText(
-                              title: AppLocalizations.of(context)!.speakinglanguage,
+                              title: AppLocalizations.of(context)!
+                                  .speakinglanguage,
                               fontSize: 12,
                               textColor: const Color(0xff444444),
                             ),
                             ValueListenableBuilder<List<CheckBox>>(
-                                valueListenable: bloc.listOfSpeakingLanguageNotifier,
+                                valueListenable:
+                                    bloc.listOfSpeakingLanguageNotifier,
                                 builder: (context, snapshot, child) {
                                   return Padding(
-                                    padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+                                    padding: const EdgeInsets.only(
+                                        left: 16, right: 16, top: 8, bottom: 8),
                                     child: SpeakingLanguageField(
                                       listOfLanguages: snapshot,
                                       selectedLanguage: (language) {
-                                        bloc.listOfSpeakingLanguageNotifier.value = language;
+                                        bloc.listOfSpeakingLanguageNotifier
+                                            .value = language;
                                         bloc.validateFieldsForFaze3();
                                       },
                                     ),
@@ -156,7 +171,8 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                                 valueListenable: bloc.listOfMajorsNotifier,
                                 builder: (context, snapshot, child) {
                                   return Padding(
-                                    padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
+                                    padding: const EdgeInsets.only(
+                                        left: 16, right: 16, top: 8),
                                     child: MajorsView(
                                       listOfMajors: snapshot,
                                       selectedMajors: (major) {
@@ -168,17 +184,20 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                                 }),
                             Padding(
                               padding: const EdgeInsets.all(16),
-                              child: Container(height: 0.5, color: const Color(0xff444444)),
+                              child: Container(
+                                  height: 0.5, color: const Color(0xff444444)),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
+                              padding: const EdgeInsets.only(
+                                  left: 8, right: 8, top: 8),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   FileHolderField(
                                     title: AppLocalizations.of(context)!.cv,
                                     height: 150,
-                                    width: MediaQuery.of(context).size.width / 3,
+                                    width:
+                                        MediaQuery.of(context).size.width / 3,
                                     currentFile: null,
                                     onAddFile: (file) {
                                       bloc.cv = file;
@@ -190,7 +209,8 @@ class _RegisterFaze3ScreenState extends State<RegisterFaze3Screen> {
                                     },
                                   ),
                                   CertificateView(
-                                    width: MediaQuery.of(context).size.width / 2,
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
                                     height: 40,
                                     onChange: (cert1, cert2, cert3) {
                                       bloc.cert1 = cert1;

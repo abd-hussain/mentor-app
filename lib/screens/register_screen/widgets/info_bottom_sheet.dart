@@ -14,10 +14,9 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class RegisterInfoBottomSheetsUtil {
   final BuildContext context;
+  final String language;
 
-  RegisterInfoBottomSheetsUtil({
-    required this.context,
-  });
+  RegisterInfoBottomSheetsUtil({required this.language, required this.context});
 
   Future infoBottomSheet(
       {required int step, required Function() openNext}) async {
@@ -90,10 +89,7 @@ class RegisterInfoBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep1,
                 textColor: step >= 1 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  final bottomsheet =
-                      RegisterInfoBottomSheetsUtil(context: context);
-
-                  bottomsheet.termsBottomSheet(openNext: () {});
+                  termsBottomSheet(openNext: () {});
                 },
               ),
               const SizedBox(height: 20),
@@ -177,7 +173,6 @@ class RegisterInfoBottomSheetsUtil {
 
   Future termsBottomSheet({required Function() openNext}) async {
     if (kIsWeb) {
-      //TODO
       //   // ignore: undefined_prefixed_name
       //   ui.platformViewRegistry.registerViewFactory(
       //       'terms-html',
@@ -246,7 +241,9 @@ class RegisterInfoBottomSheetsUtil {
                   child: kIsWeb
                       ? const HtmlElementView(viewType: 'terms-html')
                       : WebView(
-                          initialUrl: AppConstant.termsLink,
+                          initialUrl: language == "ar"
+                              ? AppConstant.termsLinkAR
+                              : AppConstant.termsLink,
                           gestureRecognizers: gestureRecognizers,
                           navigationDelegate: (NavigationRequest request) {
                             return NavigationDecision.navigate;
@@ -254,7 +251,9 @@ class RegisterInfoBottomSheetsUtil {
                           onWebViewCreated:
                               (WebViewController webViewController) {
                             webViewController = webViewController;
-                            webViewController.loadUrl(AppConstant.termsLink);
+                            webViewController.loadUrl(language == "ar"
+                                ? AppConstant.termsLinkAR
+                                : AppConstant.termsLink);
                           },
                         ),
                 ),

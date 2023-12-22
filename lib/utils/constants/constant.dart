@@ -21,6 +21,8 @@ class AppConstant {
 
   static const String termsLink =
       "${AppConstant.applicationMainURL}static/web/terms.html";
+  static const String termsLinkAR =
+      "${AppConstant.applicationMainURL}static/web/termsAR.html";
   static const String aboutusLink =
       "${AppConstant.applicationMainURL}static/web/aboutus.html";
   static const String privacypolicyLink =

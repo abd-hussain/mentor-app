@@ -13,8 +13,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/shared_widget/loading_view.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
-// import 'package:mentor_app/utils/push_notifications/firebase_cloud_messaging_util.dart';
-import 'package:mentor_app/utils/push_notifications/notification_manager.dart';
 import 'package:mentor_app/utils/routes.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -32,12 +30,6 @@ class _LoginScreenState extends State<LoginScreen> {
     bloc.maincontext = context;
     bloc.initBiometric(context);
     bloc.handleListeners();
-
-    NotificationManager.init(context: context);
-
-    // Future.delayed(const Duration(seconds: 2), () {
-    //   FirebaseCloudMessagingUtil.initConfigure();
-    // });
     super.didChangeDependencies();
   }
 
@@ -219,7 +211,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                   final bottomsheet =
                                       RegisterInfoBottomSheetsUtil(
-                                          context: context);
+                                    context: context,
+                                    language: bloc.box.get(
+                                            DatabaseFieldConstant.language) ??
+                                        "",
+                                  );
                                   bottomsheet.infoBottomSheet(
                                       step: stepNum,
                                       openNext: () {
