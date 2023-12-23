@@ -12,7 +12,9 @@ void main() async {
   if (match != null) {
     String baseVersion = match.group(1)!;
     String timestamp = DateFormat('yyMMddHH').format(DateTime.now());
-    String newVersion = 'version: $baseVersion+$timestamp';
+    int intTimestamp = int.parse(timestamp);
+
+    String newVersion = 'version: $baseVersion+$intTimestamp';
 
     content = content.replaceAll(versionPattern, newVersion);
     await file.writeAsString(content);
