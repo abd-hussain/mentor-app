@@ -7,8 +7,6 @@ clean:
 
 deploy-android:
 	@echo "╠ Sending Android Build to Closed Testing..."
-	dart run update_version.dart
-	flutter pub get 
 	cd android && bundle install
 	cd android/fastlane && bundle exec fastlane deploy
 
