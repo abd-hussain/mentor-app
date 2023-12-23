@@ -11,7 +11,7 @@ void main() async {
 
   if (match != null) {
     String baseVersion = match.group(1)!;
-    String timestamp = DateFormat('yyMMddHH').format(DateTime.now());
+    String timestamp = DateFormat('yyMMddHHmm').format(DateTime.now());
     int intTimestamp = int.parse(timestamp);
 
     String newVersion = 'version: $baseVersion+$intTimestamp';
