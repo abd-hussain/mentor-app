@@ -19,7 +19,7 @@ platform :android do
 
 		android_set_version_name(version_name: version['version_name'])
 
-		android_set_version_code(version_code: version['version_code'].toInteger())
+		android_set_version_code(version_code: version['version_code'])
 	end
 
   desc "Deploy a new version to the Google Play"
