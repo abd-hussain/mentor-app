@@ -13,18 +13,18 @@
 default_platform(:android)
 
 platform :android do
-  desc "Set Gradle Version and Build Number"
-  lane :set_full_version do 
-		version = flutter_version()
+  # desc "Set Gradle Version and Build Number"
+  # lane :set_full_version do 
+	# 	version = flutter_version()
 
-		android_set_version_name(version_name: version['version_name'])
+	# 	android_set_version_name(version_name: version['version_name'])
 
-		android_set_version_code(version_code: version['version_code'])
-	end
+	# 	android_set_version_code(version_code: version['version_code'])
+	# end
 
   desc "Deploy a new version to the Google Play"
   lane :deploy do
-    set_full_version
+    # set_full_version
 
     gradle(task: "clean bundle")
 
