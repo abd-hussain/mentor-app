@@ -5,8 +5,15 @@ clean:
 	flutter pub get
 	cd ios && pod install
 
+prepare-versoion-code:
+	@echo "╠ Update version code on date"
+	dart run update_version.dart
+	flutter pub get 
+
 deploy-android:
 	@echo "╠ Sending Android Build to Closed Testing..."
+	dart run update_version.dart
+	flutter pub get 
 	cd android && bundle install
 	cd android/fastlane && bundle exec fastlane deploy
 
