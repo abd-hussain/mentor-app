@@ -41,27 +41,33 @@ class WaitingCallView extends StatefulWidget {
 }
 
 class _WaitingCallViewState extends State<WaitingCallView> {
-  Timer? timer;
+  ValueNotifier<int> loadingForTimer = ValueNotifier<int>(0);
   int timerStartNumberSec = 0;
   int timerStartNumberMin = 0;
   int timerStartNumberHour = 0;
 
   @override
-  void didChangeDependencies() {
+  void initState() {
     timerStartNumberSec = widget.timerStartNumberSec;
     timerStartNumberMin = widget.timerStartNumberMin;
     timerStartNumberHour = widget.timerStartNumberHour;
+    loadingForTimer.value = timerStartNumberSec;
 
     startTimer();
-    super.didChangeDependencies();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    loadingForTimer.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Lottie.asset('assets/lottie/115245-medical-heart-pressure-timer.zip',
-            height: 200),
+        Lottie.asset('assets/lottie/115245-medical-heart-pressure-timer.zip', height: 200),
         Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: CustomText(
@@ -71,16 +77,20 @@ class _WaitingCallViewState extends State<WaitingCallView> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        Directionality(
-          textDirection: TextDirection.ltr,
-          child: CustomText(
-            title:
-                "${timerStartNumberHour > 9 ? "$timerStartNumberHour" : "0$timerStartNumberHour"} : ${timerStartNumberMin > 9 ? "$timerStartNumberMin" : "0$timerStartNumberMin"} : ${timerStartNumberSec > 9 ? "$timerStartNumberSec" : "0$timerStartNumberSec"}",
-            fontSize: 30,
-            textColor: const Color(0xff554d56),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        ValueListenableBuilder<int>(
+            valueListenable: loadingForTimer,
+            builder: (context, snapshot, child) {
+              return Directionality(
+                textDirection: TextDirection.ltr,
+                child: CustomText(
+                  title:
+                      "${timerStartNumberHour > 9 ? "$timerStartNumberHour" : "0$timerStartNumberHour"} : ${timerStartNumberMin > 9 ? "$timerStartNumberMin" : "0$timerStartNumberMin"} : ${timerStartNumberSec > 9 ? "$timerStartNumberSec" : "0$timerStartNumberSec"}",
+                  fontSize: 30,
+                  textColor: const Color(0xff554d56),
+                  fontWeight: FontWeight.bold,
+                ),
+              );
+            }),
         const SizedBox(height: 8),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -93,6 +103,7 @@ class _WaitingCallViewState extends State<WaitingCallView> {
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.eventday,
           desc: widget.meetingday,
+          forceView: true,
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.meetingtime,
@@ -101,29 +112,29 @@ class _WaitingCallViewState extends State<WaitingCallView> {
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.meetingduration,
-          desc:
-              "${widget.meetingduration} ${AppLocalizations.of(context)!.min}",
+          desc: "${widget.meetingduration} ${AppLocalizations.of(context)!.min}",
+          forceView: true,
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.clientnote,
           desc: widget.metingDetails.clientnote,
+          forceView: true,
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.mentornote,
           desc: widget.metingDetails.mentornote,
+          forceView: true,
         ),
         ClientInfoView(metingDetails: widget.metingDetails),
         CustomButton(
-          enableButton:
-              DateTime.now().isBefore(widget.metingDetails.fromTime) &&
-                  widget.metingDetails.state == AppointmentsState.active,
+          enableButton: DateTime.now().isBefore(widget.metingDetails.fromTime) &&
+              widget.metingDetails.state == AppointmentsState.active,
           padding: const EdgeInsets.all(8.0),
           width: MediaQuery.of(context).size.width / 2,
           buttonColor: const Color(0xffda1100),
           buttonTitle: AppLocalizations.of(context)!.cancelappointment,
           onTap: () {
-            CancelBookingBottomSheetsUtil(context: context)
-                .bookMeetingBottomSheet(
+            CancelBookingBottomSheetsUtil(context: context).bookMeetingBottomSheet(
               confirm: () {
                 widget.cancelMeetingTapped();
               },
@@ -137,31 +148,34 @@ class _WaitingCallViewState extends State<WaitingCallView> {
 
   void startTimer() {
     const oneSec = Duration(seconds: 1);
-    timer = Timer.periodic(
+    Timer.periodic(
       oneSec,
       (Timer timer) {
-        if (timerStartNumberHour == 0 &&
-            timerStartNumberMin == 0 &&
-            timerStartNumberSec == 0) {
+        if (_isTimerFinished()) {
           timer.cancel();
           widget.timesup();
         } else {
-          setState(() {
-            if (timerStartNumberSec > 0) {
-              timerStartNumberSec = timerStartNumberSec - 1;
-            } else {
-              if (timerStartNumberMin > 0) {
-                timerStartNumberMin = timerStartNumberMin - 1;
-                timerStartNumberSec = 59;
-              } else {
-                timerStartNumberHour = timerStartNumberHour - 1;
-                timerStartNumberMin = 59;
-                timerStartNumberSec = 59;
-              }
-            }
-          });
+          _decrementTimer();
+          loadingForTimer.value = timerStartNumberSec - 1;
         }
       },
     );
+  }
+
+  void _decrementTimer() {
+    if (timerStartNumberSec > 0) {
+      timerStartNumberSec--;
+    } else if (timerStartNumberMin > 0) {
+      timerStartNumberMin--;
+      timerStartNumberSec = 59;
+    } else if (timerStartNumberHour > 0) {
+      timerStartNumberHour--;
+      timerStartNumberMin = 59;
+      timerStartNumberSec = 59;
+    }
+  }
+
+  bool _isTimerFinished() {
+    return timerStartNumberHour == 0 && timerStartNumberMin == 0 && timerStartNumberSec == 0;
   }
 }

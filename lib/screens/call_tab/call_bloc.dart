@@ -9,41 +9,27 @@ import 'package:mentor_app/utils/mixins.dart';
 class CallBloc extends Bloc<AccountService> {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
 
-  CalenderMeetings? checkIfThereIsAnyMeetingTodayAndReturnTheNearOne(
-      List<CalenderMeetings> listOfData) {
+  CalenderMeetings? getNearestMeetingToday(List<CalenderMeetings> meetings) {
     final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day, now.hour, now.minute);
-    List<CalenderMeetings> newList = [];
-    for (CalenderMeetings appointment in listOfData) {
-      Duration diffrent = today.difference(DateTime(
-          appointment.fromTime.year,
-          appointment.fromTime.month,
-          appointment.fromTime.day,
-          appointment.fromTime.hour,
-          appointment.fromTime.minute));
-      if (diffrent.inHours <= 24) {
-        if (appointment.state == AppointmentsState.active) {
-          newList.add(appointment);
-        }
-      }
-    }
 
-    if (newList.isNotEmpty) {
-      CalenderMeetings returnedAppointment = newList[0];
+    var activeMeetings = meetings.where((meeting) => meeting.state == AppointmentsState.active).toList();
+    var removeOldMeetingFromTheList = activeMeetings.where((meeting) => meeting.toTime.isAfter(now)).toList();
+    var filtermeetingavaliablewithing24Hour = removeOldMeetingFromTheList
+        .where((meeting) => meeting.fromTime.isBefore(now.add(const Duration(hours: 24))))
+        .toList();
 
-      for (CalenderMeetings appoint in newList) {
-        if (appoint.fromTime.isBefore(returnedAppointment.fromTime)) {
-          returnedAppointment = appoint;
-        }
-      }
-      return returnedAppointment;
-    } else {
-      return null;
-    }
+    return filtermeetingavaliablewithing24Hour.isNotEmpty
+        ? filtermeetingavaliablewithing24Hour
+            .reduce((closest, current) => current.fromTime.isBefore(closest.fromTime) ? current : closest)
+        : null;
   }
 
   Future<void> cancelAppointment({required int id}) {
     return locator<AppointmentsService>().cancelAppointment(id: id);
+  }
+
+  bool isTimeDifferencePositive(DateTime timeDifference) {
+    return timeDifference.hour > 0 || timeDifference.minute > 0 || timeDifference.second > 0;
   }
 
   @override

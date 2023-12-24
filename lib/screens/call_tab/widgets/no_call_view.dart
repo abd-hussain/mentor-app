@@ -12,7 +12,7 @@ class NoCallView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Lottie.asset('assets/lottie/86231-confused.zip', height: 220),
+        Lottie.asset('assets/lottie/86231-confused.zip', height: 200),
         Padding(
           padding: const EdgeInsets.all(8),
           child: CustomText(

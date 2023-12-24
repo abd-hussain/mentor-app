@@ -36,85 +36,72 @@ class _CallScreenState extends State<CallScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          HeaderHomePage(
-            refreshCallBack: () {
-              locator<MainContainerBloc>().getMentorAppointments(context);
-            },
-          ),
-          ValueListenableBuilder<List<CalenderMeetings>>(
-              valueListenable:
-                  locator<MainContainerBloc>().meetingsListNotifier,
+    return Column(
+      children: [
+        HeaderHomePage(
+          refreshCallBack: () {
+            locator<MainContainerBloc>().getMentorAppointments(context);
+          },
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            child: ValueListenableBuilder<List<CalenderMeetings>>(
+              valueListenable: locator<MainContainerBloc>().meetingsListNotifier,
               builder: (context, snapshot, child) {
-                if (snapshot != []) {
-                  final appointment =
-                      bloc.checkIfThereIsAnyMeetingTodayAndReturnTheNearOne(
-                          snapshot);
+                if (snapshot.isEmpty) {
+                  return noCallView();
+                }
 
-                  if (appointment != null) {
-                    DateTime timeDifference = DateTime(DateTime.now().year);
+                final appointment = bloc.getNearestMeetingToday(snapshot);
 
-                    if (appointment.fromTime.isAfter(DateTime.now())) {
-                      timeDifference = appointment.fromTime.subtract(Duration(
-                        hours: DateTime.now().hour,
-                        minutes: DateTime.now().minute,
-                        seconds: DateTime.now().second,
-                      ));
-                    }
+                if (appointment == null) {
+                  return noCallView();
+                }
+                DateTime now = DateTime.now();
+                DateTime timeDifference = appointment.fromTime.isAfter(now)
+                    ? appointment.fromTime.subtract(Duration(
+                        hours: now.hour,
+                        minutes: now.minute,
+                        seconds: now.second,
+                      ))
+                    : DateTime(now.year, now.month, now.day);
 
-                    if (timeDifference.hour > 0 ||
-                        timeDifference.minute > 0 ||
-                        timeDifference.second > 0) {
-                      return WaitingCallView(
-                        timerStartNumberHour: timeDifference.hour,
-                        timerStartNumberMin: timeDifference.minute,
-                        timerStartNumberSec: timeDifference.second,
-                        metingDetails: appointment,
-                        meetingtime:
-                            DateFormat('hh:mm a').format(appointment.fromTime),
-                        meetingduration:
-                            "${appointment.toTime.difference(appointment.fromTime).inMinutes}",
-                        meetingday:
-                            bloc.box.get(DatabaseFieldConstant.language) == "en"
-                                ? DateFormat('EEEE').format(timeDifference)
-                                : DayTime().convertDayToArabic(
-                                    DateFormat('EEEE').format(timeDifference)),
-                        cancelMeetingTapped: () {
-                          bloc
-                              .cancelAppointment(id: appointment.meetingId)
-                              .then((value) async {
-                            locator<MainContainerBloc>()
-                                .getMentorAppointments(context);
-                          });
-                        },
-                        timesup: () {
-                          setState(() {});
-                        },
-                      );
-                    } else {
-                      if (chechIfMentorNotExiedTheTimeAllowedToEnter(
-                          appointmentFromDate: appointment.fromTime)) {
-                        return CallReadyView(channelId: appointment.channelID);
-                      } else {
-                        return noCallView();
-                      }
-                    }
-                  } else {
-                    return noCallView();
-                  }
+                if (bloc.isTimeDifferencePositive(timeDifference)) {
+                  return WaitingCallView(
+                    timerStartNumberHour: timeDifference.hour,
+                    timerStartNumberMin: timeDifference.minute,
+                    timerStartNumberSec: timeDifference.second,
+                    metingDetails: appointment,
+                    meetingtime: DateFormat('hh:mm a').format(appointment.fromTime),
+                    meetingduration: "${appointment.toTime.difference(appointment.fromTime).inMinutes}",
+                    meetingday: bloc.box.get(DatabaseFieldConstant.language) == "en"
+                        ? DateFormat('EEEE').format(timeDifference)
+                        : DayTime().convertDayToArabic(DateFormat('EEEE').format(timeDifference)),
+                    cancelMeetingTapped: () {
+                      bloc.cancelAppointment(id: appointment.meetingId).then((value) async {
+                        locator<MainContainerBloc>().getMentorAppointments(context);
+                      });
+                    },
+                    timesup: () {
+                      setState(() {});
+                    },
+                  );
+                }
+
+                if (chechIfMentorNotExiedTheTimeAllowedToEnter(appointmentFromDate: appointment.fromTime)) {
+                  return CallReadyView(channelId: appointment.channelID);
                 } else {
                   return noCallView();
                 }
-              }),
-        ],
-      ),
+              },
+            ),
+          ),
+        ),
+      ],
     );
   }
 
-  bool chechIfMentorNotExiedTheTimeAllowedToEnter(
-      {required DateTime appointmentFromDate}) {
+  bool chechIfMentorNotExiedTheTimeAllowedToEnter({required DateTime appointmentFromDate}) {
     final currentDate = DateTime.now();
     final difference = currentDate.difference(appointmentFromDate).inMinutes;
     return difference < 10;
