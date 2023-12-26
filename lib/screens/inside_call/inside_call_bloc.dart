@@ -1,13 +1,15 @@
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
+import 'package:mentor_app/locator.dart';
+import 'package:mentor_app/services/appointments_service.dart';
 
 class InsideCallBloc {
   late RtcEngine engine;
   String channelName = "";
+  int callID = 0;
   String? appId = "67fa993d64a346e1a2587f4a8b96f569";
   String tempToken =
       "007eJxTYBBfMEdg8f+T2lbvZl/OWu/kI+JWO7vBi0s20dE9LXr21zUKDGbmaYmWlsYpZiaJxiZmqYaJRqYW5mkmiRZJlmZppmaWL0XKUxoCGRn6WCQYGRkgEMRnZyhJLS4xMLdkYAAAL4od0g==";
-  ValueNotifier<bool> localUserJoinedStatus = ValueNotifier<bool>(false);
   ValueNotifier<int?> remoteUidStatus = ValueNotifier<int?>(null);
   final infoStrings = <String>[];
 
@@ -16,6 +18,7 @@ class InsideCallBloc {
     if (arguments != null) {
       final newArguments = arguments as Map<String, dynamic>;
       channelName = newArguments["channelName"] as String;
+      callID = newArguments["callID"] as int;
     }
   }
 
@@ -53,7 +56,6 @@ class InsideCallBloc {
       RtcEngineEventHandler(
         onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
           debugPrint("local user ${connection.localUid} joined");
-          localUserJoinedStatus.value = true;
         },
         onLeaveChannel: (connection, stats) {
           debugPrint("local user ${connection.localUid} Leave");
@@ -74,5 +76,13 @@ class InsideCallBloc {
         },
       ),
     );
+  }
+
+  Future<void> joinAppointment({required int id}) {
+    return locator<AppointmentsService>().joinCall(id: id);
+  }
+
+  Future<void> exitAppointment({required int id}) {
+    return locator<AppointmentsService>().exitCall(id: id);
   }
 }

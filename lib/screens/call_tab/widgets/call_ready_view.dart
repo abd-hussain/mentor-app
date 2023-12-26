@@ -9,7 +9,13 @@ import 'package:permission_handler/permission_handler.dart';
 
 class CallReadyView extends StatelessWidget {
   final String channelId;
-  const CallReadyView({super.key, required this.channelId});
+  final int appointmentId;
+  final Function callEnd;
+  const CallReadyView(
+      {super.key,
+      required this.channelId,
+      required this.appointmentId,
+      required this.callEnd});
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +79,10 @@ class CallReadyView extends StatelessWidget {
                             RoutesConstants.insideCallScreen,
                             arguments: {
                               "channelName": channelId,
-                            });
+                              "callID": appointmentId
+                            }).then((value) {
+                          callEnd();
+                        });
                       });
                     });
                   }),

@@ -24,15 +24,35 @@ class AppointmentsService with Service {
     return response;
   }
 
-  Future<void> compleateAppointment({required int id}) async {
+  Future<void> joinCall({required int id}) async {
     final response = await repository.callRequest(
-      requestType: RequestType.post,
-      methodName: MethodNameConstant.compleatedAppointment,
+      requestType: RequestType.put,
+      methodName: MethodNameConstant.joinCallAppointment,
       queryParam: {"id": id},
     );
 
     return response;
   }
+
+  Future<void> exitCall({required int id}) async {
+    final response = await repository.callRequest(
+      requestType: RequestType.put,
+      methodName: MethodNameConstant.exitCallAppointment,
+      queryParam: {"id": id},
+    );
+
+    return response;
+  }
+
+  // Future<void> compleateAppointment({required int id}) async {
+  //   final response = await repository.callRequest(
+  //     requestType: RequestType.post,
+  //     methodName: MethodNameConstant.compleatedAppointment,
+  //     queryParam: {"id": id},
+  //   );
+
+  //   return response;
+  // }
 
   Future<void> addCommentToAppointment(
       {required AddCommentToAppointment body}) async {

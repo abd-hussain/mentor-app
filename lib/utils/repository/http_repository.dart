@@ -36,7 +36,6 @@ class HttpRepository {
           response = await dioClient.get(
             methodName,
             queryParameters: queryParam,
-            // options: Options(contentType: contentType),
           );
 
           break;
@@ -45,7 +44,6 @@ class HttpRepository {
             methodName,
             data: formData ?? postBody?.toJson(),
             queryParameters: queryParam,
-            // options: Options(contentType: contentType),
           );
           break;
         case RequestType.delete:
@@ -53,7 +51,6 @@ class HttpRepository {
             methodName,
             data: postBody?.toJson(),
             queryParameters: queryParam,
-            // options: Options(contentType: contentType),
           );
           break;
         case RequestType.put:
@@ -61,7 +58,6 @@ class HttpRepository {
             methodName,
             data: formData ?? postBody?.toJson(),
             queryParameters: queryParam,
-            // options: Options(contentType: contentType),
           );
           break;
       }

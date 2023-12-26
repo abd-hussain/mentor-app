@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 
 class CallToolBarView extends StatefulWidget {
   final RtcEngine engine;
+  final Function callEnd;
 
-  const CallToolBarView({super.key, required this.engine});
+  const CallToolBarView(
+      {super.key, required this.engine, required this.callEnd});
 
   @override
   State<CallToolBarView> createState() => _CallToolBarViewState();
@@ -38,7 +40,7 @@ class _CallToolBarViewState extends State<CallToolBarView> {
                 );
               }),
           RawMaterialButton(
-            onPressed: () => onCallEnd(context),
+            onPressed: () => widget.callEnd(),
             shape: const CircleBorder(),
             elevation: 2.0,
             fillColor: Colors.redAccent,
@@ -68,10 +70,6 @@ class _CallToolBarViewState extends State<CallToolBarView> {
 
   void onSwitchCamera() {
     widget.engine.switchCamera();
-  }
-
-  void onCallEnd(BuildContext context) {
-    Navigator.pop(context);
   }
 
   void onToggleMute() {

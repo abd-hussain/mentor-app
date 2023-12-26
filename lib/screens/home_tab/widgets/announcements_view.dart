@@ -20,7 +20,9 @@ class AnnouncementsView extends StatelessWidget {
         });
   }
 
-  Widget item({required BuildContext context, required NotificationsResponseData item}) {
+  Widget item(
+      {required BuildContext context,
+      required NotificationsResponseData item}) {
     var parsedDate = DateTime.parse(item.createdAt!);
     var dateLocal = parsedDate.toLocal();
     return Padding(
@@ -50,7 +52,8 @@ class AnnouncementsView extends StatelessWidget {
                   ),
                   Expanded(child: Container()),
                   CustomText(
-                    title: "${dateLocal.year}/${dateLocal.month}/${dateLocal.day}",
+                    title:
+                        "${dateLocal.year}/${dateLocal.month}/${dateLocal.day}",
                     fontSize: 12,
                     textColor: const Color(0xff444444),
                   ),

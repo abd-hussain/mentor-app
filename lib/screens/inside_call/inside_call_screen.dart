@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/screens/inside_call/inside_call_bloc.dart';
-import 'package:mentor_app/screens/inside_call/widgets/mentor_camera_view.dart';
+import 'package:mentor_app/screens/inside_call/widgets/client_camera_view.dart';
 import 'package:mentor_app/screens/inside_call/widgets/my_camera_view.dart';
 import 'package:mentor_app/screens/inside_call/widgets/toolbar.dart';
 
@@ -19,13 +19,13 @@ class _InsideCallScreenState extends State<InsideCallScreen> {
     bloc.handleReadingArguments(context,
         arguments: ModalRoute.of(context)!.settings.arguments);
     bloc.initializeCall();
+    bloc.joinAppointment(id: bloc.callID);
     super.didChangeDependencies();
   }
 
   @override
   void dispose() {
     bloc.engine.leaveChannel();
-
     super.dispose();
   }
 
@@ -35,15 +35,21 @@ class _InsideCallScreenState extends State<InsideCallScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-            MentorCameraView(
+            ClientCameraView(
               rtcEngine: bloc.engine,
               remoteUidStatus: bloc.remoteUidStatus,
               channelName: bloc.channelName,
             ),
-            MyCameraView(
-                rtcEngine: bloc.engine,
-                localUserJoinedStatus: bloc.localUserJoinedStatus),
-            CallToolBarView(engine: bloc.engine),
+            MyCameraView(rtcEngine: bloc.engine),
+            CallToolBarView(
+              engine: bloc.engine,
+              callEnd: () async {
+                await bloc.exitAppointment(id: bloc.callID);
+                if (context.mounted) {
+                  Navigator.pop(context);
+                }
+              },
+            ),
           ],
         ),
       ),

@@ -2,15 +2,16 @@ import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class MentorCameraView extends StatelessWidget {
+class ClientCameraView extends StatelessWidget {
   final RtcEngine rtcEngine;
   final String channelName;
   final ValueNotifier<int?> remoteUidStatus;
-  const MentorCameraView(
-      {super.key,
-      required this.remoteUidStatus,
-      required this.rtcEngine,
-      required this.channelName});
+  const ClientCameraView({
+    super.key,
+    required this.remoteUidStatus,
+    required this.rtcEngine,
+    required this.channelName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +34,16 @@ class MentorCameraView extends StatelessWidget {
         ),
       );
     } else {
-      return Text(
-        AppLocalizations.of(context)!.pleasewaitforclient,
-        textAlign: TextAlign.center,
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.pleasewaitforclient,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          const CircularProgressIndicator()
+        ],
       );
     }
   }

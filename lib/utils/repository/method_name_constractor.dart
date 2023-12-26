@@ -13,8 +13,9 @@ class MethodNameConstant {
   static const String mentors = "mentor-list/";
   static const String mentorAppointments = "mentor-appointment/";
   static const String cancelAppointment = "mentor-appointment/cancel";
-  static const String compleatedAppointment = "mentor-appointment/compleated";
   static const String commentAppointment = "mentor-appointment/comment";
+  static const String joinCallAppointment = "mentor-appointment/join-call";
+  static const String exitCallAppointment = "mentor-appointment/end-call";
 
   static const String mentorWorkingHours = "mentor-prop/working_hours";
 
