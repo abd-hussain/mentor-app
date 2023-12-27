@@ -4,28 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/error/exceptions.dart';
+import 'package:mentor_app/utils/logger.dart';
 import 'package:mentor_app/utils/mixins.dart';
 
 class HttpInterceptor extends InterceptorsWrapper {
   @override
-  void onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     var box = Hive.box(DatabaseBoxConstant.userInfo);
-    if (box.get(DatabaseFieldConstant.token) != null ||
-        box.get(DatabaseFieldConstant.token) != "") {
+    if (box.get(DatabaseFieldConstant.token) != null || box.get(DatabaseFieldConstant.token) != "") {
       String bearerToken = "Bearer ${box.get(DatabaseFieldConstant.token)}";
       options.headers = {
         "Authorization": bearerToken,
         "lang": box.get(DatabaseFieldConstant.language),
       };
     } else {
-      options.headers
-          .putIfAbsent("lang", () => box.get(DatabaseFieldConstant.language));
-      // options.headers.putIfAbsent("Content-Type", () => "application/json");
-      // options.headers.putIfAbsent("User-Agent", () => "PostmanRuntime/7.36.0");
-      // options.headers.putIfAbsent("Accept", () => "*/*");
-      // options.headers.putIfAbsent("Accept-Encoding", () => "gzip, deflate, br");
-      // options.headers.putIfAbsent("Connection", () => "keep-alive");
+      options.headers.putIfAbsent("lang", () => box.get(DatabaseFieldConstant.language));
     }
     return handler.next(options);
   }
@@ -47,8 +40,7 @@ class HttpInterceptor extends InterceptorsWrapper {
   }
 
   Future<bool> validateResponse<T extends Model, TR>(Response response) async {
-    debugPrint(
-        "request name ${response.requestOptions.path} -- status code ${response.statusCode}");
+    debugPrint("request name ${response.requestOptions.path} -- status code ${response.statusCode}");
 
     switch (response.statusCode) {
       case 200:
@@ -56,8 +48,10 @@ class HttpInterceptor extends InterceptorsWrapper {
       case 201:
         return true;
       case 403:
-        debugPrint("response.data ${response.data.toString()}");
-
+        logErrorMessageCrashlytics(
+          error: response.statusCode,
+          message: "response.data ${response.data.toString()}",
+        );
         throw DioException(
             error: HttpException(
                 status: response.statusCode!,
@@ -65,7 +59,10 @@ class HttpInterceptor extends InterceptorsWrapper {
                 requestId: ""),
             requestOptions: response.requestOptions);
       default:
-        debugPrint("response.data ${response.data.toString()}");
+        logErrorMessageCrashlytics(
+          error: response.statusCode,
+          message: "response.data ${response.data.toString()}",
+        );
 
         throw DioException(
             error: HttpException(

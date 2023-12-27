@@ -13,7 +13,7 @@ class InsideCallBloc {
 
   String? appId = "67fa993d64a346e1a2587f4a8b96f569";
   String tempToken =
-      "007eJxTYBBfMEdg8f+T2lbvZl/OWu/kI+JWO7vBi0s20dE9LXr21zUKDGbmaYmWlsYpZiaJxiZmqYaJRqYW5mkmiRZJlmZppmaWL0XKUxoCGRn6WCQYGRkgEMRnZyhJLS4xMLdkYAAAL4od0g==";
+      "007eJxTYOiU1ufQkPbJ8rrkfdBzTaCeTBTbasvAbm6td8KBT1Y0iigwmJmnJVpaGqeYmSQam5ilGiYamVqYp5kkWiRZmqWZmlmqT+pJbQhkZDjMbMnACIUgPgtDYnFxMQMDALwSGiQ=";
   ValueNotifier<int?> remoteUidStatus = ValueNotifier<int?>(null);
   final infoStrings = <String>[];
 
