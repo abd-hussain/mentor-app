@@ -10,21 +10,22 @@ import 'package:permission_handler/permission_handler.dart';
 class CallReadyView extends StatelessWidget {
   final String channelId;
   final int appointmentId;
+  final int meetingDurationInMin;
+
   final Function callEnd;
   const CallReadyView(
       {super.key,
       required this.channelId,
       required this.appointmentId,
-      required this.callEnd});
+      required this.callEnd,
+      required this.meetingDurationInMin});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const SizedBox(height: 20),
-        Lottie.network(
-            "https://assets8.lottiefiles.com/packages/lf20_WZQ5gTEaXA.json",
-            height: 200),
+        Lottie.network("https://assets8.lottiefiles.com/packages/lf20_WZQ5gTEaXA.json", height: 200),
         const SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.all(8),
@@ -69,18 +70,14 @@ class CallReadyView extends StatelessWidget {
                   buttonTitle: AppLocalizations.of(context)!.joinnow,
                   enableButton: true,
                   onTap: () async {
-                    PermissionHandler()
-                        .handlePermission(Permission.camera)
-                        .whenComplete(() {
-                      PermissionHandler()
-                          .handlePermission(Permission.microphone)
-                          .whenComplete(() {
-                        Navigator.of(context, rootNavigator: true).pushNamed(
-                            RoutesConstants.insideCallScreen,
-                            arguments: {
-                              "channelName": channelId,
-                              "callID": appointmentId
-                            }).then((value) {
+                    PermissionHandler().handlePermission(Permission.camera).whenComplete(() {
+                      PermissionHandler().handlePermission(Permission.microphone).whenComplete(() {
+                        Navigator.of(context, rootNavigator: true)
+                            .pushNamed(RoutesConstants.insideCallScreen, arguments: {
+                          "channelName": channelId,
+                          "callID": appointmentId,
+                          "durations": meetingDurationInMin,
+                        }).then((value) {
                           callEnd();
                         });
                       });

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:mentor_app/locator.dart';
@@ -7,18 +9,20 @@ class InsideCallBloc {
   late RtcEngine engine;
   String channelName = "";
   int callID = 0;
+  int meetingDurationInMin = 0;
+
   String? appId = "67fa993d64a346e1a2587f4a8b96f569";
   String tempToken =
       "007eJxTYBBfMEdg8f+T2lbvZl/OWu/kI+JWO7vBi0s20dE9LXr21zUKDGbmaYmWlsYpZiaJxiZmqYaJRqYW5mkmiRZJlmZppmaWL0XKUxoCGRn6WCQYGRkgEMRnZyhJLS4xMLdkYAAAL4od0g==";
   ValueNotifier<int?> remoteUidStatus = ValueNotifier<int?>(null);
   final infoStrings = <String>[];
 
-  void handleReadingArguments(BuildContext context,
-      {required Object? arguments}) {
+  void handleReadingArguments(BuildContext context, {required Object? arguments}) {
     if (arguments != null) {
       final newArguments = arguments as Map<String, dynamic>;
       channelName = newArguments["channelName"] as String;
       callID = newArguments["callID"] as int;
+      meetingDurationInMin = newArguments["durations"] as int;
     }
   }
 
@@ -28,8 +32,7 @@ class InsideCallBloc {
     _addAgoraEventHandlers();
 
     VideoEncoderConfiguration encoderConfiguration =
-        const VideoEncoderConfiguration(
-            dimensions: VideoDimensions(width: 1920, height: 1080));
+        const VideoEncoderConfiguration(dimensions: VideoDimensions(width: 1920, height: 1080));
     await engine.setVideoEncoderConfiguration(encoderConfiguration);
     await engine.joinChannel(
       token: tempToken,
@@ -65,14 +68,12 @@ class InsideCallBloc {
           debugPrint("remote user $remoteUid joined");
           remoteUidStatus.value = remoteUid;
         },
-        onUserOffline: (RtcConnection connection, int remoteUid,
-            UserOfflineReasonType reason) {
+        onUserOffline: (RtcConnection connection, int remoteUid, UserOfflineReasonType reason) {
           debugPrint("remote user $remoteUid left channel");
           remoteUidStatus.value = null;
         },
         onTokenPrivilegeWillExpire: (RtcConnection connection, String token) {
-          debugPrint(
-              '[onTokenPrivilegeWillExpire] connection: ${connection.toJson()}, token: $token');
+          debugPrint('[onTokenPrivilegeWillExpire] connection: ${connection.toJson()}, token: $token');
         },
       ),
     );
@@ -85,4 +86,37 @@ class InsideCallBloc {
   Future<void> exitAppointment({required int id}) {
     return locator<AppointmentsService>().exitCall(id: id);
   }
+
+  // void startTimer() {
+  //   const oneSec = Duration(seconds: 1);
+  //   Timer.periodic(
+  //     oneSec,
+  //     (Timer timer) {
+  //       if (_isTimerFinished()) {
+  //         timer.cancel();
+  //         //TODO: handle when call finish
+  //       } else {
+  //         _decrementTimer();
+  //         loadingForTimer.value = timerStartNumberSec - 1;
+  //       }
+  //     },
+  //   );
+  // }
+
+  // void _decrementTimer() {
+  //   if (timerStartNumberSec > 0) {
+  //     timerStartNumberSec--;
+  //   } else if (timerStartNumberMin > 0) {
+  //     timerStartNumberMin--;
+  //     timerStartNumberSec = 59;
+  //   } else if (timerStartNumberHour > 0) {
+  //     timerStartNumberHour--;
+  //     timerStartNumberMin = 59;
+  //     timerStartNumberSec = 59;
+  //   }
+  // }
+
+  // bool _isTimerFinished() {
+  //   return timerStartNumberHour == 0 && timerStartNumberMin == 0 && timerStartNumberSec == 0;
+  // }
 }

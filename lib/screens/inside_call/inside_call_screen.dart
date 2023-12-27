@@ -16,12 +16,13 @@ class _InsideCallScreenState extends State<InsideCallScreen> {
 
   @override
   void didChangeDependencies() {
-    bloc.handleReadingArguments(context,
-        arguments: ModalRoute.of(context)!.settings.arguments);
+    bloc.handleReadingArguments(context, arguments: ModalRoute.of(context)!.settings.arguments);
     bloc.initializeCall();
     bloc.joinAppointment(id: bloc.callID);
     super.didChangeDependencies();
   }
+
+  //TODO: handle when the call is established the time for it
 
   @override
   void dispose() {
@@ -39,15 +40,18 @@ class _InsideCallScreenState extends State<InsideCallScreen> {
               rtcEngine: bloc.engine,
               remoteUidStatus: bloc.remoteUidStatus,
               channelName: bloc.channelName,
-            ),
-            MyCameraView(rtcEngine: bloc.engine),
-            CallToolBarView(
-              engine: bloc.engine,
-              callEnd: () async {
+              timesup: () async {
                 await bloc.exitAppointment(id: bloc.callID);
                 if (context.mounted) {
                   Navigator.pop(context);
                 }
+              },
+            ),
+            MyCameraView(rtcEngine: bloc.engine),
+            CallToolBarView(
+              engine: bloc.engine,
+              callEnd: () {
+                Navigator.pop(context);
               },
             ),
           ],

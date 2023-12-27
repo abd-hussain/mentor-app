@@ -7,18 +7,22 @@ class MyCameraView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.topLeft,
-      child: SizedBox(
-        width: 100,
-        height: 150,
-        child: Center(
-            child: AgoraVideoView(
-          controller: VideoViewController(
-            rtcEngine: rtcEngine,
-            canvas: const VideoCanvas(uid: 0),
-          ),
-        )),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(75),
+          child: SizedBox(
+              width: 150,
+              height: 150,
+              child: AgoraVideoView(
+                controller: VideoViewController(
+                  rtcEngine: rtcEngine,
+                  canvas: const VideoCanvas(uid: 0),
+                ),
+              )),
+        ),
       ),
     );
   }
