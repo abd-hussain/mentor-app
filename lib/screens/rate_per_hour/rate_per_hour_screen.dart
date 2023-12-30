@@ -45,7 +45,8 @@ class _RatePerHourScreenState extends State<RatePerHourScreen> {
             return snapshot == LoadingStatus.inprogress
                 ? const LoadingView()
                 : Padding(
-                    padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
+                    padding:
+                        const EdgeInsets.only(top: 20, left: 16, right: 16),
                     child: Column(
                       children: [
                         Container(
@@ -65,7 +66,8 @@ class _RatePerHourScreenState extends State<RatePerHourScreen> {
                             child: Column(
                               children: [
                                 CustomText(
-                                  title: AppLocalizations.of(context)!.rateperhourdesc1,
+                                  title: AppLocalizations.of(context)!
+                                      .rateperhourdesc1,
                                   fontSize: 14,
                                   maxLins: 3,
                                   textColor: const Color(0xff444444),
@@ -74,7 +76,8 @@ class _RatePerHourScreenState extends State<RatePerHourScreen> {
                                 ),
                                 const SizedBox(height: 20),
                                 CustomText(
-                                  title: AppLocalizations.of(context)!.rateperhourdesc2,
+                                  title: AppLocalizations.of(context)!
+                                      .rateperhourdesc2,
                                   fontSize: 14,
                                   maxLins: 3,
                                   textAlign: TextAlign.center,
@@ -83,7 +86,8 @@ class _RatePerHourScreenState extends State<RatePerHourScreen> {
                                 ),
                                 const SizedBox(height: 20),
                                 CustomText(
-                                  title: AppLocalizations.of(context)!.rateperhourdesc3,
+                                  title: AppLocalizations.of(context)!
+                                      .rateperhourdesc3,
                                   fontSize: 14,
                                   textAlign: TextAlign.center,
                                   textColor: const Color(0xff444444),
@@ -106,7 +110,8 @@ class _RatePerHourScreenState extends State<RatePerHourScreen> {
                                         color: Colors.grey[200],
                                         child: IconButton(
                                           icon: const Icon(Icons.remove),
-                                          onPressed: () => bloc.decreseRatePerHourBy1(),
+                                          onPressed: () =>
+                                              bloc.decreseRatePerHourBy1(),
                                         ),
                                       ),
                                     ),
@@ -114,8 +119,10 @@ class _RatePerHourScreenState extends State<RatePerHourScreen> {
                                       flex: 3,
                                       child: CustomTextField(
                                         controller: bloc.ratePerHourController,
-                                        hintText: AppLocalizations.of(context)!.rateperhour,
-                                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                                        hintText: AppLocalizations.of(context)!
+                                            .rateperhour,
+                                        keyboardType: const TextInputType
+                                            .numberWithOptions(decimal: true),
                                         inputFormatters: [
                                           LengthLimitingTextInputFormatter(4),
                                         ],
@@ -130,7 +137,8 @@ class _RatePerHourScreenState extends State<RatePerHourScreen> {
                                         color: Colors.grey[200],
                                         child: IconButton(
                                           icon: const Icon(Icons.add),
-                                          onPressed: () => bloc.encreseRatePerHourBy1(),
+                                          onPressed: () =>
+                                              bloc.encreseRatePerHourBy1(),
                                         ),
                                       ),
                                     ),
@@ -159,7 +167,8 @@ class _RatePerHourScreenState extends State<RatePerHourScreen> {
                               child: Column(
                                 children: [
                                   CustomText(
-                                    title: AppLocalizations.of(context)!.ibaninfo,
+                                    title:
+                                        AppLocalizations.of(context)!.ibaninfo,
                                     fontSize: 14,
                                     textAlign: TextAlign.center,
                                     textColor: const Color(0xff444444),
@@ -168,13 +177,19 @@ class _RatePerHourScreenState extends State<RatePerHourScreen> {
                                   const SizedBox(height: 8),
                                   CustomTextField(
                                     controller: bloc.ibanController,
-                                    padding: const EdgeInsets.only(left: 8, right: 8),
+                                    padding: const EdgeInsets.only(
+                                        left: 8, right: 8),
                                     hintText: "",
                                     fontSize: 20,
                                     keyboardType: TextInputType.name,
-                                    inputFormatters: [LengthLimitingTextInputFormatter(30)],
-                                    onChange: (text) => bloc.validateFieldsForFaze5(),
-                                    onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(30)
+                                    ],
+                                    onChange: (text) =>
+                                        bloc.validateFieldsForFaze5(),
+                                    onEditingComplete: () => FocusManager
+                                        .instance.primaryFocus
+                                        ?.unfocus(),
                                   ),
                                   const SizedBox(height: 10),
                                 ],

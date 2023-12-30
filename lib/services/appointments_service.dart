@@ -24,11 +24,12 @@ class AppointmentsService with Service {
     return response;
   }
 
-  Future<void> joinCall({required int id}) async {
+  Future<dynamic> joinCall(
+      {required int id, required String channelName}) async {
     final response = await repository.callRequest(
       requestType: RequestType.put,
       methodName: MethodNameConstant.joinCallAppointment,
-      queryParam: {"id": id},
+      queryParam: {"id": id, "channelName": channelName},
     );
 
     return response;

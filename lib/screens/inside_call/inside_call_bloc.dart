@@ -12,20 +12,15 @@ class InsideCallBloc {
   int meetingDurationInMin = 0;
 
   String? appId = "67fa993d64a346e1a2587f4a8b96f569";
-  String callToken = "";
-
+  String generatedCallToken = "";
   ValueNotifier<int?> remoteUidStatus = ValueNotifier<int?>(null);
   final infoStrings = <String>[];
 
-  ValueNotifier<int> loadingForTimer = ValueNotifier<int>(0);
-  int timerStartNumberSec = 0;
-  int timerStartNumberMin = 0;
-
-  void handleReadingArguments(BuildContext context, {required Object? arguments}) {
+  void handleReadingArguments(BuildContext context,
+      {required Object? arguments}) {
     if (arguments != null) {
       final newArguments = arguments as Map<String, dynamic>;
       channelName = newArguments["channelName"] as String;
-      callToken = newArguments["callToken"] as String;
       callID = newArguments["callID"] as int;
       meetingDurationInMin = newArguments["durations"] as int;
     }
@@ -42,7 +37,7 @@ class InsideCallBloc {
 
     await engine.setVideoEncoderConfiguration(configuration);
     await engine.joinChannel(
-      token: callToken,
+      token: generatedCallToken,
       channelId: channelName,
       uid: 0,
       options: const ChannelMediaOptions(),
@@ -57,7 +52,7 @@ class InsideCallBloc {
       channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
     ));
 
-    await engine.setClientRole(role: ClientRoleType.clientRoleAudience);
+    await engine.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
     await engine.enableVideo();
     await engine.startPreview();
   }
@@ -76,51 +71,30 @@ class InsideCallBloc {
           debugPrint("remote user $remoteUid joined");
           remoteUidStatus.value = remoteUid;
         },
-        onUserOffline: (RtcConnection connection, int remoteUid, UserOfflineReasonType reason) {
+        onUserOffline: (RtcConnection connection, int remoteUid,
+            UserOfflineReasonType reason) {
           debugPrint("remote user $remoteUid left channel");
           remoteUidStatus.value = null;
         },
         onTokenPrivilegeWillExpire: (RtcConnection connection, String token) {
-          debugPrint('[onTokenPrivilegeWillExpire] connection: ${connection.toJson()}, token: $token');
+          debugPrint(
+              '[onTokenPrivilegeWillExpire] connection: ${connection.toJson()}, token: $token');
         },
       ),
     );
   }
 
-  Future<void> joinAppointment({required int id}) {
-    return locator<AppointmentsService>().joinCall(id: id);
+  Future<void> joinAppointment(
+      {required int id, required String channelName}) async {
+    locator<AppointmentsService>()
+        .joinCall(id: id, channelName: channelName)
+        .then((value) {
+      generatedCallToken = value["data"];
+      initializeCall();
+    });
   }
 
   Future<void> exitAppointment({required int id}) {
     return locator<AppointmentsService>().exitCall(id: id);
-  }
-
-  void startTimer() {
-    const oneSec = Duration(seconds: 1);
-    Timer.periodic(
-      oneSec,
-      (Timer timer) {
-        if (_isTimerFinished()) {
-          timer.cancel();
-          //TODO: handle when call finish
-        } else {
-          _decrementTimer();
-          loadingForTimer.value = timerStartNumberSec - 1;
-        }
-      },
-    );
-  }
-
-  void _decrementTimer() {
-    if (timerStartNumberSec > 0) {
-      timerStartNumberSec--;
-    } else if (timerStartNumberMin > 0) {
-      timerStartNumberMin--;
-      timerStartNumberSec = 59;
-    }
-  }
-
-  bool _isTimerFinished() {
-    return timerStartNumberMin == 0 && timerStartNumberSec == 0;
   }
 }
