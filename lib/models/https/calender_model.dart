@@ -1,11 +1,4 @@
-enum AppointmentsState {
-  active,
-  mentorCancel,
-  clientCancel,
-  clientMiss,
-  mentorMiss,
-  completed
-}
+enum AppointmentsState { active, mentorCancel, clientCancel, clientMiss, mentorMiss, completed }
 
 class CalenderMeetings {
   final String firstName;
@@ -27,6 +20,7 @@ class CalenderMeetings {
   final String clientnote;
   final String mentornote;
   final String channelID;
+  final String callToken;
 
   const CalenderMeetings({
     required this.dateOfBirth,
@@ -47,5 +41,6 @@ class CalenderMeetings {
     required this.clientnote,
     required this.mentornote,
     required this.channelID,
+    required this.callToken,
   });
 }

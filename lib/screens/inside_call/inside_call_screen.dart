@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mentor_app/screens/inside_call/inside_call_bloc.dart';
 import 'package:mentor_app/screens/inside_call/widgets/client_camera_view.dart';
 import 'package:mentor_app/screens/inside_call/widgets/my_camera_view.dart';
+import 'package:mentor_app/screens/inside_call/widgets/timer_end_call_view.dart';
 import 'package:mentor_app/screens/inside_call/widgets/toolbar.dart';
 
 class InsideCallScreen extends StatefulWidget {
@@ -22,11 +23,10 @@ class _InsideCallScreenState extends State<InsideCallScreen> {
     super.didChangeDependencies();
   }
 
-  //TODO: handle when the call is established the time for it
-
   @override
   void dispose() {
     bloc.engine.leaveChannel();
+    bloc.loadingForTimer.dispose();
     super.dispose();
   }
 
@@ -48,6 +48,23 @@ class _InsideCallScreenState extends State<InsideCallScreen> {
               },
             ),
             MyCameraView(rtcEngine: bloc.engine),
+            ValueListenableBuilder<int?>(
+                valueListenable: bloc.remoteUidStatus,
+                builder: (context, snapshot, child) {
+                  if (snapshot != null) {
+                    return TimerEndCallView(
+                      meetingDurationInMin: bloc.meetingDurationInMin,
+                      timesup: () async {
+                        await bloc.exitAppointment(id: bloc.callID);
+                        if (context.mounted) {
+                          Navigator.pop(context);
+                        }
+                      },
+                    );
+                  } else {
+                    return Container();
+                  }
+                }),
             CallToolBarView(
               engine: bloc.engine,
               callEnd: () {

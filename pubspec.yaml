@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+24
+version: 1.0.0+25
 
 environment:
   sdk: '>=2.18.2 <3.0.0'
@@ -68,6 +68,8 @@ dependencies:
   permission_handler: ^11.0.1
   http_parser: ^4.0.2
   jaguar_jwt: ^3.0.0
+  # flutter_ringtone_player: ^4.0.0+2
+  # wakelock: ^0.4.0
 
 dev_dependencies:
   flutter_test:

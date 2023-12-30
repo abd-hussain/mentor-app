@@ -91,6 +91,7 @@ class _CallScreenState extends State<CallScreen> {
                 if (chechIfMentorNotExiedTheTimeAllowedToEnter(appointmentFromDate: appointment.fromTime)) {
                   return CallReadyView(
                     channelId: appointment.channelID,
+                    callToken: appointment.callToken,
                     appointmentId: appointment.meetingId,
                     meetingDurationInMin: appointment.toTime.difference(appointment.fromTime).inMinutes,
                     callEnd: () {

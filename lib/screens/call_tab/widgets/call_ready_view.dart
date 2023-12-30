@@ -9,6 +9,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 class CallReadyView extends StatelessWidget {
   final String channelId;
+  final String callToken;
   final int appointmentId;
   final int meetingDurationInMin;
 
@@ -16,6 +17,7 @@ class CallReadyView extends StatelessWidget {
   const CallReadyView(
       {super.key,
       required this.channelId,
+      required this.callToken,
       required this.appointmentId,
       required this.callEnd,
       required this.meetingDurationInMin});
@@ -76,6 +78,7 @@ class CallReadyView extends StatelessWidget {
                             .pushNamed(RoutesConstants.insideCallScreen, arguments: {
                           "channelName": channelId,
                           "callID": appointmentId,
+                          "callToken": callToken,
                           "durations": meetingDurationInMin,
                         }).then((value) {
                           callEnd();
