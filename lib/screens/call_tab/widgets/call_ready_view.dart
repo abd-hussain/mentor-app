@@ -11,8 +11,8 @@ class CallReadyView extends StatelessWidget {
   final String channelId;
   final int appointmentId;
   final int meetingDurationInMin;
-
   final Function callEnd;
+
   const CallReadyView(
       {super.key,
       required this.channelId,
