@@ -37,7 +37,8 @@ class TutView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 100),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular((MediaQuery.of(context).size.width - 16) / 2),
+                borderRadius: BorderRadius.circular(
+                    (MediaQuery.of(context).size.width - 16) / 2),
                 child: Image.asset(
                   image,
                   height: MediaQuery.of(context).size.width - 16,

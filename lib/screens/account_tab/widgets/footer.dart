@@ -36,11 +36,11 @@ class FooterView extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
               TextButton(
-                onPressed: () => Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.webViewScreen,
-                    arguments: {
-                      AppConstant.webViewPageUrl: AppConstant.linkedinLink,
-                      AppConstant.pageTitle: AppLocalizations.of(context)!.linkedin
-                    }),
+                onPressed: () => Navigator.of(context, rootNavigator: true)
+                    .pushNamed(RoutesConstants.webViewScreen, arguments: {
+                  AppConstant.webViewPageUrl: AppConstant.linkedinLink,
+                  AppConstant.pageTitle: AppLocalizations.of(context)!.linkedin
+                }),
                 child: Image.asset(
                   "assets/images/linkedinLogo.png",
                 ),
@@ -64,21 +64,28 @@ class FooterView extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.webViewScreen, arguments: {
-                AppConstant.webViewPageUrl: language == "en" ? AppConstant.termsLink : AppConstant.termsLinkAR,
-                AppConstant.pageTitle: AppLocalizations.of(context)!.termsandconditions
+              Navigator.of(context, rootNavigator: true)
+                  .pushNamed(RoutesConstants.webViewScreen, arguments: {
+                AppConstant.webViewPageUrl: language == "en"
+                    ? AppConstant.termsLink
+                    : AppConstant.termsLinkAR,
+                AppConstant.pageTitle:
+                    AppLocalizations.of(context)!.termsandconditions
               });
             },
-            child: _footerTextWidget(AppLocalizations.of(context)!.termsandconditions),
+            child: _footerTextWidget(
+                AppLocalizations.of(context)!.termsandconditions),
           ),
           TextButton(
-            onPressed: () =>
-                Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.webViewScreen, arguments: {
-              AppConstant.webViewPageUrl:
-                  language == "en" ? AppConstant.privacypolicyLink : AppConstant.privacypolicyLinkAR,
+            onPressed: () => Navigator.of(context, rootNavigator: true)
+                .pushNamed(RoutesConstants.webViewScreen, arguments: {
+              AppConstant.webViewPageUrl: language == "en"
+                  ? AppConstant.privacypolicyLink
+                  : AppConstant.privacypolicyLinkAR,
               AppConstant.pageTitle: AppLocalizations.of(context)!.privacypolicy
             }),
-            child: _footerTextWidget(AppLocalizations.of(context)!.privacypolicy),
+            child:
+                _footerTextWidget(AppLocalizations.of(context)!.privacypolicy),
           ),
           const SizedBox(height: 16),
           FutureBuilder<String>(
@@ -86,7 +93,8 @@ class FooterView extends StatelessWidget {
               future: Version().getApplicationVersion(),
               builder: (context, snapshot) {
                 return CustomText(
-                  title: "${AppLocalizations.of(context)!.version} ${snapshot.data}",
+                  title:
+                      "${AppLocalizations.of(context)!.version} ${snapshot.data}",
                   fontSize: 12,
                   textColor: const Color(0xffBFBFBF),
                 );
@@ -126,7 +134,8 @@ class FooterView extends StatelessWidget {
     final scaffoldMessenger = ScaffoldMessenger.of(context);
 
     var whatsapp = AppConstant.whatsappNumber;
-    var whatsappAndroid = Uri.parse("whatsapp://send?phone=$whatsapp&text=hello");
+    var whatsappAndroid =
+        Uri.parse("whatsapp://send?phone=$whatsapp&text=hello");
     if (await canLaunchUrl(whatsappAndroid)) {
       await launchUrl(whatsappAndroid);
     } else {
