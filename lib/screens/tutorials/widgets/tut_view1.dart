@@ -20,6 +20,7 @@ class TutView extends StatelessWidget {
             Image.asset(
               "assets/images/logo.png",
               height: 150,
+              width: 175,
             ),
             Padding(
               padding: const EdgeInsets.only(top: 8, left: 16, right: 16),
@@ -36,8 +37,7 @@ class TutView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 100),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(
-                    (MediaQuery.of(context).size.width - 16) / 2),
+                borderRadius: BorderRadius.circular((MediaQuery.of(context).size.width - 16) / 2),
                 child: Image.asset(
                   image,
                   height: MediaQuery.of(context).size.width - 16,

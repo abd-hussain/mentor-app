@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mentor_app/shared_widget/custom_text.dart';
-import 'package:mentor_app/utils/constants/constant.dart';
 
 class HeaderHomePage extends StatefulWidget {
   final Function()? refreshCallBack;
@@ -18,11 +16,9 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
       child: Row(
         children: [
           const SizedBox(width: 8),
-          const CustomText(
-            title: AppConstant.appName,
-            fontSize: 30,
-            textColor: Color(0xff444444),
-            fontWeight: FontWeight.bold,
+          Image.asset(
+            "assets/images/logo.png",
+            width: 100,
           ),
           Expanded(child: Container()),
           widget.refreshCallBack != null

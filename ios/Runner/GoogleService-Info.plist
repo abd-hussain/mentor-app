@@ -11,7 +11,7 @@
 	<key>BUNDLE_ID</key>
 	<string>com.helpera.mentorApp</string>
 	<key>PROJECT_ID</key>
-	<string>helpera</string>
+	<string>LegalzHub</string>
 	<key>STORAGE_BUCKET</key>
 	<string>helpera.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
