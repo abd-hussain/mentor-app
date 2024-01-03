@@ -87,5 +87,6 @@ dependencies {
     // implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-messaging")
     implementation("com.google.firebase:firebase-perf-ktx")
+    implementation 'com.google.android.material:material:1.6.0'
     implementation 'com.android.installreferrer:installreferrer:2.1'
 }

@@ -52,7 +52,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
               return const SizedBox(
                 child: Center(
                   child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
                   ),
                 ),
               );
