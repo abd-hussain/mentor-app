@@ -335,8 +335,11 @@ class _RegisterFaze2ScreenState extends State<RegisterFaze2Screen> {
                                 LengthLimitingTextInputFormatter(6)
                               ],
                               onChange: (text) => bloc.validateFieldsForFaze2(),
-                              onEditingComplete: () =>
-                                  FocusManager.instance.primaryFocus?.unfocus(),
+                              onEditingComplete: () {
+                                bloc.validateReferal(
+                                    bloc.referalCodeController.text);
+                                FocusManager.instance.primaryFocus?.unfocus();
+                              },
                             ),
                             ValueListenableBuilder<bool?>(
                                 valueListenable: bloc.validateReferalCode,

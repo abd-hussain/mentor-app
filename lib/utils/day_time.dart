@@ -45,6 +45,35 @@ class DayTime {
     }
   }
 
+  // List<WorkingHourFilterdModel> fixTimingOnUTC(
+  //     List<WorkingHourFilterdModel> list) {
+  //   List<WorkingHourFilterdModel> newList = [];
+  //   DateTime now = DateTime.now();
+  //   DateTime utcNow = now.toUtc();
+  //   int difference = now.difference(utcNow).inHours;
+  //   List<int> filteredList = [];
+
+  //   for (WorkingHourFilterdModel day in list) {
+  //     var dayName = day.dayName;
+  //     for (int hour in day.list) {
+  //       var newHour = hour - difference;
+  //       if (newHour < 0) {
+  //         //TODO
+  //       } else {
+  //         filteredList.add(newHour);
+  //       }
+  //     }
+  //     newList
+  //         .add(WorkingHourFilterdModel(dayName: dayName, list: filteredList));
+
+  //     // for (hour in day.list) {}
+  //     // newList.add(WorkingHourModel(list: [], dayName: ''));
+  //   }
+
+  //   //TODO
+  //   return newList;
+  // }
+
   int getHourFromTimeString(String time) {
     if (time.contains("a.m")) {
       String result = time.replaceAll(" a.m", "");
@@ -86,18 +115,6 @@ class DayTime {
       return 0;
     }
   }
-
-  // int getMinFromTimeString(String time) {
-  //   if (time.contains("a.m")) {
-  //     String result = time.replaceAll(" a.m", "");
-  //     var parts = result.split(':');
-  //     return int.parse(parts.sublist(1).join(':').trim());
-  //   } else {
-  //     String result = time.replaceAll(" p.m", "");
-  //     var parts = result.split(':');
-  //     return int.parse(parts.sublist(1).join(':').trim());
-  //   }
-  // }
 
   String convertDayToArabic(String dayName) {
     switch (dayName) {

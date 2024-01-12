@@ -21,14 +21,12 @@ class Category {
   int? id;
   String? name;
   String? icon;
-  String? description;
 
-  Category({this.id, this.name, this.icon, this.description});
+  Category({this.id, this.name, this.icon});
 
   Category.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     icon = AppConstant.imagesBaseURLForCategories + json['icon'];
     name = json['name'];
-    description = json['description'];
   }
 }

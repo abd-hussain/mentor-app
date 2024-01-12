@@ -63,7 +63,7 @@ class Register6Bloc extends Bloc<FilterService> {
   }
 
   validateEmailAPI(BuildContext context) {
-    service.validateMobileNumber(emailController.text).then((value) {
+    service.validateEmailAddress(emailController.text).then((value) {
       if (value) {
         validateEmail.value = AppLocalizations.of(context)!.emailalreadyinuse;
       } else {

@@ -36,8 +36,10 @@ class FilterService with Service {
     final response = await repository.callRequest(
       requestType: RequestType.post,
       methodName: MethodNameConstant.referalCode,
+      queryParam: {"code": code},
       postBody: ReferalCodeRequest(code: code),
     );
+
     return response["data"];
   }
 

@@ -1,14 +1,14 @@
 class MethodNameConstant {
   static const String countries = "countries";
+  static const String suffix = "suffix";
+  static const String checkMobile = "checkmobile";
+  static const String referalCode = "referalcode";
 
   // Verfied API
 
   static const String categories = "categories";
-  static const String suffix = "suffix";
-  static const String referalCode = "referalcode";
   static const String majors = "/majors";
   static const String checkEmail = "checkemial";
-  static const String checkMobile = "checkmobile";
 
   static const String login = "mentor-auth/login";
   static const String forgotPassword = "mentor-auth/forgotpassword";
