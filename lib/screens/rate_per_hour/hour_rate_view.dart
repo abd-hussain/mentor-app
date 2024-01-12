@@ -10,7 +10,11 @@ class HourRateView extends StatefulWidget {
   final Function() onTapPlus;
   final Function() onTapMinus;
 
-  const HourRateView({super.key, required this.controller, required this.onTapPlus, required this.onTapMinus});
+  const HourRateView(
+      {super.key,
+      required this.controller,
+      required this.onTapPlus,
+      required this.onTapMinus});
 
   @override
   State<HourRateView> createState() => _HourRateViewState();
@@ -97,7 +101,8 @@ class _HourRateViewState extends State<HourRateView> {
                   child: CustomTextField(
                     controller: widget.controller,
                     hintText: AppLocalizations.of(context)!.rateperhour,
-                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(4),
                     ],

@@ -18,7 +18,8 @@ class RegisterInfoBottomSheetsUtil {
 
   RegisterInfoBottomSheetsUtil({required this.language, required this.context});
 
-  Future infoBottomSheet({required int step, required Function() openNext}) async {
+  Future infoBottomSheet(
+      {required int step, required Function() openNext}) async {
     return await showModalBottomSheet(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
@@ -33,7 +34,8 @@ class RegisterInfoBottomSheetsUtil {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (context) {
         return Padding(
-          padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
+          padding:
+              const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
           child: Wrap(
             children: [
               Row(
@@ -96,7 +98,8 @@ class RegisterInfoBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep2,
                 textColor: step >= 2 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfaze2Screen);
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerfaze2Screen);
                 },
               ),
               const SizedBox(height: 20),
@@ -105,7 +108,8 @@ class RegisterInfoBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep3,
                 textColor: step >= 3 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfaze3Screen);
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerfaze3Screen);
                 },
               ),
               const SizedBox(height: 20),
@@ -114,7 +118,8 @@ class RegisterInfoBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep4,
                 textColor: step >= 4 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfaze4Screen);
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerfaze4Screen);
                 },
               ),
               const SizedBox(height: 20),
@@ -123,7 +128,8 @@ class RegisterInfoBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep5,
                 textColor: step >= 5 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfaze5Screen);
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerfaze5Screen);
                 },
               ),
               const SizedBox(height: 20),
@@ -132,7 +138,8 @@ class RegisterInfoBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep6,
                 textColor: step >= 6 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfaze6Screen);
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerfaze6Screen);
                 },
               ),
               const SizedBox(height: 20),
@@ -141,7 +148,8 @@ class RegisterInfoBottomSheetsUtil {
                 text: AppLocalizations.of(context)!.registerstep7,
                 textColor: step >= 7 ? Colors.green : const Color(0xff444444),
                 onPress: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(RoutesConstants.registerfinalfazeScreen);
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(RoutesConstants.registerfinalfazeScreen);
                 },
               ),
               CustomButton(
@@ -159,7 +167,9 @@ class RegisterInfoBottomSheetsUtil {
     );
   }
 
-  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {Factory(() => EagerGestureRecognizer())};
+  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {
+    Factory(() => EagerGestureRecognizer())
+  };
 
   Future termsBottomSheet({required Function() openNext}) async {
     if (kIsWeb) {
@@ -187,7 +197,8 @@ class RegisterInfoBottomSheetsUtil {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         builder: (context) {
           return Padding(
-            padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
+            padding:
+                const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 20),
             child: Wrap(
               children: [
                 Row(
@@ -225,19 +236,24 @@ class RegisterInfoBottomSheetsUtil {
                   height: 300,
                   margin: const EdgeInsets.all(15.0),
                   padding: const EdgeInsets.all(3.0),
-                  decoration: BoxDecoration(border: Border.all(color: const Color(0xff444444))),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: const Color(0xff444444))),
                   child: kIsWeb
                       ? const HtmlElementView(viewType: 'terms-html')
                       : WebView(
-                          initialUrl: language == "ar" ? AppConstant.termsLinkAR : AppConstant.termsLink,
+                          initialUrl: language == "ar"
+                              ? AppConstant.termsLinkAR
+                              : AppConstant.termsLink,
                           gestureRecognizers: gestureRecognizers,
                           navigationDelegate: (NavigationRequest request) {
                             return NavigationDecision.navigate;
                           },
-                          onWebViewCreated: (WebViewController webViewController) {
+                          onWebViewCreated:
+                              (WebViewController webViewController) {
                             webViewController = webViewController;
-                            webViewController
-                                .loadUrl(language == "ar" ? AppConstant.termsLinkAR : AppConstant.termsLink);
+                            webViewController.loadUrl(language == "ar"
+                                ? AppConstant.termsLinkAR
+                                : AppConstant.termsLink);
                           },
                         ),
                 ),

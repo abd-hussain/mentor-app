@@ -23,7 +23,6 @@ import 'package:mentor_app/screens/register_screen/register_final_fase/register_
 import 'package:mentor_app/screens/report/report_screen.dart';
 import 'package:mentor_app/screens/setup_screen/setup_screen.dart';
 import 'package:mentor_app/screens/tutorials/tutorials_screen.dart';
-import 'package:mentor_app/screens/versioning/versioning_screen.dart';
 import 'package:mentor_app/screens/web_view/web_view_screen.dart';
 import 'package:mentor_app/screens/working_hours/working_hours_screen.dart';
 
@@ -57,14 +56,12 @@ class RoutesConstants {
   static const String eventDetailsScreen = 'eventDetailsScreen';
   static const String forgotPasswordConfirmationScreen =
       'forgotPasswordConfirmationScreen';
-  static const String versioningScreen = 'versioningScreen';
   static const String insideCallScreen = 'InsideCallScreen';
 }
 
 final Map<String, Widget> routes = {
   RoutesConstants.initialRoute: const SetupScreen(),
   RoutesConstants.loginScreen: const LoginScreen(),
-  RoutesConstants.versioningScreen: const VersioningScreen(),
   RoutesConstants.mainContainer: const MainContainer(),
   RoutesConstants.homeScreen: const HomeScreen(),
   RoutesConstants.callScreen: const CallScreen(),

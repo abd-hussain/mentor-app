@@ -47,7 +47,8 @@ class IbanView extends StatelessWidget {
                 onChange: (text) {
                   onChange(text);
                 },
-                onEditingComplete: () => FocusManager.instance.primaryFocus?.unfocus(),
+                onEditingComplete: () =>
+                    FocusManager.instance.primaryFocus?.unfocus(),
               ),
               const SizedBox(height: 10),
             ],

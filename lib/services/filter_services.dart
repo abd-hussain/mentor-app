@@ -19,7 +19,6 @@ class FilterService with Service {
   Future<CountriesModel> countries() async {
     final response = await repository.callRequest(
       requestType: RequestType.get,
-      queryParam: {"limit": 100},
       methodName: MethodNameConstant.countries,
     );
     return CountriesModel.fromJson(response);

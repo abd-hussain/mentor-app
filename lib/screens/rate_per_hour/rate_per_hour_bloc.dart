@@ -4,7 +4,8 @@ import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/mixins.dart';
 
 class RatePerHourBloc extends Bloc<MentorSettingsService> {
-  ValueNotifier<LoadingStatus> loadingStatusNotifier = ValueNotifier<LoadingStatus>(LoadingStatus.idle);
+  ValueNotifier<LoadingStatus> loadingStatusNotifier =
+      ValueNotifier<LoadingStatus>(LoadingStatus.idle);
   ValueNotifier<bool> enableSaveButton = ValueNotifier<bool>(false);
 
   TextEditingController ratePerHourController = TextEditingController();
@@ -25,11 +26,13 @@ class RatePerHourBloc extends Bloc<MentorSettingsService> {
   }
 
   Future<void> changeRateRequest() async {
-    return service.updateHourRate(newRate: ratePerHourController.text, iban: ibanController.text);
+    return service.updateHourRate(
+        newRate: ratePerHourController.text, iban: ibanController.text);
   }
 
   validateFieldsForFaze5() {
-    if (ratePerHourController.text.isNotEmpty && ibanController.text.isNotEmpty) {
+    if (ratePerHourController.text.isNotEmpty &&
+        ibanController.text.isNotEmpty) {
       enableSaveButton.value = true;
     } else {
       enableSaveButton.value = false;

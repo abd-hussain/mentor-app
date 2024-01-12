@@ -57,7 +57,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 TitleView(title: AppLocalizations.of(context)!.support),
                 CollectionListOptionView(
                     listOfOptions: bloc.listOfSupportOptions(context),
-                    containerHight: 200),
+                    containerHight: 125),
                 const SizedBox(height: 8),
                 const AddMobBanner(),
                 FooterView(

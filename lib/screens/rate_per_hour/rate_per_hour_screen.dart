@@ -50,7 +50,8 @@ class _RatePerHourScreenState extends State<RatePerHourScreen> {
                   : SingleChildScrollView(
                       child: Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
+                          padding: const EdgeInsets.only(
+                              top: 20, left: 16, right: 16),
                           child: Column(
                             children: [
                               HourRateView(
@@ -71,7 +72,9 @@ class _RatePerHourScreenState extends State<RatePerHourScreen> {
                                     return CustomButton(
                                         enableButton: snapshot,
                                         onTap: () {
-                                          bloc.changeRateRequest().whenComplete(() {
+                                          bloc
+                                              .changeRateRequest()
+                                              .whenComplete(() {
                                             Navigator.of(context).pop();
                                           });
                                         });

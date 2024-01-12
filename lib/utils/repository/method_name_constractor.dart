@@ -1,5 +1,8 @@
 class MethodNameConstant {
   static const String countries = "countries";
+
+  // Verfied API
+
   static const String categories = "categories";
   static const String suffix = "suffix";
   static const String referalCode = "referalcode";
@@ -34,7 +37,6 @@ class MethodNameConstant {
   static const String home = "mentor-home/";
 
   static const String uploadContactList = "settings/leads";
-  static const String versions = "settings/versions";
 
   static const String auth = "client-auth";
   static const String authDebuging = "client-auth-debug";
