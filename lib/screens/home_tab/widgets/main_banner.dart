@@ -4,7 +4,7 @@ import 'package:mentor_app/models/https/home_response.dart';
 import 'package:mentor_app/utils/constants/constant.dart';
 
 class MainBannerHomePage extends StatelessWidget {
-  final List<MainBanner> bannerList;
+  final List<MainBannerData> bannerList;
 
   const MainBannerHomePage({required this.bannerList, super.key});
 
@@ -17,7 +17,7 @@ class MainBannerHomePage extends StatelessWidget {
     );
   }
 
-  List<Widget> _listOfBanners(List<MainBanner> commingList) {
+  List<Widget> _listOfBanners(List<MainBannerData> commingList) {
     List<Widget> list = [];
     for (var item in commingList) {
       list.add(_banner(obj: item));
@@ -25,7 +25,7 @@ class MainBannerHomePage extends StatelessWidget {
     return list;
   }
 
-  Widget _banner({required MainBanner obj}) {
+  Widget _banner({required MainBannerData obj}) {
     return Container(
       decoration: BoxDecoration(
         boxShadow: [

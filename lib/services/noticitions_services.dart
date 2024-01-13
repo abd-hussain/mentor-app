@@ -8,6 +8,7 @@ class NotificationsService with Service {
     final response = await repository.callRequest(
       requestType: RequestType.get,
       methodName: MethodNameConstant.notifications,
+      queryParam: {"userType": "mentor"},
     );
     return NotificationsResponse.fromJson(response);
   }

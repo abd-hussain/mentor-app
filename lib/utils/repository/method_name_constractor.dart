@@ -9,10 +9,11 @@ class MethodNameConstant {
   static const String checkEmail = "checkemial";
   static const String register = "mentor/register";
   static const String login = "mentor-auth/";
+  static const String forgotPassword = "mentor-settings/forgotpassword";
+  static const String home = "mentor-home/";
+  static const String notifications = "notifications/";
 
   // Verfied API
-
-  static const String forgotPassword = "mentor-auth/forgotpassword";
 
   static const String mentors = "mentor-list/";
   static const String mentorAppointments = "mentor-appointment/";
@@ -31,10 +32,6 @@ class MethodNameConstant {
 
   static const String loyalityRules = "loyality/rules";
   static const String loyalityPoints = "loyality/";
-
-  static const String notifications = "notifications/mentor";
-
-  static const String home = "mentor-home/";
 
   static const String uploadContactList = "settings/leads";
 

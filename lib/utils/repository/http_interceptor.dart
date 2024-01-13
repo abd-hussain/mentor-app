@@ -52,6 +52,7 @@ class HttpInterceptor extends InterceptorsWrapper {
       case 201:
         return true;
       case 403:
+      case 404:
         logErrorMessageCrashlytics(
           error: response.statusCode,
           message: "response.data ${response.data.toString()}",

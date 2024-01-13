@@ -166,6 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                                   DatabaseFieldConstant
                                                                       .biometricStatus) ==
                                                               'true'
+                                                          // ignore: use_build_context_synchronously
                                                           ? await bloc
                                                               .tryToAuthintecateUserByBiometric(
                                                                   context)

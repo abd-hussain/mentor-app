@@ -46,16 +46,15 @@ class ForgotPasswordBloc extends Bloc<AuthService> {
 
   void doForgotPasswordCall() async {
     loadingStatusNotifier.value = LoadingStatus.inprogress;
-    final ForgotPasswordRequest data =
-        ForgotPasswordRequest(email: emailFieldController.text);
-
     try {
-      await service.forgotPassword(data: data);
+      await service.forgotPassword(
+          data: ForgotPasswordRequest(email: emailFieldController.text));
       loadingStatusNotifier.value = LoadingStatus.finish;
       _openConfirmScreen(maincontext!);
-    } on DioException {
-      errorMessage.value = AppLocalizations.of(maincontext!)!.wrongemail;
+    } on DioException catch (_) {
+      // final error = e.error as HttpException;
       loadingStatusNotifier.value = LoadingStatus.finish;
+      errorMessage.value = AppLocalizations.of(maincontext!)!.wrongemail;
     }
   }
 

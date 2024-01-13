@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FutureBuilder<List<MainBanner>?>(
+                FutureBuilder<List<MainBannerData>?>(
                     initialData: const [],
                     future: bloc.getHome(),
                     builder: (context, snapshot) {

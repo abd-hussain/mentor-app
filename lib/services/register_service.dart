@@ -8,7 +8,6 @@ import 'package:mentor_app/utils/repository/method_name_constractor.dart';
 class RegisterService with Service {
   Future<dynamic> callRegister({required Register data}) async {
     FormData formData = FormData();
-    //TODO: regestration not working on android
 
     formData.fields.add(MapEntry("suffixe_name", data.suffixeName));
     formData.fields.add(MapEntry("first_name", data.firstName));

@@ -10,10 +10,10 @@ import 'package:mentor_app/utils/mixins.dart';
 class HomeBloc extends Bloc<HomeService> {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
 
-  Future<List<MainBanner>?> getHome() async {
+  Future<List<MainBannerData>?> getHome() async {
     final value = await service.getHome();
     if (value.data != null) {
-      return value.data!.mainBanner ?? [];
+      return value.data ?? [];
     } else {
       return [];
     }

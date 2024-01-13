@@ -1,38 +1,27 @@
 class HomeResponse {
-  HomeResponseData? data;
+  List<MainBannerData>? data;
   String? message;
 
   HomeResponse({this.data, this.message});
 
   HomeResponse.fromJson(Map<String, dynamic> json) {
-    data =
-        json['data'] != null ? HomeResponseData.fromJson(json['data']) : null;
+    if (json['data'] != null) {
+      data = <MainBannerData>[];
+      json['data'].forEach((v) {
+        data!.add(MainBannerData.fromJson(v));
+      });
+    }
     message = json['message'];
   }
 }
 
-class HomeResponseData {
-  List<MainBanner>? mainBanner;
-
-  HomeResponseData({this.mainBanner});
-
-  HomeResponseData.fromJson(Map<String, dynamic> json) {
-    if (json['main_banner'] != null) {
-      mainBanner = <MainBanner>[];
-      json['main_banner'].forEach((v) {
-        mainBanner!.add(MainBanner.fromJson(v));
-      });
-    }
-  }
-}
-
-class MainBanner {
+class MainBannerData {
   String? image;
   String? actionType;
 
-  MainBanner({this.image, this.actionType});
+  MainBannerData({this.image, this.actionType});
 
-  MainBanner.fromJson(Map<String, dynamic> json) {
+  MainBannerData.fromJson(Map<String, dynamic> json) {
     image = json['image'];
     actionType = json['action_type'];
   }
