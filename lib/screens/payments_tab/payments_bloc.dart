@@ -7,8 +7,7 @@ import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/mixins.dart';
 
 class PaymentsBloc extends Bloc<PaymentService> {
-  final ValueNotifier<List<PaymentResponseData>> paymentListNotifier =
-      ValueNotifier<List<PaymentResponseData>>([]);
+  final ValueNotifier<List<PaymentResponseData>> paymentListNotifier = ValueNotifier<List<PaymentResponseData>>([]);
   double pendingTotalAmount = 0;
   double recivedTotalAmount = 0;
   String currency = "";
@@ -20,17 +19,23 @@ class PaymentsBloc extends Bloc<PaymentService> {
         pendingTotalAmount = 0;
         recivedTotalAmount = 0;
         for (PaymentResponseData item in value.data!) {
-          if (item.status == 1) {
-            pendingTotalAmount = pendingTotalAmount + item.amount!;
-          } else {
-            recivedTotalAmount = recivedTotalAmount + item.amount!;
+          if (item.appointmentIsFree == false) {
+            if (item.paymentStatus == 1) {
+              if (item.appointmentDiscountId != null) {
+                pendingTotalAmount = pendingTotalAmount + item.appointmentDiscountedPrice!;
+              } else {
+                pendingTotalAmount = pendingTotalAmount + item.appointmentPrice!;
+              }
+            } else {
+              if (item.appointmentDiscountId != null) {
+                recivedTotalAmount = recivedTotalAmount + item.appointmentDiscountedPrice!;
+              } else {
+                recivedTotalAmount = recivedTotalAmount + item.appointmentPrice!;
+              }
+            }
           }
 
-          currency = item.currencyEnglish ?? "";
-
-          if (box.get(DatabaseFieldConstant.language) != "en") {
-            currency = item.currencyArabic ?? "";
-          }
+          currency = item.currency ?? "";
         }
 
         paymentListNotifier.value = value.data!;
@@ -39,8 +44,7 @@ class PaymentsBloc extends Bloc<PaymentService> {
   }
 
   Future<dynamic> reportPayment(int id, String message) async {
-    PaymentReportRequest data =
-        PaymentReportRequest(message: message, paymentId: id);
+    PaymentReportRequest data = PaymentReportRequest(message: message, paymentId: id);
     return service.reportPayment(data);
   }
 

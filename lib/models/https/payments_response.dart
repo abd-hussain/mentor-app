@@ -20,37 +20,94 @@ class PaymentResponse {
 class PaymentResponseData with ModelChecker {
   int? id;
   int? mentorId;
-  int? status;
-  double? amount;
-  int? durations;
-  String? currencyArabic;
-  String? currencyEnglish;
-  String? descriptions;
+  int? appointmentId;
+  int? paymentStatus;
   String? createdAt;
-  String? reportMessage;
+  String? paymentReportedMessage;
+  int? clientId;
+  int? appointmentType;
+  String? appointmentDateFrom;
+  String? appointmentDateTo;
+  int? appointmentState;
+  bool? appointmentIsFree;
+  double? appointmentPrice;
+  double? appointmentDiscountedPrice;
+  String? currency;
+  double? mentorHourRate;
+  String? noteFromClient;
+  String? noteFromMentor;
+  int? appointmentDiscountId;
+  String? clientFirstName;
+  String? clientLastName;
+  String? clientProfileImg;
+  int? clientCountryId;
+  String? clientFlagImg;
+  String? mentorSuffixeName;
+  String? mentorFirstName;
+  String? mentorLastName;
+  String? mentorIban;
+  String? mentorProfileImg;
 
   PaymentResponseData(
       {this.id,
       this.mentorId,
-      this.status,
-      this.amount,
-      this.durations,
-      this.currencyArabic,
-      this.currencyEnglish,
-      this.descriptions,
+      this.appointmentId,
+      this.paymentStatus,
       this.createdAt,
-      this.reportMessage});
+      this.paymentReportedMessage,
+      this.clientId,
+      this.appointmentType,
+      this.appointmentDateFrom,
+      this.appointmentDateTo,
+      this.appointmentState,
+      this.appointmentIsFree,
+      this.appointmentPrice,
+      this.appointmentDiscountedPrice,
+      this.currency,
+      this.mentorHourRate,
+      this.noteFromClient,
+      this.noteFromMentor,
+      this.appointmentDiscountId,
+      this.clientFirstName,
+      this.clientLastName,
+      this.clientProfileImg,
+      this.clientCountryId,
+      this.clientFlagImg,
+      this.mentorSuffixeName,
+      this.mentorFirstName,
+      this.mentorLastName,
+      this.mentorIban,
+      this.mentorProfileImg});
 
   PaymentResponseData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     mentorId = json['mentor_id'];
-    status = json['status'];
-    amount = convertToDouble(json['amount']);
-    durations = json['durations'];
-    currencyArabic = json['currency_arabic'];
-    currencyEnglish = json['currency_english'];
-    descriptions = json['descriptions'];
+    appointmentId = json['appointment_id'];
+    paymentStatus = json['payment_status'];
     createdAt = json['created_at'];
-    reportMessage = json['report_message'];
+    paymentReportedMessage = json['payment_reported_message'];
+    clientId = json['client_id'];
+    appointmentType = json['appointment_type'];
+    appointmentDateFrom = json['appointment_date_from'];
+    appointmentDateTo = json['appointment_date_to'];
+    appointmentState = json['appointment_state'];
+    appointmentIsFree = json['appointment_is_free'];
+    appointmentPrice = convertToDouble(json['appointment_price']);
+    appointmentDiscountedPrice = convertToDouble(json['appointment_discounted_price']);
+    currency = json['currency'];
+    mentorHourRate = convertToDouble(json['mentor_hour_rate']);
+    noteFromClient = json['note_from_client'];
+    noteFromMentor = json['note_from_mentor'];
+    appointmentDiscountId = json['appointment_discount_id'];
+    clientFirstName = json['client_first_name'];
+    clientLastName = json['client_last_name'];
+    clientProfileImg = json['client_profile_img'];
+    clientCountryId = json['client_country_id'];
+    clientFlagImg = json['client_flag_img'];
+    mentorSuffixeName = json['mentor_suffixe_name'];
+    mentorFirstName = json['mentor_first_name'];
+    mentorLastName = json['mentor_last_name'];
+    mentorIban = json['mentor_iban'];
+    mentorProfileImg = json['mentor_profile_img'];
   }
 }

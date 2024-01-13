@@ -12,6 +12,7 @@ class MethodNameConstant {
   static const String forgotPassword = "mentor-settings/forgotpassword";
   static const String home = "mentor-home/";
   static const String notifications = "notifications/";
+  static const String payments = "mentor-payments/";
 
   // Verfied API
 
@@ -42,6 +43,5 @@ class MethodNameConstant {
   static const String accountInfo = "mentor-account/info";
   static const String accountExperiance = "mentor-account/exp-info";
 
-  static const String payments = "mentor-payments/";
   static const String paymentReport = "mentor-payments/report";
 }
