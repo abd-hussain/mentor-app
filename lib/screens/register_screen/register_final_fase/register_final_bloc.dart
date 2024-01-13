@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mentor_app/models/https/register_model.dart';
+import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/services/register_service.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
+import 'package:mentor_app/utils/day_time.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/gender_format.dart';
 import 'package:mentor_app/utils/mixins.dart';
@@ -20,6 +22,19 @@ class RegisterFinalBloc extends Bloc<RegisterService> {
       gender = GenderFormat().convertStringToIndex(
           context, box.get(TempFieldToRegistrtConstant.gender));
     }
+
+    List<WorkingHourUTCModel> workingHoursUTC = DayTime().prepareTimingUTC(
+      workingHoursSaturday:
+          box.get(TempFieldToRegistrtConstant.saturdayWH) ?? [],
+      workingHoursSunday: box.get(TempFieldToRegistrtConstant.sundayWH) ?? [],
+      workingHoursMonday: box.get(TempFieldToRegistrtConstant.mondayWH) ?? [],
+      workingHoursTuesday: box.get(TempFieldToRegistrtConstant.tuesdayWH) ?? [],
+      workingHoursWednesday:
+          box.get(TempFieldToRegistrtConstant.wednesdayWH) ?? [],
+      workingHoursThursday:
+          box.get(TempFieldToRegistrtConstant.thursdayWH) ?? [],
+      workingHoursFriday: box.get(TempFieldToRegistrtConstant.fridayWH) ?? [],
+    );
 
     final model = Register(
       appVersion: version,
@@ -45,17 +60,35 @@ class RegisterFinalBloc extends Bloc<RegisterService> {
       cert1: box.get(TempFieldToRegistrtConstant.certificates1),
       cert2: box.get(TempFieldToRegistrtConstant.certificates2),
       cert3: box.get(TempFieldToRegistrtConstant.certificates3),
-      pushToken: box.get(DatabaseFieldConstant.pushNotificationToken) ?? "",
-      workingHoursSaturday:
-          box.get(TempFieldToRegistrtConstant.saturdayWH) ?? [],
-      workingHoursSunday: box.get(TempFieldToRegistrtConstant.sundayWH) ?? [],
-      workingHoursMonday: box.get(TempFieldToRegistrtConstant.mondayWH) ?? [],
-      workingHoursTuesday: box.get(TempFieldToRegistrtConstant.tuesdayWH) ?? [],
-      workingHoursWednesday:
-          box.get(TempFieldToRegistrtConstant.wednesdayWH) ?? [],
-      workingHoursThursday:
-          box.get(TempFieldToRegistrtConstant.thursdayWH) ?? [],
-      workingHoursFriday: box.get(TempFieldToRegistrtConstant.fridayWH) ?? [],
+      pushToken: box.get(DatabaseFieldConstant.pushNotificationToken),
+      workingHoursSaturday: workingHoursUTC
+          .where((element) => element.dayName == DayNameEnum.saturday)
+          .first
+          .list,
+      workingHoursSunday: workingHoursUTC
+          .where((element) => element.dayName == DayNameEnum.sunday)
+          .first
+          .list,
+      workingHoursMonday: workingHoursUTC
+          .where((element) => element.dayName == DayNameEnum.monday)
+          .first
+          .list,
+      workingHoursTuesday: workingHoursUTC
+          .where((element) => element.dayName == DayNameEnum.tuesday)
+          .first
+          .list,
+      workingHoursWednesday: workingHoursUTC
+          .where((element) => element.dayName == DayNameEnum.wednesday)
+          .first
+          .list,
+      workingHoursThursday: workingHoursUTC
+          .where((element) => element.dayName == DayNameEnum.thursday)
+          .first
+          .list,
+      workingHoursFriday: workingHoursUTC
+          .where((element) => element.dayName == DayNameEnum.friday)
+          .first
+          .list,
       experienceSince:
           box.get(TempFieldToRegistrtConstant.experianceSince) ?? "",
       majors: box.get(TempFieldToRegistrtConstant.majors) ?? [],

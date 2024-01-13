@@ -8,57 +8,73 @@ import 'package:mentor_app/utils/repository/method_name_constractor.dart';
 class RegisterService with Service {
   Future<dynamic> callRegister({required Register data}) async {
     FormData formData = FormData();
+    //TODO: regestration not working on android
 
     formData.fields.add(MapEntry("suffixe_name", data.suffixeName));
     formData.fields.add(MapEntry("first_name", data.firstName));
     formData.fields.add(MapEntry("last_name", data.lastName));
-    formData.fields.add(MapEntry("email", data.email));
+    formData.fields.add(MapEntry("gender", data.gender.toString()));
     formData.fields.add(MapEntry("password", data.password));
     formData.fields.add(MapEntry("date_of_birth", data.dateOfBirth));
-    formData.fields.add(MapEntry("gender", data.gender.toString()));
     formData.fields.add(MapEntry("bio", data.bio));
     formData.fields.add(MapEntry("mobile_number", data.mobileNumber));
-    formData.fields.add(MapEntry("push_token", data.pushToken));
+    formData.fields.add(MapEntry("email", data.email));
+
+    if (data.pushToken != "" && data.pushToken != null) {
+      formData.fields.add(MapEntry("push_token", data.pushToken!));
+    }
+
+    if (data.referalCode != "" && data.referalCode != null) {
+      formData.fields.add(MapEntry("referral_code", data.referalCode ?? ""));
+    }
+
     formData.fields.add(MapEntry("app_version", data.appVersion));
+    formData.fields.add(MapEntry("experience_since", data.experienceSince));
     formData.fields.add(MapEntry("category_id", data.categoryId));
     formData.fields.add(MapEntry("hour_rate", data.hourRate));
     formData.fields.add(MapEntry("iban", data.iban));
-    formData.fields.add(MapEntry("experience_since", data.experienceSince));
     formData.fields.add(MapEntry("country_id", data.countryId));
-    formData.fields.add(MapEntry("referal_code", data.referalCode ?? ""));
+
     for (var x1 in data.majors) {
       formData.fields.add(MapEntry("majors", x1.toString()));
     }
+
     if (data.workingHoursSaturday != null) {
       for (var x1 in data.workingHoursSaturday!) {
         formData.fields.add(MapEntry("working_hours_saturday", x1.toString()));
       }
     }
+
     if (data.workingHoursSunday != null) {
       for (var x1 in data.workingHoursSunday!) {
         formData.fields.add(MapEntry("working_hours_sunday", x1.toString()));
       }
     }
+
     if (data.workingHoursMonday != null) {
       for (var x1 in data.workingHoursMonday!) {
         formData.fields.add(MapEntry("working_hours_monday", x1.toString()));
       }
     }
+
     if (data.workingHoursTuesday != null) {
       for (var x1 in data.workingHoursTuesday!) {
         formData.fields.add(MapEntry("working_hours_tuesday", x1.toString()));
       }
     }
+
     if (data.workingHoursWednesday != null) {
       for (var x1 in data.workingHoursWednesday!) {
         formData.fields.add(MapEntry("working_hours_wednesday", x1.toString()));
       }
     }
+
     if (data.workingHoursThursday != null) {
       for (var x1 in data.workingHoursThursday!) {
         formData.fields.add(MapEntry("working_hours_thursday", x1.toString()));
       }
     }
+
     if (data.workingHoursFriday != null) {
       for (var x1 in data.workingHoursFriday!) {
         formData.fields.add(MapEntry("working_hours_friday", x1.toString()));

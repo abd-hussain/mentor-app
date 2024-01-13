@@ -165,6 +165,8 @@
     "selectCategory" : "اختر التصنيف",
     "forgotpassword" : "نسيت كلمة المرور ؟",
     "wrongemailorpassword" : "خطا بالبريد الالكتروني او كلمة المرور",
+    "userblocked" : "حسابك محظور ولا يمكنك استخدام التطبيق",
+    "userstillunderreview" : "حسابك لا يزال قيد المراجعة، وسوف نتصل بك قريبا",
     "emailformatnotvalid" : "شكل البريد الالكتروني غير صالح",
     "or" : "او",
     "loginbiometric" : "الدخول باستخدام المستشعر",

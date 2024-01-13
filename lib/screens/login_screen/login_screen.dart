@@ -114,6 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             return CustomText(
                                               title: snapshot,
                                               fontSize: 14,
+                                              maxLins: 2,
                                               textAlign: TextAlign.center,
                                               textColor: Colors.red,
                                             );

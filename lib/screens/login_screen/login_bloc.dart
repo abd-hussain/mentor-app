@@ -196,10 +196,21 @@ class LoginBloc extends Bloc<AuthService> {
           userName: userName, password: password, token: info["data"]);
       loadingStatusNotifier.value = LoadingStatus.finish;
       _openMainScreen(maincontext!);
-    } on DioException {
-      errorMessage.value =
-          AppLocalizations.of(maincontext!)!.wrongemailorpassword;
+    } on DioException catch (e) {
+      final error = e.error as HttpException;
       loadingStatusNotifier.value = LoadingStatus.finish;
+
+      if (error.message.toString() == "Invalid Credentials") {
+        errorMessage.value =
+            AppLocalizations.of(maincontext!)!.wrongemailorpassword;
+      } else if (error.message.toString() == "User Blocked") {
+        errorMessage.value = AppLocalizations.of(maincontext!)!.userblocked;
+      } else if (error.message.toString() == "User Under Review") {
+        errorMessage.value =
+            AppLocalizations.of(maincontext!)!.userstillunderreview;
+      } else {
+        errorMessage.value = error.message.toString();
+      }
     }
   }
 

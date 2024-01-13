@@ -76,13 +76,14 @@ class _RegisterFinalScreenState extends State<RegisterFinalScreen> {
                               await bloc
                                   .handleCreatingTheProfile(context)
                                   .then((value) async {
-                                await bloc.clearRegistrationData();
                                 bloc.loadingStatus.value = LoadingStatus.finish;
                                 scaffoldMessenger.showSnackBar(
                                   SnackBar(
                                       content: Text(localization
                                           .accountcreatedsuccessfully)),
                                 );
+                                await bloc.clearRegistrationData();
+
                                 navigation.pushReplacement(
                                     MaterialPageRoute(builder: (ctx) {
                                   return const LoginScreen();

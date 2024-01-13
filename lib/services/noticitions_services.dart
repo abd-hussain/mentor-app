@@ -16,7 +16,7 @@ class NotificationsService with Service {
     final response = await repository.callRequest(
       requestType: RequestType.put,
       methodName: MethodNameConstant.registerToken,
-      queryParam: {"token": token},
+      queryParam: {"token": token, "userType": "mentor"},
     );
     return NotificationsResponse.fromJson(response);
   }

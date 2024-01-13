@@ -23,7 +23,7 @@ class Register {
   final String iban;
   final String password;
   final String appVersion;
-  final String pushToken;
+  final String? pushToken;
   final String experienceSince;
   final String? profileImg;
   final String? idImg;
@@ -57,7 +57,7 @@ class Register {
       required this.iban,
       required this.password,
       required this.appVersion,
-      required this.pushToken,
+      this.pushToken,
       required this.experienceSince,
       this.profileImg,
       this.idImg,

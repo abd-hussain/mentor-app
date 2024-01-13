@@ -3,14 +3,15 @@ class MethodNameConstant {
   static const String suffix = "suffix";
   static const String checkMobile = "checkmobile";
   static const String referalCode = "referalcode";
-
-  // Verfied API
-
+  static const String registerToken = "notifications/register-token";
   static const String categories = "categories";
   static const String majors = "/majors";
   static const String checkEmail = "checkemial";
+  static const String register = "mentor/register";
+  static const String login = "mentor-auth/";
 
-  static const String login = "mentor-auth/login";
+  // Verfied API
+
   static const String forgotPassword = "mentor-auth/forgotpassword";
 
   static const String mentors = "mentor-list/";
@@ -32,15 +33,11 @@ class MethodNameConstant {
   static const String loyalityPoints = "loyality/";
 
   static const String notifications = "notifications/mentor";
-  static const String registerToken = "notifications/mentor-register-token";
 
   static const String home = "mentor-home/";
 
   static const String uploadContactList = "settings/leads";
 
-  static const String auth = "client-auth";
-  static const String authDebuging = "client-auth-debug";
-  static const String authVerify = "client-auth-verify";
   static const String account = "client-account/";
   static const String reportIssue = "report/issue";
   static const String reportSuggestion = "report/suggestion";
@@ -50,6 +47,4 @@ class MethodNameConstant {
 
   static const String payments = "mentor-payments/";
   static const String paymentReport = "mentor-payments/report";
-
-  static const String register = "mentor/register";
 }

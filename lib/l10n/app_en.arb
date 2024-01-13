@@ -165,6 +165,8 @@
     "selectCategory" : "Select Category",
     "forgotpassword" : "Forgot Password ?",
     "wrongemailorpassword" : "Wrong Email or Password",
+    "userblocked" : "Your account is Blocked and you can't use the application.",
+    "userstillunderreview" : "Your account still under review, we will contact you soon",
     "emailformatnotvalid" : "Email Format not valid",
     "or" : "OR",
     "loginbiometric" : "Login Biometric",

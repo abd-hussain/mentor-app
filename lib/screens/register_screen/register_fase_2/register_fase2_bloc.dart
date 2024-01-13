@@ -58,6 +58,7 @@ class Register2Bloc extends Bloc<FilterService> {
         lastNameController.text.isNotEmpty &&
         genderController.text.isNotEmpty &&
         countryController.text.isNotEmpty &&
+        selectedDate != null &&
         validatePhoneNumber &&
         mobileNumberErrorMessage.value == false &&
         mobileController.isNotEmpty &&

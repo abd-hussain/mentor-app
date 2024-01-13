@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:mentor_app/models/working_hours.dart';
 
 class DayTime {
   String gettheCorrentImageDependOnCurrentTime() {
@@ -45,34 +46,66 @@ class DayTime {
     }
   }
 
-  // List<WorkingHourFilterdModel> fixTimingOnUTC(
-  //     List<WorkingHourFilterdModel> list) {
-  //   List<WorkingHourFilterdModel> newList = [];
-  //   DateTime now = DateTime.now();
-  //   DateTime utcNow = now.toUtc();
-  //   int difference = now.difference(utcNow).inHours;
-  //   List<int> filteredList = [];
+  List<WorkingHourUTCModel> prepareTimingUTC(
+      {required List<int> workingHoursSaturday,
+      required List<int> workingHoursSunday,
+      required List<int> workingHoursMonday,
+      required List<int> workingHoursTuesday,
+      required List<int> workingHoursWednesday,
+      required List<int> workingHoursThursday,
+      required List<int> workingHoursFriday}) {
+    int offset = DateTime.now().timeZoneOffset.inHours;
+    List<WorkingHourUTCModel> returnedList = [];
 
-  //   for (WorkingHourFilterdModel day in list) {
-  //     var dayName = day.dayName;
-  //     for (int hour in day.list) {
-  //       var newHour = hour - difference;
-  //       if (newHour < 0) {
-  //         //TODO
-  //       } else {
-  //         filteredList.add(newHour);
-  //       }
-  //     }
-  //     newList
-  //         .add(WorkingHourFilterdModel(dayName: dayName, list: filteredList));
+    // Map of working hours for each day
+    var workingHoursMap = {
+      DayNameEnum.saturday: workingHoursSaturday,
+      DayNameEnum.sunday: workingHoursSunday,
+      DayNameEnum.monday: workingHoursMonday,
+      DayNameEnum.tuesday: workingHoursTuesday,
+      DayNameEnum.wednesday: workingHoursWednesday,
+      DayNameEnum.thursday: workingHoursThursday,
+      DayNameEnum.friday: workingHoursFriday,
+    };
 
-  //     // for (hour in day.list) {}
-  //     // newList.add(WorkingHourModel(list: [], dayName: ''));
-  //   }
+    DayNameEnum previousDay =
+        DayNameEnum.friday; // Start with Friday as the previous day of Saturday
 
-  //   //TODO
-  //   return newList;
-  // }
+    for (var entry in workingHoursMap.entries) {
+      var day = entry.key;
+      var hours = entry.value;
+      var previousDayHours = <int>[];
+
+      if (hours.isEmpty) {
+        returnedList.add(WorkingHourUTCModel(dayName: day, list: []));
+      } else {
+        var editedWorkingHour = <int>[];
+        for (var hour in hours) {
+          var editedHour = hour - offset;
+          if (editedHour < 0) {
+            previousDayHours.add(24 + editedHour);
+          } else {
+            editedWorkingHour.add(editedHour);
+          }
+        }
+        returnedList
+            .add(WorkingHourUTCModel(dayName: day, list: editedWorkingHour));
+      }
+
+      // Add hours to the previous day if needed
+      if (previousDayHours.isNotEmpty) {
+        var previousDayModel = returnedList.firstWhere(
+          (element) => element.dayName == previousDay,
+          orElse: () => WorkingHourUTCModel(dayName: previousDay, list: []),
+        );
+        previousDayModel.list.addAll(previousDayHours);
+      }
+
+      previousDay = day; // Update the previous day
+    }
+
+    return returnedList;
+  }
 
   int getHourFromTimeString(String time) {
     if (time.contains("a.m")) {
