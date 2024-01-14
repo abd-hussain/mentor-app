@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
-import 'package:mentor_app/models/https/calender_model.dart';
+import 'package:mentor_app/models/https/appointment.dart';
 import 'package:mentor_app/screens/calender_tab/widgets/client_info_view.dart';
 import 'package:mentor_app/screens/calender_tab/widgets/price_view.dart';
 import 'package:mentor_app/shared_widget/appointment_details_view.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/utils/day_time.dart';
+import 'package:mentor_app/utils/gender_format.dart';
 
 class CalenderBottomSheetsUtil {
   final BuildContext context;
-  final CalenderMeetings metingDetails;
+  final AppointmentData metingDetails;
   final String language;
 
   CalenderBottomSheetsUtil({
@@ -137,9 +138,9 @@ class CalenderBottomSheetsUtil {
                   },
                 ),
                 CustomButton(
-                  enableButton:
-                      DateTime.now().isBefore(metingDetails.fromTime) &&
-                          metingDetails.state == AppointmentsState.active,
+                  enableButton: DateTime.now()
+                          .isBefore(DateTime.parse(metingDetails.dateFrom!)) &&
+                      metingDetails.state == AppointmentsState.active,
                   padding: const EdgeInsets.all(8.0),
                   buttonColor: const Color(0xffda1100),
                   buttonTitle: AppLocalizations.of(context)!.cancelappointment,
@@ -155,43 +156,45 @@ class CalenderBottomSheetsUtil {
   }
 
   Widget meetingView() {
-    final difference =
-        metingDetails.toTime.difference(metingDetails.fromTime).inMinutes;
+    DateTime fromTime = DateTime.parse(metingDetails.dateFrom!);
+    DateTime toTime = DateTime.parse(metingDetails.dateTo!);
+
+    final difference = toTime.difference(fromTime).inMinutes;
 
     return Column(
       children: [
         ClientInfoView(
           profileImg: metingDetails.profileImg,
-          flagImage: metingDetails.countryFlag,
+          flagImage: metingDetails.flagImage,
           firstName: metingDetails.firstName,
           lastName: metingDetails.lastName,
-          gender: metingDetails.gender,
+          gender: GenderFormat()
+              .convertIndexToString(context, metingDetails.gender!),
           dateOfBirth: metingDetails.dateOfBirth,
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.eventdate,
-          desc:
-              "${metingDetails.fromTime.year}/${metingDetails.fromTime.month}/${metingDetails.fromTime.day}",
+          desc: "${fromTime.year}/${fromTime.month}/${fromTime.day}",
           padding: const EdgeInsets.all(8),
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.eventday,
           desc: language == "en"
-              ? DateFormat('EEEE').format(metingDetails.fromTime)
+              ? DateFormat('EEEE').format(fromTime)
               : DayTime().convertDayToArabic(
-                  DateFormat('EEEE').format(metingDetails.fromTime),
+                  DateFormat('EEEE').format(fromTime),
                 ),
           padding: const EdgeInsets.all(8),
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.sessiontype,
-          desc: _sessionType(metingDetails.appointmentType),
+          desc: _sessionType(metingDetails.appointmentType!),
           padding: const EdgeInsets.all(8),
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.meetingtime,
           desc: DayTime().convertingTimingWithMinToRealTime(
-              metingDetails.fromTime.hour, metingDetails.fromTime.minute),
+              fromTime.hour, fromTime.minute),
           padding: const EdgeInsets.all(8),
         ),
         AppointmentDetailsView(
@@ -201,32 +204,49 @@ class CalenderBottomSheetsUtil {
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.meetingstatus,
-          desc: _sessionStatusString(metingDetails.state),
-          descColor: metingDetails.state == AppointmentsState.active
+          desc: _sessionStatusString(_handleMeetingState(metingDetails.state!)),
+          descColor: _handleMeetingState(metingDetails.state!) ==
+                  AppointmentsState.active
               ? Colors.green
               : Colors.red,
           padding: const EdgeInsets.all(8),
         ),
         PriceView(
-            priceBeforeDiscount: metingDetails.priceBefore,
-            priceAfterDiscount: metingDetails.priceAfter),
+            priceBeforeDiscount: metingDetails.price!,
+            priceAfterDiscount: metingDetails.discountedPrice!),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.clientnote,
-          desc: metingDetails.clientnote == ""
+          desc: metingDetails.noteFromClient == ""
               ? AppLocalizations.of(context)!.noitem
-              : metingDetails.clientnote,
+              : metingDetails.noteFromClient!,
           padding: const EdgeInsets.all(8),
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.mentornote,
-          desc: metingDetails.mentornote == ""
+          desc: metingDetails.noteFromMentor == ""
               ? AppLocalizations.of(context)!.noitem
-              : metingDetails.mentornote,
+              : metingDetails.noteFromMentor!,
           padding: const EdgeInsets.all(8),
         ),
         Container(height: 1, color: const Color(0xff444444)),
       ],
     );
+  }
+
+  AppointmentsState _handleMeetingState(int index) {
+    if (index == 1) {
+      return AppointmentsState.active;
+    } else if (index == 2) {
+      return AppointmentsState.mentorCancel;
+    } else if (index == 3) {
+      return AppointmentsState.clientCancel;
+    } else if (index == 4) {
+      return AppointmentsState.clientMiss;
+    } else if (index == 5) {
+      return AppointmentsState.mentorMiss;
+    } else {
+      return AppointmentsState.completed;
+    }
   }
 
   String _sessionType(int id) {

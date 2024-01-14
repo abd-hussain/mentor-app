@@ -11,15 +11,19 @@ class RatePerHourBloc extends Bloc<MentorSettingsService> {
   TextEditingController ratePerHourController = TextEditingController();
   TextEditingController ibanController = TextEditingController();
 
+  String currency = "";
+  int freeType = 0;
+
   void getHourPerRate() async {
     loadingStatusNotifier.value = LoadingStatus.inprogress;
 
     service.getHourRate().then((value) {
       final hourRate = value.data!.hourRate ?? 0;
-      final iban = value.data!.iban;
 
       ratePerHourController.text = "$hourRate";
-      ibanController.text = "$iban";
+      ibanController.text = value.data!.iban ?? "";
+      currency = value.data!.currency ?? "";
+      freeType = value.data!.freeCall ?? 0;
 
       loadingStatusNotifier.value = LoadingStatus.finish;
     });
@@ -27,7 +31,10 @@ class RatePerHourBloc extends Bloc<MentorSettingsService> {
 
   Future<void> changeRateRequest() async {
     return service.updateHourRate(
-        newRate: ratePerHourController.text, iban: ibanController.text);
+      newRate: ratePerHourController.text,
+      iban: ibanController.text,
+      freeCall: freeType,
+    );
   }
 
   validateFieldsForFaze5() {

@@ -8,18 +8,24 @@ class MentorSettingsService with Service {
   Future<HourRateResponse> getHourRate() async {
     final response = await repository.callRequest(
       requestType: RequestType.get,
-      methodName: MethodNameConstant.mentorSettingsRate,
+      methodName: MethodNameConstant.mentorHourRate,
     );
 
     return HourRateResponse.fromJson(response);
   }
 
   Future<dynamic> updateHourRate(
-      {required String newRate, required String iban}) async {
+      {required String newRate,
+      required String iban,
+      required int freeCall}) async {
     final response = await repository.callRequest(
       requestType: RequestType.put,
-      queryParam: {"rate": newRate, "iban": iban},
-      methodName: MethodNameConstant.mentorSettingsRate,
+      queryParam: {
+        "hour_rate": newRate,
+        "iban": iban,
+        "free_type": freeCall,
+      },
+      methodName: MethodNameConstant.mentorHourRate,
     );
 
     return response;

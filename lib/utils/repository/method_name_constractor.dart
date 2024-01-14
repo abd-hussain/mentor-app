@@ -15,11 +15,15 @@ class MethodNameConstant {
   static const String payments = "mentor-payments/";
   static const String paymentReport = "mentor-payments/report";
   static const String mentorAppointments = "mentor-appointment/";
-  static const String mentorActiveAppointments = "mentor-appointment/active/";
+  static const String mentorActiveAppointments = "mentor-appointment/active";
+  static const String deleteAccount = "mentor-settings/delete";
+  static const String reportIssue = "report/issue";
+  static const String reportSuggestion = "report/suggestion";
+  static const String changePassword = "mentor-settings/change-password";
+  static const String mentorHourRate = "hour-rate/";
 
   // Verfied API
 
-  static const String mentors = "mentor-list/";
   static const String cancelAppointment = "mentor-appointment/cancel";
   static const String commentAppointment = "mentor-appointment/comment";
   static const String joinCallAppointment = "mentor-appointment/join-call";
@@ -27,20 +31,7 @@ class MethodNameConstant {
 
   static const String mentorWorkingHours = "mentor-prop/working_hours";
 
-  static const String mentorSettingsRate = "/mentor-settings/hour-rate";
-  static const String changePassword = "mentor-settings/change-password";
-  static const String deleteAccount = "mentor-settings/delete";
-
-  static const String discount = "discount/";
-
-  static const String loyalityRules = "loyality/rules";
-  static const String loyalityPoints = "loyality/";
-
   static const String uploadContactList = "settings/leads";
-
-  static const String account = "client-account/";
-  static const String reportIssue = "report/issue";
-  static const String reportSuggestion = "report/suggestion";
 
   static const String accountInfo = "mentor-account/info";
   static const String accountExperiance = "mentor-account/exp-info";

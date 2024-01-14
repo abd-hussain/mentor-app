@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_app/models/https/add_comment_appointment.dart';
-import 'package:mentor_app/models/https/calender_model.dart';
+import 'package:mentor_app/models/https/appointment.dart';
 import 'package:mentor_app/screens/calender_tab/calender_bloc.dart';
 import 'package:mentor_app/screens/calender_tab/widgets/calender_bottom_sheet.dart';
 import 'package:mentor_app/screens/calender_tab/widgets/meeting_datasource.dart';
@@ -43,7 +43,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
         ),
         const SizedBox(height: 8),
         Expanded(
-          child: ValueListenableBuilder<List<CalenderMeetings>>(
+          child: ValueListenableBuilder<List<AppointmentData>>(
               valueListenable: bloc.meetingsListNotifier,
               builder: (context, snapshot, child) {
                 return SfCalendar(
@@ -74,7 +74,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                           calendarTapDetails.targetElement ==
                               CalendarElement.appointment) {
                         final item = calendarTapDetails.appointments![0]
-                            as CalenderMeetings;
+                            as AppointmentData;
 
                         CalenderBottomSheetsUtil(
                           context: context,
@@ -87,7 +87,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                 .bookMeetingBottomSheet(
                               confirm: () {
                                 bloc
-                                    .cancelMeeting(item.meetingId)
+                                    .cancelMeeting(item.id!)
                                     .whenComplete(() async {
                                   bloc.getMentorAppointments(context);
                                   setState(() {});
@@ -102,10 +102,10 @@ class _CalenderScreenState extends State<CalenderScreen> {
                               language:
                                   bloc.box.get(DatabaseFieldConstant.language),
                             ).showAddEditNoteDialog(
-                                note: item.mentornote,
+                                note: item.noteFromMentor ?? "",
                                 confirm: (note) {
                                   var body = AddCommentToAppointment(
-                                      id: item.meetingId, comment: note);
+                                      id: item.id!, comment: note);
                                   bloc.addNote(body).whenComplete(() async {
                                     bloc.getMentorAppointments(context);
                                     setState(() {});

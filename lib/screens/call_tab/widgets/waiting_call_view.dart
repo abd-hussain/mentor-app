@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/models/https/active_appointment.dart';
-import 'package:mentor_app/models/https/calender_model.dart';
+import 'package:mentor_app/models/https/appointment.dart';
 import 'package:mentor_app/screens/calender_tab/widgets/client_info_view.dart';
 import 'package:mentor_app/shared_widget/appointment_details_view.dart';
 import 'package:mentor_app/shared_widget/cancel_booking_bottom_sheet.dart';

@@ -12,32 +12,21 @@ class HourRateResponse {
         : null;
     message = json['message'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    data['message'] = message;
-    return data;
-  }
 }
 
 class HourRateResponseData with ModelChecker {
   double? hourRate;
   String? iban;
+  String? currency;
+  int? freeCall;
 
-  HourRateResponseData({this.hourRate, this.iban});
+  HourRateResponseData(
+      {this.hourRate, this.iban, this.currency, this.freeCall});
 
   HourRateResponseData.fromJson(Map<String, dynamic> json) {
     hourRate = convertToDouble(json['hour_rate']);
     iban = json['iban'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['hour_rate'] = hourRate;
-    data['iban'] = iban;
-    return data;
+    currency = json['currency'];
+    freeCall = json['free_call'];
   }
 }

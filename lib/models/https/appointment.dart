@@ -1,5 +1,14 @@
 import 'package:mentor_app/models/model_checker.dart';
 
+enum AppointmentsState {
+  active,
+  mentorCancel,
+  clientCancel,
+  clientMiss,
+  mentorMiss,
+  completed
+}
+
 class Appointments {
   List<AppointmentData>? data;
   String? message;
@@ -24,19 +33,28 @@ class AppointmentData with ModelChecker {
   int? clientId;
   int? mentorId;
   int? appointmentType;
-  double? priceBeforeDiscount;
-  double? priceAfterDiscount;
+  String? channelId;
+  String? noteFromMentor;
+  String? noteFromClient;
+  double? price;
+  double? discountedPrice;
   int? state;
+  String? mentorJoinCall;
+  String? clientJoinCall;
+  String? mentorDateOfClose;
+  String? clientDateOfClose;
+  String? currencyEnglish;
+  String? currencyArabic;
+  bool? isFree;
+  double? mentorHourRate;
+  int? discountId;
   String? profileImg;
   String? firstName;
   String? lastName;
   int? gender;
   String? dateOfBirth;
   int? countryId;
-  String? countryFlag;
-  String? mentornote;
-  String? clientnote;
-  String? channelID;
+  String? flagImage;
 
   AppointmentData({
     this.id,
@@ -45,19 +63,28 @@ class AppointmentData with ModelChecker {
     this.clientId,
     this.mentorId,
     this.appointmentType,
-    this.priceBeforeDiscount,
-    this.priceAfterDiscount,
+    this.channelId,
+    this.noteFromMentor,
+    this.noteFromClient,
+    this.price,
+    this.discountedPrice,
     this.state,
+    this.mentorJoinCall,
+    this.clientJoinCall,
+    this.mentorDateOfClose,
+    this.clientDateOfClose,
+    this.currencyEnglish,
+    this.currencyArabic,
+    this.isFree,
+    this.mentorHourRate,
+    this.discountId,
     this.profileImg,
     this.firstName,
     this.lastName,
     this.gender,
     this.dateOfBirth,
     this.countryId,
-    this.countryFlag,
-    this.mentornote,
-    this.clientnote,
-    this.channelID,
+    this.flagImage,
   });
 
   AppointmentData.fromJson(Map<String, dynamic> json) {
@@ -67,18 +94,27 @@ class AppointmentData with ModelChecker {
     clientId = json['client_id'];
     mentorId = json['mentor_id'];
     appointmentType = json['appointment_type'];
-    priceBeforeDiscount = convertToDouble(json['price_before_discount']);
-    priceAfterDiscount = convertToDouble(json['price_after_discount']);
+    channelId = convertToString(json['channel_id']);
+    noteFromMentor = convertToString(json['note_from_mentor']);
+    noteFromClient = convertToString(json['note_from_client']);
+    price = convertToDouble(json['price']);
+    discountedPrice = convertToDouble(json['discounted_price']);
     state = json['state'];
+    mentorJoinCall = convertToString(json['mentor_join_call']);
+    clientJoinCall = convertToString(json['client_join_call']);
+    mentorDateOfClose = convertToString(json['mentor_date_of_close']);
+    clientDateOfClose = convertToString(json['client_date_of_close']);
+    currencyEnglish = json['currency_english'];
+    currencyArabic = json['currency_arabic'];
+    isFree = json['is_free'];
+    mentorHourRate = convertToDouble(json['mentor_hour_rate']);
+    discountId = json['discount_id'];
     profileImg = convertToString(json['profile_img']);
     firstName = convertToString(json['first_name']);
     lastName = convertToString(json['last_name']);
     gender = json['gender'];
     dateOfBirth = convertToString(json['date_of_birth']);
     countryId = json['country_id'];
-    countryFlag = json['flag_image'];
-    mentornote = json['note_from_mentor'];
-    clientnote = json['note_from_client'];
-    channelID = convertToString(json['channel_id']);
+    flagImage = convertToString(json['flag_image']);
   }
 }
