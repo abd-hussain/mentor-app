@@ -160,7 +160,14 @@ class CalenderBottomSheetsUtil {
 
     return Column(
       children: [
-        ClientInfoView(metingDetails: metingDetails),
+        ClientInfoView(
+          profileImg: metingDetails.profileImg,
+          flagImage: metingDetails.countryFlag,
+          firstName: metingDetails.firstName,
+          lastName: metingDetails.lastName,
+          gender: metingDetails.gender,
+          dateOfBirth: metingDetails.dateOfBirth,
+        ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.eventdate,
           desc:

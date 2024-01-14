@@ -10,13 +10,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class PaymentListView extends StatelessWidget {
   final List<PaymentResponseData> list;
   final Function(PaymentResponseData) onReportPressed;
-  const PaymentListView({required this.list, super.key, required this.onReportPressed});
+  const PaymentListView(
+      {required this.list, super.key, required this.onReportPressed});
 
   @override
   Widget build(BuildContext context) {
     return list.isNotEmpty
         ? Padding(
-            padding: const EdgeInsets.only(top: 0, right: 8, left: 8, bottom: 16),
+            padding:
+                const EdgeInsets.only(top: 0, right: 8, left: 8, bottom: 16),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.grey[200],
@@ -32,7 +34,8 @@ class PaymentListView extends StatelessWidget {
                 ],
               ),
               child: ListView.separated(
-                separatorBuilder: (BuildContext context, int index) => const Divider(),
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(),
                 padding: const EdgeInsets.all(8),
                 itemCount: list.length,
                 itemBuilder: (context, index) {
@@ -52,8 +55,8 @@ class PaymentListView extends StatelessWidget {
           );
   }
 
-  Widget _buildExpandableTile(
-      BuildContext context, PaymentResponseData item, Function(PaymentResponseData) onReportPressed) {
+  Widget _buildExpandableTile(BuildContext context, PaymentResponseData item,
+      Function(PaymentResponseData) onReportPressed) {
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
     final DateTime parsedDate = DateTime.parse(item.createdAt!);
 
@@ -134,7 +137,12 @@ class PaymentListView extends StatelessWidget {
           title: AppLocalizations.of(context)!.priceafter,
           desc: "${item.appointmentDiscountedPrice ?? 0.0} ${item.currency}",
         ),
-        ClientView(),
+        ClientView(
+          clientProfileImg: item.clientProfileImg ?? "",
+          clientFirstName: item.clientFirstName ?? "",
+          clientLastName: item.clientLastName ?? "",
+          clientCountryFlag: item.clientFlagImg ?? "",
+        ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(

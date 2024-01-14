@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mentor_app/models/https/active_appointment.dart';
 import 'package:mentor_app/models/https/calender_model.dart';
 import 'package:mentor_app/screens/calender_tab/widgets/client_info_view.dart';
 import 'package:mentor_app/shared_widget/appointment_details_view.dart';
@@ -9,6 +10,7 @@ import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'dart:async';
 
 import 'package:mentor_app/shared_widget/custom_text.dart';
+import 'package:mentor_app/utils/gender_format.dart';
 
 class WaitingCallView extends StatefulWidget {
   final int timerStartNumberHour;
@@ -18,7 +20,7 @@ class WaitingCallView extends StatefulWidget {
   final String meetingtime;
   final String meetingday;
 
-  final CalenderMeetings metingDetails;
+  final ActiveAppointmentsData metingDetails;
 
   final Function() cancelMeetingTapped;
   final Function() timesup;
@@ -119,19 +121,27 @@ class _WaitingCallViewState extends State<WaitingCallView> {
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.clientnote,
-          desc: widget.metingDetails.clientnote,
+          desc: widget.metingDetails.noteFromClient ?? "",
           forceView: true,
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.mentornote,
-          desc: widget.metingDetails.mentornote,
+          desc: widget.metingDetails.noteFromMentor ?? "",
           forceView: true,
         ),
-        ClientInfoView(metingDetails: widget.metingDetails),
+        ClientInfoView(
+          profileImg: widget.metingDetails.profileImg,
+          flagImage: widget.metingDetails.flagImage,
+          firstName: widget.metingDetails.firstName,
+          lastName: widget.metingDetails.lastName,
+          gender: GenderFormat()
+              .convertIndexToString(context, widget.metingDetails.gender!),
+          dateOfBirth: widget.metingDetails.dateOfBirth,
+        ),
         CustomButton(
-          enableButton:
-              DateTime.now().isBefore(widget.metingDetails.fromTime) &&
-                  widget.metingDetails.state == AppointmentsState.active,
+          enableButton: DateTime.now()
+                  .isBefore(DateTime.parse(widget.metingDetails.dateFrom!)) &&
+              widget.metingDetails.state == AppointmentsState.active,
           padding: const EdgeInsets.all(8.0),
           width: MediaQuery.of(context).size.width / 2,
           buttonColor: const Color(0xffda1100),

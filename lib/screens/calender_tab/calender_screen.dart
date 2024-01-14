@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mentor_app/locator.dart';
 import 'package:mentor_app/models/https/add_comment_appointment.dart';
 import 'package:mentor_app/models/https/calender_model.dart';
 import 'package:mentor_app/screens/calender_tab/calender_bloc.dart';
 import 'package:mentor_app/screens/calender_tab/widgets/calender_bottom_sheet.dart';
 import 'package:mentor_app/screens/calender_tab/widgets/meeting_datasource.dart';
 import 'package:mentor_app/screens/home_tab/widgets/header.dart';
-import 'package:mentor_app/screens/main_contaner/main_container_bloc.dart';
 import 'package:mentor_app/shared_widget/cancel_booking_bottom_sheet.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/logger.dart';
@@ -40,14 +38,13 @@ class _CalenderScreenState extends State<CalenderScreen> {
       children: [
         HeaderHomePage(
           refreshCallBack: () {
-            locator<MainContainerBloc>().getMentorAppointments(context);
+            bloc.getMentorAppointments(context);
           },
         ),
         const SizedBox(height: 8),
         Expanded(
           child: ValueListenableBuilder<List<CalenderMeetings>>(
-              valueListenable:
-                  locator<MainContainerBloc>().meetingsListNotifier,
+              valueListenable: bloc.meetingsListNotifier,
               builder: (context, snapshot, child) {
                 return SfCalendar(
                     view: CalendarView.month,
@@ -92,8 +89,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                 bloc
                                     .cancelMeeting(item.meetingId)
                                     .whenComplete(() async {
-                                  locator<MainContainerBloc>()
-                                      .getMentorAppointments(context);
+                                  bloc.getMentorAppointments(context);
                                   setState(() {});
                                 });
                               },
@@ -111,8 +107,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                   var body = AddCommentToAppointment(
                                       id: item.meetingId, comment: note);
                                   bloc.addNote(body).whenComplete(() async {
-                                    locator<MainContainerBloc>()
-                                        .getMentorAppointments(context);
+                                    bloc.getMentorAppointments(context);
                                     setState(() {});
                                   });
                                 });

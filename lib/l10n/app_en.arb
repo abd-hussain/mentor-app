@@ -247,6 +247,7 @@
     "sessiontype" : "Session Type",
     "schudule" : "Scheduled",
     "instant" : "Instant",
+    "callwith" : "call with",
     "pricebefore" : "Price",
     "priceafter" : "Discount Price",
     "dateofbirth" : "Date of birth",

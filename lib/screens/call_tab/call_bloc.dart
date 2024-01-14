@@ -1,35 +1,48 @@
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:mentor_app/locator.dart';
-import 'package:mentor_app/models/https/calender_model.dart';
-import 'package:mentor_app/services/account_service.dart';
+import 'package:mentor_app/models/https/active_appointment.dart';
 import 'package:mentor_app/services/appointments_service.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/mixins.dart';
 
-class CallBloc extends Bloc<AccountService> {
+class CallBloc extends Bloc<AppointmentsService> {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
+  final ValueNotifier<List<ActiveAppointmentsData>>
+      activeMentorAppointmentsListNotifier =
+      ValueNotifier<List<ActiveAppointmentsData>>([]);
 
-  CalenderMeetings? getNearestMeetingToday(List<CalenderMeetings> meetings) {
+  void getActiveMentorAppointments(BuildContext context) async {
+    await service.getActiveMentorAppointments().then((value) {
+      if (value.data != null) {
+        activeMentorAppointmentsListNotifier.value = value.data!;
+      }
+    });
+  }
+
+  ActiveAppointmentsData? getNearestMeetingToday(
+      List<ActiveAppointmentsData> activeMeetings) {
     final now = DateTime.now();
 
-    var activeMeetings = meetings
-        .where((meeting) => meeting.state == AppointmentsState.active)
+    var removeOldMeetingFromTheList = activeMeetings
+        .where((meeting) => DateTime.parse(meeting.dateTo!).isAfter(now))
         .toList();
-    var removeOldMeetingFromTheList =
-        activeMeetings.where((meeting) => meeting.toTime.isAfter(now)).toList();
+
     var filtermeetingavaliablewithing24Hour = removeOldMeetingFromTheList
-        .where((meeting) =>
-            meeting.fromTime.isBefore(now.add(const Duration(hours: 24))))
+        .where((meeting) => DateTime.parse(meeting.dateFrom!)
+            .isBefore(now.add(const Duration(hours: 24))))
         .toList();
 
     return filtermeetingavaliablewithing24Hour.isNotEmpty
         ? filtermeetingavaliablewithing24Hour.reduce((closest, current) =>
-            current.fromTime.isBefore(closest.fromTime) ? current : closest)
+            DateTime.parse(current.dateFrom!)
+                    .isBefore(DateTime.parse(closest.dateFrom!))
+                ? current
+                : closest)
         : null;
   }
 
   Future<void> cancelAppointment({required int id}) {
-    return locator<AppointmentsService>().cancelAppointment(id: id);
+    return service.cancelAppointment(id: id);
   }
 
   bool isTimeDifferencePositive(DateTime timeDifference) {

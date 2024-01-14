@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:mentor_app/models/https/calender_model.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/utils/constants/constant.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ClientInfoView extends StatelessWidget {
-  final CalenderMeetings metingDetails;
-  const ClientInfoView({super.key, required this.metingDetails});
+  final String? profileImg;
+  final String? flagImage;
+  final String? firstName;
+  final String? lastName;
+  final String? gender;
+  final String? dateOfBirth;
+
+  const ClientInfoView({
+    super.key,
+    required this.profileImg,
+    required this.flagImage,
+    required this.firstName,
+    required this.lastName,
+    required this.gender,
+    required this.dateOfBirth,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +49,13 @@ class ClientInfoView extends StatelessWidget {
                     radius: 30,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: metingDetails.profileImg != ""
+                      child: profileImg != ""
                           ? FadeInImage(
                               placeholder:
                                   const AssetImage("assets/images/avatar.jpeg"),
                               image: NetworkImage(
-                                  AppConstant.imagesBaseURLForMentors +
-                                      metingDetails.profileImg,
+                                  AppConstant.imagesBaseURLForClient +
+                                      profileImg!,
                                   scale: 1),
                             )
                           : Image.asset(
@@ -61,13 +74,13 @@ class ClientInfoView extends StatelessWidget {
                       radius: 10,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
-                        child: metingDetails.countryFlag != ""
+                        child: flagImage != ""
                             ? FadeInImage(
                                 placeholder: const AssetImage(
                                     "assets/images/avatar.jpeg"),
                                 image: NetworkImage(
                                     AppConstant.imagesBaseURLForCountries +
-                                        metingDetails.countryFlag,
+                                        flagImage!,
                                     scale: 1),
                               )
                             : Image.asset(
@@ -86,8 +99,7 @@ class ClientInfoView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    title:
-                        "${metingDetails.firstName} ${metingDetails.lastName}",
+                    title: "$firstName $lastName",
                     textColor: const Color(0xff444444),
                     fontSize: 14,
                     textAlign: TextAlign.center,
@@ -98,13 +110,13 @@ class ClientInfoView extends StatelessWidget {
                   Row(
                     children: [
                       Text("${AppLocalizations.of(context)!.gender}: "),
-                      Text(metingDetails.gender)
+                      Text(gender!),
                     ],
                   ),
                   Row(
                     children: [
                       Text("${AppLocalizations.of(context)!.dateofbirth}: "),
-                      Text(metingDetails.dateOfBirth)
+                      Text(dateOfBirth!),
                     ],
                   ),
                 ],

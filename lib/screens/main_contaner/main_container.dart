@@ -17,8 +17,6 @@ class _MainContainerState extends State<MainContainer> {
   @override
   void didChangeDependencies() {
     locator<MainContext>().mainContext = context;
-
-    _bloc.getMentorAppointments(context);
     super.didChangeDependencies();
   }
 

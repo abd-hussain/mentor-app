@@ -42,42 +42,33 @@ class PaymentResponseData with ModelChecker {
   String? clientProfileImg;
   int? clientCountryId;
   String? clientFlagImg;
-  String? mentorSuffixeName;
-  String? mentorFirstName;
-  String? mentorLastName;
-  String? mentorIban;
-  String? mentorProfileImg;
 
-  PaymentResponseData(
-      {this.id,
-      this.mentorId,
-      this.appointmentId,
-      this.paymentStatus,
-      this.createdAt,
-      this.paymentReportedMessage,
-      this.clientId,
-      this.appointmentType,
-      this.appointmentDateFrom,
-      this.appointmentDateTo,
-      this.appointmentState,
-      this.appointmentIsFree,
-      this.appointmentPrice,
-      this.appointmentDiscountedPrice,
-      this.currency,
-      this.mentorHourRate,
-      this.noteFromClient,
-      this.noteFromMentor,
-      this.appointmentDiscountId,
-      this.clientFirstName,
-      this.clientLastName,
-      this.clientProfileImg,
-      this.clientCountryId,
-      this.clientFlagImg,
-      this.mentorSuffixeName,
-      this.mentorFirstName,
-      this.mentorLastName,
-      this.mentorIban,
-      this.mentorProfileImg});
+  PaymentResponseData({
+    this.id,
+    this.mentorId,
+    this.appointmentId,
+    this.paymentStatus,
+    this.createdAt,
+    this.paymentReportedMessage,
+    this.clientId,
+    this.appointmentType,
+    this.appointmentDateFrom,
+    this.appointmentDateTo,
+    this.appointmentState,
+    this.appointmentIsFree,
+    this.appointmentPrice,
+    this.appointmentDiscountedPrice,
+    this.currency,
+    this.mentorHourRate,
+    this.noteFromClient,
+    this.noteFromMentor,
+    this.appointmentDiscountId,
+    this.clientFirstName,
+    this.clientLastName,
+    this.clientProfileImg,
+    this.clientCountryId,
+    this.clientFlagImg,
+  });
 
   PaymentResponseData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -93,7 +84,8 @@ class PaymentResponseData with ModelChecker {
     appointmentState = json['appointment_state'];
     appointmentIsFree = json['appointment_is_free'];
     appointmentPrice = convertToDouble(json['appointment_price']);
-    appointmentDiscountedPrice = convertToDouble(json['appointment_discounted_price']);
+    appointmentDiscountedPrice =
+        convertToDouble(json['appointment_discounted_price']);
     currency = json['currency'];
     mentorHourRate = convertToDouble(json['mentor_hour_rate']);
     noteFromClient = json['note_from_client'];
@@ -104,10 +96,5 @@ class PaymentResponseData with ModelChecker {
     clientProfileImg = json['client_profile_img'];
     clientCountryId = json['client_country_id'];
     clientFlagImg = json['client_flag_img'];
-    mentorSuffixeName = json['mentor_suffixe_name'];
-    mentorFirstName = json['mentor_first_name'];
-    mentorLastName = json['mentor_last_name'];
-    mentorIban = json['mentor_iban'];
-    mentorProfileImg = json['mentor_profile_img'];
   }
 }

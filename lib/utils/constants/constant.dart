@@ -13,6 +13,8 @@ class AppConstant {
       "${AppConstant.applicationMainURL}static/banners/";
   static const String imagesBaseURLForMentors =
       "${AppConstant.applicationMainURL}static/mentorsImg/";
+  static const String imagesBaseURLForClient =
+      "${AppConstant.applicationMainURL}static/clientsImg/";
   static const String imagesIDBaseURLForMentors =
       "${AppConstant.applicationMainURL}static/mentorsIDs/";
 

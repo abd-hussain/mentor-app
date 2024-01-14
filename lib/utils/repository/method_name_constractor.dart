@@ -13,11 +13,13 @@ class MethodNameConstant {
   static const String home = "mentor-home/";
   static const String notifications = "notifications/";
   static const String payments = "mentor-payments/";
+  static const String paymentReport = "mentor-payments/report";
+  static const String mentorAppointments = "mentor-appointment/";
+  static const String mentorActiveAppointments = "mentor-appointment/active/";
 
   // Verfied API
 
   static const String mentors = "mentor-list/";
-  static const String mentorAppointments = "mentor-appointment/";
   static const String cancelAppointment = "mentor-appointment/cancel";
   static const String commentAppointment = "mentor-appointment/comment";
   static const String joinCallAppointment = "mentor-appointment/join-call";
@@ -42,6 +44,4 @@ class MethodNameConstant {
 
   static const String accountInfo = "mentor-account/info";
   static const String accountExperiance = "mentor-account/exp-info";
-
-  static const String paymentReport = "mentor-payments/report";
 }

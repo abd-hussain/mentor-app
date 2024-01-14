@@ -1,10 +1,7 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:mentor_app/models/https/appointment.dart';
-import 'package:mentor_app/models/https/calender_model.dart';
 import 'package:mentor_app/screens/main_contaner/widgets/tab_navigator.dart';
 import 'package:mentor_app/services/appointments_service.dart';
-import 'package:mentor_app/utils/gender_format.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:mentor_app/utils/routes.dart';
 
@@ -13,8 +10,6 @@ enum SelectedTab { home, payment, call, calender, account }
 class MainContainerBloc extends Bloc<AppointmentsService> {
   final ValueNotifier<SelectedTab> currentTabIndexNotifier =
       ValueNotifier<SelectedTab>(SelectedTab.home);
-  final ValueNotifier<List<CalenderMeetings>> meetingsListNotifier =
-      ValueNotifier<List<CalenderMeetings>>([]);
 
   GlobalKey<ConvexAppBarState> appBarKey = GlobalKey<ConvexAppBarState>();
 
@@ -55,55 +50,6 @@ class MainContainerBloc extends Bloc<AppointmentsService> {
         return 4;
       default:
         return 0;
-    }
-  }
-
-  void getMentorAppointments(BuildContext context) async {
-    List<CalenderMeetings> list = [];
-
-    await service.getMentorAppointments().then((value) {
-      if (value.data != null) {
-        for (AppointmentData item in value.data!) {
-          final newItem = CalenderMeetings(
-            meetingId: item.id!,
-            firstName: item.firstName!,
-            lastName: item.lastName!,
-            profileImg: item.profileImg!,
-            clientId: item.clientId!,
-            state: handleMeetingState(item.state!),
-            gender: GenderFormat().convertIndexToString(context, item.gender!),
-            fromTime: DateTime.parse(item.dateFrom!),
-            toTime: DateTime.parse(item.dateTo!),
-            dateOfBirth: item.dateOfBirth!,
-            appointmentType: item.appointmentType!,
-            priceBefore: item.priceBeforeDiscount!,
-            priceAfter: item.priceAfterDiscount!,
-            countryId: item.countryId!,
-            countryFlag: item.countryFlag!,
-            mentornote: item.mentornote ?? "",
-            clientnote: item.clientnote ?? "",
-            channelID: item.channelID ?? "",
-          );
-          list.add(newItem);
-        }
-        meetingsListNotifier.value = list;
-      }
-    });
-  }
-
-  AppointmentsState handleMeetingState(int index) {
-    if (index == 1) {
-      return AppointmentsState.active;
-    } else if (index == 2) {
-      return AppointmentsState.mentorCancel;
-    } else if (index == 3) {
-      return AppointmentsState.clientCancel;
-    } else if (index == 4) {
-      return AppointmentsState.clientMiss;
-    } else if (index == 5) {
-      return AppointmentsState.mentorMiss;
-    } else {
-      return AppointmentsState.completed;
     }
   }
 
