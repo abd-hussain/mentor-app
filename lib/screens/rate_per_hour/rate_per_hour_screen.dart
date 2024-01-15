@@ -57,6 +57,7 @@ class _RatePerHourScreenState extends State<RatePerHourScreen> {
                             onTapMinus: () => bloc.decreseRatePerHourBy1(),
                             freeCallTypeSelected: (type) {
                               bloc.freeType = type;
+                              bloc.validateFieldsForFaze5();
                             },
                           ),
                           IbanView(

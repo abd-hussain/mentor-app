@@ -46,7 +46,7 @@ class DayTime {
     }
   }
 
-  List<WorkingHourUTCModel> prepareTimingUTC(
+  List<WorkingHourUTCModel> prepareTimingToUTC(
       {required List<int> workingHoursSaturday,
       required List<int> workingHoursSunday,
       required List<int> workingHoursMonday,
@@ -105,6 +105,95 @@ class DayTime {
     }
 
     return returnedList;
+  }
+
+  List<WorkingHourUTCModel> prepareTimingFromUTC(
+      {required List<int> workingHoursSaturday,
+      required List<int> workingHoursSunday,
+      required List<int> workingHoursMonday,
+      required List<int> workingHoursTuesday,
+      required List<int> workingHoursWednesday,
+      required List<int> workingHoursThursday,
+      required List<int> workingHoursFriday}) {
+    int offset = DateTime.now().timeZoneOffset.inHours;
+    List<WorkingHourUTCModel> returnedList = [
+      WorkingHourUTCModel(dayName: DayNameEnum.saturday, list: []),
+      WorkingHourUTCModel(dayName: DayNameEnum.sunday, list: []),
+      WorkingHourUTCModel(dayName: DayNameEnum.monday, list: []),
+      WorkingHourUTCModel(dayName: DayNameEnum.tuesday, list: []),
+      WorkingHourUTCModel(dayName: DayNameEnum.wednesday, list: []),
+      WorkingHourUTCModel(dayName: DayNameEnum.thursday, list: []),
+      WorkingHourUTCModel(dayName: DayNameEnum.friday, list: []),
+    ];
+
+    // Map of working hours for each day
+    var workingHoursMap = {
+      DayNameEnum.saturday: workingHoursSaturday,
+      DayNameEnum.sunday: workingHoursSunday,
+      DayNameEnum.monday: workingHoursMonday,
+      DayNameEnum.tuesday: workingHoursTuesday,
+      DayNameEnum.wednesday: workingHoursWednesday,
+      DayNameEnum.thursday: workingHoursThursday,
+      DayNameEnum.friday: workingHoursFriday,
+    };
+
+    DayNameEnum nextDay =
+        DayNameEnum.sunday; // Start with sunday as the after day of Saturday
+
+    for (var entry in workingHoursMap.entries) {
+      var day = entry.key;
+      var hours = entry.value;
+      var nextDayHours = <int>[];
+
+      if (hours.isNotEmpty) {
+        var editedWorkingHour = <int>[];
+        for (var hour in hours) {
+          var editedHour = hour + offset;
+          if (editedHour >= 24) {
+            nextDayHours.add(editedHour - 24);
+          } else {
+            editedWorkingHour.add(editedHour);
+          }
+        }
+        returnedList
+            .firstWhere((element) => element.dayName == day)
+            .list
+            .addAll(editedWorkingHour);
+      }
+
+      // Add hours to the next day if needed
+      if (nextDayHours.isNotEmpty) {
+        var nextDayModel = returnedList.firstWhere(
+          (element) => element.dayName == getNextDay(nextDay),
+          orElse: () =>
+              WorkingHourUTCModel(dayName: getNextDay(nextDay), list: []),
+        );
+        nextDayModel.list.addAll(nextDayHours);
+      }
+
+      nextDay = getNextDay(day); // Update the next day
+    }
+
+    return returnedList;
+  }
+
+  DayNameEnum getNextDay(DayNameEnum day) {
+    switch (day) {
+      case DayNameEnum.saturday:
+        return DayNameEnum.sunday;
+      case DayNameEnum.sunday:
+        return DayNameEnum.monday;
+      case DayNameEnum.monday:
+        return DayNameEnum.tuesday;
+      case DayNameEnum.tuesday:
+        return DayNameEnum.wednesday;
+      case DayNameEnum.wednesday:
+        return DayNameEnum.thursday;
+      case DayNameEnum.thursday:
+        return DayNameEnum.thursday;
+      case DayNameEnum.friday:
+        return DayNameEnum.saturday;
+    }
   }
 
   int getHourFromTimeString(String time) {

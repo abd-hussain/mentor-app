@@ -23,7 +23,7 @@ class RegisterFinalBloc extends Bloc<RegisterService> {
           context, box.get(TempFieldToRegistrtConstant.gender));
     }
 
-    List<WorkingHourUTCModel> workingHoursUTC = DayTime().prepareTimingUTC(
+    List<WorkingHourUTCModel> workingHoursUTC = DayTime().prepareTimingToUTC(
       workingHoursSaturday:
           box.get(TempFieldToRegistrtConstant.saturdayWH) ?? [],
       workingHoursSunday: box.get(TempFieldToRegistrtConstant.sundayWH) ?? [],

@@ -7,9 +7,11 @@ class NotificationsResponse {
   NotificationsResponse.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <NotificationsResponseData>[];
-      json['data'].forEach((v) {
-        data!.add(NotificationsResponseData.fromJson(v));
-      });
+      if (json['data'].isNotEmpty) {
+        json['data'].forEach((v) {
+          data!.add(NotificationsResponseData.fromJson(v));
+        });
+      }
     }
     message = json['message'];
   }

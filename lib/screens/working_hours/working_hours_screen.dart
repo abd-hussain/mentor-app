@@ -89,15 +89,21 @@ class _WorkingHoursScreenState extends State<WorkingHoursScreen> {
                                       .value[index]
                                       .list,
                                   onSave: (newList) async {
-                                    bloc.updateWorkingHours(
-                                        context: context,
-                                        obj: WorkingHoursRequest(
-                                          dayName: bloc
-                                              .listOfWorkingHourNotifier
-                                              .value[index]
-                                              .dayName,
-                                          workingHours: newList,
-                                        ));
+                                    bloc
+                                        .updateWorkingHours(
+                                            context: context,
+                                            obj: WorkingHoursRequest(
+                                              dayName: bloc
+                                                  .listOfWorkingHourNotifier
+                                                  .value[index]
+                                                  .dayName,
+                                              workingHours: newList,
+                                            ))
+                                        .whenComplete(() {
+                                      bloc.loadingStatusNotifier.value =
+                                          LoadingStatus.finish;
+                                      bloc.getWorkingHours(context);
+                                    });
                                   },
                                 );
                               },

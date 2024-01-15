@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mentor_app/models/https/working_hour_request.dart';
+import 'package:mentor_app/models/https/working_hours.dart';
 import 'package:mentor_app/models/working_hours.dart';
 import 'package:mentor_app/services/mentor_properties_services.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
+import 'package:mentor_app/utils/day_time.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -95,54 +97,100 @@ class WorkingHoursBloc extends Bloc<MentorPropertiesService> {
     return list;
   }
 
+  WorkingHoursData formatDataFromUTCToLocalTime(WorkingHoursData data) {
+    final newData = DayTime().prepareTimingFromUTC(
+        workingHoursSaturday: data.workingHoursSaturday ?? [],
+        workingHoursSunday: data.workingHoursSunday ?? [],
+        workingHoursMonday: data.workingHoursMonday ?? [],
+        workingHoursTuesday: data.workingHoursTuesday ?? [],
+        workingHoursWednesday: data.workingHoursWednesday ?? [],
+        workingHoursThursday: data.workingHoursThursday ?? [],
+        workingHoursFriday: data.workingHoursFriday ?? []);
+
+    return WorkingHoursData(
+      workingHoursSaturday: newData
+          .where((element) => element.dayName == DayNameEnum.saturday)
+          .first
+          .list,
+      workingHoursSunday: newData
+          .where((element) => element.dayName == DayNameEnum.sunday)
+          .first
+          .list,
+      workingHoursMonday: newData
+          .where((element) => element.dayName == DayNameEnum.monday)
+          .first
+          .list,
+      workingHoursTuesday: newData
+          .where((element) => element.dayName == DayNameEnum.tuesday)
+          .first
+          .list,
+      workingHoursWednesday: newData
+          .where((element) => element.dayName == DayNameEnum.wednesday)
+          .first
+          .list,
+      workingHoursThursday: newData
+          .where((element) => element.dayName == DayNameEnum.thursday)
+          .first
+          .list,
+      workingHoursFriday: newData
+          .where((element) => element.dayName == DayNameEnum.friday)
+          .first
+          .list,
+    );
+  }
+
   void getWorkingHours(BuildContext context) {
     loadingStatusNotifier.value = LoadingStatus.inprogress;
 
     service.getWorkingHours().then((value) {
       loadingStatusNotifier.value = LoadingStatus.finish;
       if (value.data != null) {
+        WorkingHoursData formatedData =
+            formatDataFromUTCToLocalTime(value.data!);
         List<WorkingHourModel> theList = [];
-        if (value.data!.workingHoursSaturday != null) {
-          theList.add(WorkingHourModel(
-              list: _prepareList(
-                  context: context, theList: value.data!.workingHoursSaturday!),
-              dayName: "Saturday"));
-        }
-        if (value.data!.workingHoursSunday != null) {
-          theList.add(WorkingHourModel(
-              list: _prepareList(
-                  context: context, theList: value.data!.workingHoursSunday!),
-              dayName: "Sunday"));
-        }
-        if (value.data!.workingHoursMonday != null) {
-          theList.add(WorkingHourModel(
-              list: _prepareList(
-                  context: context, theList: value.data!.workingHoursMonday!),
-              dayName: "Monday"));
-        }
-        if (value.data!.workingHoursTuesday != null) {
-          theList.add(WorkingHourModel(
-              list: _prepareList(
-                  context: context, theList: value.data!.workingHoursTuesday!),
-              dayName: "Tuesday"));
-        }
-        if (value.data!.workingHoursWednesday != null) {
+        if (formatedData.workingHoursSaturday != null) {
           theList.add(WorkingHourModel(
               list: _prepareList(
                   context: context,
-                  theList: value.data!.workingHoursWednesday!),
+                  theList: formatedData.workingHoursSaturday!),
+              dayName: "Saturday"));
+        }
+        if (formatedData.workingHoursSunday != null) {
+          theList.add(WorkingHourModel(
+              list: _prepareList(
+                  context: context, theList: formatedData.workingHoursSunday!),
+              dayName: "Sunday"));
+        }
+        if (formatedData.workingHoursMonday != null) {
+          theList.add(WorkingHourModel(
+              list: _prepareList(
+                  context: context, theList: formatedData.workingHoursMonday!),
+              dayName: "Monday"));
+        }
+        if (formatedData.workingHoursTuesday != null) {
+          theList.add(WorkingHourModel(
+              list: _prepareList(
+                  context: context, theList: formatedData.workingHoursTuesday!),
+              dayName: "Tuesday"));
+        }
+        if (formatedData.workingHoursWednesday != null) {
+          theList.add(WorkingHourModel(
+              list: _prepareList(
+                  context: context,
+                  theList: formatedData.workingHoursWednesday!),
               dayName: "Wednesday"));
         }
-        if (value.data!.workingHoursThursday != null) {
+        if (formatedData.workingHoursThursday != null) {
           theList.add(WorkingHourModel(
               list: _prepareList(
-                  context: context, theList: value.data!.workingHoursThursday!),
+                  context: context,
+                  theList: formatedData.workingHoursThursday!),
               dayName: "Thursday"));
         }
-        if (value.data!.workingHoursFriday != null) {
+        if (formatedData.workingHoursFriday != null) {
           theList.add(WorkingHourModel(
               list: _prepareList(
-                  context: context, theList: value.data!.workingHoursFriday!),
+                  context: context, theList: formatedData.workingHoursFriday!),
               dayName: "Friday"));
         }
 
@@ -151,14 +199,69 @@ class WorkingHoursBloc extends Bloc<MentorPropertiesService> {
     });
   }
 
-  void updateWorkingHours(
+  Future<void> updateWorkingHours(
       {required BuildContext context, required WorkingHoursRequest obj}) async {
     loadingStatusNotifier.value = LoadingStatus.inprogress;
 
-    await service.updateWorkingHours(data: obj).whenComplete(() {
-      loadingStatusNotifier.value = LoadingStatus.finish;
-      getWorkingHours(context);
-    });
+    List<int> workingHoursSaturday = [];
+    List<int> workingHoursSunday = [];
+    List<int> workingHoursMonday = [];
+    List<int> workingHoursTuesday = [];
+    List<int> workingHoursWednesday = [];
+    List<int> workingHoursThursday = [];
+    List<int> workingHoursFriday = [];
+
+    if (obj.dayName == "Saturday") {
+      workingHoursSaturday = obj.workingHours;
+    } else if (obj.dayName == "Sunday") {
+      workingHoursSunday = obj.workingHours;
+    } else if (obj.dayName == "Monday") {
+      workingHoursMonday = obj.workingHours;
+    } else if (obj.dayName == "Tuesday") {
+      workingHoursTuesday = obj.workingHours;
+    } else if (obj.dayName == "Wednesday") {
+      workingHoursWednesday = obj.workingHours;
+    } else if (obj.dayName == "Thursday") {
+      workingHoursThursday = obj.workingHours;
+    } else if (obj.dayName == "Friday") {
+      workingHoursFriday = obj.workingHours;
+    }
+
+    final newData = DayTime().prepareTimingToUTC(
+        workingHoursSaturday: workingHoursSaturday,
+        workingHoursSunday: workingHoursSunday,
+        workingHoursMonday: workingHoursMonday,
+        workingHoursTuesday: workingHoursTuesday,
+        workingHoursWednesday: workingHoursWednesday,
+        workingHoursThursday: workingHoursThursday,
+        workingHoursFriday: workingHoursFriday);
+
+    for (var item in newData) {
+      if (item.list.isNotEmpty) {
+        WorkingHoursRequest newObj = WorkingHoursRequest(
+            dayName: dayParser(item.dayName), workingHours: item.list);
+        await service.updateWorkingHours(data: newObj);
+      }
+    }
+  }
+
+  String dayParser(DayNameEnum dayName) {
+    switch (dayName) {
+      case DayNameEnum.saturday:
+        return "Saturday";
+      case DayNameEnum.sunday:
+        return "Sunday";
+      case DayNameEnum.monday:
+        return "Monday";
+      case DayNameEnum.tuesday:
+        return "Tuesday";
+      case DayNameEnum.wednesday:
+        return "Wednesday";
+      case DayNameEnum.thursday:
+        return "Thursday";
+      case DayNameEnum.friday:
+        return "Friday";
+    }
   }
 
   @override
