@@ -23,6 +23,8 @@ class EditExperienceBloc extends Bloc<AccountService> {
   TextEditingController categoryController = TextEditingController();
   TextEditingController experianceSinceController = TextEditingController();
 
+  int? categoryId;
+
   File? cv;
   String cvFileUrl = "";
 
@@ -37,21 +39,20 @@ class EditExperienceBloc extends Bloc<AccountService> {
 
   List<SuffixData> listOfAllMajors = [];
 
-  getListOfMajors() {
-    locator<FilterService>().getMajors().then((value) {
+  getProfileExperiance() async {
+    loadingStatusNotifier.value = LoadingStatus.inprogress;
+
+    await locator<FilterService>().getMajors().then((value) {
       listOfAllMajors = value!;
     });
-  }
 
-  getProfileExperiance() {
-    getListOfMajors();
-    loadingStatusNotifier.value = LoadingStatus.inprogress;
-    service.getProfileExperiance().then((value) {
+    await service.getProfileExperiance().then((value) {
       final data = value.data;
 
       if (data != null) {
         categoryController.text = data.categoryName ?? "";
         experianceSinceController.text = data.experienceSince ?? "";
+        categoryId = data.categoryId ?? 0;
 
         if (data.majors != null) {
           listOfMajorsNotifier.value = prepareListOfMajors(data.majors!);
@@ -75,6 +76,7 @@ class EditExperienceBloc extends Bloc<AccountService> {
         cert1: cert1,
         cert2: cert2,
         cert3: cert3,
+        categoryId: categoryId,
       ),
     );
   }

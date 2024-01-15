@@ -22,7 +22,7 @@ class AccountInfoData {
   List<String>? speakingLanguage;
   int? countryId;
   DBCountries? dBCountries;
-  String? referalCode;
+  String? invitationCode;
   String? idImg;
   String? bio;
 
@@ -38,7 +38,7 @@ class AccountInfoData {
       this.speakingLanguage,
       this.countryId,
       this.dBCountries,
-      this.referalCode,
+      this.invitationCode,
       this.idImg,
       this.bio});
 
@@ -46,19 +46,19 @@ class AccountInfoData {
     profileImg = json['profile_img'];
     mobileNumber = json['mobile_number'];
     suffixeName = json['suffixe_name'];
-    dateOfBirth = json['date_of_birth'];
     firstName = json['first_name'];
-    email = json['email'];
     lastName = json['last_name'];
+    dateOfBirth = json['date_of_birth'];
+    email = json['email'];
+    bio = json['bio'];
     gender = json['gender'];
     speakingLanguage = json['speaking_language'].cast<String>();
     countryId = json['country_id'];
+    invitationCode = json['invitation_code'];
+    idImg = json['id_img'];
     dBCountries = json['DB_Countries'] != null
         ? DBCountries.fromJson(json['DB_Countries'])
         : null;
-    referalCode = json['referal_code'];
-    idImg = json['id_img'];
-    bio = json['bio'];
   }
 }
 
@@ -72,27 +72,35 @@ class DBCountries {
   int? id;
   String? currencyEnglish;
   bool? published;
+  int? minLength;
+  int? maxLength;
 
-  DBCountries(
-      {this.flagImage,
-      this.currencyArabic,
-      this.nameArabic,
-      this.dialCode,
-      this.createdAt,
-      this.nameEnglish,
-      this.id,
-      this.currencyEnglish,
-      this.published});
+  DBCountries({
+    this.flagImage,
+    this.currencyArabic,
+    this.nameArabic,
+    this.dialCode,
+    this.createdAt,
+    this.nameEnglish,
+    this.id,
+    this.currencyEnglish,
+    this.published,
+    this.minLength,
+    this.maxLength,
+  });
 
   DBCountries.fromJson(Map<String, dynamic> json) {
     flagImage = json['flag_image'];
-    currencyArabic = json['currency_arabic'];
     nameArabic = json['name_arabic'];
+    currencyArabic = json['currency_arabic'];
     dialCode = json['dialCode'];
-    createdAt = json['created_at'];
-    nameEnglish = json['name_english'];
-    id = json['id'];
-    currencyEnglish = json['currency_english'];
+    dialCode = json['dialCode'];
+    minLength = json['minLength'];
     published = json['published'];
+    id = json['id'];
+    nameEnglish = json['name_english'];
+    currencyEnglish = json['currency_english'];
+    maxLength = json['maxLength'];
+    createdAt = json['created_at'];
   }
 }

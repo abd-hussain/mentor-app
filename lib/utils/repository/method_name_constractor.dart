@@ -22,6 +22,8 @@ class MethodNameConstant {
   static const String changePassword = "mentor-settings/change-password";
   static const String mentorHourRate = "hour-rate/";
   static const String mentorWorkingHours = "working_hours/";
+  static const String accountExperiance = "mentor-account/exp-info";
+  static const String accountInfo = "mentor-account/info";
 
   // Verfied API
 
@@ -31,7 +33,4 @@ class MethodNameConstant {
   static const String exitCallAppointment = "mentor-appointment/end-call";
 
   static const String uploadContactList = "settings/leads";
-
-  static const String accountInfo = "mentor-account/info";
-  static const String accountExperiance = "mentor-account/exp-info";
 }

@@ -73,6 +73,11 @@ class EditProfileBloc extends Bloc<AccountService> {
 
   void getProfileInformations(BuildContext context) async {
     loadingStatusNotifier.value = LoadingStatus.inprogress;
+
+    await locator<FilterService>().suffix().then((value) {
+      listOfSuffix.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
+    });
+
     service.getProfileInfo().then((value) {
       final data = value.data;
 
@@ -82,7 +87,7 @@ class EditProfileBloc extends Bloc<AccountService> {
         lastNameController.text = data.lastName ?? "";
         emailController.text = data.email ?? "";
         mobileNumberController.text = data.mobileNumber ?? "";
-        referalCodeController.text = data.referalCode ?? "";
+        referalCodeController.text = data.invitationCode ?? "";
         bioController.text = data.bio ?? "";
         profileImageUrl = data.profileImg ?? "";
 
@@ -103,6 +108,8 @@ class EditProfileBloc extends Bloc<AccountService> {
                 ? dbCountries.currencyEnglish ?? ""
                 : dbCountries.currencyArabic ?? "",
             dialCode: dbCountries.dialCode ?? "",
+            maxLength: dbCountries.maxLength ?? 0,
+            minLength: dbCountries.minLength ?? 0,
           );
 
           countryController.text =
@@ -136,12 +143,6 @@ class EditProfileBloc extends Bloc<AccountService> {
       listOfCountriesNotifier.value = value.data!
         ..sort((a, b) => a.id!.compareTo(b.id!));
       loadingStatusNotifier.value = LoadingStatus.finish;
-    });
-  }
-
-  void getlistOfSuffix() {
-    locator<FilterService>().suffix().then((value) {
-      listOfSuffix.value = value.data!..sort((a, b) => a.id!.compareTo(b.id!));
     });
   }
 

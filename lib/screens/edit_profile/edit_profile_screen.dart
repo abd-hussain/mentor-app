@@ -34,7 +34,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void didChangeDependencies() {
     bloc.getProfileInformations(context);
-    bloc.getlistOfSuffix();
     super.didChangeDependencies();
   }
 

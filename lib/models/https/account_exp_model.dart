@@ -20,6 +20,7 @@ class AccountExperianceData {
   List<int>? majors;
   String? experienceSince;
   String? categoryName;
+  int? categoryId;
 
   AccountExperianceData(
       {this.cv,
@@ -28,6 +29,7 @@ class AccountExperianceData {
       this.cert3,
       this.majors,
       this.experienceSince,
+      this.categoryId,
       this.categoryName});
 
   AccountExperianceData.fromJson(Map<String, dynamic> json) {
@@ -38,5 +40,6 @@ class AccountExperianceData {
     majors = json['majors'].cast<int>();
     experienceSince = json['experience_since'];
     categoryName = json['category_name'];
+    categoryId = json['category_id'];
   }
 }

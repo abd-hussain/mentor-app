@@ -80,7 +80,7 @@ class AccountService with Service {
     String cert2FileName = "";
     String cert3FileName = "";
 
-    if (account.cv != null && account.cv != File("")) {
+    if (account.cv != null) {
       cvFileName = account.cv!.path.split('/').last;
     }
     if (account.cert1 != null) {
@@ -110,6 +110,7 @@ class AccountService with Service {
           : MultipartFile.fromString(""),
       "experience_since":
           MultipartFile.fromString(account.experienceSince ?? ""),
+      "category_id": MultipartFile.fromString(account.categoryId!.toString()),
       "majors": account.majors!,
     });
 

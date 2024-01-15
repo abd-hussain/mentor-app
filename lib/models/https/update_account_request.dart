@@ -33,13 +33,15 @@ class UpdateAccountExperianceRequest {
   File? cert1;
   File? cert2;
   File? cert3;
+  int? categoryId;
 
   UpdateAccountExperianceRequest({
     required this.experienceSince,
     required this.majors,
-    required this.cv,
-    required this.cert1,
-    required this.cert2,
-    required this.cert3,
+    this.cv,
+    this.cert1,
+    this.cert2,
+    this.cert3,
+    required this.categoryId,
   });
 }
