@@ -46,6 +46,12 @@ class AccountBloc extends Bloc<AccountService> {
             .pushNamed(RoutesConstants.ratePerHourScreen),
       ),
       ProfileOptions(
+        icon: Ionicons.star_half_outline,
+        name: AppLocalizations.of(context)!.ratingandreview,
+        onTap: () => Navigator.of(context, rootNavigator: true)
+            .pushNamed(RoutesConstants.ratingAndReviewScreen),
+      ),
+      ProfileOptions(
         icon: Icons.password,
         name: AppLocalizations.of(context)!.editprofilepassword,
         onTap: () => Navigator.of(context, rootNavigator: true)

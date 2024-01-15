@@ -45,7 +45,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 TitleView(title: AppLocalizations.of(context)!.accountsettings),
                 CollectionListOptionView(
                     listOfOptions: bloc.listOfAccountOptions(context),
-                    containerHight: 560),
+                    containerHight: 640),
                 TitleView(title: AppLocalizations.of(context)!.generalsettings),
                 CollectionListOptionView(
                     listOfOptions: bloc.listOfSettingsOptions(context),

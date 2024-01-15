@@ -114,7 +114,5 @@ class ClientView extends StatelessWidget {
         ),
       ],
     );
-
-    // TODO
   }
 }

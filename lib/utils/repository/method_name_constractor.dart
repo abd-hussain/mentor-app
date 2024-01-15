@@ -24,6 +24,9 @@ class MethodNameConstant {
   static const String mentorWorkingHours = "working_hours/";
   static const String accountExperiance = "mentor-account/exp-info";
   static const String accountInfo = "mentor-account/info";
+  static const String mentorRatingAndReviews = "mentor-settings/review";
+  static const String mentorRespondOnReviews =
+      "mentor-settings/review-response";
 
   // Verfied API
 

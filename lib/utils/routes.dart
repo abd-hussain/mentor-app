@@ -14,6 +14,7 @@ import 'package:mentor_app/screens/login_screen/login_screen.dart';
 import 'package:mentor_app/screens/main_contaner/main_container.dart';
 import 'package:mentor_app/screens/payments_tab/payments_screen.dart';
 import 'package:mentor_app/screens/rate_per_hour/rate_per_hour_screen.dart';
+import 'package:mentor_app/screens/rating_and_review/rating_and_review_screen.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_2/register_fase2_screen.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_3/register_fase3_screen.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_4/register_fase4_screen.dart';
@@ -57,6 +58,7 @@ class RoutesConstants {
   static const String forgotPasswordConfirmationScreen =
       'forgotPasswordConfirmationScreen';
   static const String insideCallScreen = 'InsideCallScreen';
+  static const String ratingAndReviewScreen = 'ratingAndReviewScreen';
 }
 
 final Map<String, Widget> routes = {
@@ -87,4 +89,5 @@ final Map<String, Widget> routes = {
   RoutesConstants.forgotPasswordScreen: const ForgotPasswordScreen(),
   RoutesConstants.forgotPasswordConfirmationScreen:
       const ForgotPasswordConfirmationScreen(),
+  RoutesConstants.ratingAndReviewScreen: const RatingAndReviewScreen()
 };

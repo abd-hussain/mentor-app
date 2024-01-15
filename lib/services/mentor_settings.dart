@@ -1,4 +1,5 @@
 import 'package:mentor_app/models/https/hour_rate_response.dart';
+import 'package:mentor_app/models/https/rating_and_review_response.dart';
 import 'package:mentor_app/models/https/update_password_request.dart';
 import 'package:mentor_app/utils/mixins.dart';
 import 'package:mentor_app/utils/repository/http_repository.dart';
@@ -45,6 +46,25 @@ class MentorSettingsService with Service {
       requestType: RequestType.put,
       methodName: MethodNameConstant.changePassword,
       postBody: account,
+    );
+    return response;
+  }
+
+  Future<RatingAndReviewResponse> getMentorRatingAndReviews() async {
+    final response = await repository.callRequest(
+      requestType: RequestType.get,
+      methodName: MethodNameConstant.mentorRatingAndReviews,
+    );
+
+    return RatingAndReviewResponse.fromJson(response);
+  }
+
+  Future<dynamic> respondOnReview(
+      {required int id, required String responseMessage}) async {
+    final response = await repository.callRequest(
+      requestType: RequestType.put,
+      methodName: MethodNameConstant.mentorRespondOnReviews,
+      queryParam: {"id": id, "response": responseMessage},
     );
     return response;
   }

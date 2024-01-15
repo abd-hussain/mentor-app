@@ -35,7 +35,7 @@ class AccountService with Service {
     if (account.profileImage != null) {
       formData.files.add(
         MapEntry(
-          "profile_picture",
+          "profile_img",
           MultipartFile.fromFileSync(
             account.profileImage!.path,
             filename: account.profileImage!.path.split('/').last,
