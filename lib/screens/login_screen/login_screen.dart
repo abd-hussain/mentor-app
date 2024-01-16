@@ -172,9 +172,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                                                   context)
                                                           : contextScafold
                                                               .showSnackBar(
-                                                              const SnackBar(
+                                                              SnackBar(
                                                                 content: Text(
-                                                                    "Login_BiometricMssage_BiometricLoginIsDisabled"),
+                                                                    // ignore: use_build_context_synchronously
+                                                                    AppLocalizations.of(
+                                                                            context)!
+                                                                        .biometricsisdisable),
                                                               ),
                                                             );
                                                     }

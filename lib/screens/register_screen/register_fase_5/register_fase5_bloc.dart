@@ -12,6 +12,10 @@ class Register5Bloc {
 
   String ibanRes = "";
 
+  String getUserCurrency() {
+    return box.get(DatabaseFieldConstant.selectedCountryCurrency) ?? "\$";
+  }
+
   validateFieldsForFaze5() {
     if (ratePerHourController.text.isNotEmpty) {
       double convertedText = double.tryParse(ratePerHourController.text) ?? 0.0;

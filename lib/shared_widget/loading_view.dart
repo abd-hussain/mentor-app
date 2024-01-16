@@ -26,9 +26,7 @@ class LoadingView extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   pathBackgroundColor: Colors.transparent),
             ),
-            const SizedBox(
-              height: 12,
-            ),
+            const SizedBox(height: 12),
             CustomText(
               title: title ?? '',
               fontSize: 14,

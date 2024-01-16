@@ -67,4 +67,7 @@ Future<bool> _setupFirebase() async {
   networkInfoService.initNetworkConnectionCheck();
 
   return hasConnectivity;
+
+  //TODO handle web
+  //TODO fix ioS notifications
 }

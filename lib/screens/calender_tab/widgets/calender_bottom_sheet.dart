@@ -212,8 +212,12 @@ class CalenderBottomSheetsUtil {
           padding: const EdgeInsets.all(8),
         ),
         PriceView(
-            priceBeforeDiscount: metingDetails.price!,
-            priceAfterDiscount: metingDetails.discountedPrice!),
+          priceBeforeDiscount: metingDetails.price!,
+          priceAfterDiscount: metingDetails.discountedPrice!,
+          currency: language == "en"
+              ? metingDetails.currencyEnglish!
+              : metingDetails.currencyArabic!,
+        ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.clientnote,
           desc: metingDetails.noteFromClient == ""

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mentor_app/utils/constants/database_constant.dart';
 
 class PriceView extends StatelessWidget {
   final double priceBeforeDiscount;
   final double priceAfterDiscount;
+  final String currency;
 
   const PriceView(
       {super.key,
       required this.priceBeforeDiscount,
-      required this.priceAfterDiscount});
+      required this.priceAfterDiscount,
+      required this.currency});
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +29,14 @@ class PriceView extends StatelessWidget {
             TextSpan(
               children: <TextSpan>[
                 TextSpan(
-                  text: '$priceBeforeDiscount ${getCurrency()} ',
+                  text: '$priceBeforeDiscount $currency',
                   style: const TextStyle(
                     color: Colors.grey,
                     decoration: TextDecoration.lineThrough,
                   ),
                 ),
                 TextSpan(
-                  text: "$priceAfterDiscount ${getCurrency()}",
+                  text: "$priceAfterDiscount $currency",
                 ),
               ],
             ),
@@ -44,15 +44,5 @@ class PriceView extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String getCurrency() {
-    final box = Hive.box(DatabaseBoxConstant.userInfo);
-
-    String currency = "JD";
-    if (box.get(DatabaseFieldConstant.language) != "en") {
-      currency = "د.أ";
-    }
-    return currency;
   }
 }

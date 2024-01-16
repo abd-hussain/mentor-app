@@ -29,8 +29,8 @@ class HourRateView extends StatefulWidget {
 }
 
 class _HourRateViewState extends State<HourRateView> {
-  double recumendedRatePerHour = 22.0;
-  ValueNotifier<String> valueEntered = ValueNotifier<String>("22.0");
+  double recumendedRatePerHour = 16.0;
+  ValueNotifier<String> valueEntered = ValueNotifier<String>("16.0");
   ValueNotifier<int> selectedFreeType = ValueNotifier<int>(0);
 
   @override

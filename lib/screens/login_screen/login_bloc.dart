@@ -110,15 +110,16 @@ class LoginBloc extends Bloc<AuthService> {
                 Theme.of(context).platform)) {
           // continue with authentication
           isBiometricAppeared = true;
-          final authentication = await authenticationService
-              .authenticateUser("Please use your biometric signature");
+          final authentication = await authenticationService.authenticateUser(
+              AppLocalizations.of(maincontext!)!.pleaseuseyourbiometrics);
           if (authentication.success) {
             final String biometricU = box.get(DatabaseFieldConstant.biometricU);
             final String biometricP = box.get(DatabaseFieldConstant.biometricP);
 
             if (!(await locator<NetworkInfoService>().isConnected())) {
               throw ConnectionException(
-                  message: "Please check your internet connection");
+                  message: AppLocalizations.of(maincontext!)!
+                      .pleasecheckyourinternetconnection);
             } else {
               if (context.mounted) {
                 doLoginCall(

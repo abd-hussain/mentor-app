@@ -107,13 +107,13 @@ class _RegisterFaze5ScreenState extends State<RegisterFaze5Screen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: CustomText(
-                      title: "22 \$",
+                      title: "16 ${bloc.getUserCurrency()}",
                       fontSize: 16,
                       textAlign: TextAlign.center,
-                      textColor: Color(0xff444444),
+                      textColor: const Color(0xff444444),
                       fontWeight: FontWeight.bold,
                     ),
                   ),

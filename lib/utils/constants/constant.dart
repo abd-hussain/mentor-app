@@ -2,8 +2,7 @@ class AppConstant {
   static const String argument1 = "argument1";
   static const String webViewPageUrl = "webViewPageUrl";
   static const String pageTitle = "pageTitle";
-  static const String applicationMainURL =
-      "http://167.99.212.137/"; // 'http://127.0.0.1:8000/'; //
+  static const String applicationMainURL = "http://167.99.212.137/";
 
   static const String imagesBaseURLForCountries =
       "${AppConstant.applicationMainURL}static/countries/";

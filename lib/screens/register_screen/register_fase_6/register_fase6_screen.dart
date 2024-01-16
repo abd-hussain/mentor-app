@@ -41,6 +41,8 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
     super.dispose();
   }
 
+  //TODO: on registration : save password or ask the user if he want to enable biometrics
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
