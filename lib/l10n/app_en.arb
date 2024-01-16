@@ -65,8 +65,6 @@
     "reportproblem" : "Report Problem",
     "reportsuggestion" : "Report Suggestion",
     "permision_denied" : "Permission Denied",
-    "sendsmsmessage" : "Send SMS Message",
-    "smsmessage" : "Help Era application for consulting, consult specialists, via video calls in any specialty. Download the app now",
     "reportFooterText" : "We read all of the feedback carefully, but we may not respond to each submission individually.",
     "reportanproblem" : "Report a Problem",
     "reportansuggestion" : "Report a Suggestion",
@@ -294,10 +292,17 @@
     "rateapponstore" : "Rate Application on Store",
     "rateapponstoremessage" : "If you like this app, please take a little bit of your time to review it ! It really helps us and it shouldn't take you more than one minute.",
     "mentorapp" : "Attorneys App",
+    "clientapp" : "Client App",
     "later" : "Later",
     "close" : "close",
     "pleaseuseyourbiometrics" : "Please use your biometric signature",
     "pleasecheckyourinternetconnection" : "Please check your internet connection",
     "biometricsisdisable" : "Biometric login is disabled",
-    "metingendwihin" : "call will be end until"
+    "saveemailandpasswordfornextlogin" : "Save Email and Password for next login",
+    "metingendwihin" : "call will be end until",
+    "mentorappdesc" : "Application for attorneys to meet client online, and respond of their legal questions",
+    "clientappdesc" : "Application for any client , he can ask his legal question or reserve a meeting with the specialist attorney",
+    "invitationcodeinvite" : "Get points if any one use your code to register new account using your invitation code",
+    "messageforsharementor" : "Download LegalzHub application now and open new account to get more money by consulting customers legals issues, Also dont forgot to use this invitation code to give me points",
+    "messageforshareclient" : "Download LegalzHub application now and consult our best specialist about any legal issue you have, Also don't forget to use this invitation code to give me points"
 }

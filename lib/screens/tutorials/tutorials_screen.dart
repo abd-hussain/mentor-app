@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/screens/tutorials/widgets/dot_indicator_view.dart';
 import 'package:mentor_app/screens/tutorials/widgets/tut_view1.dart';
+import 'package:mentor_app/utils/routes.dart';
+
+enum TutorialOpenFrom {
+  account,
+  firstInstall,
+}
 
 class TutorialsScreen extends StatefulWidget {
   const TutorialsScreen({super.key});
@@ -12,11 +18,26 @@ class TutorialsScreen extends StatefulWidget {
 
 class _TutorialsScreenState extends State<TutorialsScreen> {
   final PageController controller = PageController(initialPage: 0);
+  TutorialOpenFrom? openFrom;
+
+  @override
+  void didChangeDependencies() {
+    extractArguments(context);
+    super.didChangeDependencies();
+  }
 
   @override
   void dispose() {
     controller.dispose();
     super.dispose();
+  }
+
+  void extractArguments(BuildContext context) {
+    final arguments =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+    if (arguments != null) {
+      openFrom = arguments["openFrom"] as TutorialOpenFrom;
+    }
   }
 
   @override
@@ -68,7 +89,13 @@ class _TutorialsScreenState extends State<TutorialsScreen> {
                     );
                   },
                   skipPressed: () {
-                    Navigator.pop(context);
+                    if (openFrom == TutorialOpenFrom.firstInstall) {
+                      Navigator.of(context, rootNavigator: true)
+                          .pushNamedAndRemoveUntil(RoutesConstants.loginScreen,
+                              (Route<dynamic> route) => false);
+                    } else {
+                      Navigator.pop(context);
+                    }
                   },
                 ),
               ),

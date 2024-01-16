@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/screens/invite_friends/invite_friends_bloc.dart';
-import 'package:mentor_app/screens/invite_friends/widgets/list_of_contacts_widget.dart';
+import 'package:mentor_app/screens/invite_friends/widgets/client_share_view.dart';
+import 'package:mentor_app/screens/invite_friends/widgets/mentor_share_view.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
-import 'package:mentor_app/shared_widget/custom_text.dart';
-import 'package:mentor_app/shared_widget/shimmers/shimmer_list.dart';
 
 class InviteFriendsScreen extends StatefulWidget {
   const InviteFriendsScreen({super.key});
@@ -20,6 +18,7 @@ class _InviteFriendsScreenState extends State<InviteFriendsScreen> {
   @override
   void didChangeDependencies() {
     _bloc.fetchContacts();
+    _bloc.getProfileInformations();
     super.didChangeDependencies();
   }
 
@@ -33,42 +32,23 @@ class _InviteFriendsScreenState extends State<InviteFriendsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(title: AppLocalizations.of(context)!.invite_friends),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ValueListenableBuilder<List<Contact>>(
-            valueListenable: _bloc.contactsNotifier,
-            builder: (context, snapshot, child) {
-              if (_bloc.permissionDenied) {
-                return Column(
-                  children: [
-                    const SizedBox(height: 50),
-                    Center(
-                      child: CustomText(
-                        title: AppLocalizations.of(context)!.permision_denied,
-                        fontSize: 20,
-                        textColor: Colors.black,
-                      ),
-                    ),
-                  ],
-                );
-              } else {
-                return snapshot.isNotEmpty
-                    ? ListOfContactsWidget(
-                        contacts: snapshot,
-                      )
-                    : const Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: ShimmerListView(
-                            count: 15,
-                          ),
-                        ),
-                      );
-              }
-            },
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: ValueListenableBuilder<String>(
+                valueListenable: _bloc.invitationCodeNotifier,
+                builder: (context, snapshot, child) {
+                  return Column(
+                    children: [
+                      MentorShareView(invitationCode: snapshot),
+                      const SizedBox(height: 10),
+                      ClientShareView(invitationCode: snapshot),
+                    ],
+                  );
+                }),
           ),
-        ],
+        ),
       ),
     );
   }

@@ -61,6 +61,15 @@ class LoginBloc extends Bloc<AuthService> {
     passwordController.addListener(_passwordListen);
   }
 
+  getUserNameAndPasswordWhenSavePasswordTicked() {
+    if (box.get(DatabaseFieldConstant.saveEmailAndPassword) == true) {
+      emailController.text = box.get(DatabaseFieldConstant.biometricU) ?? "";
+      passwordController.text = box.get(DatabaseFieldConstant.biometricP) ?? "";
+      fieldsValidations.value = true;
+      loadingStatusNotifier.value = LoadingStatus.finish;
+    }
+  }
+
   void _emailListen() {
     showHideEmailClearNotifier.value = emailController.text.isNotEmpty;
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mentor_app/models/https/countries_model.dart';
+import 'package:mentor_app/screens/tutorials/tutorials_screen.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:mentor_app/shared_widget/shimmers/shimmer_list.dart';
 import 'package:mentor_app/utils/constants/database_constant.dart';
@@ -28,7 +29,7 @@ class ListOfCountriesWidget extends StatelessWidget {
   }
 
   Widget countryTile(BuildContext context, Country item) {
-    final nav = Navigator.of(context, rootNavigator: true);
+    final navigator = Navigator.of(context, rootNavigator: true);
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10),
       child: InkWell(
@@ -49,8 +50,11 @@ class ListOfCountriesWidget extends StatelessWidget {
           await box.put(DatabaseFieldConstant.selectedCountryMaxLenght,
               item.maxLength.toString());
 
-          nav.pushNamedAndRemoveUntil(
-              RoutesConstants.loginScreen, (Route<dynamic> route) => false);
+          navigator.pushNamedAndRemoveUntil(
+            RoutesConstants.tutorialsScreen,
+            (Route<dynamic> route) => false,
+            arguments: {"openFrom": TutorialOpenFrom.firstInstall},
+          );
         },
         child: Container(
           height: 50,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mentor_app/models/authentication_models.dart';
 import 'package:mentor_app/screens/login_screen/login_bloc.dart';
 import 'package:mentor_app/screens/login_screen/widgets/biometric_login_view.dart';
+import 'package:mentor_app/screens/login_screen/widgets/save_password_view.dart';
 import 'package:mentor_app/shared_widget/email_field.dart';
 import 'package:mentor_app/screens/login_screen/widgets/forgot_password_widget.dart';
 import 'package:mentor_app/shared_widget/password_field.dart';
@@ -30,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
     bloc.maincontext = context;
     bloc.initBiometric(context);
     bloc.handleListeners();
+    bloc.getUserNameAndPasswordWhenSavePasswordTicked();
     super.didChangeDependencies();
   }
 
@@ -104,6 +106,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                     onEditingComplete: () => FocusManager
                                         .instance.primaryFocus
                                         ?.unfocus(),
+                                  ),
+                                  SavePasswordLoginView(
+                                    initialValue: bloc.box.get(
+                                            DatabaseFieldConstant
+                                                .saveEmailAndPassword) ??
+                                        false,
+                                    selectedStatus: (val) {
+                                      bloc.box.put(
+                                          DatabaseFieldConstant
+                                              .saveEmailAndPassword,
+                                          val);
+                                    },
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(16),

@@ -39,9 +39,13 @@ class AppConstant {
   static const String facebookLink = "http://www.facebook.com/legalzhub/";
 
   static const String whatsappNumber = "+962795190663";
-  static const String appLinkAndroid =
-      "https://play.google.com/apps/internaltest/4701396781860140433";
   static const String appName = "LegalzHub";
-  static const String appLinkIos =
+  static const String mentorAppLinkIos =
       "https://apps.apple.com/us/app/helpera-mentor/id6474047303";
+  static const String mentorAppLinkAndroid =
+      "https://play.google.com/apps/internaltest/4701396781860140433";
+  static const String clientAppLinkIos =
+      "https://apps.apple.com/us/app/helpera-client/id6474086504";
+  static const String clientAppLinkAndroid =
+      "https://play.google.com/apps/internaltest/4701710799932453797";
 }

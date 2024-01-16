@@ -31,8 +31,5 @@ class MethodNameConstant {
   static const String cancelAppointment = "mentor-appointment/cancel";
   static const String joinCallAppointment = "mentor-appointment/join-call";
   static const String exitCallAppointment = "mentor-appointment/end-call";
-
-  // Verfied API
-  //TODO check this api
   static const String uploadContactList = "settings/leads";
 }

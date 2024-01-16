@@ -5,6 +5,7 @@ import 'package:mentor_app/locator.dart';
 import 'package:mentor_app/models/profile_options.dart';
 import 'package:mentor_app/my_app.dart';
 import 'package:mentor_app/screens/report/report_screen.dart';
+import 'package:mentor_app/screens/tutorials/tutorials_screen.dart';
 import 'package:mentor_app/services/account_service.dart';
 import 'package:mentor_app/services/mentor_settings.dart';
 import 'package:mentor_app/shared_widget/bottom_sheet_util.dart';
@@ -105,8 +106,10 @@ class AccountBloc extends Bloc<AccountService> {
       ProfileOptions(
         icon: Icons.menu_book_rounded,
         name: AppLocalizations.of(context)!.usertutorials,
-        onTap: () => Navigator.of(context, rootNavigator: true)
-            .pushNamed(RoutesConstants.tutorialsScreen),
+        onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(
+          RoutesConstants.tutorialsScreen,
+          arguments: {"openFrom": TutorialOpenFrom.account},
+        ),
       ),
     ];
   }

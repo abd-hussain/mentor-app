@@ -7,6 +7,7 @@ import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/shared_widget/loading_view.dart';
+import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/enums/loading_status.dart';
 import 'package:mentor_app/utils/error/exceptions.dart';
 import 'package:mentor_app/utils/push_notifications/firebase_cloud_messaging_util.dart';
@@ -82,6 +83,14 @@ class _RegisterFinalScreenState extends State<RegisterFinalScreen> {
                                       content: Text(localization
                                           .accountcreatedsuccessfully)),
                                 );
+                                await bloc.box.put(
+                                    DatabaseFieldConstant.biometricU,
+                                    bloc.box.get(
+                                        TempFieldToRegistrtConstant.email));
+                                await bloc.box.put(
+                                    DatabaseFieldConstant.biometricP,
+                                    bloc.box.get(
+                                        TempFieldToRegistrtConstant.password));
                                 await bloc.clearRegistrationData();
 
                                 navigation.pushReplacement(

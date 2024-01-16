@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_6/register_fase6_bloc.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_6/widgets/email_header.dart';
 import 'package:mentor_app/screens/register_screen/register_fase_6/widgets/password_complexity.dart';
+import 'package:mentor_app/screens/register_screen/register_fase_6/widgets/save_password_view.dart';
 import 'package:mentor_app/screens/register_screen/widgets/footer_view.dart';
 import 'package:mentor_app/shared_widget/custom_appbar.dart';
 import 'package:mentor_app/shared_widget/custom_text.dart';
@@ -41,8 +42,6 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
     super.dispose();
   }
 
-  //TODO: on registration : save password or ask the user if he want to enable biometrics
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -70,6 +69,13 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                       bloc.emailController.text);
                   await bloc.box.put(TempFieldToRegistrtConstant.password,
                       bloc.passwordController.text);
+
+                  await bloc.box.put(DatabaseFieldConstant.saveEmailAndPassword,
+                      bloc.statusOfSaveEmailAndPassword);
+
+                  await bloc.box.put(TempFieldToRegistrtConstant.password,
+                      bloc.passwordController.text);
+
                   await bloc.box
                       .put(DatabaseFieldConstant.registrationStep, "7");
                   navigator.pushNamed(RoutesConstants.registerfinalfazeScreen);
@@ -153,7 +159,12 @@ class _RegisterFaze6ScreenState extends State<RegisterFaze6Screen> {
                   passwordHaveNumberNotifier: bloc.passwordHaveNumberNotifier,
                   passwordMoreThan8CharNotifier:
                       bloc.passwordMoreThan8CharNotifier,
-                )
+                ),
+                SavePasswordView(
+                  selectedStatus: (val) {
+                    bloc.statusOfSaveEmailAndPassword = val;
+                  },
+                ),
               ],
             ),
           ),

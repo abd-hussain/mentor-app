@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Register6Bloc extends Bloc<FilterService> {
   final box = Hive.box(DatabaseBoxConstant.userInfo);
+  bool statusOfSaveEmailAndPassword = true;
 
   ValueNotifier<bool> enableNextBtn = ValueNotifier<bool>(false);
 

@@ -9,6 +9,7 @@ class DatabaseFieldConstant {
   static const String userid = "userid";
   static const String isUserLoggedIn = "isUserLoggedIn";
   static const String registrationStep = "registrationStep";
+  static const String saveEmailAndPassword = "saveEmailAndPassword";
 
   static const String biometricU = "biometricU";
   static const String biometricP = "biometricP";
