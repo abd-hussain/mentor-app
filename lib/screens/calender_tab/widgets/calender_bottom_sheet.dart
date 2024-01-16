@@ -140,7 +140,7 @@ class CalenderBottomSheetsUtil {
                 CustomButton(
                   enableButton: DateTime.now()
                           .isBefore(DateTime.parse(metingDetails.dateFrom!)) &&
-                      metingDetails.state == AppointmentsState.active,
+                      metingDetails.state == 1,
                   padding: const EdgeInsets.all(8.0),
                   buttonColor: const Color(0xffda1100),
                   buttonTitle: AppLocalizations.of(context)!.cancelappointment,

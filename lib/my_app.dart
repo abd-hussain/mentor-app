@@ -37,6 +37,7 @@ class MyAppState extends State<MyApp> {
       onGenerateTitle: (BuildContext context) {
         return AppConstant.appName;
       },
+      debugShowCheckedModeBanner: false,
       locale: myBox.get(DatabaseFieldConstant.language) != null
           ? Locale(myBox.get(DatabaseFieldConstant.language))
           : const Locale("en"),

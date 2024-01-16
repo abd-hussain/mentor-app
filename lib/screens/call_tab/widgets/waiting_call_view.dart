@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mentor_app/models/https/active_appointment.dart';
-import 'package:mentor_app/models/https/appointment.dart';
 import 'package:mentor_app/screens/calender_tab/widgets/client_info_view.dart';
-import 'package:mentor_app/shared_widget/appointment_details_view.dart';
 import 'package:mentor_app/shared_widget/cancel_booking_bottom_sheet.dart';
 import 'package:mentor_app/shared_widget/custom_button.dart';
 import 'dart:async';
 
 import 'package:mentor_app/shared_widget/custom_text.dart';
+import 'package:mentor_app/utils/constants/database_constant.dart';
 import 'package:mentor_app/utils/gender_format.dart';
 
 class WaitingCallView extends StatefulWidget {
@@ -47,6 +47,8 @@ class _WaitingCallViewState extends State<WaitingCallView> {
   int timerStartNumberSec = 0;
   int timerStartNumberMin = 0;
   int timerStartNumberHour = 0;
+
+  final box = Hive.box(DatabaseBoxConstant.userInfo);
 
   @override
   void initState() {
@@ -95,57 +97,45 @@ class _WaitingCallViewState extends State<WaitingCallView> {
               );
             }),
         const SizedBox(height: 8),
+        CustomText(
+          title: "-- ${AppLocalizations.of(context)!.appointmentdetails} --",
+          fontSize: 16,
+          textColor: const Color(0xff554d56),
+        ),
+        meetingTimingView(),
+        CustomText(
+          title: "-- ${AppLocalizations.of(context)!.payments} --",
+          fontSize: 16,
+          textColor: const Color(0xff554d56),
+        ),
+        meetingPricingView(),
+        CustomText(
+          title: "-- ${AppLocalizations.of(context)!.notes} --",
+          fontSize: 16,
+          textColor: const Color(0xff554d56),
+        ),
+        meetingNotesView(),
         Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CustomText(
-            title: "-- ${AppLocalizations.of(context)!.appointmentdetails} --",
-            fontSize: 16,
-            textColor: const Color(0xff554d56),
+          padding: const EdgeInsets.only(left: 8, right: 8),
+          child: ClientInfoView(
+            profileImg: widget.metingDetails.profileImg,
+            flagImage: widget.metingDetails.flagImage,
+            firstName: widget.metingDetails.firstName,
+            lastName: widget.metingDetails.lastName,
+            gender: GenderFormat()
+                .convertIndexToString(context, widget.metingDetails.gender!),
+            dateOfBirth: widget.metingDetails.dateOfBirth,
           ),
-        ),
-        AppointmentDetailsView(
-          title: AppLocalizations.of(context)!.eventday,
-          desc: widget.meetingday,
-          forceView: true,
-        ),
-        AppointmentDetailsView(
-          title: AppLocalizations.of(context)!.meetingtime,
-          desc: widget.meetingtime,
-          forceView: true,
-        ),
-        AppointmentDetailsView(
-          title: AppLocalizations.of(context)!.meetingduration,
-          desc:
-              "${widget.meetingduration} ${AppLocalizations.of(context)!.min}",
-          forceView: true,
-        ),
-        AppointmentDetailsView(
-          title: AppLocalizations.of(context)!.clientnote,
-          desc: widget.metingDetails.noteFromClient ?? "",
-          forceView: true,
-        ),
-        AppointmentDetailsView(
-          title: AppLocalizations.of(context)!.mentornote,
-          desc: widget.metingDetails.noteFromMentor ?? "",
-          forceView: true,
-        ),
-        ClientInfoView(
-          profileImg: widget.metingDetails.profileImg,
-          flagImage: widget.metingDetails.flagImage,
-          firstName: widget.metingDetails.firstName,
-          lastName: widget.metingDetails.lastName,
-          gender: GenderFormat()
-              .convertIndexToString(context, widget.metingDetails.gender!),
-          dateOfBirth: widget.metingDetails.dateOfBirth,
         ),
         CustomButton(
           enableButton: DateTime.now()
                   .isBefore(DateTime.parse(widget.metingDetails.dateFrom!)) &&
-              widget.metingDetails.state == AppointmentsState.active,
+              widget.metingDetails.state == 1,
           padding: const EdgeInsets.all(8.0),
           width: MediaQuery.of(context).size.width / 2,
           buttonColor: const Color(0xffda1100),
           buttonTitle: AppLocalizations.of(context)!.cancelappointment,
+          buttonTitleColor: Colors.white,
           onTap: () {
             CancelBookingBottomSheetsUtil(context: context)
                 .bookMeetingBottomSheet(
@@ -155,9 +145,17 @@ class _WaitingCallViewState extends State<WaitingCallView> {
             );
           },
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 25),
       ],
     );
+  }
+
+  String getCurrency({required String enCurrency, required String arCurrency}) {
+    if (box.get(DatabaseFieldConstant.language) == "en") {
+      return enCurrency;
+    } else {
+      return arCurrency;
+    }
   }
 
   void startTimer() {
@@ -193,5 +191,145 @@ class _WaitingCallViewState extends State<WaitingCallView> {
     return timerStartNumberHour == 0 &&
         timerStartNumberMin == 0 &&
         timerStartNumberSec == 0;
+  }
+
+  Widget meetingTimingView() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8, left: 16, right: 16),
+      child: GridView(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 0,
+          crossAxisSpacing: 8,
+          childAspectRatio: 3.2,
+        ),
+        children: [
+          itemInGrid(
+              title: AppLocalizations.of(context)!.eventday,
+              value: widget.meetingday),
+          itemInGrid(
+              title: AppLocalizations.of(context)!.meetingtime,
+              value: widget.meetingtime),
+          itemInGrid(
+              title: AppLocalizations.of(context)!.meetingduration,
+              value:
+                  "${widget.meetingduration} ${AppLocalizations.of(context)!.min}"),
+          itemInGrid(
+              title: AppLocalizations.of(context)!.appointmenttype,
+              value: widget.metingDetails.appointmentType == 1
+                  ? AppLocalizations.of(context)!.schudule
+                  : AppLocalizations.of(context)!.instant),
+        ],
+      ),
+    );
+  }
+
+  Widget meetingPricingView() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
+      child: GridView(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 0,
+          crossAxisSpacing: 8,
+          childAspectRatio: 3.2,
+        ),
+        children: [
+          itemInGrid(
+            title: AppLocalizations.of(context)!.free,
+            value: widget.metingDetails.isFree!
+                ? AppLocalizations.of(context)!.yes
+                : AppLocalizations.of(context)!.no,
+          ),
+          itemInGrid(
+            title: AppLocalizations.of(context)!.hasdiscount,
+            value: widget.metingDetails.discountId != null
+                ? AppLocalizations.of(context)!.yes
+                : AppLocalizations.of(context)!.no,
+          ),
+          itemInGrid(
+              title: AppLocalizations.of(context)!.price,
+              value:
+                  "${widget.metingDetails.price!} ${getCurrency(enCurrency: widget.metingDetails.currencyEnglish!, arCurrency: widget.metingDetails.currencyArabic!)}"),
+          itemInGrid(
+              title: AppLocalizations.of(context)!.priceafter,
+              value:
+                  "${widget.metingDetails.discountedPrice!} ${getCurrency(enCurrency: widget.metingDetails.currencyEnglish!, arCurrency: widget.metingDetails.currencyArabic!)}"),
+        ],
+      ),
+    );
+  }
+
+  Widget meetingNotesView() {
+    return SizedBox(
+      height: 125,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+        child: GridView(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 0,
+            crossAxisSpacing: 8,
+            childAspectRatio: 1,
+          ),
+          children: [
+            itemInGrid(
+                title: AppLocalizations.of(context)!.clientnote,
+                value: checkNote(widget.metingDetails.noteFromClient),
+                valueHight: 90),
+            itemInGrid(
+                title: AppLocalizations.of(context)!.mentornote,
+                value: checkNote(widget.metingDetails.noteFromMentor),
+                valueHight: 90),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String checkNote(String? note) {
+    if (note == null) {
+      return "-";
+    } else if (note == "") {
+      return "-";
+    } else {
+      return note;
+    }
+  }
+
+  Widget itemInGrid(
+      {required String title, required String value, double valueHight = 25}) {
+    return Column(
+      children: [
+        Container(
+          height: 25,
+          color: Colors.grey[300],
+          child: Center(
+            child: CustomText(
+              title: title,
+              fontSize: 16,
+              textColor: Colors.black,
+            ),
+          ),
+        ),
+        Container(
+          height: valueHight,
+          color: Colors.grey[400],
+          child: Center(
+            child: CustomText(
+              title: value,
+              fontSize: 16,
+              textColor: Colors.black,
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

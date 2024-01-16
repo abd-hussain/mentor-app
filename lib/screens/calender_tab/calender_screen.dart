@@ -23,6 +23,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
   @override
   void didChangeDependencies() {
     logDebugMessage(message: 'Calender init Called ...');
+    bloc.getMentorAppointments(context);
     super.didChangeDependencies();
   }
 

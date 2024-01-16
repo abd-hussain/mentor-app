@@ -14,9 +14,31 @@ class CallBloc extends Bloc<AppointmentsService> {
   void getActiveMentorAppointments(BuildContext context) async {
     await service.getActiveMentorAppointments().then((value) {
       if (value.data != null) {
-        activeMentorAppointmentsListNotifier.value = value.data!;
+        activeMentorAppointmentsListNotifier.value =
+            handleTimingFromUTC(value.data!);
       }
     });
+  }
+
+  List<ActiveAppointmentsData> handleTimingFromUTC(
+      List<ActiveAppointmentsData> data) {
+    int offset = DateTime.now().timeZoneOffset.inHours;
+
+    for (var appoint in data) {
+      appoint.dateFrom = _adjustDate(appoint.dateFrom, offset);
+      appoint.dateTo = _adjustDate(appoint.dateTo, offset);
+    }
+
+    return data;
+  }
+
+  String _adjustDate(String? dateString, int offset) {
+    if (dateString == null) return '';
+
+    final DateTime date = DateTime.parse(dateString);
+    final DateTime adjustedDate = date.add(Duration(hours: offset));
+
+    return adjustedDate.toString();
   }
 
   ActiveAppointmentsData? getNearestMeetingToday(

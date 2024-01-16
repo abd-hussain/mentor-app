@@ -23,6 +23,7 @@ class _CallScreenState extends State<CallScreen> {
   @override
   void didChangeDependencies() {
     logDebugMessage(message: 'Call init Called ...');
+    bloc.getActiveMentorAppointments(context);
     super.didChangeDependencies();
   }
 
@@ -49,14 +50,13 @@ class _CallScreenState extends State<CallScreen> {
                 if (snapshot.isEmpty) {
                   return noCallView();
                 }
-                //TODO : handle UTC
-                final appointment = bloc.getNearestMeetingToday(snapshot);
 
+                final appointment = bloc.getNearestMeetingToday(snapshot);
                 if (appointment == null) {
                   return noCallView();
                 }
-                DateTime now = DateTime.now();
 
+                DateTime now = DateTime.now();
                 DateTime timeDifference = DateTime.parse(appointment.dateFrom!)
                         .isAfter(now)
                     ? DateTime.parse(appointment.dateFrom!).subtract(Duration(

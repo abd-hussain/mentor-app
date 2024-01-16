@@ -3,6 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomButton extends StatelessWidget {
   final String buttonTitle;
+  final Color buttonTitleColor;
+
   final bool enableButton;
   final Color buttonColor;
   final Function() onTap;
@@ -11,6 +13,7 @@ class CustomButton extends StatelessWidget {
 
   const CustomButton({
     this.buttonTitle = "Submit",
+    this.buttonTitleColor = Colors.black,
     required this.enableButton,
     this.width,
     this.buttonColor = const Color(0xff4CB6EA),
@@ -36,7 +39,7 @@ class CustomButton extends StatelessWidget {
               buttonTitle == "Submit"
                   ? AppLocalizations.of(context)!.submit
                   : buttonTitle,
-              style: const TextStyle(color: Colors.black),
+              style: TextStyle(color: buttonTitleColor),
             ),
           ),
         ),

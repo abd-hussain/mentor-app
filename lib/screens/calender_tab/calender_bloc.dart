@@ -14,10 +14,29 @@ class CalenderBloc extends Bloc<AppointmentsService> {
   void getMentorAppointments(BuildContext context) async {
     await service.getMentorAppointments().then((value) {
       if (value.data != null) {
-        print(value.data!.length);
-        meetingsListNotifier.value = value.data!;
+        meetingsListNotifier.value = handleTimingFromUTC(value.data!);
       }
     });
+  }
+
+  List<AppointmentData> handleTimingFromUTC(List<AppointmentData> data) {
+    int offset = DateTime.now().timeZoneOffset.inHours;
+
+    for (var appoint in data) {
+      appoint.dateFrom = _adjustDate(appoint.dateFrom, offset);
+      appoint.dateTo = _adjustDate(appoint.dateTo, offset);
+    }
+
+    return data;
+  }
+
+  String _adjustDate(String? dateString, int offset) {
+    if (dateString == null) return '';
+
+    final DateTime date = DateTime.parse(dateString);
+    final DateTime adjustedDate = date.add(Duration(hours: offset));
+
+    return adjustedDate.toString();
   }
 
   Future<dynamic> cancelMeeting(int meetingId) async {
