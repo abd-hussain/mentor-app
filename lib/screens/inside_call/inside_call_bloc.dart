@@ -6,10 +6,10 @@ import 'package:mentor_app/locator.dart';
 import 'package:mentor_app/services/appointments_service.dart';
 
 class InsideCallBloc {
-  late RtcEngine engine;
   String channelName = "";
   int callID = 0;
   int meetingDurationInMin = 0;
+  ValueNotifier<RtcEngine?> engineNotifier = ValueNotifier<RtcEngine?>(null);
 
   String? appId = "67fa993d64a346e1a2587f4a8b96f569";
   String generatedCallToken = "";
@@ -35,8 +35,8 @@ class InsideCallBloc {
       orientationMode: OrientationMode.orientationModeAdaptive,
     );
 
-    await engine.setVideoEncoderConfiguration(configuration);
-    await engine.joinChannel(
+    await engineNotifier.value!.setVideoEncoderConfiguration(configuration);
+    await engineNotifier.value!.joinChannel(
       token: generatedCallToken,
       channelId: channelName,
       uid: 0,
@@ -45,20 +45,21 @@ class InsideCallBloc {
   }
 
   Future<void> _initAgoraRtcEngine() async {
-    engine = createAgoraRtcEngine();
+    engineNotifier.value = createAgoraRtcEngine();
 
-    await engine.initialize(RtcEngineContext(
+    await engineNotifier.value!.initialize(RtcEngineContext(
       appId: appId,
       channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
     ));
 
-    await engine.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
-    await engine.enableVideo();
-    await engine.startPreview();
+    await engineNotifier.value!
+        .setClientRole(role: ClientRoleType.clientRoleBroadcaster);
+    await engineNotifier.value!.enableVideo();
+    await engineNotifier.value!.startPreview();
   }
 
   void _addAgoraEventHandlers() {
-    engine.registerEventHandler(
+    engineNotifier.value!.registerEventHandler(
       RtcEngineEventHandler(
         onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
           debugPrint("local user ${connection.localUid} joined");

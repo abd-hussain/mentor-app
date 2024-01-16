@@ -26,8 +26,9 @@ class CallReadyView extends StatelessWidget {
       children: [
         const SizedBox(height: 20),
         Lottie.network(
-            "https://assets8.lottiefiles.com/packages/lf20_WZQ5gTEaXA.json",
-            height: 200),
+          "https://assets8.lottiefiles.com/packages/lf20_WZQ5gTEaXA.json",
+          height: 200,
+        ),
         const SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.all(8),

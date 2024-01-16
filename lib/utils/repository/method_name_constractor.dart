@@ -29,13 +29,10 @@ class MethodNameConstant {
       "mentor-settings/review-response";
   static const String commentAppointment = "mentor-appointment/comment";
   static const String cancelAppointment = "mentor-appointment/cancel";
-
-  // Verfied API
-
-  //TODO check Appointments actions
-
   static const String joinCallAppointment = "mentor-appointment/join-call";
   static const String exitCallAppointment = "mentor-appointment/end-call";
+
+  // Verfied API
 
   static const String uploadContactList = "settings/leads";
 }

@@ -1,3 +1,4 @@
+import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:mentor_app/screens/inside_call/inside_call_bloc.dart';
 import 'package:mentor_app/screens/inside_call/widgets/client_camera_view.dart';
@@ -25,7 +26,9 @@ class _InsideCallScreenState extends State<InsideCallScreen> {
 
   @override
   void dispose() {
-    bloc.engine.leaveChannel();
+    if (bloc.engineNotifier.value != null) {
+      bloc.engineNotifier.value!.leaveChannel();
+    }
     super.dispose();
   }
 
@@ -35,18 +38,34 @@ class _InsideCallScreenState extends State<InsideCallScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-            ClientCameraView(
-              rtcEngine: bloc.engine,
-              remoteUidStatus: bloc.remoteUidStatus,
-              channelName: bloc.channelName,
-              timesup: () async {
-                await bloc.exitAppointment(id: bloc.callID);
-                if (context.mounted) {
-                  Navigator.pop(context);
-                }
-              },
-            ),
-            MyCameraView(rtcEngine: bloc.engine),
+            ValueListenableBuilder<RtcEngine?>(
+                valueListenable: bloc.engineNotifier,
+                builder: (context, snapshot, child) {
+                  if (snapshot != null) {
+                    return ClientCameraView(
+                      rtcEngine: snapshot,
+                      remoteUidStatus: bloc.remoteUidStatus,
+                      channelName: bloc.channelName,
+                      timesup: () async {
+                        await bloc.exitAppointment(id: bloc.callID);
+                        if (context.mounted) {
+                          Navigator.pop(context);
+                        }
+                      },
+                    );
+                  } else {
+                    return Container();
+                  }
+                }),
+            ValueListenableBuilder<RtcEngine?>(
+                valueListenable: bloc.engineNotifier,
+                builder: (context, snapshot, child) {
+                  if (snapshot != null) {
+                    return MyCameraView(rtcEngine: snapshot);
+                  } else {
+                    return Container();
+                  }
+                }),
             ValueListenableBuilder<int?>(
                 valueListenable: bloc.remoteUidStatus,
                 builder: (context, snapshot, child) {
@@ -64,12 +83,23 @@ class _InsideCallScreenState extends State<InsideCallScreen> {
                     return Container();
                   }
                 }),
-            CallToolBarView(
-              engine: bloc.engine,
-              callEnd: () {
-                Navigator.pop(context);
-              },
-            ),
+            ValueListenableBuilder<RtcEngine?>(
+                valueListenable: bloc.engineNotifier,
+                builder: (context, snapshot, child) {
+                  if (snapshot != null) {
+                    return CallToolBarView(
+                      engine: snapshot,
+                      callEnd: () async {
+                        await bloc.exitAppointment(id: bloc.callID);
+                        if (context.mounted) {
+                          Navigator.pop(context);
+                        }
+                      },
+                    );
+                  } else {
+                    return Container();
+                  }
+                }),
           ],
         ),
       ),

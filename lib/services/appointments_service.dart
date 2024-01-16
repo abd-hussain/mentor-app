@@ -39,7 +39,7 @@ class AppointmentsService with Service {
     final response = await repository.callRequest(
       requestType: RequestType.put,
       methodName: MethodNameConstant.joinCallAppointment,
-      queryParam: {"id": id, "channelName": channelName},
+      queryParam: {"id": id, "channel_name": channelName},
     );
 
     return response;
@@ -54,16 +54,6 @@ class AppointmentsService with Service {
 
     return response;
   }
-
-  // Future<void> compleateAppointment({required int id}) async {
-  //   final response = await repository.callRequest(
-  //     requestType: RequestType.post,
-  //     methodName: MethodNameConstant.compleatedAppointment,
-  //     queryParam: {"id": id},
-  //   );
-
-  //   return response;
-  // }
 
   Future<void> addCommentToAppointment(
       {required AddCommentToAppointment body}) async {
