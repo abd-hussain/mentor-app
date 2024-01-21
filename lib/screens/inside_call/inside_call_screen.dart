@@ -18,9 +18,7 @@ class _InsideCallScreenState extends State<InsideCallScreen> {
 
   @override
   void didChangeDependencies() {
-    bloc.handleReadingArguments(context,
-        arguments: ModalRoute.of(context)!.settings.arguments);
-    bloc.joinAppointment(id: bloc.callID, channelName: bloc.channelName);
+    bloc.handleReadingArguments(context, arguments: ModalRoute.of(context)!.settings.arguments);
     super.didChangeDependencies();
   }
 
