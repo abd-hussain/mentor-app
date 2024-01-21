@@ -34,10 +34,10 @@ class MyAppState extends State<MyApp> {
     locator<MainContext>().setMainContext(context);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       onGenerateTitle: (BuildContext context) {
         return AppConstant.appName;
       },
-      debugShowCheckedModeBanner: false,
       locale: myBox.get(DatabaseFieldConstant.language) != null
           ? Locale(myBox.get(DatabaseFieldConstant.language))
           : const Locale("en"),

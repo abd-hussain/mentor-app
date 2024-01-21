@@ -6,8 +6,9 @@ import 'package:mentor_app/utils/repository/method_name_constractor.dart';
 class SettingService with Service {
   Future<void> uploadContactList({required UploadContact contacts}) async {
     await repository.callRequest(
-        requestType: RequestType.post,
-        methodName: MethodNameConstant.uploadContactList,
-        postBody: contacts);
+      requestType: RequestType.post,
+      methodName: MethodNameConstant.uploadContactList,
+      postBody: contacts,
+    );
   }
 }

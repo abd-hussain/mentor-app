@@ -39,8 +39,9 @@ class InviteFriendsBloc extends Bloc<SettingService> {
         ),
       );
     }
-
-    await service.uploadContactList(contacts: listOfContacts);
+    if (listOfContacts.list.isNotEmpty) {
+      await service.uploadContactList(contacts: listOfContacts);
+    }
   }
 
   void getProfileInformations() async {
