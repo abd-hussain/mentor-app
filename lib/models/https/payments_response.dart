@@ -31,7 +31,7 @@ class PaymentResponseData with ModelChecker {
   int? appointmentState;
   bool? appointmentIsFree;
   double? appointmentPrice;
-  double? appointmentDiscountedPrice;
+  double? appointmentTotalPrice;
   String? currency;
   double? mentorHourRate;
   String? noteFromClient;
@@ -57,7 +57,7 @@ class PaymentResponseData with ModelChecker {
     this.appointmentState,
     this.appointmentIsFree,
     this.appointmentPrice,
-    this.appointmentDiscountedPrice,
+    this.appointmentTotalPrice,
     this.currency,
     this.mentorHourRate,
     this.noteFromClient,
@@ -84,8 +84,7 @@ class PaymentResponseData with ModelChecker {
     appointmentState = json['appointment_state'];
     appointmentIsFree = json['appointment_is_free'];
     appointmentPrice = convertToDouble(json['appointment_price']);
-    appointmentDiscountedPrice =
-        convertToDouble(json['appointment_discounted_price']);
+    appointmentTotalPrice = convertToDouble(json['appointment_total_price']);
     currency = json['currency'];
     mentorHourRate = convertToDouble(json['mentor_hour_rate']);
     noteFromClient = json['note_from_client'];

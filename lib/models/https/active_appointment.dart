@@ -28,7 +28,7 @@ class ActiveAppointmentsData with ModelChecker {
   String? noteFromMentor;
   String? noteFromClient;
   double? price;
-  double? discountedPrice;
+  double? totalPrice;
   int? state;
   String? mentorJoinCall;
   String? clientJoinCall;
@@ -58,7 +58,7 @@ class ActiveAppointmentsData with ModelChecker {
       this.noteFromMentor,
       this.noteFromClient,
       this.price,
-      this.discountedPrice,
+      this.totalPrice,
       this.state,
       this.mentorJoinCall,
       this.clientJoinCall,
@@ -88,7 +88,7 @@ class ActiveAppointmentsData with ModelChecker {
     noteFromMentor = convertToString(json['note_from_mentor']);
     noteFromClient = convertToString(json['note_from_client']);
     price = convertToDouble(json['price']);
-    discountedPrice = convertToDouble(json['discounted_price']);
+    totalPrice = convertToDouble(json['total_price']);
     state = json['state'];
     mentorJoinCall = convertToString(json['mentor_join_call']);
     clientJoinCall = convertToString(json['client_join_call']);

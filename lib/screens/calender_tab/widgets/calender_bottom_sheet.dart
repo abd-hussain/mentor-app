@@ -213,7 +213,7 @@ class CalenderBottomSheetsUtil {
         ),
         PriceView(
           priceBeforeDiscount: metingDetails.price!,
-          priceAfterDiscount: metingDetails.discountedPrice!,
+          priceAfterDiscount: metingDetails.totalPrice!,
           currency: language == "en"
               ? metingDetails.currencyEnglish!
               : metingDetails.currencyArabic!,

@@ -24,7 +24,7 @@ class PaymentsBloc extends Bloc<PaymentService> {
             if (item.paymentStatus == 1) {
               if (item.appointmentDiscountId != null) {
                 pendingTotalAmount =
-                    pendingTotalAmount + item.appointmentDiscountedPrice!;
+                    pendingTotalAmount + item.appointmentTotalPrice!;
               } else {
                 pendingTotalAmount =
                     pendingTotalAmount + item.appointmentPrice!;
@@ -32,7 +32,7 @@ class PaymentsBloc extends Bloc<PaymentService> {
             } else {
               if (item.appointmentDiscountId != null) {
                 recivedTotalAmount =
-                    recivedTotalAmount + item.appointmentDiscountedPrice!;
+                    recivedTotalAmount + item.appointmentTotalPrice!;
               } else {
                 recivedTotalAmount =
                     recivedTotalAmount + item.appointmentPrice!;

@@ -97,7 +97,7 @@ class PaymentListView extends StatelessWidget {
           CustomText(
             title: item.appointmentIsFree!
                 ? AppLocalizations.of(context)!.free
-                : "${item.appointmentDiscountId != null ? item.appointmentDiscountedPrice! : item.appointmentPrice!} ${item.currency}",
+                : "${item.appointmentDiscountId != null ? item.appointmentTotalPrice! : item.appointmentPrice!} ${item.currency}",
             fontSize: 16,
             fontWeight: FontWeight.bold,
             textColor: const Color(0xff444444),
@@ -135,7 +135,7 @@ class PaymentListView extends StatelessWidget {
         ),
         AppointmentDetailsView(
           title: AppLocalizations.of(context)!.priceafter,
-          desc: "${item.appointmentDiscountedPrice ?? 0.0} ${item.currency}",
+          desc: "${item.appointmentTotalPrice ?? 0.0} ${item.currency}",
         ),
         ClientView(
           clientProfileImg: item.clientProfileImg ?? "",

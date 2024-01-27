@@ -16,7 +16,8 @@ class InsideCallBloc {
   ValueNotifier<int?> remoteUidStatus = ValueNotifier<int?>(null);
   final infoStrings = <String>[];
 
-  void handleReadingArguments(BuildContext context, {required Object? arguments}) {
+  void handleReadingArguments(BuildContext context,
+      {required Object? arguments}) {
     if (arguments != null) {
       final newArguments = arguments as Map<String, dynamic>;
       channelName = newArguments["channelName"] as String;
@@ -52,7 +53,8 @@ class InsideCallBloc {
       channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
     ));
 
-    await engineNotifier.value!.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
+    await engineNotifier.value!
+        .setClientRole(role: ClientRoleType.clientRoleBroadcaster);
     await engineNotifier.value!.enableVideo();
     await engineNotifier.value!.startPreview();
   }
@@ -66,9 +68,11 @@ class InsideCallBloc {
           debugPrint("+++==+++ onError $code $error");
         },
         onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
-          final info = 'onJoinChannel: ${connection.channelId}, uid: ${connection.localUid}';
+          final info =
+              'onJoinChannel: ${connection.channelId}, uid: ${connection.localUid}';
           infoStrings.add(info);
-          debugPrint("+++==+++ onJoinChannel: ${connection.channelId}, uid: ${connection.localUid}");
+          debugPrint(
+              "+++==+++ onJoinChannel: ${connection.channelId}, uid: ${connection.localUid}");
         },
         onLeaveChannel: (connection, stats) {
           infoStrings.add("onLeaveChannel ${connection.localUid} Leave");
@@ -81,23 +85,29 @@ class InsideCallBloc {
           debugPrint("+++==+++ remote user $remoteUid joined");
           remoteUidStatus.value = remoteUid;
         },
-        onUserOffline: (RtcConnection connection, int remoteUid, UserOfflineReasonType reason) {
+        onUserOffline: (RtcConnection connection, int remoteUid,
+            UserOfflineReasonType reason) {
           final info = 'userOffline: $remoteUid';
           infoStrings.add(info);
           remoteUidStatus.value = null;
           debugPrint("+++==+++ remote user $remoteUid left channel");
         },
         onTokenPrivilegeWillExpire: (RtcConnection connection, String token) {
-          final info = '[onTokenPrivilegeWillExpire] connection: ${connection.toJson()}, token: $token';
+          final info =
+              '[onTokenPrivilegeWillExpire] connection: ${connection.toJson()}, token: $token';
           infoStrings.add(info);
-          debugPrint('+++==+++ [onTokenPrivilegeWillExpire] connection: ${connection.toJson()}, token: $token');
+          debugPrint(
+              '+++==+++ [onTokenPrivilegeWillExpire] connection: ${connection.toJson()}, token: $token');
         },
       ),
     );
   }
 
-  Future<void> joinAppointment({required int id, required String channelName}) async {
-    locator<AppointmentsService>().joinCall(id: id, channelName: channelName).then((value) {
+  Future<void> joinAppointment(
+      {required int id, required String channelName}) async {
+    locator<AppointmentsService>()
+        .joinCall(id: id, channelName: channelName)
+        .then((value) {
       generatedCallToken = value["data"];
       initializeCall();
     });
