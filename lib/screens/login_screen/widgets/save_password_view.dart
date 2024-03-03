@@ -5,8 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SavePasswordLoginView extends StatefulWidget {
   final bool initialValue;
   final Function(bool) selectedStatus;
-  const SavePasswordLoginView(
-      {super.key, required this.selectedStatus, required this.initialValue});
+  const SavePasswordLoginView({super.key, required this.selectedStatus, required this.initialValue});
 
   @override
   State<SavePasswordLoginView> createState() => _SavePasswordLoginViewState();
@@ -41,9 +40,8 @@ class _SavePasswordLoginViewState extends State<SavePasswordLoginView> {
                     });
               }),
           CustomText(
-            title:
-                AppLocalizations.of(context)!.saveemailandpasswordfornextlogin,
-            fontSize: 16,
+            title: AppLocalizations.of(context)!.saveemailandpasswordfornextlogin,
+            fontSize: 12,
             textColor: const Color(0xff444444),
           )
         ],
