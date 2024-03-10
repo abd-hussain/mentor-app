@@ -1,9 +1,9 @@
-git_url("https://github.com/abd-hussain/certificate-Mentor")
+git_url("git@github.com:abd-hussain/certificate-Mentor")
 
 storage_mode("git")
 
 type("appstore") # The default type, can be: appstore, adhoc, enterprise or development
-
+clone_branch_directly(true)
 app_identifier(["com.helpera.mentorApp"])
 username("aboud.masoud.92@gmail.com") # Your Apple Developer Portal username
 

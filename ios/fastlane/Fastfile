@@ -24,6 +24,7 @@ platform :ios do
 
   desc "Push a new build to TestFlight"
   lane :deploy do
+    
     set_full_version()
 
     setup_ci if is_ci
@@ -41,17 +42,11 @@ platform :ios do
       archive_path: "../build/ios/Runner.xcarchive",
       output_directory: "../build/ios/Runner",
     )
-    require 'timeout'
-    begin
-      Timeout::timeout(900) { # 900 seconds = 15 Min
-        upload_to_testflight(
-          api_key_path: "./app_store_connect.json",
-          ipa: '../build/ios/Runner/Runner.ipa',
-          skip_waiting_for_build_processing: true,
-        )
-      }
-      rescue Timeout::Error
-        UI.message("Upload to TestFlight took too long and was aborted.")
-      end
+
+    upload_to_testflight(
+      api_key_path: "./app_store_connect.json",
+      ipa: '../build/ios/Runner/Runner.ipa',
+      skip_waiting_for_build_processing: true,
+    )
   end
 end
