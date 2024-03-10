@@ -16,7 +16,8 @@ jobs:
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
-        channel: 'stable'
+        flutter-version: '3.16.0'
+        # channel: 'stable'
         cache: true
 
     - name: Set up key.properties
@@ -37,7 +38,7 @@ jobs:
     - name: Setup Fastlane
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.2.2
+        ruby-version: 2.6
         rubygems: latest
 
     - name: Build and Deploy
@@ -55,7 +56,8 @@ jobs:
         - name: Setup Flutter
           uses: subosito/flutter-action@v2
           with:
-            channel: stable
+            flutter-version: '3.16.0'
+            # channel: stable
             cache: true
 
         - name: Set up App Store Connect
@@ -76,3 +78,25 @@ jobs:
               MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
               MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.GIT_BASIC_AUTHORIZATION }}
           
+  web:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.16.0'
+          # channel: 'stable'
+          cache: true
+          
+      - name: Enable Flutter Web
+        run: flutter config --enable-web
+
+      - name: Download Dependencies
+        run: flutter pub get
+
+      - name: Build
+        run: flutter build web
